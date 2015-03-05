@@ -1,0 +1,26 @@
+{
+  "name": "talk-services",
+  "version": "0.0.0",
+  "description": "talk-services",
+  "main": "./lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --require coffee-script/register --require should --reporter spec test/main.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:teambition/talk-services.git"
+  },
+  "author": {
+    "name": "Xu Jingxin",
+    "email": "sailxjx@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "mocha": "^2.1.0",
+    "should": "^5.0.1"
+  }
+}

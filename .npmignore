@@ -1,4 +1,5 @@
 .git*
 test/
 src/
+docs/
 .DS_Store

@@ -8,6 +8,6 @@ describe 'GitLab#Setting', ->
 
     setData = setting.toJSON()
 
-    setData.should.have.properties 'title', 'description', 'iconUrl', 'requires', 'options'
+    setData.should.have.properties 'title', 'description', 'iconUrl', 'fields'
     setData.title.should.eql 'GitLab'
-    setData.requires.should.have.properties '_roomId', 'url'
+    setData.fields.should.have.properties '_roomId', 'url'

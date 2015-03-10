@@ -9,9 +9,13 @@ class RssService extends Service
     title: 'RSS'
     description: '{{__about-rss}}'
     iconUrl: 'https://dn-talk.oss.aliyuncs.com/icons/rss@2x.png'
-    requires:
-      url: 'text'
-    options:
-      iconUrl: 'text'
+    fields:
+      url:
+        type: 'text'
+        check:
+          url: 'https://talk.ai/integrations/validate?service=rss&url=$0'
+
+  # Validate the url of rss
+  validate: ->
 
 module.exports = new RssService

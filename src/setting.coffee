@@ -7,20 +7,18 @@ class Setting
 
   add: (data) ->
     defaultData =
-      requires:  # Require these properties
+      fields:
         _roomId: 'selector'
-      options:  # Optional properties
-        title: 'text'
-        description: 'text'
-        iconUrl: 'text'
+        title:
+          type: 'text'
+          optional: true
+        description:
+          type: 'text'
+          optional: true
+        iconUrl:
+          type: 'text'
+          optional: true
     @_data = _.merge defaultData, data
-    # Bind each data property to this
-    props = {}
-    Object.keys(@_data).forEach (key) ->
-      props[key] =
-        get: ->
-          @_data[key]
-    Object.defineProperties this, props
 
   toJSON: -> @_data
 

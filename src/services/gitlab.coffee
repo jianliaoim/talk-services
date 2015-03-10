@@ -12,9 +12,13 @@ class GitLabService extends Service
     locales: locales
     title: 'GitLab'
     description: "{{__about-gitlab}}"
+    detailDesc: "{{__detail-gitlab}}"
     iconUrl: 'https://dn-talk.oss.aliyuncs.com/icons/gitlab@2x.png'
-    requires:
-      url: 'text'
+    fields:
+      url:
+        type: 'text'
+        readonly: true
+        autogen: true
 
   robot:
     name: 'GitLab'

@@ -7,4 +7,7 @@ service =
   static: (str) -> path.join __dirname, '../static', str
   i18n: (dict) -> dict
 
+# Components should be initialized before services loaded
+Object.defineProperty service, 'components', get: -> @_components
+
 module.exports = service

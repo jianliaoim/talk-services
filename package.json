@@ -2,7 +2,7 @@
   "name": "talk-services",
   "version": "0.0.0",
   "description": "talk-services",
-  "main": "./lib/index.js",
+  "main": "./lib/service.js",
   "directories": {
     "test": "test"
   },

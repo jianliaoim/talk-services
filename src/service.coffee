@@ -1,10 +1,10 @@
-Setting = require './setting'
+requireDir = require 'require-dir'
+path = require 'path'
 
-class Service
+service =
+  register: require './register'
+  loadAll: -> requireDir './services'
+  static: (str) -> path.join __dirname, '../static', str
+  i18n: (dict) -> dict
 
-  constructor: ->
-    @setting = new Setting(@setting) unless @setting instanceof Setting
-
-Service.Setting = Setting
-
-module.exports = Service
+module.exports = service

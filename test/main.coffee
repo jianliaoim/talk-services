@@ -1,5 +1,3 @@
-require './services/gitlab'
+service = require '../src/service'
 
-service = require '../src/index'
-
-console.log JSON.stringify(service.getAllSettings(), null, 2)
+console.log JSON.stringify(service.loadAll(), null, 2)

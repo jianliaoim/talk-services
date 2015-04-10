@@ -25,6 +25,7 @@
     "should": "^5.0.1"
   },
   "dependencies": {
+    "glob": "^5.0.5",
     "lodash": "^3.5.0",
     "require-dir": "^0.1.0"
   }

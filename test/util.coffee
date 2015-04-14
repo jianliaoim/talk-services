@@ -1,5 +1,5 @@
 # Test utils
-
+http = require 'http'
 Promise = require 'bluebird'
 {limbo, redis} = require './components'
 talk = limbo.use 'talk'
@@ -17,6 +17,23 @@ cleanup = (done) ->
   .then -> done()
   .catch done
 
-module.exports =
+util =
   prepare: prepare
   cleanup: cleanup
+
+Object.defineProperty util, 'req',
+  get: ->
+    req = new http.IncomingMessage
+    req._params = {}
+    req.get = (key) -> @_params[key]
+    req.set = (key, val) -> @_params[key] = val
+    req
+
+Object.defineProperty util, 'res', ->
+  get: ->
+    res = new http.ServerResponse
+    res
+
+module.exports = util
+
+

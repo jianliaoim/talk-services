@@ -2,9 +2,8 @@ Promise = require 'bluebird'
 service = require '../service'
 
 _receiveWebhook = (req, res, callback) ->
-  {integration} = req.get()
+  integration = req.integration
   payload = req.body
-
   # When the token of integration is settled
   # Compare it with the payload.token
   if integration.token and integration.token isnt payload.token
@@ -27,6 +26,8 @@ _receiveWebhook = (req, res, callback) ->
       text += commitArr.join ''
 
   message =
+    _creatorId: @robot._id
+    _integrationId: integration._id
     quote:
       title: "来自 Coding 的事件"
       text: text

@@ -46,6 +46,10 @@ class Service
     @_apis = {}
     # Handler on events
     @_events = {}
+    @robot =
+      name: @name
+      email: "#{@name}bot@talk.ai"
+      avatarUrl: @iconUrl
     Object.defineProperty this, 'manual', get: _getManual
 
   # The the input field and handler
@@ -73,46 +77,21 @@ class Service
     else throw new Error('Events type is invalid')
 
   registerEvent: (event, handler) ->
+    self = this
     unless toString.call(handler) is '[object Function]'
       throw new Error('Service url is not defined') unless @serviceUrl
       serviceUrl = @serviceUrl
       handler = (req, res, callback) ->
-        request
-          method: 'POST'
-          url: serviceUrl
-          headers: 'User-Agent': 'Talk Api Service V1'
-          json: true
-          timeout: 5000
-          body:
-            event: event
-            data: res.data
-        , (err, res, body) ->
-          unless res.statusCode >= 200 and res.statusCode < 300
-            err or= new Error("bad request #{res.statusCode}")
-          callback err, body
+        self.httpPost serviceUrl,
+          event: event
+          data: res.data
+        , callback
 
     @_events[event] = handler
 
   receiveEvent: (event, req, res, callback) ->
-    {integraion} = req.get()
     return callback(null) unless toString.call(@_events[event]) is '[object Function]'
-    @_events[event].call req, res, callback
-
-  sendMessage: (message, callback) ->
-    robot = @robot
-    {limbo} = service.components
-
-    {MessageModel} = limbo.use 'talk'
-    message = new MessageModel message
-    message._creatorId = robot._id
-    message._integrationId = integration._id
-    message.save (err, message) -> callback err, message
-
-  initRobot: ->
-    robot =
-      name: @name
-      email: "#{name}@talk.ai"
-      avatarUrl: @_iconUrl
+    @_events[event].call this, req, res, callback
 
   toJSON: ->
     name: @name
@@ -123,6 +102,40 @@ class Service
     iconUrl: @iconUrl
     fields: @fields
     manual: @manual
+
+  # ========================== Define build-in functions ==========================
+  ###*
+   * Send message to talk users
+   * @param  {Object}   message
+   * @param  {Function} callback
+  ###
+  sendMessage: (message, callback) ->
+    robot = @robot
+    {limbo} = service.components
+    {MessageModel} = limbo.use 'talk'
+    message = new MessageModel message
+    message._creatorId or= robot._id
+    message.save (err, message) -> callback err, message
+
+  ###*
+   * Post data to the thrid part services
+   * @param  {url}      url
+   * @param  {Object}   payload
+   * @param  {Function} callback [description]
+  ###
+  httpPost: (url, payload, callback) ->
+    request
+      method: 'POST'
+      url: url
+      headers: 'User-Agent': 'Talk Api Service V1'
+      json: true
+      timeout: 5000
+      body: payload
+    , (err, res, body) ->
+      unless res.statusCode >= 200 and res.statusCode < 300
+        err or= new Error("bad request #{res.statusCode}")
+      callback err, body
+  # ========================== Define build-in functions finish ==========================
 
 register = (name, fn) ->
   service = new Service name

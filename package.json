@@ -22,7 +22,6 @@
   "license": "MIT",
   "devDependencies": {
     "coffee-script": "^1.9.1",
-    "express": "^4.12.3",
     "limbo": "^0.3.2",
     "mocha": "^2.1.0",
     "mongoose": "3.8.21",

@@ -1,5 +1,5 @@
 should = require 'should'
-service = require '../service'
+service = require '../../src/service'
 {prepare, cleanup, req, res} = require '../util'
 coding = service.load 'coding'
 

@@ -16,7 +16,7 @@ payload = {
   "commits": [
     {
       "sha": "5e321dae429679a4b9ad9e06b543eed5610ff9af",
-      "short_message": "Merge branch 'newbb'\n",
+      "short_message": "Merge branch 'newbb'",
       "committer": {
         "email": "sailxjx@gmail.com",
         "name": "Xu Jingxin"
@@ -24,7 +24,7 @@ payload = {
     },
     {
       "sha": "1b6019319ab12d432108d65caa018a37f062f306",
-      "short_message": "add makefile\n",
+      "short_message": "add makefile",
       "committer": {
         "email": "sailxjx@gmail.com",
         "name": "Xu Jingxin"
@@ -43,13 +43,13 @@ describe 'Coding#Webhook', ->
       message.should.have.properties '_creatorId', '_integrationId', 'quote'
       message._integrationId.should.eql '552cc903022844e6d8afb3b4'
       message.quote.title.should.eql '来自 Coding 的事件'
-      message.quote.text.should.eql '''
-      在项目 test-webhook 中提交了新的代码<br><a href="https://coding.net/u/sailxjx/p/test-webhook/git/commit/5e321dae429679a4b9ad9e06b543eed5610ff9af" target="_blank">
-      <code>5e321d:</code></a> Merge branch 'newbb'
-      <br><a href="https://coding.net/u/sailxjx/p/test-webhook/git/commit/1b6019319ab12d432108d65caa018a37f062f306" target="_blank">
-      <code>1b6019:</code></a> add makefile
-      <br>
-      '''
+      message.quote.text.should.eql [
+        '在项目 test-webhook 中提交了新的代码<br>'
+        '<a href="https://coding.net/u/sailxjx/p/test-webhook/git/commit/5e321dae429679a4b9ad9e06b543eed5610ff9af" target="_blank">'
+        '<code>5e321d:</code></a> Merge branch \'newbb\'<br>'
+        '<a href="https://coding.net/u/sailxjx/p/test-webhook/git/commit/1b6019319ab12d432108d65caa018a37f062f306" target="_blank">'
+        '<code>1b6019:</code></a> add makefile<br>'
+      ].join ''
       done()
 
     req.body = payload
@@ -64,7 +64,8 @@ describe 'Coding#Webhook', ->
       _id: '552cc903022844e6d8afb3b3'
       category: 'coding'
       token: 'cba'
-    coding.receiveEvent 'webhook', req, res, (err) ->
+    coding.receiveEvent 'webhook', req, res
+    .catch (err) ->
       err.message.should.eql 'Invalid token'
       done()
 

@@ -32,6 +32,7 @@
     "bluebird": "^2.9.24",
     "glob": "^5.0.5",
     "lodash": "^3.5.0",
+    "marked": "^0.3.3",
     "request": "^2.55.0",
     "require-dir": "^0.1.0"
   }

@@ -1,13 +1,13 @@
 Promise = require 'bluebird'
 service = require '../service'
 
-_receiveWebhook = (req, res, callback) ->
+_receiveWebhook = (req, res) ->
   integration = req.integration
   payload = req.body
   # When the token of integration is settled
   # Compare it with the payload.token
   if integration.token and integration.token isnt payload.token
-    return callback(new Error("Invalid token"))
+    throw new Error("Invalid token")
 
   # Prepare to send the message
   if payload.before?[...6] is '000000'
@@ -20,8 +20,7 @@ _receiveWebhook = (req, res, callback) ->
       commitArr = payload.commits.map (commit) ->
         commitUrl = "#{payload.repository.url}/commit/#{commit.sha}"
         """
-        <a href="#{commitUrl}" target="_blank">
-        <code>#{commit.sha[...6]}:</code></a> #{commit.short_message}<br>
+        <a href="#{commitUrl}" target="_blank"><code>#{commit.sha[...6]}:</code></a> #{commit.short_message}<br>
         """
       text += commitArr.join ''
 
@@ -33,7 +32,7 @@ _receiveWebhook = (req, res, callback) ->
       text: text
       redirectUrl: payload.repository.url
 
-  @sendMessage message, callback
+  @sendMessage message
 
 # Register the coding service
 module.exports = service.register 'coding', ->

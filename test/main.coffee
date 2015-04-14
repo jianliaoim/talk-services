@@ -1,3 +1,9 @@
-service = require '../src/service'
+# Initialize service
+service = require './service'
 
-console.log JSON.stringify(service.loadAll(), null, 2)
+# Test settings
+settings = require './settings'
+
+# Subtestcases of each service
+requireDir = require 'require-dir'
+requireDir './services'

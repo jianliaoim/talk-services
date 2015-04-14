@@ -1,5 +1,7 @@
 service = require '../service'
 
+return
+
 module.exports = service.register 'rss', ->
 
   @title = 'RSS'
@@ -23,8 +25,4 @@ module.exports = service.register 'rss', ->
 
   @registerApi 'checkRSS', (req, res, callback) ->
 
-  @registerEvent 'integration.create'
-
-  @registerEvent 'integration.remove'
-
-  @registerEvent 'integration.update'
+  @registerEvents ['integration.create', 'integration.remove', 'integration.update']

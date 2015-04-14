@@ -1,6 +1,8 @@
 Promise = require 'bluebird'
 service = require '../service'
 
+return
+
 module.exports = service.register 'gitlab', ->
   @title = 'GitLab'
 
@@ -29,15 +31,16 @@ module.exports = service.register 'gitlab', ->
 _receiveWebhook = (req, res, callback) ->
   # Wrap the handler with promise
   # The errors should be catched and transmit to callback
+  self = this
+
   Promise.resolve()
 
   .then ->
-
     # Use components from talkai service
     {redis, limbo} = service.components
     {MessageModel} = limbo.use 'talk'
     # Load robot from service
-    {robot} = this
+    {robot} = self
     {integration} = req.get()
 
     payload = req.body

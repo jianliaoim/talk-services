@@ -144,7 +144,8 @@ _updateWebhook = (req, res) ->
   $updateNewRepos = Promise.resolve(reposes)
 
   .each (repos) ->
-    if repos in _originalRepos  # Update exist hook
+    # Update exist hook
+    if (repos in _originalRepos) or not integration.isDirectModified 'repos'
       # Do not update when notifications is not modified
       return unless integration.isDirectModified 'notifications'
       hookId = data[repos]?.hookId

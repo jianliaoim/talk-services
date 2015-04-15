@@ -45,6 +45,4 @@ IntegrationSchema.virtual '_teamId'
   .get -> @team?._id or @team
   .set (_id) -> @team = _id
 
-IntegrationSchema.methods.save = (callback = ->) -> callback null, this
-
 module.exports = IntegrationSchema

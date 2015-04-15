@@ -148,9 +148,8 @@ describe 'GitLab#Webhook', ->
 
   it 'receive push webhook', (done) ->
     gitlab.sendMessage = (message) ->
-      message.quote.title.should.eql 'New event from gitlab'
+      message.quote.title.should.eql 'Diaspora new commits'
       message.quote.text.should.eql [
-        '<a href="http://localhost/diaspora" target="_blank">Diaspora</a> new commits<br>'
         '<a href="http://localhost/diaspora/commits/b6568db1bc1dcd7f8b4d5a946b0b91f9dacd7327" target="_blank">'
         '<code>b6568d:</code></a> Update Catalan translation to e38cb41.<br>'
         '<a href="http://localhost/diaspora/commits/da1560886d4f094c3e6c9ef40349f7d38b5d27d7" target="_blank">'
@@ -165,8 +164,8 @@ describe 'GitLab#Webhook', ->
 
   it 'receive issue webhook', (done) ->
     gitlab.sendMessage = (message) ->
+      message.quote.title.should.eql '[opened] Some Issue'
       message.quote.text.should.eql '''
-      <a href="https://code.teambition.com/talk/talk-core/issues/1" target="_blank">Some Issue</a> [opened]<br>
       <pre><code>SomeCode
       </code></pre>
       '''
@@ -179,8 +178,9 @@ describe 'GitLab#Webhook', ->
 
   it 'receive merge webhook', (done) ->
     gitlab.sendMessage = (message) ->
+      message.quote.title.should.eql '[opened] Feature/gitlab'
       message.quote.text.should.eql '''
-      <a href="https://code.teambition.com/talk/talk-core/commit/e523992d8b2f2adb720224868e26cce1c81e061a" target="_blank">Feature/gitlab</a> [opened]<br>\n<p>Merge GitLab Feature</p>\n
+      <p>Merge GitLab Feature</p>\n
       '''
 
     req.body = mergePayload

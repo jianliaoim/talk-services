@@ -30,33 +30,31 @@ _receiveWebhook = (req, res) ->
     _creatorId: @robot._id
     _integrationId: integration._id
 
-  message.quote = title: "New event from gitlab"
+  message.quote = {}
 
   switch payload.event
     when 'push'
-      message.quote.text = """
-      <a href="#{repository?.homepage}" target="_blank">#{repository?.name}</a>
-      """
+      message.quote.title = "#{repository?.name}"
       if payload.before is '0000000000000000000000000000000000000000'
-        message.quote.text += " create branch #{payload.ref}<br>"
+        message.quote.title += " create branch #{payload.ref}"
       else if payload.after is '0000000000000000000000000000000000000000'
-        message.quote.text += " remove branch #{payload.ref}<br>"
+        message.quote.title += " remove branch #{payload.ref}"
       else
-        message.quote.text += " new commits<br>"
+        message.quote.title += " new commits"
       commitArr = commits.map (commit) ->
         """
         <a href="#{commit.url}" target="_blank"><code>#{commit?.id?[0...6]}:</code></a> #{commit?.message}<br>
         """
-      message.quote.text += commitArr.join ''
+      message.quote.text = commitArr.join ''
       message.quote.redirectUrl = repository?.homepage
     when 'merge_request'
+      message.quote.title = "[#{object_attributes?.state}] #{object_attributes?.title}"
       message.quote.text = """
-      <a href="#{object_attributes?.last_commit?.url}" target="_blank">#{object_attributes?.title}</a> [#{object_attributes?.state}]<br>
       #{marked(object_attributes?.description or '')}
       """
     when 'issues'
+      message.quote.title = "[#{object_attributes?.state}] #{object_attributes?.title}"
       message.quote.text = """
-      <a href="#{object_attributes?.url}" target="_blank">#{object_attributes?.title}</a> [#{object_attributes?.state}]<br>
       #{marked(object_attributes?.description or '')}
       """
 

@@ -41,6 +41,8 @@ class Service
   # Template of settings page
   template: ''
 
+  userAgent: 'Talk Api Service V1'
+
   constructor: (@name) ->
     @title = @name
     @fields = _roomId: type: 'selector'
@@ -66,6 +68,15 @@ class Service
   # Register open apis
   # The route of api will be `POST services/:integration_name/:api_name`
   registerApi: (name, fn) ->
+    @_apis[name] = fn
+
+  receiveApi: (name, req, res) ->
+    self = this
+    Promise.resolve()
+    .then ->
+      unless toString.call(self._apis[name]) is '[object Function]'
+        throw new Error('Api function is not defined')
+      self._apis[name].call self, req, res
 
   registerEvents: (events) ->
     self = this
@@ -140,7 +151,7 @@ class Service
     requestAsync
       method: 'POST'
       url: url
-      headers: 'User-Agent': 'Talk Api Service V1'
+      headers: 'User-Agent': @userAgent
       json: true
       timeout: 5000
       body: payload

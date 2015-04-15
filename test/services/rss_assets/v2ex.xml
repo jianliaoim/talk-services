@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>V2EX</title>
+<subtitle>way to explore</subtitle>
+<link rel="alternate" type="text/html" href="http://www.v2ex.com/" />
+<link rel="self" type="application/atom+xml" href="http://www.v2ex.com/index.xml" />
+<id>http://www.v2ex.com/</id>
+
+<updated>2015-01-04T05:13:18Z</updated>
+
+<rights>Copyright © 2010-2012, V2EX</rights>
+<entry>
+	<title>[Python] [校/社招/实习]网易网站招聘系统运维(开发管理)</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159039#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159039</id>
+	<published>2015-01-04T05:16:18Z</published>
+	<updated>2015-01-04T05:13:18Z</updated>
+	<author>
+		<name>justzx</name>
+		<uri>http://www.v2ex.com/member/justzx</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	社区童鞋 有没有想做运维开发的 可以试试大网易<br /><br />具体要求如下：<br /><br />投递邮箱： <a target="_blank" href="mailto:wssa@corp.netease.com">wssa@corp.netease.com</a> <br />薪资待遇：年薪15~25w，高级职位面议 <br />福利待遇：13月工资，季度奖金<br />工作职责： <br />1、管理、维护网站部服务器及应用系统（如网易新闻，微博，跟贴等）。 <br />2、研究、优化网站系统架构、提升系统服务性能。 <br /><br />职位要求： <br />1、熟练使用Linux/unix操作系统,2年以上linux平台使用经验，大型网站管理经验者优先。<br />2、熟悉linux下Web服务软件，如apache squid resin nginx等。 <br />3、熟练掌握perl、shell、python、ruby之一的脚本编程。 <br />4、熟悉常见Web系统架构，并具有很强的故障排查和解决问题的能力。 <br />5、工作认真细致、敬业，能承受较大的工作压力。 <br />6、大学本科以上学历，计算机或相关专业。
+	]]></content>
+</entry><entry>
+	<title>[问与答] mail.ru 企业邮箱密码错误？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159038#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159038</id>
+	<published>2015-01-04T05:03:10Z</published>
+	<updated>2015-01-04T05:00:10Z</updated>
+	<author>
+		<name>20140930</name>
+		<uri>http://www.v2ex.com/member/20140930</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	我刚注册的新域名去mail.ru注册了一个企业邮箱。发现提示我这个错误The password for your <a target="_blank" href="mailto:master@test.info">master@test.info</a> account is old or has been changed. Please enter a new password to continue email collection.<br />但是我根本没修改过密码啊。这可怎么办?要怎么找回密码?
+	]]></content>
+</entry><entry>
+	<title>[程序员] ruby gem 查不了东西,怎么办?</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159037#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159037</id>
+	<published>2015-01-04T04:59:13Z</published>
+	<updated>2015-01-03T04:59:13Z</updated>
+	<author>
+		<name>otmb</name>
+		<uri>http://www.v2ex.com/member/otmb</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p><img src="http://img.itc.cn/photo/j34fG62dMub" alt=""></p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 关于爬虫的问题</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159036#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159036</id>
+	<published>2015-01-04T04:55:08Z</published>
+	<updated>2015-01-04T04:52:08Z</updated>
+	<author>
+		<name>LINAICAI</name>
+		<uri>http://www.v2ex.com/member/LINAICAI</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	&lt;p&gt;&lt;img align=&quot;left&quot; height=&quot;268&quot; src=&quot;images/n_shiye.gif&quot; width=&quot;151&quot;/&gt;XXX&lt;/p&gt;<br /><br />想知道BeautifulSoup的话，怎么获取XXX,试过几个方法都得不到～
+	]]></content>
+</entry><entry>
+	<title>[程序员] 刚才看到一篇文章，讨论的是程序员该不该重复造轮子</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159035#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159035</id>
+	<published>2015-01-04T04:54:35Z</published>
+	<updated>2015-01-04T05:09:23Z</updated>
+	<author>
+		<name>yrdr</name>
+		<uri>http://www.v2ex.com/member/yrdr</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	我自己比较喜欢写些杂七杂八的东西，就是大家常说的重复早轮子吧，所以去网上搜了下这方面的文章，还真的很多人在讨论这点。有种普遍的观点是尽量不要去重复造轮子，但什么都用现成的，也许可以美其名曰：我善于利用工具，但用着用着，也许很多年后你还是连轮子的原理都不知道吧，这还怎么进步。<br />造轮子也是一个学习的过程，在这个过程中不断地进步，不断地了解轮子的原理。<br />当然，我们技术不够，要做一件事，有轮子自然是好的，但现在的风气是很多人都轻视重复造轮子，过度依赖于工具。<br />我是写php的，这方面尤其突出，各类框架几乎成为行业标准，所以很多新人几乎不管框架原理，觉得会了一种框架就会了一门语言，这实在太可怕了，这也难怪我们工资较低。<br />也许凭我们的技术无法去重复造出一门新的语言或者是某些高大上的工具，但我们也不应该惧怕重复造轮子，去做一些我们的技术能做出的东西，我们要的不是重复造轮子的结果，而是在造轮子过程中的学习经验。
+	]]></content>
+</entry><entry>
+	<title>[分享创造] 致坚守 Gmail 的人们！可以正常收发 Gmail 邮件的方法和邮箱客户端软件应用</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159034#reply5" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159034</id>
+	<published>2015-01-04T04:51:57Z</published>
+	<updated>2015-01-04T05:15:25Z</updated>
+	<author>
+		<name>Changyue</name>
+		<uri>http://www.v2ex.com/member/Changyue</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p><a target="_blank" rel="nofollow" href="http://www.iplaysoft.com/shou-fa-gmail.html">http://www.iplaysoft.com/shou-fa-gmail.html</a></p>
+
+	]]></content>
+</entry><entry>
+	<title>[BMW] Rear Spoiler 除了好看之外，具体有哪些作用呢？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159033#reply5" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159033</id>
+	<published>2015-01-04T04:51:11Z</published>
+	<updated>2015-01-04T05:16:21Z</updated>
+	<author>
+		<name>Livid</name>
+		<uri>http://www.v2ex.com/member/Livid</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<a target="_blank" href="/i/l8288382l.jpeg" target="_blank" title="在新窗口打开图片 l8288382l.jpeg"><img src="http://i.v2ex.co/l8288382l.jpeg" style="max-width: 660px" /></a>
+	]]></content>
+</entry><entry>
+	<title>[问与答] 魅族 MX2 的光感为什么那么差劲。</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159032#reply3" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159032</id>
+	<published>2015-01-04T04:47:15Z</published>
+	<updated>2015-01-04T05:12:37Z</updated>
+	<author>
+		<name>Dawned</name>
+		<uri>http://www.v2ex.com/member/Dawned</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	一直习惯iPhone的光感，省心，体验好。，前段时间MX2降到699/799就买了一部，使用一段时间发现光感差的要命，跟没有差不多。晚上有时太亮刺眼，外面有时太暗看不清屏幕。几乎不能自动调节，恢复出产，刷机都试验过了。<br /><br />想想当年mx2也是2499 2999的机器。连最基础的光感都垃圾的要命。<br /><br />而且设计上只有一个按键，没有菜单键，也就是安卓最右边的按键。返回是home键上划。很多时候操作麻烦。用着安卓系统，非要学习苹果。
+	]]></content>
+</entry><entry>
+	<title>[git] GitBubble 已经在 GitCafe 上开源拉</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159031#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159031</id>
+	<published>2015-01-04T04:37:22Z</published>
+	<updated>2015-01-04T04:50:05Z</updated>
+	<author>
+		<name>GuBonjour</name>
+		<uri>http://www.v2ex.com/member/GuBonjour</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<h1>GitBubble</h1>
+
+<p><img src="https://gitcafe-image.b0.upaiyun.com/cbe4ae06e1599402b4041289ab373b61.png" alt="banner"></p>
+
+<p><a target="_blank" rel="nofollow" href="http://gitbubble.gitcafe.io">GitBubble</a> 是一款萌系元素爆棚的可爱小游戏。它的游戏规则非常简单，戳破带有 Git 命令的泡泡即可得分。发生 Shake 事件时，用力摇晃手机即可刷分。</p>
+
+<p>GitBubble 是 <a target="_blank" rel="nofollow" href="https://gitcafe.com"><strong>GitCafé</strong></a> 专门为手机浏览器设计的小游戏，你可以扫描下面的二维码体验一下。</p>
+
+<p><img src="https://gitcafe.com/GitBubble/GitBubble/raw/master/app/image/qrcode.png" alt=""></p>
+
+<h2>使用</h2>
+
+<p>GitBubble 部署在 <a target="_blank" rel="nofollow" href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki"><strong>GitCafé</strong> Pages</a> 服务，开发环境依赖于 <code>Node.js (0.10.x)</code></p>
+<div class="highlight"><pre>git clone git@gitcafe.com:GitBubble/GitBubble.git
+cd GitBubble
+npm install
+npm start
+</pre></div>
+
+<h2><a target="_blank" rel="nofollow" href="https://gitcafe.com/GitBubble/GitBubble/tickets">工单</a></h2>
+
+<p>欢迎 <a target="_blank" rel="nofollow" href="https://gitcafe.com/GitBubble/GitBubble/tickets">创建工单</a> 来提交你的问题，我们会尽量回复每一条有价值的建议。</p>
+
+<h2>贡献</h2>
+
+<p>欢迎 <a target="_blank" rel="nofollow" href="https://gitcafe.com/GitBubble/GitBubble/fork">派生</a> 这个项目，</p>
+
+<p><strong><em>我们决不会忽略你的合并请求，更不会无故拒绝它。</em></strong></p>
+
+<h2>协议</h2>
+
+<p>GitBubble 的发布遵循 <a target="_blank" rel="nofollow" href="http://www.gnu.de/documents/gpl-2.0.en.html">GPL V2 协议</a></p>
+
+<h2>致谢</h2>
+
+<p>GitBubble 基于 <code>Node.js</code>, <code>gulp.js</code>, <code>Browserify</code>, <code>Browser-Sync</code>, <code>Backbone.js</code>, <code>Zepto.js</code>, <code>Handlebars.js</code> 以及很多优秀的框架和插件；如有可能，请尽量支持你中意的所有开源项目。</p>
+
+	]]></content>
+</entry><entry>
+	<title>[iDev] 今天收到 financial reports 说我在美国区，之前一直在中国区的，怎么回事？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159030#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159030</id>
+	<published>2015-01-04T04:33:00Z</published>
+	<updated>2015-01-04T04:30:00Z</updated>
+	<author>
+		<name>missdeer</name>
+		<uri>http://www.v2ex.com/member/missdeer</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	当初提交app时没有选区，这正常么？
+	]]></content>
+</entry><entry>
+	<title>[问与答] 外包网站完工后，对方要求售后服务是否合理？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159029#reply20" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159029</id>
+	<published>2015-01-04T04:25:20Z</published>
+	<updated>2015-01-04T05:16:30Z</updated>
+	<author>
+		<name>Yuchen</name>
+		<uri>http://www.v2ex.com/member/Yuchen</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>网站刚做完，本来以为终于可以结束了...结果对方要求签一份新的合同，内容大概：一年免费售后服务，包括技术咨询，修改网页(这里可能包括功能修改，还没问他们)若干次，修改图片若干次，debug。</p>
+
+<p>第一次做外包，想请教大家一般网站完工以后是否要提供类似这样免费的售后服务，如果需要，这样的要求合理吗？</p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 如何去除 ckeditor 上传图片后在原码中留下的 style=&#34;width: 1004px; height: 613px&#34;之类的代码呢？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159028#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159028</id>
+	<published>2015-01-04T04:16:50Z</published>
+	<updated>2015-01-04T04:25:11Z</updated>
+	<author>
+		<name>huage</name>
+		<uri>http://www.v2ex.com/member/huage</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	
+	]]></content>
+</entry><entry>
+	<title>[Mac OS X] 两块硬盘用给 Time Machine 用，应该怎么用？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159027#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159027</id>
+	<published>2015-01-04T04:16:03Z</published>
+	<updated>2015-01-04T04:45:32Z</updated>
+	<author>
+		<name>OscarUsingChen</name>
+		<uri>http://www.v2ex.com/member/OscarUsingChen</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>手头有两块硬盘，用来做Time Machine，容量不是问题。于是我有疑问了，这两块磁盘应该怎么用？</p>
+
+<h1>自己的一点思考</h1>
+
+<p>通常备份要做到两个“维度”，时间维度和硬件维度。<br>
+<strong>时间维度</strong>：不小心把文件删了，可以从过去恢复；但是硬件坏了不可以恢复。在Mac与TM之间，这个是TM特有的维度（Mac上少数应用有Versions，功能有限，不予讨论）。<br>
+<strong>硬件维度</strong>：设备坏了，有冗余；但是文件删了就是删了，不可以从过去恢复。一旦有了TM，Mac和TM就互为备份了（Mac坏了可以从TM恢复，TM坏了可以再用Mac创建新的TM）。</p>
+
+<h1>以下是对两块硬盘的用法的思考</h1>
+
+<p><strong>RAID 0</strong> : 每块硬盘的工作量只有原来的一半，可靠性降低得不严重（？），且提高了性能，容量还更多，时间维度备份能力更强。<br>
+<strong>RAID 1</strong> : 在硬件维度上再增加一层冗余，感觉有点浪费资源。不过如果一块硬盘坏掉之后，可以从容面对新旧硬盘混用的情况，这点如果是 RAID 0 就要提心吊胆了。</p>
+
+<p>究竟怎么配置比较好？</p>
+
+	]]></content>
+</entry><entry>
+	<title>[分享发现] 淘宝交易信息半天被卖，骗我去申请退款，各位警惕</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159026#reply7" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159026</id>
+	<published>2015-01-04T04:15:30Z</published>
+	<updated>2015-01-04T05:15:57Z</updated>
+	<author>
+		<name>learnshare</name>
+		<uri>http://www.v2ex.com/member/learnshare</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	- 15924127441 的号码打过来，问我是不是刚买了件衣服，我说是的。<br />- 告诉我恰好系统升级，订单无效，要退款给我（我已经估计到是骗局了，而且能听到背景中有许多姑娘在做客服的声音）。<br />- 我说：我直接在淘宝取消订单或者申请退款就好了。告诉我：不行，那样退不了，要协助我一起退款。<br />- 索要我的 Q，2972940163 加我好友，然后给我一个链接：clcteja.com [钓鱼的！！！！] ，说在上边申请退款就好了。<br />- QQ 中的网址介绍是 “轴承” 等等信息，然后我复制链接出来，发现跟本不是什么淘宝的地址。<br />- 我说：你这个地址有问题啊，浏览器提示是诈骗网站，我要不要报警？对方就吓跑了，不知道怎么应对。<br /><br />不过对于不了解情况的人，根本不会在乎 URL 是什么，就急急忙忙把账号贡献出去了。说不定后面还有更深的坑等着呢。
+	]]></content>
+</entry><entry>
+	<title>[酷工作] [望京] 陌陌诚聘客户端产品经理、增值/商业产品经理、平台产品经理</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159023#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159023</id>
+	<published>2015-01-04T03:56:36Z</published>
+	<updated>2015-01-04T04:24:36Z</updated>
+	<author>
+		<name>immomohr</name>
+		<uri>http://www.v2ex.com/member/immomohr</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	陌陌HR直招职位： <br />简历投递： <a target="_blank" href="mailto:momohr@immomo.com">momohr@immomo.com</a> （简历标明来自V2EX） <br />地点：北京市朝阳区望京阜通东大街1号望京soho，塔2，B座20层，地铁15号线望京站/地铁14号线阜通站<br /><br />增值业务产品经理<br />岗位职责：<br />1、负责陌陌增值业务，处理业务产品的相关问题，并提供解决方案；<br />2、与公司各部门制定产品方案，转化需求落地产品设计，推进增值业务开发；<br />3、能够把握公司战略与业务之间的平衡点，独立解决问题；<br />4、对增值业务产品环节中的用户行为进行数据挖掘，完善产品。<br />岗位要求：<br />1、本科以上学历，计算机、电子商务、数据等相关专业毕业，2年以上相关经验；<br />2、了解业内成熟的商业模式与增值业务，有流量变现经验或相关商业产品经验者优先；<br />3、具备良好的逻辑思考能力，沟通能力以及协调能力；<br />4、对产品团队有高度的认同和责任感，工作积极主动，抗压性强。<br /><br />=============================================================<br />高级移动客户端产品经理<br />岗位职责：<br />1、陌陌客户端项目管理和跟进；<br />2、探索更开放自由的社交平台。<br />岗位要求：<br />1、大学本科及以上学历，软件工程与计算机相关专业；<br />2、两年以上工作经验，负责过知名互联网产品的完整流程；<br />3、熟练操作各类电子设备，对各类信息技术着迷；<br />4、擅于沟通和思考，高效协作和产出；<br />5、有美术或开发的工作经验优先；<br />6、有组织业余项目经验优先；<br />7、有六位或七位陌陌号优先。<br /><br />==============================================================<br />平台产品经理(社交研究方向)<br />岗位职责： <br />1、调研、设计基于社交行为的用户模型，并推进实现； <br />2、设计用于改善社交可信度、社交效率的算法，并推进实现； <br />3、设计基于用户属性的产品功能，并推进实现。 <br />岗位要求： <br />1、大学本科及以上学历，计算机科学、数理统计或应用数学专业毕业； <br />2、两年以上大型互联网公司产品经理、算法工程师岗位经验； <br />3、有较强学习能力，了解业内主要互联网公司基于数学、统计算法的业务模式； <br />4、具备较强的沟通能力和业务推进能力，有团队合作意识； <br />5、拥有六位或七位陌陌号者优先。<br /><br />简历请投： <a target="_blank" href="mailto:momohr@immomo.com">momohr@immomo.com</a><br />公司介绍： <br />“陌陌”是北京陌陌科技有限公司于2011年8月起推出的一款基于地理位置的移动社交产品。通过陌陌手机客户端，您可以认识身边的人，与熟悉的或陌生的朋友打招呼、聊天、交换位置。陌陌将通过地理位置，帮助人们重新发现自己，发现身边，发现朋友。 <br />公司网址： <a target="_blank" href="http://www.immomo.com/" rel="nofollow">http://www.immomo.com/</a> <br /><br />我们提供： <br />有竞争力的薪资待遇（含五险一金+补充医疗） /足够宽广的上升空间 / 紧张刺激的创业经历 / 一流的办公环境（望京soho）
+	]]></content>
+</entry><entry>
+	<title>[程序员] 是否有一项标准来定义对于编程语言所谓的「熟悉」或「精通」的程度呢？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159020#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159020</id>
+	<published>2015-01-04T03:47:56Z</published>
+	<updated>2015-01-04T04:28:43Z</updated>
+	<author>
+		<name>jybox</name>
+		<uri>http://www.v2ex.com/member/jybox</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p><a target="_blank" rel="nofollow" href="http://zh.wikipedia.org/wiki/Wikipedia:%E5%B7%B4%E5%88%A5">http://zh.wikipedia.org/wiki/Wikipedia:%E5%B7%B4%E5%88%A5</a></p>
+
+<p>我在维基百科上看到了这个用于表示对自然语言的掌握程度的用户框，将对自然语言的掌握成都划分为了 0 - 5 一共六个等级，并对各等级的含义做出了简单的解释。</p>
+
+<p><a target="_blank" rel="nofollow" href="http://zh.wikipedia.org/wiki/Wikipedia:%E7%94%A8%E6%88%B6%E6%A1%86/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80">http://zh.wikipedia.org/wiki/Wikipedia:%E7%94%A8%E6%88%B6%E6%A1%86/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80</a></p>
+
+<p>然后维基百科上也有一些关于编程语言的用户框，使用类似的级别来表示掌握程度，但似乎对各个等级究竟对应何种程度没有一个清晰且通用的标准。</p>
+
+<p>所以我想知道是否有人同样对这个话题感兴趣，并做出了一些工作。</p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 求推荐千元内头戴式耳机，要求戴眼镜同时戴耳机不会压着不舒服</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159017#reply10" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159017</id>
+	<published>2015-01-04T03:42:59Z</published>
+	<updated>2015-01-04T04:45:25Z</updated>
+	<author>
+		<name>skye</name>
+		<uri>http://www.v2ex.com/member/skye</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>想买个耳机用用，求各位大神推荐，最好推荐自己用过的，小生这里谢过了~</p>
+
+	]]></content>
+</entry><entry>
+	<title>[分享发现] 机锋论坛 2000W 用户数据泄露？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159015#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159015</id>
+	<published>2015-01-04T03:38:42Z</published>
+	<updated>2015-01-03T03:38:42Z</updated>
+	<author>
+		<name>lanmaochaoren</name>
+		<uri>http://www.v2ex.com/member/lanmaochaoren</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>早晨起来看到一条微博，机锋论坛2000万用户数据泄露，包含了加盐的密码啥的，你躺枪了么。。<br>
+<a target="_blank" rel="nofollow" href="http://www.weibo.com/5052039485/BDXOs3P4S?type=comment#_rnd1420342179755">http://www.weibo.com/5052039485/BDXOs3P4S?type=comment#_rnd1420342179755</a><br>
+<a target="_blank" rel="nofollow" href="https://www.vulbox.com/bugs/vulbox-2015-01928">https://www.vulbox.com/bugs/vulbox-2015-01928</a></p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 使用自架 shadowsocks 连接 ingress 的问题</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159013#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159013</id>
+	<published>2015-01-04T03:36:54Z</published>
+	<updated>2015-01-04T03:33:54Z</updated>
+	<author>
+		<name>agentmario</name>
+		<uri>http://www.v2ex.com/member/agentmario</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>我在自己的 DO 和 Linode VPS 上架设了 shadowsocks 和 dns 转发，当我使用同一台 vps 上的 shadowsocks 和 dns 时，Ingress 就会提示“无法建立安全连接”。<br>
+但如果将 shadowsocks 和 dns 分别设为不同的服务器时就可以正常使用，我感到很不解，请求支援</p>
+
+	]]></content>
+</entry><entry>
+	<title>[业界八卦] 机锋网 2000W 用户数据泄露？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159012#reply4" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159012</id>
+	<published>2015-01-04T03:34:27Z</published>
+	<updated>2015-01-03T12:35:31Z</updated>
+	<author>
+		<name>lanmaochaoren</name>
+		<uri>http://www.v2ex.com/member/lanmaochaoren</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>早晨起来看到一条微博，机锋论坛2000万用户数据泄露，包含了加盐的密码啥的，你躺枪了么。。<br>
+<a target="_blank" rel="nofollow" href="http://www.weibo.com/5052039485/BDXOs3P4S?type=comment#_rnd1420342179755">http://www.weibo.com/5052039485/BDXOs3P4S?type=comment#_rnd1420342179755</a><br>
+<a target="_blank" rel="nofollow" href="https://www.vulbox.com/bugs/vulbox-2015-01928">https://www.vulbox.com/bugs/vulbox-2015-01928</a></p>
+
+	]]></content>
+</entry><entry>
+	<title>[硬件] 200RMB 左右的台式机电源品牌推荐</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159011#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159011</id>
+	<published>2015-01-04T03:32:57Z</published>
+	<updated>2015-01-04T04:13:30Z</updated>
+	<author>
+		<name>Devin</name>
+		<uri>http://www.v2ex.com/member/Devin</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>要求：静音稳定耐用，额定功率250W-350W，非内地品牌</p>
+
+<p>平时用途：办公、看网页，看电影，小游戏</p>
+
+<p>谢谢大家</p>
+
+	]]></content>
+</entry><entry>
+	<title>[分享创造] Porter.io - 发现及订阅 Github 项目的相关 HackerNews 新闻</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159010#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159010</id>
+	<published>2015-01-04T03:31:52Z</published>
+	<updated>2015-01-04T03:49:02Z</updated>
+	<author>
+		<name>adieu</name>
+		<uri>http://www.v2ex.com/member/adieu</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>大家好，我们搞了个Github与HackerNews的mashup，希望与大家分享。</p>
+
+<p>我们每天都在HN上阅读大量新闻，苦于没有很好的筛选机制，不断刷新HN花费了不少时间。为了解决这个问题，我们开发了利用Github已经Star的项目作为关键词，筛选出最相关的新闻并每天汇总后email推送的这套系统，使用效果很好，在这里免费提供给所有关注开源软件以及前沿技术趋势的朋友。</p>
+
+<p>项目的地址在 <a target="_blank" rel="nofollow" href="http://porter.io">http://porter.io</a> ，使用你的Github帐号登录后就可以完成订阅，系统会自动同步你Star的项目清单，过程非常简单。</p>
+
+<p>这里是我们的一篇博客，介绍了更多的相关信息，<a target="_blank" rel="nofollow" href="http://porter.io/blog/stay-up-to-date-with-your-favorite-github-repositories-with-porter-io/">http://porter.io/blog/stay-up-to-date-with-your-favorite-github-repositories-with-porter-io/</a></p>
+
+<p>希望得到大家的反馈。</p>
+
+	]]></content>
+</entry><entry>
+	<title>[分享发现] 机锋论坛 2300 万用户数据（包含用户名、密码、邮箱）在互联网疯传</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159009#reply6" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159009</id>
+	<published>2015-01-04T03:29:41Z</published>
+	<updated>2015-01-04T04:34:19Z</updated>
+	<author>
+		<name>miyuki</name>
+		<uri>http://www.v2ex.com/member/miyuki</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	近日有白帽子向漏洞盒子提交重要安全问题《一份机锋论坛2300万用户数据在互联网疯传》。目前无法确认数据由机锋论坛直接泄露
+	]]></content>
+</entry><entry>
+	<title>[Mac OS X] Dash For Mac 能否添加自定义的中文源？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159008#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159008</id>
+	<published>2015-01-04T03:27:40Z</published>
+	<updated>2015-01-04T04:22:35Z</updated>
+	<author>
+		<name>lyragosa</name>
+		<uri>http://www.v2ex.com/member/lyragosa</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	我看了一下Dash的Setting，应该是可以自定义源的，但要求输入什么种子地址就完全不明所以了。<br /><br />类似php手册这种本来就有中文源的，如果让自带的修改可以查中文那就最好不过了。<br /><br />就事论事……请勿鄙视。
+	]]></content>
+</entry><entry>
+	<title>[问与答] 在一个人的时候，大家是怎么渡过脆弱期让内心变得强大起来的？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159007#reply8" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159007</id>
+	<published>2015-01-04T03:24:39Z</published>
+	<updated>2015-01-04T04:55:27Z</updated>
+	<author>
+		<name>2232588429</name>
+		<uri>http://www.v2ex.com/member/2232588429</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	相信每个人都偶尔会有那么一段时期比较玻璃心比较敏感抽风，说白了就是蛋疼瞎想睡不着觉神经过敏，其实都是孤独+宅久了惹的祸。<br />大家是怎么渡过这个阶段让自己内心变得超级强大的呢？来说说你的经验吧，给咱参考参考。
+	]]></content>
+</entry><entry>
+	<title>[问与答] 多开一个路由器就会让网络变慢的问题</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159006#reply3" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159006</id>
+	<published>2015-01-04T03:23:22Z</published>
+	<updated>2015-01-04T04:21:03Z</updated>
+	<author>
+		<name>uuair</name>
+		<uri>http://www.v2ex.com/member/uuair</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>我家有三个路由器，同样的牌子，tplink，但出的问题莫名其妙。<br>
+tp1路由器是进户的主路由器，实现pppoe的拨号问题，同时实现无线网的功能。<br>
+tp2路由器是某一个房间，离tp1的直线距离是5米左右，穿3堵墙，如果没有这个路由器，那边房间的信号只有1格，其他房间就没有信号了，所以我开启了tp2路由器，关闭了dhcp功能，网线接入普通的接口。<br>
+tp3路由器在客厅，离tp1路由器直线距离5米左右，隔了2堵墙，如果没有tp3路由器，在tp3哪里是有信号的，大概是4格，可是无法覆盖到电视机哪里(客厅面积90平米)，所以我加入了tp3路由器，同样关闭dhcp，接口在普通的接口上。<br>
+在tp1路由器附近上网的时候，tp1跟tp3路由器的无线网信号是重叠的，三个路由器的ssid都是相同的。<br>
+这就是背景。<br>
+最近发现，如果开启tp3路由器，tp1路由器附近上网，ping网关192.168.0.1的时候，ping值大概200-300左右，如果关闭tp3，只有1-2。。是不是ssid重叠的问题？还是有其他问题呢？<br>
+三个路由器都是从jd上新买的，而且我也换过位置，还是不成。。三个路由器的信道分别是1、6、12。。</p>
+
+<p>为什么tp1附近上网，开启tp3路由器，会ping值这么低呢？？？</p>
+
+	]]></content>
+</entry><entry>
+	<title>[程序员] 节后综合征候群</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159005#reply18" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159005</id>
+	<published>2015-01-04T03:21:47Z</published>
+	<updated>2015-01-04T04:57:06Z</updated>
+	<author>
+		<name>BInaryTree111</name>
+		<uri>http://www.v2ex.com/member/BInaryTree111</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	- - <br /><br />放假的时候 玩wii 的击剑 ，把右胳膊玩残了<br /><br />早上穿bra  上班拍键盘的时候，都痛死 ... <br /><br />放完假 你哪里不好了？
+	]]></content>
+</entry><entry>
+	<title>[问与答] 加入 14 年度优秀手游团队~~带你一起牛逼一起飞！！！</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159004#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159004</id>
+	<published>2015-01-04T03:21:47Z</published>
+	<updated>2015-01-04T04:24:29Z</updated>
+	<author>
+		<name>kaiqigu</name>
+		<uri>http://www.v2ex.com/member/kaiqigu</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>1.手机游戏前端工程师（高级）<br>
+职位描述： <br>
+1.独立完成复杂的智能机游戏编程任务； <br>
+2.研究新技术并推进实施； <br>
+3.带领初中级程序员完成技术任务；<br>
+4.撰写相关技术相关文档。<br>
+职位要求： <br>
+1.有2年以上游戏编程经验，精通lua、C＋＋；<br>
+2.熟悉ios平台与android平台开发 ；<br>
+3.熟悉多线程，网络编程（以及网络常规通用协议）；<br>
+4. 能够快速独立完成win32平台工具软件（不限语言与框架）者优先； <br>
+5.有cocos2d－x或u3d引擎使用经验优先； <br>
+6.大学教育主修数学、物理、图形图像学等专业优先，有数学建模能力者优先。</p>
+
+<p>2.手机游戏前端工程师（初级）<br>
+岗位职责： <br>
+1.使用cocos2d-x开发基于andriod/ios平台的手机游戏；<br>
+2. 能够独立完成系统模块。<br>
+职位要求： <br>
+1.喜欢游戏；<br>
+2.精通C++语言； <br>
+3.对数据结构、基本算法熟练掌握，并具备基本的算法设计能力； <br>
+4.良好的团队协作能力；<br>
+5.工作细致认真，有责任心，能够承受较大的工作压力。</p>
+
+<p>3.游戏研发工程师（Python）（中高级）<br>
+职位描述： <br>
+负责手游服务端逻辑开发。 <br>
+职位要求： <br>
+1.本科及以上学历，两年以上工作经验，一年以上游戏服务端编程经验；<br>
+2.学习能力强，能更快的熟悉和掌握新技术； <br>
+3.熟悉Python语言，了解Python各种性能瓶颈及优化方法； <br>
+4.熟悉socket与http的原理，了解并使用过至少一种Python Web框架（tornado，django，web.py??）； <br>
+5.熟悉Linux系统，熟悉Bash，能进行日常的服务器维护工作； <br>
+6.良好编码习惯，了解并理解PEP8； <br>
+7.熟悉设计模式，掌握面向对象开发思想，熟悉常用的数据结构和算法；<br>
+8.热爱游戏，并具备良好的沟通能力及团队合作意识； <br>
+9.踏实，诚实，积极改造生活； <br>
+10.使用Vim/Emacs有加分；<br>
+11.熟悉Git有加分； <br>
+12.日常使用非windows系统有加分。</p>
+
+<p>我们使用的技术：linux, nginx, python, tornado, redis,mysql, git.</p>
+
+<p>4.游戏研发工程师（Python）（初级）<br>
+职位描述：<br>
+负责手游服务端逻辑开发。 <br>
+任职要求： <br>
+1. 本科学历，一年以上编程经验； <br>
+2.学习能力强，能更快的熟悉和掌握新技术； <br>
+3.熟悉任意一门编程语言，会Python有加分；<br>
+4.良好编码习惯，会为了代码可读性和可维护性而纠结；<br>
+5.熟悉设计模式，掌握面向对象开发思想，熟悉常用的数据结构和算法； <br>
+6.热爱游戏，并具备良好的沟通能力及团队合作意识； <br>
+7.踏实，诚实，积极改造生活；<br>
+8.做过服务器端开发有加分； <br>
+9.使用Vim/Emacs有加分；<br>
+10.熟悉Git有加分。</p>
+
+<p>5.平台接入工程师<br>
+职位描述：<br>
+负责将公司产品接入各平台。<br>
+职位要求：<br>
+1.专科及以上学历，三年以上工作经验，有一年以上移动平台开发经验者优先考虑；<br>
+2.熟悉Object C，熟悉java（熟悉python者优先考虑）；<br>
+3.熟悉android和ios开发，熟悉Activity声明周期和MVC模式；<br>
+4.有10个以上平台接入经验（有后端接入经验、平台sdk开发经验、游戏开发经验者优先考虑）；<br>
+5.具备清晰的表达以及良好的沟通能力。</p>
+
+<p>6.手机游戏测试工程师<br>
+职位描述： <br>
+1.制定详细测试规范及流程； <br>
+2.根据每日测试需求预估工作量，保证项目质量和进度； <br>
+3.管理游戏缺陷并跟踪和推动其解决； <br>
+4.深入研究游戏，对游戏的更新改进提出自己独特的见解； <br>
+5.提交软件测试报告。<br>
+职位要求： <br>
+1.一年以上测试工作经验； <br>
+2.对游戏有极大的热情，广泛了解PC游戏，TV游戏，手机游戏，熟悉各种游戏类型和特点，对游戏有独到见解和看法； <br>
+3.熟练运用各种测试方法，能够根据需求独立编写测试用例、测试计划，完成测试报告； <br>
+4. 良好的沟通表达能力和团队合作精神；<br>
+5.具有分析、解决问题的能力，抗压力强； <br>
+6.有手游测试经验、手机软件或PC软件测试经验者优先。</p>
+
+<p>[我们的] ：<br>
+坐标： [谷] 位于国贸郎家园--北京CBD内密度最低的创意园区朗园Vintage，办公环境优越。</p>
+
+<p>产品：主打产品《超级英雄》自上线以来，稳定在大陆区appstore畅销榜单前列，是2014年度与腾讯天天系列、《刀塔传奇》等国民手游并驾齐驱的明星产品。目前六大项目火热进行中，2D、3D项目应有尽有。</p>
+
+<p>老大：别人家有好老公、好干爹，咱有好老板！钱和礼物发到手软！公司的创始人团队包括前金山游戏副总裁、热酷游戏COO和热酷游戏策划总监等，清华北大出身，跟着干不会错。~(≧▽≦)/~</p>
+
+<p>团队：我们的 [谷] 可为大家提供最佳的成长空间和超级给力的团队，这里只有给力的队友和一起玩耍的小伙伴，团队平均游戏行业经验7年，手游行业经验3年，公司氛围真真儿是极好的，明争暗斗啥的真心没有。</p>
+
+<p>设备:刚给大神们换的MacBook Pro，你懂得！！！咱是做大事业的，不带计较这点小钱的~</p>
+
+<p>福利：敢放这样的话“别家公司有的我都有，别家公司没有的我更有！”餐补、房补、交通补（地铁涨，我们的福利也跟着涨）、免费健身足疗、水果饮料小吃样样不能少、周末俱乐部活动（足球篮球羽毛球，球球走起~）、高大上的办公环境（动不动就能看到明星哦！）、出国游（新马泰爱去哪去哪，就是任性！）、超长假期（春运抢票啥的不关我事儿！）、五险一金少不了、电影（CBD万达，我们没有包场，只是家属朋友随便带！）项目奖金咣咣地、生日会、礼品奖励（表大惊小怪，苹果6+又不是没发过，还是整组的发！）弹性工时、弹性涨薪（不用担心你工资的涨幅像老黄牛一样慢喽）~</p>
+
+<p>不是所有手游公司都是潜力股，不是所有公司都叫 [凯奇谷] ！<br>
+递我一封简历，还你一个未来！<br>
+简历投递邮箱： <a target="_blank" rel="nofollow" href="mailto:hr@kaiqigu.com">hr@kaiqigu.com</a> （请放心，我们会认真对待每一封简历的O(∩_∩)O）</p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] ICMP 协议是用的几号什么端口通信</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159003#reply6" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159003</id>
+	<published>2015-01-04T03:20:20Z</published>
+	<updated>2015-01-04T04:50:52Z</updated>
+	<author>
+		<name>webjin</name>
+		<uri>http://www.v2ex.com/member/webjin</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>ICMP协议是用的几号什么端口通信</p>
+
+	]]></content>
+</entry><entry>
+	<title>[阅读] 多看现在好像没了限免？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159002#reply10" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159002</id>
+	<published>2015-01-04T03:12:42Z</published>
+	<updated>2015-01-04T05:11:03Z</updated>
+	<author>
+		<name>qiang2k</name>
+		<uri>http://www.v2ex.com/member/qiang2k</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>多看现在好像没了限免？有链接吗？</p>
+
+	]]></content>
+</entry><entry>
+	<title>[Mac OS X] 一个可以在 OSX 的 Menubar 中固化快捷操作的软件</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159001#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159001</id>
+	<published>2015-01-04T03:04:37Z</published>
+	<updated>2015-01-04T03:37:09Z</updated>
+	<author>
+		<name>sohunjug</name>
+		<uri>http://www.v2ex.com/member/sohunjug</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>可以在Menubar中设置快捷操作的软件,叫Handy,感觉挺方便的。<br>
+官网在这里： <a target="_blank" rel="nofollow" href="https://vnet.link/soft/handy">https://vnet.link/soft/handy</a></p>
+
+	]]></content>
+</entry><entry>
+	<title>[分享发现] 分享 8 个 inbox 邀请，需要的留下邮箱吧</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/159000#reply14" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/159000</id>
+	<published>2015-01-04T03:03:18Z</published>
+	<updated>2015-01-04T03:27:43Z</updated>
+	<author>
+		<name>janon</name>
+		<uri>http://www.v2ex.com/member/janon</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	分享 8 个inbox邀请，需要的留下邮箱吧
+	]]></content>
+</entry><entry>
+	<title>[程序员] 伙伴们推荐一个 Diff 工具</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158999#reply12" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158999</id>
+	<published>2015-01-04T02:55:17Z</published>
+	<updated>2015-01-04T05:04:35Z</updated>
+	<author>
+		<name>Vanson</name>
+		<uri>http://www.v2ex.com/member/Vanson</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>伙伴们推荐一个Diff工具，Mac OS X自带的FileMeger在文件比较大和遇到中文字符就会奔溃和假死，推荐一个吧，最好能事免费的。谢谢啦</p>
+
+	]]></content>
+</entry><entry>
+	<title>[iDev] 有谁做过 Hybrid App,请经验分享</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158998#reply12" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158998</id>
+	<published>2015-01-04T02:55:02Z</published>
+	<updated>2015-01-04T05:06:01Z</updated>
+	<author>
+		<name>Janselz</name>
+		<uri>http://www.v2ex.com/member/Janselz</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	本人打算做Hybrid App,请有做过的牛牛们分享下经验<br />1.JavaScript API提供<br />2.Native 代码如和分层<br />3.加载HTML的规则<br /><br />在此谢过~
+	]]></content>
+</entry><entry>
+	<title>[问与答] 微信 WeixinApi 失效，大部分 WEBAPP 分享都错误，有什么地方可以反映问题？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158996#reply8" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158996</id>
+	<published>2015-01-04T02:53:05Z</published>
+	<updated>2015-01-04T05:13:51Z</updated>
+	<author>
+		<name>dongcheng</name>
+		<uri>http://www.v2ex.com/member/dongcheng</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	这个是WeixinApi JS作者发的公告<br /><br />12.30日，微信官方发了个公告：微信公众平台关于整顿诱导分享及诱导关注行为的公告，话说，这个调整绝对是太粗暴了，直接导致WeixinApi的分享功能不能用，官方限制的，应该是WeixinJSBridge.invoke，初步估计，应该是有个白名单，或者检测公众号是否交了300块钱去认证！<br /><br />果真是城门失火，殃及池鱼啊！WeixinApi又不是用来干坏事儿的，反到给它们拉了一些用户有木有！<br /><br />地址<br /><br /><a target="_blank" href="http://www.baidufe.com/item/ec1d71c4a0a609bf29c7.html" rel="nofollow">http://www.baidufe.com/item/ec1d71c4a0a609bf29c7.html</a><br /><br /><br />分割线<br /><br />目测大部分WEBAPP错误，除了少数白名单内的。这个情况已经持续4天，微信官方没有具体说法，也不知道什么时候能有说法。
+	]]></content>
+</entry><entry>
+	<title>[问与答] CM 12 刷 rom 的 radio img 怎么用?</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158995#reply6" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158995</id>
+	<published>2015-01-04T02:48:59Z</published>
+	<updated>2015-01-04T05:03:31Z</updated>
+	<author>
+		<name>fyooo</name>
+		<uri>http://www.v2ex.com/member/fyooo</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	看了官网给的介绍：<br /><a target="_blank" href="http://forum.xda-developers.com/google-nexus-5/development/unofficial-cm12-cmhammerhead-nexus-5-t2938502" rel="nofollow">http://forum.xda-developers.com/google-nexus-5/development/unofficial-cm12-cmhammerhead-nexus-5-t2938502</a><br /><br />略略提到：“Recommended Radio: LRX22C - 8974A-2.0.50.2.22”<br /><br />于是顺藤摸瓜的下载了N5_AndroidL_LRX22C_Radio+Bootloader.zip<br /><br />但是不会用，于是再看了一下 CM 官方的 wiki：<br /><a target="_blank" href="http://wiki.cyanogenmod.org/w/Hammerhead_Info" rel="nofollow">http://wiki.cyanogenmod.org/w/Hammerhead_Info</a><br /><br />好像没有提到 radio 的。。。<br /><br />有人知道怎么用么?<br />@<a href="/member/MerlinYang">MerlinYang</a>
+	]]></content>
+</entry><entry>
+	<title>[酷工作] [北京]网易招聘 IOS、Android 移动开发工程师，年底换工作现在正是好时候~~~~</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158992#reply2" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158992</id>
+	<published>2015-01-04T02:44:31Z</published>
+	<updated>2015-01-04T03:48:08Z</updated>
+	<author>
+		<name>izhaopeng</name>
+		<uri>http://www.v2ex.com/member/izhaopeng</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	工作职责：<br /><br />1、主要负责移动应用程序的设计、开发工作；<br />2、基于产品设计，进行iOS、Android版应用的实现；<br />3、独立完成iOS、Android软件开发、验证和和修正测试中发现的问题；<br />4、学习和研究新技术以满足产品的需求，根据开发过程中的体验对产品提出改进建议。<br /><br /><br />职位要求：<br /><br />1、计算机相关专业本科或以上学历，至少1年以上移动产品开发经验；<br />2、具备良好的沟通能力和团队协作能力，能够独立思考，优化产品实现方式和代码结构；<br />3、具有良好的英文文档阅读能力；<br />4、具有互联网开发经验或其他终端开发经验者优先。<br />5、对移动产品有浓厚兴趣 ,对移动互联网产品设计、交互有独特的见解优先<br /><br />如果你有可展现的代码或个人项目，请提供链接或github地址，我们会重点考虑。<br /><br />PS. 这个职位优势在于，一方面可以获得大公司工作的经验和人脉，另一方面，可以接触到不同方向的产品，让你的技术和经验可以被更多的用户使用到。
+	]]></content>
+</entry><entry>
+	<title>[问与答] 求介绍网速快稳定的支持 rsync 的服务器</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158991#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158991</id>
+	<published>2015-01-04T02:35:51Z</published>
+	<updated>2015-01-04T04:18:04Z</updated>
+	<author>
+		<name>standin000</name>
+		<uri>http://www.v2ex.com/member/standin000</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	对国内云存储做备份的稳定性(像115)和开放性(支持linux)挺担心的。
+	]]></content>
+</entry><entry>
+	<title>[问与答] 如何订阅某个人的推文并且实时发送到邮箱？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158990#reply5" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158990</id>
+	<published>2015-01-04T02:35:10Z</published>
+	<updated>2015-01-04T03:57:19Z</updated>
+	<author>
+		<name>lolicon</name>
+		<uri>http://www.v2ex.com/member/lolicon</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	RT，对某一个人很感兴趣<br />所以希望能够在他发送出一个推文的时候，就能立刻把内容发送到我的邮箱，这样可以做到吗？<br />谢谢
+	]]></content>
+</entry><entry>
+	<title>[酷工作] 网易招前端开发 内推内推 年底了 各种福利~~~</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158989#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158989</id>
+	<published>2015-01-04T02:32:00Z</published>
+	<updated>2015-01-03T22:32:00Z</updated>
+	<author>
+		<name>vvayy</name>
+		<uri>http://www.v2ex.com/member/vvayy</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	基本信息：<br />公 司：网易汽车中心<br />工作地点：北京<br />招聘人数：多名<br />薪酬范围：10000 – 30000（季度奖金、年终奖另算） <br />公司福利：季度奖金、年终奖、13薪、良好的工作氛围、年假、每月一天带薪病假、每年一<br />次公司部门免费出国旅游、各种节日和生日礼物<br /><br />岗位要求：<br />1. 精通javascript、HTML和CSS，解决浏览器兼容性问题；<br />2. 具备良好的代码风格和编程习惯，能够合理利用设计模式和模块化的组织方式对代码进行架构及优化；<br />3. 熟悉html5/css3 有移动开发经验；<br />4. 熟悉常用的web前端框架，如jQuery,Zepto,backbone等，阅读过一种框架的源码；<br />5. 了解一门后端开发语言，php/python/java；<br />6. 对前端技术有强烈的兴趣，喜欢钻研；<br />7. 踏实可靠，对待工作有强烈责任心，沟通良好。<br /><br />联系方式：<br />邮箱： <a target="_blank" href="mailto:pangwei@corp.netease.com">pangwei@corp.netease.com</a>
+	]]></content>
+</entry><entry>
+	<title>[Swift] SwiftDoc</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158988#reply0" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158988</id>
+	<published>2015-01-04T02:25:05Z</published>
+	<updated>2015-01-04T02:25:05Z</updated>
+	<author>
+		<name>Kai</name>
+		<uri>http://www.v2ex.com/member/Kai</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<a target="_blank" href="http://swiftdoc.org" rel="nofollow">http://swiftdoc.org</a>
+	]]></content>
+</entry><entry>
+	<title>[问与答] 刚被警察打电话问已备案域名的用途，第一次感觉好虚？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158987#reply43" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158987</id>
+	<published>2015-01-04T02:20:56Z</published>
+	<updated>2015-01-04T04:31:27Z</updated>
+	<author>
+		<name>fkbd</name>
+		<uri>http://www.v2ex.com/member/fkbd</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>接下去会发生什么？注销备案号吗？</p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 遇到了奇怪的网页广告问题 不知道是不是运营商干的</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158986#reply6" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158986</id>
+	<published>2015-01-04T02:09:44Z</published>
+	<updated>2015-01-04T04:35:01Z</updated>
+	<author>
+		<name>Pete</name>
+		<uri>http://www.v2ex.com/member/Pete</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	我发现打开blog.dimpurr.com偶尔跳转到http://www.sdfste.com/njs.php?http://blog.dimpurr.com/ 但是我用电脑端chrome和手机端UC都没问题 偶尔还会出现不跳转就直接剩下网页头部和广告<br />还有一个是魔豆路由器官网，出现了相同的广告，来自jump.gaoduan.cc ，很明显不是魔豆放的。我请求切换到桌面版网站，广告没有了。我又去dimpurr上试了一下，原来的没有了，出现了在下方占半个屏幕的购物帮的广告。同样的其它两个浏览器都没有问题，或许是那两个有广告屏蔽，这个待会再看。<br />我有几个疑问就是，为什么切换到桌面版广告就没了，这种广告可能来自哪里。手机上并没有恶意软件，移动也不像会投放这种低俗广告的啊。问问大家是怎么看的。
+	]]></content>
+</entry><entry>
+	<title>[问与答] 用 dnspod 和 dnspai 的 dns 服务，都有些用户会出现解析不到域名的情况，有没有遇到同样问题的？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158985#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158985</id>
+	<published>2015-01-04T02:00:31Z</published>
+	<updated>2015-01-04T04:06:04Z</updated>
+	<author>
+		<name>felinx</name>
+		<uri>http://www.v2ex.com/member/felinx</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	用dnspod和dnspai的dns服务，都有些用户会出现解析不到域名的情况，通常是在wifi情况下，换一下wifi的dns即可，有没有遇到同样问题的？有没有什么办法解决？
+	]]></content>
+</entry><entry>
+	<title>[问与答] 国外看中国视频/音乐？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158984#reply12" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158984</id>
+	<published>2015-01-04T01:58:54Z</published>
+	<updated>2015-01-04T04:39:21Z</updated>
+	<author>
+		<name>omegaga</name>
+		<uri>http://www.v2ex.com/member/omegaga</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>即将肉翻，做些准备。<br>
+由于版权合约的限制，很多音乐/视频网站都只在中国大陆提供服务（虾米/QQ音乐等等），我想知道如果我翻墙回大陆，是否也算违反了版权合约？如果可以使用的话，要使用哪家的服务比较好呢，国内搞个服务器是不是都需要备案？<br>
+我知道一个Chrome Extension叫Unblock Youku的，但是移动端有没有比较好的解决方案呢？</p>
+
+<p>这帖问的是翻回来的，所以就没放在monthly节点下了……</p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 奶爸们都来说说，用的啥品牌的奶粉？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158983#reply39" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158983</id>
+	<published>2015-01-04T01:58:31Z</published>
+	<updated>2015-01-04T05:10:24Z</updated>
+	<author>
+		<name>fising</name>
+		<uri>http://www.v2ex.com/member/fising</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>即将为人父，为孩子准备了惠氏启赋原装进口奶粉，不知道怎么样。</p>
+
+<p>大家都用的啥奶粉？都来说说呗。</p>
+
+<p>关于奶粉的各种经验，都抛出来吧</p>
+
+	]]></content>
+</entry><entry>
+	<title>[问与答] 单页面应用（ SPA） div 和 iframe 的性能问题？</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158982#reply1" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158982</id>
+	<published>2015-01-04T01:53:51Z</published>
+	<updated>2015-01-04T02:31:26Z</updated>
+	<author>
+		<name>thenewbie</name>
+		<uri>http://www.v2ex.com/member/thenewbie</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	背景：内部用的一个小网站，不用考虑seo，安全性等各种问题，<br />形式上类似单页面应用，页面上有几个标签页，点击会异步加载标签页的内容，<br />每个标签内数据量比较大。<br /><br />问题：单纯考虑到性能问题的话，每个标签里的内容是直接放到 div 里面，还是扔到 iframe 里面更好呢？
+	]]></content>
+</entry><entry>
+	<title>[问与答] 上回蜜月旅行求建议，行程已定，@USCONAN @duanran 童鞋过来领奖品</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158981#reply13" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158981</id>
+	<published>2015-01-04T01:46:28Z</published>
+	<updated>2015-01-04T04:59:17Z</updated>
+	<author>
+		<name>iiduce</name>
+		<uri>http://www.v2ex.com/member/iiduce</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<a target="_blank" href="http://v2ex.com/t/154872" rel="nofollow">http://v2ex.com/t/154872</a>  <br /><br />1月中旬蜜月旅行向大家求建议，最终决定二人自由行去普吉岛。回复中对我帮助最大的两位童鞋 @<a href="/member/USCONAN">USCONAN</a>  @<a href="/member/duanran">duanran</a> 请在本文下面请回复邮箱，我把转运中国的注册码发给你们，谢谢了。<br /><br />携程预订了飞机+酒店套餐。本来找到最划算的航班，发现是马航，到吉隆坡转机，心里怕怕的，就放弃了。后来发现了去香港转机的航班，在普吉岛5晚5白天，双酒店，计划摩托车环岛还有皇帝岛一日游。回来到香港再玩两天，计划去海洋公园、夜游太平山顶，还有购物。预算也提升到了2万。<br /><br />顺便有个问题咨询，望有经验童鞋告知。 我们是办理落地签，据说要抽查现金，每人至少要带2万泰铢（还是1万泰铢， <a target="_blank" href="http://www.thaishanghai.com/th/visa/visa_arrival/" rel="nofollow">http://www.thaishanghai.com/th/visa/visa_arrival/</a>  ？网上说法不一，有人说最新规定已经改成2万），或者等值其它现金。我们酒店什么都预定好了，根本花不了这么多钱啊，带这么多现金真不安全。谁能给说下具体怎么处理的。<br /><br />第一次出国玩，还是自由行，看了好多攻略，还是希望大家能给建议，谢谢啦。
+	]]></content>
+</entry><entry>
+	<title>[程序员] 悬赏大牛解答求职题目，有现金和礼物答谢（本月每日更新）</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158980#reply45" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158980</id>
+	<published>2015-01-04T01:43:48Z</published>
+	<updated>2015-01-04T07:55:17Z</updated>
+	<author>
+		<name>nowcoder</name>
+		<uri>http://www.v2ex.com/member/nowcoder</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	<p>各位程序猿，为了方便大家找工作的时候备考，我们做了一个专门面向IT互联网行业程序员的求职笔试面试备考的题库网站：（牛客网） <a target="_blank" rel="nofollow" href="http://www.nowcoder.com/">http://www.nowcoder.com/</a></p>
+
+<p>目前，牛客网 <a target="_blank" rel="nofollow" href="http://www.nowcoder.com/">http://www.nowcoder.com/</a>  上积累了谷歌、腾讯、百度、阿里、小米、优酷、网易等几十家互联网公司的笔试面试题目。当前部分题目尚未有最佳答案和解释，为了更好的服务程序猿们，我们做了一个活动，悬赏大牛解答，每道题目根据难度对应一定的现金奖励，最高一道题目奖励100元，还有iPhone、移动硬盘、小米手环等众多好礼相送。</p>
+
+<p>活动地址猛戳→_→： <a target="_blank" rel="nofollow" href="http://www.nowcoder.com/activity/challenge">http://www.nowcoder.com/activity/challenge</a></p>
+
+<p>今天开始至1月29日，我们会在论坛持续更新本贴，每天放出1-3道题目，大家可以跟帖解答，最先正确解答出来的朋友将会获得话费充值、笔记本等礼物。获奖的朋友名单会在第二天更新。<br>
+今天的题目如下：<br>
+1、<br>
+假设有以下代码<br>
+String s = &quot;hello&quot;;<br>
+String t = &quot;hello&quot;;<br>
+char c[] = {&#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;0&#39;};<br>
+下列选项中返回false的语句是：<br>
+A s.equals(t);<br>
+B t.equals(c);<br>
+C s==t;<br>
+D t.equals(new String(&quot;hello&quot;));</p>
+
+<p>2、<br>
+// 请问下面的程序一共输出多少个“-”？为什么？</p>
+<div class="highlight"><pre>#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(void) {
+    int i;
+    for (i=0; i&lt;2; i++) {
+        fork();
+        printf(&quot;-\n&quot;);
+    }
+    return 0;
+}
+</pre></div>
+
+<p>3、<br>
+有A、B两个文件，文件格式相同，均为每行一个十进制整型数字，两个文件的行数不一定相等，但均在一千万行左右。A文件中的数字两两不等，B文件中的数字两两不等， 请用一个算法找出A和B两文件中所有相同的数，并且从小到大有序输出。请考虑统计程序如何实现，给出设计思路和关键算法（可使用伪代码），并估计程序核心代码的时间复杂度和空间复杂度。</p>
+
+<p>牛客网在内测期间得到了V2EX论坛众多朋友的支持和宝贵建议，内测邀请帖子回顾：<br>
+<a target="_blank" rel="nofollow" href="http://v2ex.com/t/134907">http://v2ex.com/t/134907</a><br>
+<a target="_blank" rel="nofollow" href="http://v2ex.com/t/137986">http://v2ex.com/t/137986</a></p>
+
+<p>欢迎关注我们，活动结束后我们会把面试题整理成PDF分发给参与的用户<br>
+微薄    <a target="_blank" rel="nofollow" href="http://www.weibo.com/nowcoder">http://www.weibo.com/nowcoder</a><br>
+微信    www_nowcoder_com<br>
+QQ群   157594705<br>
+邮件    <a target="_blank" rel="nofollow" href="mailto:admin@nowcoder.com">admin@nowcoder.com</a></p>
+
+<p>如果你手里有更多的笔试面试题，欢迎联系我们，重金求购</p>
+<div class="highlight"><pre>再次感谢大家！祝大家新年行好运，早日找到女朋友！！
+</pre></div>
+
+	]]></content>
+</entry><entry>
+	<title>[程序员] v2ex 最近变得好慢。。</title>
+	<link rel="alternate" type="text/html" href="http://www.v2ex.com/t/158979#reply12" />
+	<id>tag:www.v2ex.com,2015-01-04:/t/158979</id>
+	<published>2015-01-04T01:39:14Z</published>
+	<updated>2015-01-04T05:12:56Z</updated>
+	<author>
+		<name>yuankui</name>
+		<uri>http://www.v2ex.com/member/yuankui</uri>
+	</author>
+	<content type="html" xml:base="http://www.v2ex.com/" xml:lang="en"><![CDATA[
+	加载一个页面要2s多，昨天有几次到达10s的，只有我一个人这样吗？<br /><img src="http://ww3.sinaimg.cn/large/8da06673jw1enx8mvf8awj218g02iwf9.jpg" class="imgly" style="max-width: 660px;" border="0" /> 
+	]]></content>
+</entry>
+</feed>

@@ -1,6 +1,51 @@
+_ = require 'lodash'
+request = require 'request'
+Promise = require 'bluebird'
+charset = require 'charset'
+iconv = require 'iconv-lite'
+jschardet = require 'jschardet'
+FeedParser = require 'feedparser'
+stream = require 'stream'
 service = require '../service'
 
-return
+_checkRSS = (req, res) ->
+  {url} = req.get()
+  url = url.trim()
+
+  new Promise (resolve, reject) ->
+    request
+      url: url
+      method: 'GET'
+      headers: 'User-Agent': @userAgent
+      encoding: null
+    , (err, res, body) ->
+      unless res.statusCode >= 200 and res.statusCode < 300
+        err = new Error("bad request #{res.statusCode}")
+      return reject(err) if err
+
+      encoding = charset res.headers, body
+      encoding = encoding or jschardet.detect(body)?.encoding?.toLowerCase() or 'utf-8'
+      body = iconv.decode body, encoding
+
+      return reject(new Error('Invalid feed')) unless body
+
+      resolve(body)
+
+  .then (body) ->
+    new Promise (resolve, reject) ->
+      feedParser = new FeedParser()
+      readableStream = new stream.Readable()
+      readableStream._read = ->
+
+      feedParser
+      .on 'error', reject
+      .on 'meta', (meta) -> resolve meta
+
+      readableStream.pipe feedParser
+      readableStream.push body
+      readableStream.push null
+
+  .then (meta) -> _.pick meta, 'title', 'description'
 
 module.exports = service.register 'rss', ->
 
@@ -16,13 +61,17 @@ module.exports = service.register 'rss', ->
 
   @iconUrl = service.static('images/icons/rss@2x.png')
 
-  @setField 'url', onChange: 'checkRSS'
+  @setField 'url',
+    onChange:
+      callApi: 'checkRSS'
   @setField 'notification', type: 'text'
 
   @needCustomName false
   @needCustomDescription false
   @needCustomIcon false
 
-  @registerApi 'checkRSS', (req, res, callback) ->
+  @serviceUrl = 'http://localhost:7411'
+
+  @registerApi 'checkRSS', _checkRSS
 
   @registerEvents ['integration.create', 'integration.remove', 'integration.update']

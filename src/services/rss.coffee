@@ -16,7 +16,7 @@ _checkRSS = (req, res) ->
     request
       url: url
       method: 'GET'
-      headers: 'User-Agent': @userAgent
+      headers: 'User-Agent': service.userAgent
       encoding: null
     , (err, res, body) ->
       unless res.statusCode >= 200 and res.statusCode < 300
@@ -64,6 +64,7 @@ module.exports = service.register 'rss', ->
   @setField 'url',
     onChange:
       callApi: 'checkRSS'
+
   @setField 'notification', type: 'text'
 
   @needCustomName false

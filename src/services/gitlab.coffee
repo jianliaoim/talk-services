@@ -86,7 +86,7 @@ module.exports = service.register 'gitlab', ->
     zh: 'GitLab 是一个用于仓库管理系统的开源项目，添加后可以收到来自 GitLab 的推送。'
     en: 'GitLab is a software repository manager. You may connect webhooks of GitLab repos.'
 
-  @iconUrl = service.static('images/icons/gitlab@2x.png')
+  @iconUrl = service.static 'images/icons/gitlab@2x.png'
 
   @setField 'url', type: 'text', readOnly: true, autoGen: true
 

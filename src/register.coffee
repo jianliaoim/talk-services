@@ -41,8 +41,6 @@ class Service
   # Template of settings page
   template: ''
 
-  userAgent: 'Talk Api Service V1'
-
   constructor: (@name) ->
     @title = @name
     @fields = _roomId: type: 'selector'
@@ -148,10 +146,11 @@ class Service
    * @return {Promise}  Response body
   ###
   httpPost: (url, payload) ->
+    _service = require '../service'
     requestAsync
       method: 'POST'
       url: url
-      headers: 'User-Agent': @userAgent
+      headers: 'User-Agent': _service.userAgent
       json: true
       timeout: 5000
       body: payload

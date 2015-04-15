@@ -14,7 +14,9 @@ IntegrationSchema = new Schema
   refreshToken: String
   showname: type: String
   openId: String
-  notifications: Object
+  notifications: type: Object, set: (notifications) ->
+    @_originalNotifications = @notifications
+    notifications
   # Options
   title: type: String
   iconUrl: String
@@ -22,7 +24,9 @@ IntegrationSchema = new Schema
   url: String
   description: type: String
   # Github
-  repos: Array
+  repos: type: Array, set: (repos) ->
+    @_originalRepos = @repos
+    repos
   # Data saved by system
   data: Object
   errorInfo: String

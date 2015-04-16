@@ -1,4 +1,5 @@
 Promise = require 'bluebird'
+marked = require 'marked'
 _ = require 'lodash'
 request = require 'request'
 requestAsync = Promise.promisify request
@@ -168,6 +169,72 @@ _updateWebhook = (req, res) ->
   .then -> integration.data = data
 
 _receiveWebhook = (req, res) ->
+  self = this
+  event = req.headers?['x-github-event']
+  payload = req.body
+  {integration} = req
+  {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
+
+  message =
+    _creatorId: @robot._id
+    _integrationId: integration._id
+    quote:
+      userName: sender.login
+      userAvatarUrl: sender.avatar_url
+
+  reposTitle = repository?.full_name
+
+  switch event
+    when 'commit_comment'
+      message.quote.title = "#{reposTitle} new commit comment by #{sender?.login}"
+      message.quote.text = "#{marked(comment?.body or '')}"
+      message.quote.redirectUrl = comment?.html_url
+    when 'create'
+      message.quote.title = "#{reposTitle} new #{payload.ref_type} to #{repository?.full_name}"
+      message.quote.redirectUrl = repository?.html_url
+    when 'delete'
+      message.quote.title = "#{reposTitle} #{payload.ref_type} #{payload.ref} was deleted by #{sender?.login}"
+      message.quote.redirectUrl = repository?.html_url
+    when 'fork'
+      message.quote.title = "#{reposTitle} #{forkee?.full_name}"
+      message.quote.redirectUrl = forkee?.html_url
+    when 'issue_comment'
+      message.quote.title = "#{reposTitle} issue comment by #{sender?.login}"
+      message.quote.text = "#{marked(comment?.body or '')}"
+      message.quote.redirectUrl = comment?.html_url
+    when 'issues'
+      message.quote.title = "#{reposTitle} issue #{action or ''} by #{sender?.login}"
+      message.quote.text = """
+      <h3>#{issue?.title}</h3>
+      #{marked(issue?.body or '')}
+      """
+      message.quote.redirectUrl = issue?.html_url
+    when 'pull_request'
+      message.quote.title = "#{reposTitle} new pull request by #{sender?.login}"
+      message.quote.text = """
+      <h3>#{pull_request?.title}</h3>
+      #{marked(pull_request?.body or '')}
+      """
+      message.quote.redirectUrl = pull_request?.html_url
+    when 'pull_request_review_comment'
+      message.quote.title = "#{reposTitle} new review comment by #{sender?.login}"
+      message.quote.text = """
+      #{marked(comment?.body or '')}
+      """
+      message.quote.redirectUrl = comment?.html_url
+    when 'push'
+      return false unless commits?.length
+      message.quote.title = "#{reposTitle} new commits"
+      commitArr = commits.map (commit) ->
+        """
+        <a href="#{commit.url}" target="_blank"><code>#{commit?.id?[0...6]}:</code></a> #{commit?.message}<br>
+        """
+      message.quote.text = commitArr.join ''
+      message.quote.redirectUrl = head_commit.url
+    else
+      return false
+
+  @sendMessage message
 
 module.exports = service.register 'github', ->
 

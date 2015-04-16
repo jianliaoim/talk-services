@@ -1,0 +1,25 @@
+{
+  "object_kind": "issue",
+  "user": {
+    "name": "sailxjx",
+    "username": "sailxjx",
+    "avatar_url": "https://code.teambition.com//uploads/user/avatar/7/sailxjx.png"
+  },
+  "object_attributes": {
+    "id": 10,
+    "title": "Some Issue",
+    "assignee_id": null,
+    "author_id": 7,
+    "project_id": 21,
+    "created_at": "2015-01-26 10:01:20 +0800",
+    "updated_at": "2015-01-26 10:01:20 +0800",
+    "position": 0,
+    "branch_name": null,
+    "description": "```\r\nSomeCode\r\n```",
+    "milestone_id": null,
+    "state": "opened",
+    "iid": 1,
+    "url": "https://code.teambition.com/talk/talk-core/issues/1",
+    "action": "open"
+  }
+}

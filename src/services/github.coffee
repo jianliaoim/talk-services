@@ -186,11 +186,11 @@ _receiveWebhook = (req, res) ->
 
   switch event
     when 'commit_comment'
-      message.quote.title = "#{reposTitle} new commit comment by #{sender?.login}"
+      message.quote.title = "#{repository.full_name} new commit comment by #{sender?.login}"
       message.quote.text = "#{marked(comment?.body or '')}"
       message.quote.redirectUrl = comment?.html_url
     when 'create'
-      message.quote.title = "#{reposTitle} new #{payload.ref_type} to #{repository?.full_name}"
+      message.quote.title = "new #{payload.ref_type} [#{payload.ref}] to #{repository.full_name}"
       message.quote.redirectUrl = repository?.html_url
     when 'delete'
       message.quote.title = "#{reposTitle} #{payload.ref_type} #{payload.ref} was deleted by #{sender?.login}"

@@ -85,4 +85,15 @@ describe 'Github#Webhook', ->
     .then -> done()
     .catch done
 
+  it 'receive create', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'new branch [test] to teambition/limbo'
+      message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo'
+
+    req.body = payloads['create']
+    req.headers['x-github-event'] = 'create'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
   after cleanup

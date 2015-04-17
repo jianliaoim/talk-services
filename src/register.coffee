@@ -99,7 +99,7 @@ class Service
           data: res.data
 
     if handler.length is 3
-      handler = Promise.promisify(handler).bind this
+      handler = Promise.promisify(handler)
 
     @_events[event] = handler
 

@@ -75,7 +75,7 @@ describe 'Github#Webhook', ->
     github.sendMessage = (message) ->
       message.quote.userName.should.eql 'sailxjx'
       message.quote.userAvatarUrl.should.eql 'https://avatars.githubusercontent.com/u/909853?v=3'
-      message.quote.title.should.eql 'teambition/limbo new commit comment by sailxjx'
+      message.quote.title.should.eql 'teambition/limbo commit comment by sailxjx'
       message.quote.text.trim().should.eql '<p>Leave a commit comment</p>'
       message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo/commit/507388aa1123b0e91fa2d17314b625802cd3f3fa#commitcomment-8535013'
 
@@ -87,11 +87,105 @@ describe 'Github#Webhook', ->
 
   it 'receive create', (done) ->
     github.sendMessage = (message) ->
-      message.quote.title.should.eql 'new branch [test] to teambition/limbo'
+      message.quote.title.should.eql 'teambition/limbo branch test created by sailxjx'
       message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo'
 
     req.body = payloads['create']
     req.headers['x-github-event'] = 'create'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive delete', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'teambition/limbo branch test deleted by sailxjx'
+      message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo'
+
+    req.body = payloads['delete']
+    req.headers['x-github-event'] = 'delete'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive fork', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'teambition/limbo forked to sailxjx/limbo'
+      message.quote.redirectUrl.should.eql 'https://github.com/sailxjx/limbo'
+
+    req.body = payloads['fork']
+    req.headers['x-github-event'] = 'fork'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive issue comment', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'sailxjx/mms issue comment by sailxjx'
+      message.quote.text.should.eql '''
+      <h1 id="markdown">Markdown</h1>
+      <ul>
+      <li>a</li>
+      <li>b</li>
+      <li>c</li>
+      </ul>
+      <pre><code class="lang-coffeescript">foo = -&gt;
+      </code></pre>\n
+      '''
+      message.quote.redirectUrl.should.eql 'https://github.com/sailxjx/mms/issues/1#issuecomment-62661320'
+
+    req.body = payloads['issue-comment']
+    req.headers['x-github-event'] = 'issue_comment'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive issues', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql "teambition/limbo issue opened test"
+      message.quote.text.should.eql '<p>FOr integration</p>\n<ul>\n<li>1</li>\n<li>2</li>\n<li>3</li>\n</ul>\n<pre><code class="lang-coffeescript">foo -&gt;\n</code></pre>\n'
+      message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo/issues/2'
+
+    req.body = payloads['issues']
+    req.headers['x-github-event'] = 'issues'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive pull request', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'teambition/limbo pull request update readme'
+      message.quote.text.should.eql '<p>For test</p>\n'
+      message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo/pull/3'
+
+    req.body = payloads['pull-request']
+    req.headers['x-github-event'] = 'pull_request'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive pull request review comment', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'teambition/limbo review comment by sailxjx'
+      message.quote.text.should.eql '<p>Review CCCC</p>\n'
+      message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo/pull/3#discussion_r20270745'
+
+    req.body = payloads['pull-request-review-comment']
+    req.headers['x-github-event'] = 'pull_request_review_comment'
+    github.receiveEvent 'webhook', req, res
+    .then -> done()
+    .catch done
+
+  it 'receive push', (done) ->
+    github.sendMessage = (message) ->
+      message.quote.title.should.eql 'teambition/limbo commits to refs/heads/master'
+      message.quote.text.should.eql [
+        '<a href="https://github.com/teambition/limbo/commit/20b0e57a9acaf05987da1813480739caece54999" target="_blank"><code>20b0e5:</code></a> update readme<br>'
+        '<a href="https://github.com/teambition/limbo/commit/90654779287d9de686422daaa4dbff0b4d6e5542" target="_blank"><code>906547:</code></a> Merge pull request #3 from sailxjx/master\n\nupdate readme<br>'
+      ].join ''
+      message.quote.redirectUrl.should.eql 'https://github.com/teambition/limbo/commit/90654779287d9de686422daaa4dbff0b4d6e5542'
+
+    req.body = payloads['push']
+    req.headers['x-github-event'] = 'push'
     github.receiveEvent 'webhook', req, res
     .then -> done()
     .catch done

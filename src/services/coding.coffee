@@ -1,4 +1,3 @@
-Promise = require 'bluebird'
 service = require '../service'
 
 _receiveWebhook = (req, res) ->
@@ -49,7 +48,7 @@ module.exports = service.register 'coding', ->
     en: "Coding.net is a developer-oriented cloud development platform, provides a running space, quality control, providing code hosting, project management, and other functions. When you Git version of the repository on the Coding.net when there is a new Push, you'll catch up on Talk received this Push on and information about the repository."
     zh: 'Coding.net 是面向开发者的云端开发平台，提供了提供代码托管、运行空间、质量控制、项目管理等功能。当您在 Coding.net 上的 Git 版本仓库有新的 Push 的时候，你会在简聊上收到本次 Push 以及本仓库的相关信息。'
 
-  @iconUrl = service.static('images/icons/coding@2x.png')
+  @iconUrl = service.static 'images/icons/coding@2x.png'
 
   @setField 'url', type: 'text', readOnly: true, autoGen: true
 

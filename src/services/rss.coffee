@@ -59,7 +59,7 @@ module.exports = service.register 'rss', ->
     zh: '你可以为某一个话题添加来自其他网站的 RSS 订阅，这能够帮助你即时获取网站的最新内容。你可以在简聊上阅读来自 RSS 订阅的文章，甚至无需离开页面。'
     en: 'RSS automatically syncs the latest site contents. This integration allows you read RSS feed without leaving Talk.'
 
-  @iconUrl = service.static('images/icons/rss@2x.png')
+  @iconUrl = service.static 'images/icons/rss@2x.png'
 
   @setField 'url',
     onChange:

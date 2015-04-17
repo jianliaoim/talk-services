@@ -85,7 +85,7 @@ class Service
       Object.keys(events).forEach (event) ->
         handler = events[event]
         self.registerEvent event, handler
-    else throw new Error('Events type is invalid')
+    else throw new Error('Events are invalid')
 
   registerEvent: (event, handler) ->
     self = this

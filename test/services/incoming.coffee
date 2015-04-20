@@ -9,7 +9,7 @@ describe 'Incoming#Webhook', ->
 
   it 'receive webhook', (done) ->
     incoming.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_integrationId'
+      message.should.have.properties '_integrationId'
       message.quote.should.have.properties 'authorName', 'title', 'text', 'redirectUrl', 'thumbnailPicUrl', 'originalPicUrl'
 
     req.body =

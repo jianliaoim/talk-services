@@ -40,7 +40,7 @@ describe 'Coding#Webhook', ->
   it 'should create new message when receive a webhook request with a push payload', (done) ->
     # Overwrite the sendMessage function of coding
     coding.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_integrationId', 'quote'
+      message.should.have.properties '_integrationId', 'quote'
       message._integrationId.should.eql '552cc903022844e6d8afb3b4'
       message.quote.title.should.eql '来自 Coding 的事件'
       message.quote.text.should.eql [

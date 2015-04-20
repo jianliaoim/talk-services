@@ -24,7 +24,6 @@ _receiveWebhook = (req, res) ->
       text += commitArr.join ''
 
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
     quote:
       title: "来自 Coding 的事件"

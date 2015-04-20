@@ -5,7 +5,6 @@ _receiveWebhook = (req, res) ->
 
   payload = req.body
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
     quote:
       text: "#{payload.entry?.creator_name} 添加了新的数据"

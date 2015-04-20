@@ -27,7 +27,6 @@ _receiveWebhook = (req, res) ->
   commits or= []
 
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
 
   message.quote = {}

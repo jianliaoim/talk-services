@@ -176,7 +176,6 @@ _receiveWebhook = (req, res) ->
   {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
 
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
     quote:
       userName: sender.login

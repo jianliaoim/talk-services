@@ -6,7 +6,6 @@ _receiveWebhook = (req, res) ->
   payload = req.body
 
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
     quote:
       text: "Fir.im: #{payload.msg}"

@@ -14,7 +14,6 @@ _receiveWebhook = (req, res) ->
   throw new Error("Title and text can not be empty") unless title?.length or text?.length
 
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
     quote:
       authorName: authorName

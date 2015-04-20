@@ -36,5 +36,3 @@ Object.defineProperty util, 'res', ->
     res
 
 module.exports = util
-
-

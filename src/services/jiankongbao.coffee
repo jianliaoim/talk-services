@@ -17,7 +17,6 @@ _receiveWebhook = (req, res) ->
     throw new Error('Invalid jiankongbao payload')
 
   message =
-    _creatorId: @robot._id
     _integrationId: integration._id
     quote:
       text: content

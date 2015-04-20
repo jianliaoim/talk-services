@@ -20,6 +20,7 @@ describe 'Jiankongbao#Webhook', ->
   it 'should create new message when receive jiankongbao webhook', (done) ->
     jiankongbao.sendMessage = (message) ->
       message.quote.text.should.eql payload.content
+      message.quote.redirectUrl.should.eql 'https://qiye.jiankongbao.com/task/http/2'
 
     req.body = payload
 

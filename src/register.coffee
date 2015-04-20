@@ -41,6 +41,9 @@ class Service
   # Template of settings page
   template: ''
 
+  # Whether if the service displayed in web/android/ios
+  isHidden: false
+
   constructor: (@name) ->
     @title = @name
     @fields = _roomId: type: 'selector'

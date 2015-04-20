@@ -4,4 +4,4 @@ module.exports = service.register 'email', ->
 
   @title = 'Email'
 
-  @isShownInWeb = false
+  @isHidden = true

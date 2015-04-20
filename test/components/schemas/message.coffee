@@ -55,5 +55,3 @@ MessageSchema.virtual '_starredById'
 MessageSchema.virtual '_integrationId'
   .get -> @integration?._id or @integration
   .set (_id) -> @integration = _id
-
-module.exports = MessageSchema

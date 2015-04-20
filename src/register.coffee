@@ -24,6 +24,41 @@ _getManual = ->
   else
     @_manual = _.zipObject fileNames.map _getContent
 
+_initRobot = ->
+  self = this
+  service = require './service'
+  {limbo} = service.components
+  {UserModel} = limbo.use 'talk'
+
+  # Set default properties of robot
+  @robot.name or= @title or @name
+  @robot.email or= "#{@name}bot@talk.ai"
+  @robot.avatarUrl or= @iconUrl
+  @robot.isRobot = true
+
+  conditions =
+    email: @robot.email
+    isRobot: true
+
+  $robot = UserModel.findOneAsync conditions
+
+  .then (_robot) ->
+    return _robot if _robot
+    robot = new UserModel self.robot
+    update = robot.toJSON()
+    delete update._id
+    delete update.id
+    UserModel.findOneAndUpdateAsync conditions
+    ,
+      update
+    ,
+      upsert: true
+      new: true
+
+  .then (robot) ->
+    throw new Error("Service #{self.name} load robot failed") unless robot
+    self.robot = robot
+
 class Service
 
   # Shown as title
@@ -51,11 +86,16 @@ class Service
     @_apis = {}
     # Handler on events
     @_events = {}
-    @robot =
-      name: @name
-      email: "#{@name}bot@talk.ai"
-      avatarUrl: @iconUrl
+    @robot = {}
     Object.defineProperty this, 'manual', get: _getManual
+
+  initialize: ->
+    self = this
+
+    $robot = _initRobot.apply this
+
+    Promise.all [$robot]
+    .then -> self
 
   # The the input field and handler
   setField: (field, options = {}) ->
@@ -131,6 +171,7 @@ class Service
    * @return {Promise}  MessageModel
   ###
   sendMessage: (message) ->
+    service = require './service'
     robot = @robot
     {limbo} = service.components
     {MessageModel} = limbo.use 'talk'
@@ -149,11 +190,11 @@ class Service
    * @return {Promise}  Response body
   ###
   httpPost: (url, payload) ->
-    _service = require '../service'
+    service = require './service'
     requestAsync
       method: 'POST'
       url: url
-      headers: 'User-Agent': _service.userAgent
+      headers: 'User-Agent': service.userAgent
       json: true
       timeout: 5000
       body: payload
@@ -164,8 +205,8 @@ class Service
   # ========================== Define build-in functions finish ==========================
 
 register = (name, fn) ->
-  service = new Service name
-  fn.apply service
-  service
+  _service = new Service name
+  fn.apply _service
+  _service
 
 module.exports = register

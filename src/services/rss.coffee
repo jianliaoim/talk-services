@@ -75,4 +75,4 @@ module.exports = service.register 'rss', ->
 
   @registerApi 'checkRSS', _checkRSS
 
-  @registerEvents ['integration.create', 'integration.remove', 'integration.update']
+  @registerEvents ['post_create_integration', 'post_remove_integration', 'post_update_integration']

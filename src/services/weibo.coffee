@@ -16,4 +16,4 @@ module.exports = service.register 'weibo', ->
 
   @serviceUrl = 'http://localhost:7410'
 
-  @registerEvents ['integration.create', 'integration.remove', 'integration.update']
+  @registerEvents ['post_create_integration', 'post_remove_integration', 'post_update_integration']

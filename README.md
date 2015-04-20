@@ -7,6 +7,16 @@ talk-services
 
 Integration services of talk.ai
 
+### Events
+
+- `pre_create_integration`
+- `post_create_integration`
+- `pre_update_integration`
+- `post_update_integration`
+- `pre_remove_integration`
+- `post_remove_integration`
+- `webhook`  Emitted when receive webhook request
+
 [npm-url]: https://npmjs.org/package/talk-services
 [npm-image]: http://img.shields.io/npm/v/talk-services.svg
 

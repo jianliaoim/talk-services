@@ -239,10 +239,10 @@ module.exports = service.register 'github', ->
 
   @iconUrl = service.static 'images/icons/github@2x.png'
 
-  @registerEvent 'integration.create', _createWebhook
+  @registerEvent 'pre_create_integration', _createWebhook
 
-  @registerEvent 'integration.update', _updateWebhook
+  @registerEvent 'pre_update_integration', _updateWebhook
 
-  @registerEvent 'integration.remove', _removeWebhook
+  @registerEvent 'pre_remove_integration', _removeWebhook
 
   @registerEvent 'webhook', _receiveWebhook

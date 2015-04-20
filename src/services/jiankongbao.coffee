@@ -40,4 +40,6 @@ module.exports = service.register 'jiankongbao', ->
 
   @iconUrl = service.static 'images/icons/jiankongbao@2x.png'
 
+  @showToken = true
+
   @registerEvent 'webhook', _receiveWebhook

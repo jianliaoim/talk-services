@@ -38,7 +38,7 @@ module.exports = service.register 'coding', ->
 
   @title = 'Coding'
 
-  @template = ''
+  @template = 'webhook'
 
   @summary = service.i18n
     en: 'Coding.net is a developer-oriented cloud development platform, provides a running space, quality control, providing code hosting, project management, and other functions.'

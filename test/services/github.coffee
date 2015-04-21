@@ -36,7 +36,7 @@ describe 'Github#IntegrationHooks', ->
 
   it 'should create github hook when integration created', (done) ->
     req.integration = integration
-    github.receiveEvent 'pre_create_integration', req, res
+    github.receiveEvent 'before.integration.create', req, res
     .then ->
       integration.data[config.github.repos].hookId.should.be.type 'number'
       hookId = integration.data[config.github.repos].hookId
@@ -51,7 +51,7 @@ describe 'Github#IntegrationHooks', ->
     integration.notifications =
       push: 1
       create: 1
-    github.receiveEvent 'pre_update_integration', req, res
+    github.receiveEvent 'before.integration.update', req, res
     .then ->
       # Hook id is not changed
       integration.data[config.github.repos].hookId.should.eql hookId
@@ -59,7 +59,7 @@ describe 'Github#IntegrationHooks', ->
     .catch done
 
   it 'should remove the github hook when integration removed', (done) ->
-    github.receiveEvent 'pre_remove_integration', req, res
+    github.receiveEvent 'before.integration.remove', req, res
     .then -> done()
     .catch done
 

@@ -27,4 +27,4 @@ module.exports = service.register 'firim', ->
 
   @iconUrl = service.static 'images/icons/firim@2x.jpg'
 
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

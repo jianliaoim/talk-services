@@ -245,4 +245,4 @@ module.exports = service.register 'github', ->
 
   @registerEvent 'before.integration.remove', _removeWebhook
 
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

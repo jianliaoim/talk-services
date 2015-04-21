@@ -12,7 +12,7 @@ Integration services of talk.ai
 * `integration.create`
 * `integration.update`
 * `integration.remove`
-* `webhook`  Emitted when receive webhook request
+* `service.webhook`  Emitted when receive webhook request
 * `before.integration.create`
 * `before.integration.update`
 * `before.integration.remove`

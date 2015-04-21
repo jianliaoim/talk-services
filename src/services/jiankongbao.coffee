@@ -42,4 +42,4 @@ module.exports = service.register 'jiankongbao', ->
 
   @showToken = true
 
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

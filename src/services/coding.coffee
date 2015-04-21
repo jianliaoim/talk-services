@@ -51,4 +51,4 @@ module.exports = service.register 'coding', ->
 
   @setField 'url', type: 'text', readOnly: true, autoGen: true
 
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

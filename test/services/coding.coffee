@@ -56,7 +56,7 @@ describe 'Coding#Webhook', ->
     req.integration =
       _id: '552cc903022844e6d8afb3b4'
       category: 'coding'
-    coding.receiveEvent 'webhook', req, res
+    coding.receiveEvent 'service.webhook', req, res
 
   it 'should emit an error when the integration token isnt equals to payload token', (done) ->
     req.body = payload
@@ -64,7 +64,7 @@ describe 'Coding#Webhook', ->
       _id: '552cc903022844e6d8afb3b3'
       category: 'coding'
       token: 'cba'
-    coding.receiveEvent 'webhook', req, res
+    coding.receiveEvent 'service.webhook', req, res
     .catch (err) ->
       err.message.should.eql 'Invalid token'
       done()

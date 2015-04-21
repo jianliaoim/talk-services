@@ -28,7 +28,7 @@ describe 'GitLab#Webhook', ->
 
     req.body = payloads['push']
 
-    gitlab.receiveEvent 'webhook', req, res
+    gitlab.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -42,7 +42,7 @@ describe 'GitLab#Webhook', ->
 
     req.body = payloads['issue']
 
-    gitlab.receiveEvent 'webhook', req, res
+    gitlab.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -55,7 +55,7 @@ describe 'GitLab#Webhook', ->
 
     req.body = payloads['merge']
 
-    gitlab.receiveEvent 'webhook', req, res
+    gitlab.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 

@@ -90,4 +90,4 @@ module.exports = service.register 'gitlab', ->
   @setField 'url', type: 'text', readOnly: true, autoGen: true
 
   # Apply function on `webhook` event
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

@@ -36,7 +36,7 @@ describe 'Jinshuju#Webhook', ->
 
     req.body = payload
 
-    jinshuju.receiveEvent 'webhook', req, res
+    jinshuju.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 

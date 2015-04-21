@@ -39,4 +39,4 @@ module.exports = service.register 'incoming', ->
 
   @iconUrl = service.static 'images/icons/incoming@2x.png'
 
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

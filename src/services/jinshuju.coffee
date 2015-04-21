@@ -26,4 +26,4 @@ module.exports = service.register 'jinshuju', ->
     zh: '金数据是一款在线表单设计、数据收集、统计和分享工具。在金数据表单设置中填写 Webhook 地址后，你就可以在简聊话题内收取表单新的填写记录通知。'
     en: 'Jinshuju.net is an online form design, data collection, statistics and sharing tools. Fill in the data form setting Webhook address, you can simply receive new topics within a form to fill out log notification in Talk.'
 
-  @registerEvent 'webhook', _receiveWebhook
+  @registerEvent 'service.webhook', _receiveWebhook

@@ -24,7 +24,7 @@ describe 'Jiankongbao#Webhook', ->
 
     req.body = payload
 
-    jiankongbao.receiveEvent 'webhook', req, res
+    jiankongbao.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 

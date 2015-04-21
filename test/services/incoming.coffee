@@ -19,6 +19,6 @@ describe 'Incoming#Webhook', ->
       redirectUrl: 'https://talk.ai/site'
       imageUrl: 'https://dn-talk.oss.aliyuncs.com/site/images/workspace-84060cfd.jpg'
 
-    incoming.receiveEvent 'webhook', req, res
+    incoming.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done

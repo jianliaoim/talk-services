@@ -81,7 +81,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['commit-comment']
     req.headers['x-github-event'] = 'commit_comment'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -92,7 +92,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['create']
     req.headers['x-github-event'] = 'create'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -103,7 +103,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['delete']
     req.headers['x-github-event'] = 'delete'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -114,7 +114,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['fork']
     req.headers['x-github-event'] = 'fork'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -135,7 +135,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['issue-comment']
     req.headers['x-github-event'] = 'issue_comment'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -147,7 +147,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['issues']
     req.headers['x-github-event'] = 'issues'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -159,7 +159,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['pull-request']
     req.headers['x-github-event'] = 'pull_request'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -171,7 +171,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['pull-request-review-comment']
     req.headers['x-github-event'] = 'pull_request_review_comment'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 
@@ -186,7 +186,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['push']
     req.headers['x-github-event'] = 'push'
-    github.receiveEvent 'webhook', req, res
+    github.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 

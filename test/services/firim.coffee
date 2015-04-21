@@ -16,7 +16,7 @@ describe 'Firim#Webhook', ->
       msg: '你好'
       link: 'http://fir.im/'
     req.integration = _id: 1
-    firim.receiveEvent 'webhook', req, res
+    firim.receiveEvent 'service.webhook', req, res
     .then -> done()
     .catch done
 

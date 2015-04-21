@@ -1,3 +1,4 @@
+crypto = require 'crypto'
 service = require '../service'
 
 jkbUrl = 'https://qiye.jiankongbao.com'

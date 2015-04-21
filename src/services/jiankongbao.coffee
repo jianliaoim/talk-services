@@ -2,11 +2,8 @@ service = require '../service'
 
 jkbUrl = 'https://qiye.jiankongbao.com'
 
-_receiveWebhook = (req, res) ->
-  {integration} = req
-
-  if req.method is 'GET' then payload = req.query else payload = req.body
-
+_receiveWebhook = ({integration, method, body, query}) ->
+  if method is 'GET' then payload = query else payload = body
   {msg_id, task_id, task_type, fault_time, token, content} = payload
 
   if integration.token and

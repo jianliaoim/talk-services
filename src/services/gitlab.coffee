@@ -9,13 +9,11 @@ service = require '../service'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = (req, res) ->
+_receiveWebhook = ({integration, body}) ->
   # The errors should be catched and transmit to callback
   self = this
-  {integration} = req
   {redis} = service.components
-
-  payload = req.body
+  payload = body
 
   switch payload.object_kind
     when 'merge_request' then payload.event = 'merge_request'

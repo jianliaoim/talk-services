@@ -89,9 +89,8 @@ _updateHook = (repos, hookId, token, notifications, hashId) ->
     throw err if err
     body
 
-_createWebhook = (req, res) ->
+_createWebhook = (integration) ->
   self = this
-  {integration} = req
   data = {}
 
   Promise.resolve integration.repos
@@ -109,9 +108,8 @@ _createWebhook = (req, res) ->
     integration.data = data
     integration
 
-_removeWebhook = (req, res) ->
+_removeWebhook = (integration) ->
   self = this
-  {integration} = req
   reposes = integration.repos
   data = integration.data or {}
   Promise.resolve reposes
@@ -123,9 +121,8 @@ _removeWebhook = (req, res) ->
     , hookId
     , integration.token
 
-_updateWebhook = (req, res) ->
+_updateWebhook = (integration) ->
   self = this
-  {integration} = req
   return unless ['repos', 'notifications'].some (field) -> integration.isDirectModified field
   {_originalRepos, _originalNotifications, data} = integration
   data or= {}
@@ -168,11 +165,10 @@ _updateWebhook = (req, res) ->
   Promise.all [$removeOldRepos, $updateNewRepos]
   .then -> integration.data = data
 
-_receiveWebhook = (req, res) ->
+_receiveWebhook = ({headers, body, integration}) ->
   self = this
-  event = req.headers?['x-github-event']
-  payload = req.body
-  {integration} = req
+  event = headers['x-github-event']
+  payload = body
   {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
 
   message =

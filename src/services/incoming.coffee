@@ -1,8 +1,8 @@
 service = require '../service'
 
-_receiveWebhook = (req, res) ->
-  payload = req.body
-  {integration} = req
+_receiveWebhook = ({integration, body}) ->
+  payload = body
+
   {
     authorName
     title

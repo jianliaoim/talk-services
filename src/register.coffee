@@ -135,13 +135,13 @@ class Service
     unless toString.call(handler) is '[object Function]'
       throw new Error('Service url is not defined') unless @serviceUrl
       serviceUrl = @serviceUrl
-      handler = (req, res) ->
+      handler = (payload) ->
         self.httpPost serviceUrl
         ,
           event: event
-          data: res.data
+          data: payload
 
-    if handler.length is 3
+    if handler.length is 2
       handler = Promise.promisify(handler)
 
     @_events[event] = handler

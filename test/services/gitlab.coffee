@@ -2,7 +2,7 @@ should = require 'should'
 requireDir = require 'require-dir'
 
 service = require '../../src/service'
-{prepare, cleanup, req, res} = require '../util'
+{prepare, cleanup, req} = require '../util'
 gitlab = service.load 'gitlab'
 
 payloads = requireDir './gitlab_assets'
@@ -28,7 +28,7 @@ describe 'GitLab#Webhook', ->
 
     req.body = payloads['push']
 
-    gitlab.receiveEvent 'service.webhook', req, res
+    gitlab.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -42,7 +42,7 @@ describe 'GitLab#Webhook', ->
 
     req.body = payloads['issue']
 
-    gitlab.receiveEvent 'service.webhook', req, res
+    gitlab.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -55,7 +55,7 @@ describe 'GitLab#Webhook', ->
 
     req.body = payloads['merge']
 
-    gitlab.receiveEvent 'service.webhook', req, res
+    gitlab.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 

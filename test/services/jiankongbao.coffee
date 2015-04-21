@@ -1,6 +1,6 @@
 should = require 'should'
 service = require '../../src/service'
-{prepare, cleanup, req, res} = require '../util'
+{prepare, cleanup, req} = require '../util'
 jiankongbao = service.load 'jiankongbao'
 
 payload =
@@ -24,7 +24,7 @@ describe 'Jiankongbao#Webhook', ->
 
     req.body = payload
 
-    jiankongbao.receiveEvent 'service.webhook', req, res
+    jiankongbao.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 

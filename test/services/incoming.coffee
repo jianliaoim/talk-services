@@ -1,6 +1,6 @@
 should = require 'should'
 service = require '../../src/service'
-{prepare, cleanup, req, res} = require '../util'
+{prepare, cleanup, req} = require '../util'
 incoming = service.load 'incoming'
 
 describe 'Incoming#Webhook', ->
@@ -19,6 +19,6 @@ describe 'Incoming#Webhook', ->
       redirectUrl: 'https://talk.ai/site'
       imageUrl: 'https://dn-talk.oss.aliyuncs.com/site/images/workspace-84060cfd.jpg'
 
-    incoming.receiveEvent 'service.webhook', req, res
+    incoming.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done

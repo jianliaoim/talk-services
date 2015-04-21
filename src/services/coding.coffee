@@ -1,8 +1,7 @@
 service = require '../service'
 
-_receiveWebhook = (req, res) ->
-  integration = req.integration
-  payload = req.body
+_receiveWebhook = ({integration, body}) ->
+  payload = body
   # When the token of integration is settled
   # Compare it with the payload.token
   if integration.token and integration.token isnt payload.token

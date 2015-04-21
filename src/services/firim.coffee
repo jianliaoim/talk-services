@@ -1,10 +1,7 @@
 service = require '../service'
 
-_receiveWebhook = (req, res) ->
-
-  {integration} = req
-  payload = req.body
-
+_receiveWebhook = ({integration, body}) ->
+  payload = body
   message =
     _integrationId: integration._id
     quote:

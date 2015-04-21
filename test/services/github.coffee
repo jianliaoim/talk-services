@@ -4,7 +4,7 @@ Promise = require 'bluebird'
 
 service = require '../../src/service'
 config = require '../config'
-{prepare, cleanup, req, res} = require '../util'
+{prepare, cleanup, req} = require '../util'
 github = service.load 'github'
 {limbo} = service.components
 {IntegrationModel} = limbo.use 'talk'
@@ -35,8 +35,7 @@ describe 'Github#IntegrationHooks', ->
   before prepare
 
   it 'should create github hook when integration created', (done) ->
-    req.integration = integration
-    github.receiveEvent 'before.integration.create', req, res
+    github.receiveEvent 'before.integration.create', integration
     .then ->
       integration.data[config.github.repos].hookId.should.be.type 'number'
       hookId = integration.data[config.github.repos].hookId
@@ -51,7 +50,7 @@ describe 'Github#IntegrationHooks', ->
     integration.notifications =
       push: 1
       create: 1
-    github.receiveEvent 'before.integration.update', req, res
+    github.receiveEvent 'before.integration.update', integration
     .then ->
       # Hook id is not changed
       integration.data[config.github.repos].hookId.should.eql hookId
@@ -59,7 +58,7 @@ describe 'Github#IntegrationHooks', ->
     .catch done
 
   it 'should remove the github hook when integration removed', (done) ->
-    github.receiveEvent 'before.integration.remove', req, res
+    github.receiveEvent 'before.integration.remove', integration
     .then -> done()
     .catch done
 
@@ -81,7 +80,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['commit-comment']
     req.headers['x-github-event'] = 'commit_comment'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -92,7 +91,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['create']
     req.headers['x-github-event'] = 'create'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -103,7 +102,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['delete']
     req.headers['x-github-event'] = 'delete'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -114,7 +113,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['fork']
     req.headers['x-github-event'] = 'fork'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -135,7 +134,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['issue-comment']
     req.headers['x-github-event'] = 'issue_comment'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -147,7 +146,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['issues']
     req.headers['x-github-event'] = 'issues'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -159,7 +158,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['pull-request']
     req.headers['x-github-event'] = 'pull_request'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -171,7 +170,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['pull-request-review-comment']
     req.headers['x-github-event'] = 'pull_request_review_comment'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 
@@ -186,7 +185,7 @@ describe 'Github#Webhook', ->
 
     req.body = payloads['push']
     req.headers['x-github-event'] = 'push'
-    github.receiveEvent 'service.webhook', req, res
+    github.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 

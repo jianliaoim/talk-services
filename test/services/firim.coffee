@@ -1,6 +1,6 @@
 should = require 'should'
 service = require '../../src/service'
-{prepare, cleanup, req, res} = require '../util'
+{prepare, cleanup, req} = require '../util'
 firim = service.load 'firim'
 
 describe 'Firim#Webhook', ->
@@ -16,7 +16,7 @@ describe 'Firim#Webhook', ->
       msg: '你好'
       link: 'http://fir.im/'
     req.integration = _id: 1
-    firim.receiveEvent 'service.webhook', req, res
+    firim.receiveEvent 'service.webhook', req
     .then -> done()
     .catch done
 

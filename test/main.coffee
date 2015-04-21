@@ -1,8 +1,9 @@
 # Initialize service
-service = require './service'
+service = require '../src/service'
+service.components = require './components'
 
-# Test settings
-settings = require './settings'
+# Test service
+require './service'
 
 # Subtestcases of each service
 requireDir = require 'require-dir'

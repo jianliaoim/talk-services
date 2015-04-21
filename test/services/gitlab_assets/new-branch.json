@@ -1,0 +1,17 @@
+{
+  "before": "0000000000000000000000000000000000000000",
+  "after": "8dfb272d9e9bc2276c0c72e391318c4ec29bcb4c",
+  "ref": "refs/heads/feature/gitlab",
+  "checkout_sha": "8dfb272d9e9bc2276c0c72e391318c4ec29bcb4c",
+  "user_id": 7,
+  "user_name": "sailxjx",
+  "project_id": 21,
+  "repository": {
+    "name": "talk-core",
+    "url": "git@code.teambition.com:talk/talk-core.git",
+    "description": "",
+    "homepage": "https://code.teambition.com/talk/talk-core"
+  },
+  "commits": [],
+  "total_commits_count": 0
+}

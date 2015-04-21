@@ -6,7 +6,6 @@ IntegrationSchema = new Schema
   creator: type: Schema.Types.ObjectId
   team: type: Schema.Types.ObjectId
   room: type: Schema.Types.ObjectId
-  serviceName:  String
   category: type: String # Integration category: weibo/github
   hashId: type: String, default: -> crypto.createHash('sha1').update("#{Date.now()}").digest('hex')
   # For authorized integrations
@@ -14,7 +13,9 @@ IntegrationSchema = new Schema
   refreshToken: String
   showname: type: String
   openId: String
-  notifications: Object
+  notifications: type: Object, set: (notifications) ->
+    @_originalNotifications = @notifications
+    notifications
   # Options
   title: type: String
   iconUrl: String
@@ -22,7 +23,9 @@ IntegrationSchema = new Schema
   url: String
   description: type: String
   # Github
-  repos: Array
+  repos: type: Array, set: (repos) ->
+    @_originalRepos = @repos
+    repos
   # Data saved by system
   data: Object
   errorInfo: String
@@ -40,7 +43,5 @@ IntegrationSchema.virtual '_roomId'
 IntegrationSchema.virtual '_teamId'
   .get -> @team?._id or @team
   .set (_id) -> @team = _id
-
-IntegrationSchema.methods.save = (callback = ->) -> callback null, this
 
 module.exports = IntegrationSchema

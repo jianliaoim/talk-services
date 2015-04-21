@@ -25,14 +25,19 @@
     "express": "^4.12.3",
     "limbo": "^0.3.2",
     "mocha": "^2.1.0",
-    "mongoose": "3.8.21",
+    "mongoose": "^4.0.1",
     "redis": "^0.12.1",
     "should": "^5.0.1"
   },
   "dependencies": {
     "bluebird": "^2.9.24",
+    "charset": "^1.0.0",
+    "feedparser": "^1.0.1",
     "glob": "^5.0.5",
+    "iconv-lite": "^0.4.8",
+    "jschardet": "^1.1.1",
     "lodash": "^3.5.0",
+    "marked": "^0.3.3",
     "request": "^2.55.0",
     "require-dir": "^0.1.0"
   }

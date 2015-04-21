@@ -1,0 +1,51 @@
+{
+  "object_kind": "merge_request",
+  "user": {
+    "name": "sailxjx",
+    "username": "sailxjx",
+    "avatar_url": "https://code.teambition.com//uploads/user/avatar/7/sailxjx.png"
+  },
+  "object_attributes": {
+    "id": 465,
+    "target_branch": "master",
+    "source_branch": "feature/gitlab",
+    "source_project_id": 21,
+    "author_id": 7,
+    "assignee_id": null,
+    "title": "Feature/gitlab",
+    "created_at": "2015-01-26 09:56:49 +0800",
+    "updated_at": "2015-01-26 09:56:49 +0800",
+    "milestone_id": null,
+    "state": "opened",
+    "merge_status": "unchecked",
+    "target_project_id": 21,
+    "iid": 2,
+    "description": "Merge GitLab Feature",
+    "position": 0,
+    "locked_at": null,
+    "source": {
+      "name": "talk-core",
+      "ssh_url": "git@code.teambition.com:talk/talk-core.git",
+      "http_url": "https://code.teambition.com/talk/talk-core.git",
+      "namespace": "Talk",
+      "visibility_level": 0
+    },
+    "target": {
+      "name": "talk-core",
+      "ssh_url": "git@code.teambition.com:talk/talk-core.git",
+      "http_url": "https://code.teambition.com/talk/talk-core.git",
+      "namespace": "Talk",
+      "visibility_level": 0
+    },
+    "last_commit": {
+      "id": "e523992d8b2f2adb720224868e26cce1c81e061a",
+      "message": "add gitlab repository homepage\n",
+      "timestamp": "2015-01-26T09:55:51+08:00",
+      "url": "https://code.teambition.com/talk/talk-core/commit/e523992d8b2f2adb720224868e26cce1c81e061a",
+      "author": {
+        "name": "Xu Jingxin",
+        "email": "sailxjx@gmail.com"
+      }
+    }
+  }
+}

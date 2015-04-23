@@ -1,5 +1,5 @@
 service = require '../service'
-Moment = require 'moment'
+moment = require 'moment-timezone'
 
 _receiveWebhook = ({integration, body, headers}) ->
   payload = body
@@ -46,7 +46,7 @@ _receiveWebhook = ({integration, body, headers}) ->
           message.quote.title = "项目 #{payload.repository.name} 中添加了新的任务"
           message.quote.text = payload.task.content
         when 'update_deadline'
-          message.quote.title = "项目 #{payload.repository.name} 中更新了任务的截止日期 #{Moment(payload.task.deadline).format('YYYY-MM-DD')}"
+          message.quote.title = "项目 #{payload.repository.name} 中更新了任务的截止日期 #{moment(payload.task.deadline).tz('Asia/Shanghai').format('YYYY-MM-DD')}"
           message.quote.text = payload.task.content
         when 'update_priority'
           prioritys = ['有空再看', '正常处理', '优先处理', '十万火急']

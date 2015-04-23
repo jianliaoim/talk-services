@@ -1,0 +1,40 @@
+{
+  "author": {
+    "global_key": "sailxjx",
+    "name": "sailxjx",
+    "path": "/u/sailxjx",
+    "avatar": "/static/fruit_avatar/Fruit-9.png"
+  },
+  "repository": {
+    "https_url": "https://git.coding.net/sailxjx/test-webhook.git",
+    "description": "test webhook",
+    "web_url": "https://coding.net/u/sailxjx/p/test-webhook",
+    "name": "test-webhook",
+    "project_id": "47074",
+    "owner": {
+      "email": "sailxjx@gmail.com",
+      "name": "sailxjx"
+    },
+    "ssh_url": "git@git.coding.net:sailxjx/test-webhook.git"
+  },
+  "task": {
+    "creator": {
+      "global_key": "sailxjx",
+      "name": "sailxjx",
+      "path": "/u/sailxjx",
+      "avatar": "/static/fruit_avatar/Fruit-9.png"
+    },
+    "deadline": 1430323200000,
+    "owner": {
+      "global_key": "coding",
+      "name": "coding",
+      "path": "/u/coding",
+      "avatar": "https://dn-coding-net-production-static.qbox.me/512b2a62-956b-4ef8-8e84-b3c66e71468f.png?imageMogr2/auto-orient/format/png/crop/!300x300a0a0"
+    },
+    "content": "测试",
+    "priority": 1
+  },
+  "event": "task",
+  "action": "update_priority",
+  "token": "abc"
+}

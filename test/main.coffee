@@ -2,9 +2,10 @@
 service = require '../src/service'
 service.components = require './components'
 
-# Test service
-require './service'
+# # Test service
+# require './service'
 
 # Subtestcases of each service
-requireDir = require 'require-dir'
-requireDir './services'
+require './services/coding'
+# requireDir = require 'require-dir'
+# requireDir './services'

@@ -1,0 +1,24 @@
+{
+  "author": {
+    "global_key": "sailxjx",
+    "name": "sailxjx",
+    "path": "/u/sailxjx",
+    "avatar": "/static/fruit_avatar/Fruit-9.png"
+  },
+  "repository": {
+    "https_url": "https://git.coding.net/sailxjx/alalalalalala.git",
+    "description": "aaaaa",
+    "web_url": "https://coding.net/u/sailxjx/p/alalalalalala",
+    "name": "alalalalalala",
+    "project_id": "89463",
+    "owner": {
+      "email": "sailxjx@gmail.com",
+      "name": "sailxjx"
+    },
+    "git_url": "git://git.coding.net/sailxjx/alalalalalala.git",
+    "ssh_url": "git@git.coding.net:sailxjx/alalalalalala.git"
+  },
+  "event": "star",
+  "action": "star",
+  "token": "abc"
+}

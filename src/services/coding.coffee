@@ -1,5 +1,6 @@
-service = require '../service'
 moment = require 'moment-timezone'
+marked = require 'marked'
+service = require '../service'
 
 _receiveWebhook = ({integration, body, headers}) ->
   payload = body
@@ -14,45 +15,105 @@ _receiveWebhook = ({integration, body, headers}) ->
     _integrationId: integration._id
     quote: {}
 
+  projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
+  projectUrl = payload.repository?.web_url
+  authorName = if payload.author?.name then "#{payload.author.name} " else ''
 
   switch event
     when 'push'
       # Prepare to send the message
       if payload.before?[...6] is '000000'
-        message.quote.title = "项目 #{payload.repository.name} 中新建了分支 #{payload.ref}"
+        message.quote.title = "#{projectName}新建了分支 #{payload.ref}"
       else if payload.after?[...6] is '000000'
-        message.quote.title = "项目 #{payload.repository.name} 中删除了分支 #{payload.ref}"
+        message.quote.title = "#{projectName}删除了分支 #{payload.ref}"
       else
-        message.quote.title = "项目 #{payload.repository.name} 中提交了新的代码"
+        message.quote.title = "#{projectName}提交了新的代码"
         if payload.commits?.length
           commitArr = payload.commits.map (commit) ->
-            commitUrl = "#{payload.repository.web_url}/git/commit/#{commit.sha}"
+            commitUrl = "#{projectUrl}/git/commit/#{commit.sha}"
             """
             <a href="#{commitUrl}" target="_blank"><code>#{commit.sha[...6]}:</code></a> #{commit.short_message}<br>
             """
           text = commitArr.join ''
           message.quote.text = text
-      message.quote.redirectUrl = payload.repository.web_url
+      message.quote.redirectUrl = projectUrl
+
     when 'member'
       switch payload.action
         when 'create'
-          message.quote.title = "项目 #{payload.repository.name} 中添加了新的成员 #{payload.target_user.name}"
-          message.quote.redirectUrl = "#{payload.repository.web_url}/members/#{payload.target_user.global_key}"
+          message.quote.title = "#{projectName}#{authorName}添加了新的成员 #{payload.target_user.name}"
+          message.quote.redirectUrl = "#{projectUrl}/members/#{payload.target_user.global_key}"
         else return false
+
     when 'task'
-      message.quote.redirectUrl = "#{payload.repository.web_url}/tasks"
+      message.quote.redirectUrl = "#{projectUrl}/tasks"
       switch payload.action
         when 'create'
-          message.quote.title = "项目 #{payload.repository.name} 中添加了新的任务"
-          message.quote.text = payload.task.content
+          message.quote.title = "#{projectName}#{authorName}添加了新的任务 #{payload.task.content}"
         when 'update_deadline'
-          message.quote.title = "项目 #{payload.repository.name} 中更新了任务的截止日期 #{moment(payload.task.deadline).tz('Asia/Shanghai').format('YYYY-MM-DD')}"
-          message.quote.text = payload.task.content
+          message.quote.title = "#{projectName}#{authorName}更新了任务 #{payload.task.content} 的截止日期 #{moment(payload.task.deadline).tz('Asia/Shanghai').format('YYYY-MM-DD')}"
         when 'update_priority'
           prioritys = ['有空再看', '正常处理', '优先处理', '十万火急']
-          message.quote.title = "项目 #{payload.repository.name} 中更新了任务的优先级 #{prioritys[payload.task.priority] or ''}"
-          message.quote.text = payload.task.content
+          message.quote.title = "#{projectName}#{authorName}更新了任务 #{payload.task.content} 的优先级 #{prioritys[payload.task.priority] or ''}"
+        when 'reassign'
+          message.quote.title = "#{projectName}#{authorName}将任务 #{payload.task.content} 指派给 #{payload.task.owner.name}"
+        when 'finish'
+          message.quote.title = "#{projectName}#{authorName}完成了任务 #{payload.task.content}"
+        when 'restore'
+          message.quote.title = "#{projectName}#{authorName}重做了任务 #{payload.task.content}"
         else return false
+
+    when 'topic'
+      message.quote.redirectUrl = payload.topic.web_url
+      switch payload.action
+        when 'create'
+          message.quote.title = "#{projectName}#{payload.topic.author.name} 发起了新的话题 #{payload.topic.title}"
+        when 'update'
+          message.quote.title = "#{projectName}#{payload.topic.author.name} 更新了话题 #{payload.topic.title}"
+        else return false
+
+    when 'document'
+      message.quote.redirectUrl = payload.document.web_url
+      targetTypes =
+        dir: '文件夹'
+        file: '文件'
+      switch payload.action
+        when 'create'
+          message.quote.title = "#{projectName}#{authorName}创建了新的#{targetTypes[payload.type] or '文件'} #{payload.document.name}"
+        when 'upload'
+          message.quote.title = "#{projectName}#{authorName}上传了新的#{targetTypes[payload.type] or '文件'} #{payload.document.name}"
+        when 'update'
+          message.quote.title = "#{projectName}#{authorName}更新了#{targetTypes[payload.type] or '文件'} #{payload.document.name}"
+        else return false
+
+    when 'watch'
+      message.quote.redirectUrl = projectUrl
+      switch payload.action
+        when 'watch'
+          message.quote.title = "#{projectName}#{authorName}关注了项目"
+        else return false
+
+    when 'star'
+      message.quote.redirectUrl = projectUrl
+      switch payload.action
+        when 'star'
+          message.quote.title = "#{projectName}#{authorName}收藏了项目"
+        else return false
+
+    when 'merge_request', 'pull_request'
+      message.quote.redirectUrl = payload[event].web_url
+      switch payload[event]?.action
+        when 'create'
+          message.quote.title = "#{projectName}新的 #{event} 请求 #{payload[event].title}"
+          message.quote.text = marked(payload[event].body) if payload[event].body
+        when 'refuse'
+          message.quote.title = "#{projectName}拒绝了 #{event} 请求 #{payload[event].title}"
+          message.quote.text = marked(payload[event].body) if payload[event].body
+        when 'merge'
+          message.quote.title = "#{projectName}合并了 #{event} 请求 #{payload[event].title}"
+          message.quote.text = marked(payload[event].body) if payload[event].body
+        else return false
+
     else return false
 
   @sendMessage message

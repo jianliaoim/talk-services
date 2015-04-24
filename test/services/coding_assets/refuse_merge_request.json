@@ -1,0 +1,27 @@
+{
+  "merge_request": {
+    "target_branch": "master",
+    "body": "* cccccc\n* 1\n* 2",
+    "title": "标题标题",
+    "status": "REFUSED",
+    "source_branch": "newbr",
+    "web_url": "https://coding.net/u/sailxjx/p/test-webhook/git/merge/5",
+    "action": "refuse",
+    "number": 5,
+    "merge_commit_sha": "757bb39278a40e1bab568b654d8d011da36dc2a8"
+  },
+  "repository": {
+    "https_url": "https://git.coding.net/sailxjx/test-webhook.git",
+    "description": "test webhook",
+    "web_url": "https://coding.net/u/sailxjx/p/test-webhook",
+    "name": "test-webhook",
+    "project_id": "47074",
+    "owner": {
+      "email": "sailxjx@gmail.com",
+      "name": "sailxjx"
+    },
+    "ssh_url": "git@git.coding.net:sailxjx/test-webhook.git"
+  },
+  "event": "merge_request",
+  "token": "abc"
+}

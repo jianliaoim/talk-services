@@ -1,0 +1,24 @@
+{
+  "author": {
+    "global_key": "jiyinyiyong",
+    "name": "jiyinyiyong",
+    "path": "/u/jiyinyiyong",
+    "avatar": "https://dn-coding-net-production-static.qbox.me/49d5a46383ea29666593e53c9851c58f.jpg"
+  },
+  "repository": {
+    "https_url": "https://git.coding.net/sailxjx/alalalalalala.git",
+    "description": "aaaaa",
+    "web_url": "https://coding.net/u/sailxjx/p/alalalalalala",
+    "name": "alalalalalala",
+    "project_id": "89463",
+    "owner": {
+      "email": "sailxjx@gmail.com",
+      "name": "sailxjx"
+    },
+    "git_url": "git://git.coding.net/sailxjx/alalalalalala.git",
+    "ssh_url": "git@git.coding.net:sailxjx/alalalalalala.git"
+  },
+  "event": "watch",
+  "action": "watch",
+  "token": "abc"
+}

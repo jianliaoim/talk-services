@@ -4,24 +4,18 @@ limbo = require 'limbo'
 config = require '../config'
 schemas = require './schemas'
 
+# Promisify mongoose objects
 Promise.promisifyAll mongoose.Model
 
-_promisifyObj = (obj) ->
-  Object.keys(obj).forEach (key) ->
-    return if key.match /Async$/
-    obj["#{key}Async"] = Promise.promisify obj[key]
+Object.keys(schemas).forEach (key) ->
+  Promise.promisifyAll schemas[key].statics
+  Promise.promisifyAll schemas[key].methods
 
-_promisifySchema = (schema) ->
-  _promisifyObj schema.methods
-  _promisifyObj schema.statics
+talkOptions = {}
+talkOptions = auth: authdb: config.talkAuthDb if config.talkAuthDb
 
-_promisifySchemas = (schemas) ->
-  Object.keys(schemas).forEach (key) -> _promisifySchema schemas[key]
-
-_promisifySchemas schemas
-
-db = limbo.use 'talk',
-  conn: mongoose.createConnection config.talk
+talk = limbo.use 'talk',
+  conn: mongoose.createConnection config.talk, talkOptions
   schemas: schemas
 
 module.exports = limbo

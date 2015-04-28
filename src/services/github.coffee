@@ -13,7 +13,7 @@ _pageHost = 'https://github.com'
  * @param  {String} repos - Repos name
  * @param  {String} token - Token
  * @param  {Object} notifications - Events of hook
- * @param  {String} hashId - hashId of integration
+ * @param  {String} hashId - HashId of integration
  * @return {Promise} Response body
 ###
 _createHook = (repos, token, notifications, hashId) ->
@@ -34,7 +34,7 @@ _createHook = (repos, token, notifications, hashId) ->
 
   .spread (res, body) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("bad request #{res.statusCode}")
+      err = new Error("Bad request #{res.statusCode}")
     throw err if err
     body
 

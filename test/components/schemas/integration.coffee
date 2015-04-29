@@ -10,23 +10,24 @@ IntegrationSchema = new Schema
   hashId: type: String, default: -> crypto.createHash('sha1').update("#{Date.now()}").digest('hex')
   # For authorized integrations
   token: String
+  # Options
+  title: type: String
+  description: type: String
+  iconUrl: String
+  # Other properties
   refreshToken: String
   showname: type: String
   openId: String
-  notifications: type: Object, set: (notifications) ->
-    @_originalNotifications = @notifications
-    notifications
-  # Options
-  title: type: String
-  iconUrl: String
-  # Rss
+  notifications: type: Object
   url: String
-  description: type: String
+  events: Array
   # Github
-  repos: type: Array, set: (repos) ->
-    @_originalRepos = @repos
-    repos
-  # Data saved by system
+  repos: type: Array
+  # Teambition project object id
+  project:
+    _id: String
+    name: String
+  # Data saved in system
   data: Object
   errorInfo: String
   createdAt: type: Date, default: Date.now

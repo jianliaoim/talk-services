@@ -47,6 +47,7 @@ describe 'Github#IntegrationHooks', ->
     .catch done
 
   it 'should update github hook when integration updated', (done) ->
+    integration._original = integration.toJSON()
     integration.notifications =
       push: 1
       create: 1

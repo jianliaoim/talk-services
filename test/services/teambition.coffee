@@ -10,6 +10,17 @@ teambition = service.load 'teambition'
 
 payloads = requireDir './teambition_assets'
 
+sign =
+  "sign": "b0df73e3c09a9620f31998911b1940109ee24c0b"
+  "timestamp": "1430293521192"
+  "nonce": "b00e8a80"
+
+_testWebhook = (event, payload, checkMessage) ->
+  # Overwrite the sendMessage function of coding
+  teambition.sendMessage = checkMessage
+  req.body = payload
+  teambition.receiveEvent 'service.webhook', req
+
 describe 'Teambition#IntegrationHooks', ->
 
   return
@@ -87,12 +98,27 @@ describe 'Teambition#IntegrationHooks', ->
 
   after cleanup
 
-# describe 'Teambition#Webhook', ->
+describe 'Teambition#Webhook', ->
 
-#   before prepare
+  before prepare
 
-#   req.integration =
-#     _id: '5539eef5db959e7d87c9e48a'
-#     category: 'teambition'
+  req.integration =
+    _id: '5539eef5db959e7d87c9e48a'
+    category: 'teambition'
 
-#   after cleanup
+  it 'receive project.rename', ->
+    _testWebhook 'project.rename', payloads['project.rename'], (message) ->
+      message.quote.title.should.eql '[新名] 二师兄 修改了项目名 新名'
+      message.quote.redirectUrl.should.eql payloads['project.rename'].data.project.url
+
+  it 'receive project.archive', ->
+    _testWebhook 'project.archive', payloads['project.archive'], (message) ->
+      message.quote.title.should.eql '[新名] 二师兄 归档了项目'
+      message.quote.redirectUrl.should.eql payloads['project.archive'].data.project.url
+
+  it 'receive project.unarchive', ->
+    _testWebhook 'project.unarchive', payloads['project.unarchive'], (message) ->
+      message.quote.title.should.eql '[新名] 二师兄 恢复了项目'
+      message.quote.redirectUrl.should.eql payloads['project.unarchive'].data.project.url
+
+  after cleanup

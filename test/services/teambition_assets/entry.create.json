@@ -1,0 +1,22 @@
+{
+  "event": "entry.create",
+  "data": {
+    "entry": {
+      "_id": "5541d6e984b8b4a859be8df1",
+      "content": "incoming",
+      "type": 1,
+      "amount": 10,
+      "url": "http://project.ci/project/554063098f408b186ab54b89/bookkeeping/entry/5541d6e984b8b4a859be8df1"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    }
+  }
+}

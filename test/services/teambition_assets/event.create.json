@@ -1,0 +1,24 @@
+{
+  "event": "event.create",
+  "data": {
+    "event": {
+      "_id": "5541d6ade37bab3455d0f468",
+      "title": "event",
+      "content": "",
+      "startDate": "2015-04-30T08:15:00.000Z",
+      "endDate": "2015-04-30T09:15:00.000Z",
+      "location": "office",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/events/event/5541d6ade37bab3455d0f468"
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    }
+  }
+}

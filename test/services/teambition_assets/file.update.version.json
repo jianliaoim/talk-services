@@ -1,0 +1,21 @@
+{
+  "event": "file.update.version",
+  "data": {
+    "file": {
+      "_id": "5541d671e37bab3455d0f461",
+      "fileName": "4.jpg",
+      "fileType": "jpg",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/files/5541d66be37bab3455d0f460/work/5541d671e37bab3455d0f461"
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    }
+  }
+}

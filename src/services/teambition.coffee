@@ -42,14 +42,21 @@ _preValidate = (integration) ->
     throw new Error('Missing events in teambition integration')
 
 _receiveWebhook = ({integration, body}) ->
-  payload = body
+  {event, data} = body
 
   message =
     _integrationId: integration._id
     quote:
-      title: ""
-      text: ""
-      redirectUrl: ""
+      redirectUrl: data.project?.url
+
+  switch event
+    when 'project.rename'
+      message.quote.title = "[#{data.project.name}] #{data.user.name} 修改了项目名 #{data.project.name}"
+    when 'project.archive'
+      message.quote.title = "[#{data.project.name}] #{data.user.name} 归档了项目"
+    when 'project.unarchive'
+      message.quote.title = "[#{data.project.name}] #{data.user.name} 恢复了项目"
+    else return false
 
   @sendMessage message
 

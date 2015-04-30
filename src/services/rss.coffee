@@ -6,6 +6,7 @@ iconv = require 'iconv-lite'
 jschardet = require 'jschardet'
 FeedParser = require 'feedparser'
 stream = require 'stream'
+he = require 'he'
 service = require '../service'
 
 _checkRSS = (req, res) ->
@@ -47,7 +48,11 @@ _checkRSS = (req, res) ->
       readableStream.push body
       readableStream.push null
 
-  .then (meta) -> _.pick meta, 'title', 'description'
+  .then (meta) ->
+    data = {}
+    ['title', 'description'].forEach (key) ->
+      data[key] = he.decode(meta[key]) if meta[key]
+    data
 
 module.exports = service.register 'rss', ->
 

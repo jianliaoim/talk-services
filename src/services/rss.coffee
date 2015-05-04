@@ -20,7 +20,9 @@ _checkRSS = (req, res) ->
       encoding: null
     , (err, res, body) ->
       unless res.statusCode >= 200 and res.statusCode < 300
-        err = new Error("bad request #{res.statusCode}")
+        err = new Error("Invalid feed #{url}")
+        err.status = 400
+        err.phrase = 'INVALID_RSS_URL'
       return reject(err) if err
 
       encoding = charset res.headers, body

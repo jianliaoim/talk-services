@@ -5,11 +5,7 @@
       "_id": "5541d52de37bab3455d0f44b",
       "content": "task",
       "url": "http://project.ci/project/554063098f408b186ab54b89/tasks/scrum/5541d51fe37bab3455d0f446/task/5541d52de37bab3455d0f44b",
-      "executor": {
-        "_id": "553dd73a307022fe2b7f6d81",
-        "name": "大师兄",
-        "avatarUrl": "https://mailimg.teambition.com/logos/5.png"
-      }
+      "executor": null
     },
     "project": {
       "_id": "554063098f408b186ab54b89",

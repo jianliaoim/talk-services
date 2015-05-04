@@ -6,6 +6,6 @@ service.components = require './components'
 # require './service'
 
 # Subtestcases of each service
-require './services/teambition'
-# requireDir = require 'require-dir'
-# requireDir './services'
+# require './services/teambition'
+requireDir = require 'require-dir'
+requireDir './services'

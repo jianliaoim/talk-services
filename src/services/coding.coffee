@@ -9,7 +9,7 @@ _receiveWebhook = ({integration, body, headers}) ->
   # When the token of integration is settled
   # Compare it with the payload.token
   if integration.token and integration.token isnt payload.token
-    throw new Error("Invalid token")
+    throw new Error("Invalid token of coding")
 
   message =
     _integrationId: integration._id

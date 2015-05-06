@@ -32,19 +32,21 @@ describe 'Github#IntegrationHooks', ->
 
   hookId = null
 
+  _repos = config.github.repos.split('.').join('_')
+
   before prepare
 
   it 'should create github hook when integration created', (done) ->
     github.receiveEvent 'before.integration.create', integration
     .then ->
-      integration.data[config.github.repos].hookId.should.be.type 'number'
-      hookId = integration.data[config.github.repos].hookId
+      integration.data[_repos].hookId.should.be.type 'number'
+      hookId = integration.data[_repos].hookId
       new Promise (resolve, reject) ->
         integration.save (err, integration) ->
           return reject(err) if err
           resolve integration
-    .catch done
     .then -> done()
+    .catch done
 
   it 'should update github hook when integration updated', (done) ->
     integration.notifications =
@@ -53,7 +55,7 @@ describe 'Github#IntegrationHooks', ->
     github.receiveEvent 'before.integration.update', integration
     .then ->
       # Hook id is not changed
-      integration.data[config.github.repos].hookId.should.eql hookId
+      integration.data[_repos].hookId.should.eql hookId
       done()
     .catch done
 

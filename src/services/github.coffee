@@ -95,14 +95,17 @@ _createWebhook = (integration) ->
 
   Promise.resolve integration.repos
 
-  .each (repos) ->
+  .map (repos) ->
 
     _createHook repos
     , integration.token
     , integration.notifications
     , integration.hashId
 
-    .then (body) -> data[repos] = hookId: body?.id
+    .then (body) ->
+      # Replace the dot in keys
+      _repos = repos.split('.').join('_')
+      data[_repos] = hookId: body?.id
 
   .then ->
     integration.data = data
@@ -113,8 +116,9 @@ _removeWebhook = (integration) ->
   reposes = integration.repos
   data = integration.data or {}
   Promise.resolve reposes
-  .each (repos) ->
-    hookId = data[repos]?.hookId
+  .map (repos) ->
+    _repos = repos.split('.').join('_')
+    hookId = data[_repos]?.hookId
     # Skip this when repos in not exist in data
     return unless hookId
     _removeHook repos
@@ -130,23 +134,24 @@ _updateWebhook = (integration) ->
 
   $removeOldRepos = Promise.resolve(_originalRepos)
 
-  .each (repos) ->
+  .map (repos) ->
     return if repos in reposes  # Do not remove when the repos exist in the new array
-    hookId = data[repos]?.hookId
-    unless hookId  # remove the original hookId when repos not exist
-      return delete data[repos]
+    _repos = repos.split('.').join('_')
+    hookId = data[_repos]?.hookId
+    return delete data[_repos] unless hookId  # remove the original hookId when repos not exist
     _removeWebhook repos
     , hookId
     , integration.token
 
   $updateNewRepos = Promise.resolve(reposes)
 
-  .each (repos) ->
+  .map (repos) ->
+    _repos = repos.split('.').join('_')
     # Update exist hook
     if (repos in _originalRepos) or not integration.isDirectModified 'repos'
       # Do not update when notifications is not modified
       return unless integration.isDirectModified 'notifications'
-      hookId = data[repos]?.hookId
+      hookId = data[_repos]?.hookId
       throw new Error('Github hook not found') unless hookId  # Stop the update process when hookId not found
       _updateHook repos
       , hookId
@@ -160,7 +165,7 @@ _updateWebhook = (integration) ->
       , integration.hashId
 
       .then (body) ->
-        data[repos] = hookId: body?.id
+        data[_repos] = hookId: body?.id
 
   Promise.all [$removeOldRepos, $updateNewRepos]
   .then -> integration.data = data

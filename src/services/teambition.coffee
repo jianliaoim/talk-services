@@ -44,6 +44,10 @@ _preValidate = (integration) ->
   unless integration.events
     throw new Error('Missing events in teambition integration')
 
+  invalidEvents = integration.events.filter (event) -> event not in _supportEvents
+  if invalidEvents.length
+    throw new Error("Invalid events #{invalidEvents}")
+
 _checkSign = (query = {}, clientSecret) ->
   {sign, timestamp, nonce} = query
   unless sign and timestamp and nonce
@@ -366,6 +370,9 @@ _removeWebhook = (integration) ->
   , integration.data[_projectId].hookId
   , integration.token
 
+_getEvents = ->
+  _supportEvents
+
 module.exports = service.register 'teambition', ->
 
   @title = 'Teambition'
@@ -381,6 +388,8 @@ module.exports = service.register 'teambition', ->
     en: 'This integration helps you receive real-time tasks, schedules and posts from Teambition'
 
   @iconUrl = service.static 'images/icons/teambition@2x.png'
+
+  @setField 'events', _getEvents.apply this
 
   @registerEvent 'service.webhook', _receiveWebhook
 

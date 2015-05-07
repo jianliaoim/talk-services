@@ -81,7 +81,7 @@ class Service
 
   constructor: (@name) ->
     @title = @name
-    @fields = _roomId: type: 'selector'
+    @_fields = _roomId: type: 'selector'
     # Open api
     @_apis = {}
     # Handler on events
@@ -90,12 +90,12 @@ class Service
     Object.defineProperty this, 'manual', get: _getManual
 
   initialize: ->
-    self = this
-
-    $robot = _initRobot.apply this
-
-    Promise.all [$robot]
-    .then -> self
+    unless @_initialized
+      self = this
+      $robot = _initRobot.apply this
+      @_initialized = Promise.all [$robot]
+      .then -> self
+    @_initialized
 
   # The the input field and handler
   setField: (field, options = {}) ->
@@ -161,7 +161,7 @@ class Service
     summary: @summary
     description: @description
     iconUrl: @iconUrl
-    fields: @fields
+    fields: @_fields
     manual: @manual
 
   # ========================== Define build-in functions ==========================

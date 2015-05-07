@@ -13,9 +13,13 @@ service =
   loadAll: ->
     unless _services
       _services = requireDir './services'
+
       props = _.mapValues _services, (service) ->
-        service.$promise = service.initialize()
-      _services.$promise = Promise.props props
+        Object.defineProperty service, '$promise', value: service.initialize()
+        service.$promise
+
+      Object.defineProperty _services, '$promise', value: Promise.props props
+
     _services
 
   load: (name) -> @loadAll()[name]

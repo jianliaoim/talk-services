@@ -32,7 +32,7 @@ _testWebhook = (event, payload, checkMessage) ->
 
 describe 'Teambition#IntegrationHooks', ->
 
-  return
+  return  # Skip teambition integration test
 
   unless config.teambition?.token and config.teambition?._projectId
     return console.error """

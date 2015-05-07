@@ -14,7 +14,6 @@ describe 'Service#LoadAll', ->
 
     services = service.loadAll()
     Object.keys(services).forEach (name) ->
-      return if name is '$promise'
       services[name].should.have.properties 'name', 'title'
 
   it 'should load robots of each services when the promise is fulfilled', (done) ->
@@ -28,11 +27,9 @@ describe 'Service#LoadAll', ->
     service.loadAll().$promise.then (_services) ->
 
       Object.keys(_services).forEach (name) ->
-        return if name is '$promise'
         _checkService _services[name]
 
       Object.keys(services).forEach (name) ->
-        return if name is '$promise'
         _checkService services[name]
 
       done()

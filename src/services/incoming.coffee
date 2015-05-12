@@ -1,7 +1,10 @@
+_ = require 'lodash'
 service = require '../service'
 
-_receiveWebhook = ({integration, body}) ->
-  payload = body
+_receiveWebhook = ({integration, query, body}) ->
+  payload = _.assign {}
+    , query or {}
+    , body or {}
 
   {
     authorName

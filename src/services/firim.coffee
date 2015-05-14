@@ -14,6 +14,8 @@ module.exports = service.register 'firim', ->
 
   @title = 'Firim'
 
+  @template = 'webhook'
+
   @summary = service.i18n
     zh: 'App 免费内测托管平台。'
     en: 'FIR.im is a beta testing platform that distribute beta versions of your apps and get feedback from users.'

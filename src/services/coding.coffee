@@ -121,7 +121,7 @@ _receiveWebhook = ({integration, body, headers}) ->
 # Register the coding service
 module.exports = service.register 'coding', ->
 
-  @title = 'Coding'
+  @title = 'Coding.net'
 
   @template = 'webhook'
 

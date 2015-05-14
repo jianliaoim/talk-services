@@ -32,6 +32,8 @@ module.exports = service.register 'incoming', ->
 
   @title = 'Incoming Webhook'
 
+  @template = 'webhook'
+
   @isCustomized = true
 
   @summary = service.i18n

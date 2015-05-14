@@ -4,6 +4,8 @@ module.exports = service.register 'weibo', ->
 
   @title = '微博'
 
+  @template = 'webhook'
+
   @summary = service.i18n
     zh: '通过关注机制分享简短实时信息的社交网络平台。'
     en: 'Weibo is one of the most popular social network in China.'

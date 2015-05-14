@@ -75,6 +75,8 @@ _receiveWebhook = ({integration, body}) ->
 module.exports = service.register 'gitlab', ->
   @title = 'GitLab'
 
+  @template = 'webhook'
+
   @summary = service.i18n
     zh: '用于仓库管理系统的开源项目。'
     en: 'GitLab is a web-based Git repository manager with wiki and issue tracking features.'

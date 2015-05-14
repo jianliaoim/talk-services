@@ -83,12 +83,17 @@ class Service
 
   constructor: (@name) ->
     @title = @name
-    @_fields =
+    @_fields = [
       _roomId: type: 'selector'
+    ,
       webhookUrl: type: 'text', readonly: true
+    ,
       title: type: 'text'
+    ,
       description: type: 'text'
+    ,
       iconUrl: type: 'file'
+    ]
     # Open api
     @_apis = {}
     # Handler on events

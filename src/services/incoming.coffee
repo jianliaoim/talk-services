@@ -32,6 +32,8 @@ module.exports = service.register 'incoming', ->
 
   @title = 'Incoming Webhook'
 
+  @isCustomized = true
+
   @summary = service.i18n
     zh: 'Incoming Webhook 是使用普通的 HTTP 请求与 JSON 数据从外部向简聊发送消息的简单方案。'
     en: 'Incoming Webhook makes use of normal HTTP requests with a JSON payload.'

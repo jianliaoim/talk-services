@@ -79,9 +79,16 @@ class Service
   # Whether if the service displayed in web/android/ios
   isHidden: false
 
+  isCustomized: false
+
   constructor: (@name) ->
     @title = @name
-    @_fields = _roomId: type: 'selector'
+    @_fields =
+      _roomId: type: 'selector'
+      webhookUrl: type: 'text', readonly: true
+      title: type: 'text'
+      description: type: 'text'
+      iconUrl: type: 'file'
     # Open api
     @_apis = {}
     # Handler on events
@@ -163,6 +170,7 @@ class Service
     iconUrl: @iconUrl
     fields: @_fields
     manual: @manual
+    isCustomized: @isCustomized
 
   # ========================== Define build-in functions ==========================
   ###*

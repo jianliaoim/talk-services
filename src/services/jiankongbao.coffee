@@ -28,6 +28,11 @@ module.exports = service.register 'jiankongbao', ->
 
   @template = 'webhook'
 
+  @_fields = [].concat(@_fields[0...1], [
+    key: 'token'
+    type: 'text'
+  ], @_fields[1...])
+
   @summary = service.i18n
     zh: '端到端一体化云监控。'
     en: 'Jiankongbao is able to monitor website, servers, network, database, API, applications, performance, etc.'

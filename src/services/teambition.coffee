@@ -370,8 +370,7 @@ _removeWebhook = (integration) ->
   , integration.data[_projectId].hookId
   , integration.token
 
-_getEvents = ->
-  _supportEvents
+_getEvents = -> _supportEvents
 
 module.exports = service.register 'teambition', ->
 

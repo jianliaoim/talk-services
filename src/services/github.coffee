@@ -12,11 +12,11 @@ _pageHost = 'https://github.com'
  * Create github hook
  * @param  {String} repos - Repos name
  * @param  {String} token - Token
- * @param  {Object} notifications - Events of hook
+ * @param  {Array} events - Events of hook
  * @param  {String} hashId - HashId of integration
  * @return {Promise} Response body
 ###
-_createHook = (repos, token, notifications, hashId) ->
+_createHook = (repos, token, events, hashId) ->
   requestAsync
     method: 'POST'
     url: "#{_apiHost}/repos/#{repos}/hooks"
@@ -27,7 +27,7 @@ _createHook = (repos, token, notifications, hashId) ->
     body:
       name: 'web'
       active: true,
-      events: _.keys(notifications)
+      events: events
       config:
         url: "#{service.apiHost}/services/webhook/#{hashId}"
         content_type: 'json'
@@ -63,11 +63,11 @@ _removeHook = (repos, hookId, token) ->
  * @param  {String} repos - Repos name
  * @param  {String} hookId - Github hook id
  * @param  {String} token - Token
- * @param  {Object} notifications - Events of hook
+ * @param  {Array} events - Events of hook
  * @param  {String} hashId - hashId of integration
  * @return {Promise} Response body
 ###
-_updateHook = (repos, hookId, token, notifications, hashId) ->
+_updateHook = (repos, hookId, token, events, hashId) ->
   requestAsync
     method: 'PATCH'
     url: "#{_apiHost}/repos/#{repos}/hooks/#{hookId}"
@@ -78,7 +78,7 @@ _updateHook = (repos, hookId, token, notifications, hashId) ->
     body:
       name: 'web'
       active: true,
-      events: _.keys(notifications)
+      events: events
       config:
         url: "#{service.apiHost}/services/webhook/#{hashId}"
         content_type: 'json'
@@ -99,7 +99,7 @@ _createWebhook = (integration) ->
 
     _createHook repos
     , integration.token
-    , integration.notifications
+    , integration.events
     , integration.hashId
 
     .then (body) ->
@@ -127,45 +127,43 @@ _removeWebhook = (integration) ->
 
 _updateWebhook = (integration) ->
   self = this
-  return unless ['repos', 'notifications'].some (field) -> integration.isDirectModified field
-  {_originalRepos, _originalNotifications, data} = integration
-  data or= {}
-  reposes = integration.repos
+  return unless ['repos', 'events'].some (field) -> integration.isDirectModified field
+  {_original} = integration
+  data = integration.data or {}
 
-  $removeOldRepos = Promise.resolve(_originalRepos)
+  if integration.isDirectModified 'repos'
+    $removeOldRepos = Promise.resolve _original.repos
+    .map (repos) ->
+      return if repos in reposes  # Do not remove when the repos exist in the new array
+      _repos = repos.split('.').join('_')
+      hookId = data[_repos]?.hookId
+      return delete data[_repos] unless hookId  # remove the original hookId when repos not exist
+      _removeWebhook repos
+      , hookId
+      , integration.token
+  else $removeOldRepos = Promise.resolve()
 
-  .map (repos) ->
-    return if repos in reposes  # Do not remove when the repos exist in the new array
-    _repos = repos.split('.').join('_')
-    hookId = data[_repos]?.hookId
-    return delete data[_repos] unless hookId  # remove the original hookId when repos not exist
-    _removeWebhook repos
-    , hookId
-    , integration.token
-
-  $updateNewRepos = Promise.resolve(reposes)
-
+  $updateNewRepos = Promise.resolve integration.repos
   .map (repos) ->
     _repos = repos.split('.').join('_')
     # Update exist hook
-    if (repos in _originalRepos) or not integration.isDirectModified 'repos'
+    if (repos in _original.repos) or not integration.isDirectModified 'repos'
       # Do not update when notifications is not modified
-      return unless integration.isDirectModified 'notifications'
+      return unless integration.isDirectModified 'events'
       hookId = data[_repos]?.hookId
       throw new Error('Github hook not found') unless hookId  # Stop the update process when hookId not found
       _updateHook repos
       , hookId
       , integration.token
-      , integration.notifications
+      , integration.events
       , integration.hashId
     else  # Create new hook
       _createHook repos
       , integration.token
-      , integration.notifications
+      , integration.events
       , integration.hashId
 
-      .then (body) ->
-        data[_repos] = hookId: body?.id
+      .then (body) -> data[_repos] = hookId: body?.id
 
   Promise.all [$removeOldRepos, $updateNewRepos]
   .then -> integration.data = data
@@ -226,6 +224,8 @@ _receiveWebhook = ({headers, body, integration}) ->
 
   @sendMessage message
 
+_getEvents = ->
+
 module.exports = service.register 'github', ->
 
   @title = 'GitHub'
@@ -239,6 +239,8 @@ module.exports = service.register 'github', ->
     en: 'GitHub offers online source code hosting for Git projects. This integration allows you receive GitHub comments, pull request, etc. '
 
   @iconUrl = service.static 'images/icons/github@2x.png'
+
+  @addField key: 'events', items: _getEvents.apply this
 
   @registerEvent 'before.integration.create', _createWebhook
 

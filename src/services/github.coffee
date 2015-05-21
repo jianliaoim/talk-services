@@ -225,6 +225,75 @@ _receiveWebhook = ({headers, body, integration}) ->
   @sendMessage message
 
 _getEvents = ->
+  [
+    key: 'push'
+    label: service.i18n
+      zh: 'Push'
+      en: 'Push'
+    title: service.i18n
+      zh: "仓库的 Push, 包括编辑 tag 或者分支. 通过 API 发布的改变了缩印的 commit 也包括在内. 这是默认事件"
+      en: "Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. This is the default event"
+    checked: true
+  ,
+    key: 'commit_comment'
+    label: service.i18n
+      zh: 'Commit 被评论'
+      en: 'Comment on commit'
+    title: service.i18n
+      en: 'Any time a Commit is commented on'
+  ,
+    key: 'create'
+    label: service.i18n
+      zh: '创建分支或者 tag'
+      en: 'Create branch or tag'
+    title: service.i18n
+      en: 'Any time a Branch or Tag is created'
+  ,
+    key: 'delete'
+    label: service.i18n
+      zh: '删除分支或者 tag'
+      en: 'Delete branch or tag'
+    title: service.i18n
+      en: 'Any time a Branch or Tag is deleted'
+  ,
+    key: 'fork'
+    label: service.i18n
+      zh: '仓库被 Fork'
+      en: 'Fork'
+    title: service.i18n
+      en: 'Any time a Repository is forked'
+  ,
+    key: 'issue_comment'
+    label: service.i18n
+      zh: 'Issue 被评论'
+      en: 'Comment on issue'
+    title: service.i18n
+      en: 'Any time an Issue is commented on'
+  ,
+    key: 'issues'
+    label: service.i18n
+      zh: 'Issues'
+      en: 'Issues'
+    title: service.i18n
+      zh: 'Issue 被指定, 取消指定, 标记, 取消标记, 创建, 关闭, 重新打开'
+      en: 'Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened'
+  ,
+    key: 'pull_request_review_comment'
+    label: service.i18n
+      zh: 'PR 中增加 Commit'
+      en: 'Commit in PR'
+    title: service.i18n
+      zh: 'Pull Request（的文件页面）当中的 Commit 被评论'
+      en: 'Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab)'
+  ,
+    key: 'pull_request'
+    label: service.i18n
+      zh: 'Pull request'
+      en: 'Pull request'
+    title: service.i18n
+      zh: 'Pull Request 被指定, 取消指定, 标记, 取消标记, 打开, 关闭, 重新打开, 或者同步（pull request 正在追踪的分支上新的 Push 引起的更新）'
+      en: 'Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking)'
+  ]
 
 module.exports = service.register 'github', ->
 

@@ -370,7 +370,218 @@ _removeWebhook = (integration) ->
   , integration.data[_projectId].hookId
   , integration.token
 
-_getEvents = -> _supportEvents
+_getEvents = ->
+  [
+    key: 'project.rename'
+    label: service.i18n
+      zh: '重命名项目'
+      en: 'Rename project'
+  ,
+    key: 'project.archive'
+    label: service.i18n
+      zh: '归档任务'
+      en: 'Archive project'
+  ,
+    key: 'project.unarchive'
+    label: service.i18n
+      zh: '恢复归档任务'
+      en: 'Unarchive project'
+  ,
+    key: 'project.member.create'
+    label: service.i18n
+      zh: '添加项目成员'
+      en: 'Invite members to project'
+  ,
+    key: 'project.member.remove'
+    label: service.i18n
+      zh: '移除项目成员'
+      en: 'Remove project members'
+  ,
+    key: 'tasklist.create'
+    label: service.i18n
+      zh: '创建任务列表'
+      en: 'Create tasklist'
+  ,
+    key: 'tasklist.remove'
+    label: service.i18n
+      zh: '删除任务列表'
+      en: 'Remove tasklist'
+  ,
+    key: 'tasklist.rename'
+    label: service.i18n
+      zh: '重命名任务列表'
+      en: 'Rename tasklist'
+  ,
+    key: 'task.create'
+    label: service.i18n
+      zh: '创建任务'
+      en: 'Create task'
+  ,
+    key: 'task.update'
+    label: service.i18n
+      zh: '更新任务内容'
+      en: 'Update content of task'
+  ,
+    key: 'task.remove'
+    label: service.i18n
+      zh: '删除任务'
+      en: 'Remove task'
+  ,
+    key: 'task.update.executor'
+    label: service.i18n
+      zh: '更新任务执行者'
+      en: 'Update executor of task'
+  ,
+    key: 'task.update.dueDate'
+    label: service.i18n
+      zh: '更新任务截止日期'
+      en: 'Update due date of task'
+  ,
+    key: 'task.update.priority'
+    label: service.i18n
+      zh: '更新任务优先级'
+      en: 'Update priority of task'
+  ,
+    key: 'task.update.involveMembers'
+    label: service.i18n
+      zh: '更新任务相关者'
+      en: 'Update involved members of task'
+  ,
+    key: 'task.rename'
+    label: service.i18n
+      zh: '重命名任务'
+      en: 'Update name of task'
+  ,
+    key: 'task.move'
+    label: service.i18n
+      zh: '更新任务阶段或列表'
+      en: 'Update stage of task'
+  ,
+    key: 'task.done'
+    label: service.i18n
+      zh: '完成任务'
+      en: 'Finish the task'
+  ,
+    key: 'subtask.create'
+    label: service.i18n
+      zh: '创建子任务'
+      en: 'Create subtask'
+  ,
+    key: 'subtask.update.executor'
+    label: service.i18n
+      zh: '更新子任务执行者'
+      en: 'Update executor of subtask'
+  ,
+    key: 'subtask.update.content'
+    label: service.i18n
+      zh: '更新子任务内容'
+      en: 'Update content of subtask'
+  ,
+    key: 'subtask.done'
+    label: service.i18n
+      zh: '完成子任务'
+      en: 'Finish the subtask'
+  ,
+    key: 'tag.create'
+    label: service.i18n
+      zh: '创建标签'
+      en: 'Create tag'
+  ,
+    key: 'tag.remove'
+    label: service.i18n
+      zh: '删除标签'
+      en: 'Remove tag'
+  ,
+    key: 'post.create'
+    label: service.i18n
+      zh: '创建分享'
+      en: 'Create a post'
+  ,
+    key: 'post.update'
+    label: service.i18n
+      zh: '更新分享内容'
+      en: 'Update a post'
+  ,
+    key: 'post.update.involveMembers'
+    label: service.i18n
+      zh: '更新分享相关者'
+      en: 'Update involved members of post'
+  ,
+    key: 'file.create'
+    label: service.i18n
+      zh: '上传文件'
+      en: 'Upload a file'
+  ,
+    key: 'file.remove'
+    label: service.i18n
+      zh: '删除文件'
+      en: 'Remove a file'
+  ,
+    key: 'file.move'
+    label: service.i18n
+      zh: '移动文件'
+      en: 'Move file to another directory'
+  ,
+    key: 'file.rename'
+    label: service.i18n
+      zh: '重命名文件'
+      en: 'Rename a file'
+  ,
+    key: 'file.update.version'
+    label: service.i18n
+      zh: '更新文件版本'
+      en: 'Update version of file'
+  ,
+    key: 'file.update.involveMembers'
+    label: service.i18n
+      zh: '更新文件相关者'
+      en: 'Update involved members of file'
+  ,
+    key: 'event.create'
+    label: service.i18n
+      zh: '创建日程'
+      en: 'Create event'
+  ,
+    key: 'event.remove'
+    label: service.i18n
+      zh: '删除日程'
+      en: 'Remove event'
+  ,
+    key: 'event.update'
+    label: service.i18n
+      zh: '更新日程内容'
+      en: 'Update content of event'
+  ,
+    key: 'event.update.involveMembers'
+    label: service.i18n
+      zh: '更新日程相关者'
+      en: 'Update involved members of event'
+  ,
+    key: 'stage.create'
+    label: service.i18n
+      zh: '创建阶段'
+      en: 'Create stage'
+  ,
+    key: 'stage.rename'
+    label: service.i18n
+      zh: '重命名阶段'
+      en: 'Rename stage'
+  ,
+    key: 'entry.create'
+    label: service.i18n
+      zh: '记录账目'
+      en: 'Create a entry'
+  ,
+    key: 'entry.update'
+    label: service.i18n
+      zh: '更新账目'
+      en: 'Update a entry'
+  ,
+    key: 'entry.update.involveMembers'
+    label: service.i18n
+      zh: '更新账目相关者'
+      en: 'Update involved members of entry'
+  ]
 
 module.exports = service.register 'teambition', ->
 

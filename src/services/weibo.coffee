@@ -1,5 +1,23 @@
 service = require '../service'
 
+_getEvents = ->
+  [
+    key: 'mention'
+    label: service.i18n
+      zh: '@我'
+      en: '@me'
+  ,
+    key: 'repost'
+    label: service.i18n
+      zh: '转发'
+      en: 'Repost'
+  ,
+    key: 'comment'
+    label: service.i18n
+      zh: '评论'
+      en: 'Comment'
+  ]
+
 module.exports = service.register 'weibo', ->
 
   @title = '微博'
@@ -17,5 +35,7 @@ module.exports = service.register 'weibo', ->
   @iconUrl = service.static('images/icons/weibo@2x.png')
 
   @serviceUrl = 'http://localhost:7410'
+
+  @addField key: 'events', items: _getEvents.apply this
 
   @registerEvents ['integration.create', 'integration.remove', 'integration.update']

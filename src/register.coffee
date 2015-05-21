@@ -59,6 +59,27 @@ _initRobot = ->
     throw new Error("Service #{self.name} load robot failed") unless robot
     self.robot = robot
 
+_getFields = ->
+  headerFields = [
+    key: '_roomId'
+    type: 'selector'
+  ]
+  footerFields = [
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+  ,
+    key: 'title'
+    type: 'text'
+  ,
+    key: 'description'
+    type: 'text'
+  ,
+    key: 'iconUrl'
+    type: 'file'
+  ]
+  [].concat headerFields, @_fields, footerFields
+
 class Service
 
   # Shown as title
@@ -83,28 +104,13 @@ class Service
 
   constructor: (@name) ->
     @title = @name
-    @_fields = [
-      key: '_roomId'
-      type: 'selector'
-    ,
-      key: 'webhookUrl'
-      type: 'text'
-      readonly: true
-    ,
-      key: 'title'
-      type: 'text'
-    ,
-      key: 'description'
-      type: 'text'
-    ,
-      key: 'iconUrl'
-      type: 'file'
-    ]
+    @_fields = []
     # Open api
     @_apis = {}
     # Handler on events
     @_events = {}
     @robot = {}
+    Object.defineProperty this, 'fields', get: _getFields
     Object.defineProperty this, 'manual', get: _getManual
 
   initialize: ->
@@ -116,7 +122,7 @@ class Service
     @_initialized
 
   # The the input field and handler
-  setField: (field, options = {}) ->
+  addField: (field) -> @_fields.push field
 
   needCustomName: (need) ->
 
@@ -179,9 +185,11 @@ class Service
     summary: @summary
     description: @description
     iconUrl: @iconUrl
-    fields: @_fields
+    fields: @fields
     manual: @manual
     isCustomized: @isCustomized
+
+  toObject: @::toJSON
 
   # ========================== Define build-in functions ==========================
   ###*

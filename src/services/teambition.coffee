@@ -389,7 +389,7 @@ module.exports = service.register 'teambition', ->
 
   @iconUrl = service.static 'images/icons/teambition@2x.png'
 
-  @setField 'events', _getEvents.apply this
+  @addField key: 'events', items: _getEvents.apply this
 
   @registerEvent 'service.webhook', _receiveWebhook
 

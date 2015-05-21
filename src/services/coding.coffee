@@ -135,6 +135,6 @@ module.exports = service.register 'coding', ->
 
   @iconUrl = service.static 'images/icons/coding@2x.png'
 
-  @setField 'url', type: 'text', readOnly: true, autoGen: true
+  @addField key: 'url', type: 'text', readOnly: true, autoGen: true
 
   @registerEvent 'service.webhook', _receiveWebhook

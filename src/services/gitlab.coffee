@@ -24,8 +24,7 @@ _receiveWebhook = ({integration, body}) ->
 
   commits or= []
 
-  message =
-    _integrationId: integration._id
+  message = _integrationId: integration._id
 
   message.quote = {}
 
@@ -87,7 +86,7 @@ module.exports = service.register 'gitlab', ->
 
   @iconUrl = service.static 'images/icons/gitlab@2x.png'
 
-  @setField 'url', type: 'text', readOnly: true, autoGen: true
+  @addField key: 'url', type: 'text', readOnly: true, autoGen: true
 
   # Apply function on `webhook` event
   @registerEvent 'service.webhook', _receiveWebhook

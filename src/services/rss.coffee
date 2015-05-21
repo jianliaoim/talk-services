@@ -68,11 +68,9 @@ module.exports = service.register 'rss', ->
 
   @iconUrl = service.static 'images/icons/rss@2x.png'
 
-  @setField 'url',
-    onChange:
-      callApi: 'checkRSS'
+  @addField key: 'url', onChange: 'checkRSS'
 
-  @setField 'notification', type: 'text'
+  @addField key: 'notification', type: 'text'
 
   @needCustomName false
   @needCustomDescription false

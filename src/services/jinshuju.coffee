@@ -22,8 +22,8 @@ module.exports = service.register 'jinshuju', ->
     en: 'Jinshuju.net is an online form design, data collection, statistics and sharing tools.'
 
   @description = service.i18n
-    zh: '金数据是一款在线表单设计、数据收集、统计和分享工具。在金数据表单设置中填写 Webhook 地址后，你就可以在简聊话题内收取表单新的填写记录通知。'
-    en: 'Jinshuju.net is an online form design, data collection, statistics and sharing tools. Fill in the data form setting Webhook address, you can simply receive new topics within a form to fill out log notification in Talk.'
+    zh: '金数据是一款在线表单设计、数据收集、统计和分享工具。在金数据表单设置中填写 Webhook 地址后，你就可以在简聊话题内收取表单新的填写记录通知。<a href="https://jinshuju.net/auth/teambition" target="_blank">使用 Teambition 账号登录金数据</a>'
+    en: 'Jinshuju.net is an online form design, data collection, statistics and sharing tools. Fill in the data form setting Webhook address, you can simply receive new topics within a form to fill out log notification in Talk.<a href="https://jinshuju.net/auth/teambition" target="_blank">Log in Jinshuju with Teambition account</a>'
 
   @iconUrl = service.static 'images/icons/jinshuju@2x.png'
 

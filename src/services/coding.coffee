@@ -135,6 +135,12 @@ module.exports = service.register 'coding', ->
 
   @iconUrl = service.static 'images/icons/coding@2x.png'
 
-  @addField key: 'url', type: 'text', readOnly: true, autoGen: true
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readOnly: true
+    description: service.i18n
+      zh: '进入你的 Coding.net 项目设置，选择 WebHook 设置，添加 WebHook 地址到项目中即可接收推送通知。'
+      en: 'Open your project settings on Coding.net, select the WebHook settings, add a WebHook address to your project to receive push notifications.'
 
   @registerEvent 'service.webhook', _receiveWebhook

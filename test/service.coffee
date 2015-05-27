@@ -26,6 +26,8 @@ describe 'Service#LoadAll', ->
 
     service.loadAll().$promise.then (_services) ->
 
+      console.log _services.coding.toJSON()
+
       Object.keys(_services).forEach (name) ->
         _checkService _services[name]
 

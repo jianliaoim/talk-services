@@ -26,4 +26,12 @@ module.exports = service.register 'firim', ->
 
   @iconUrl = service.static 'images/icons/firim@2x.png'
 
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的 Fir.im 的配置当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
+      en: 'Copy this web hook to your Fir.im account to use it. You may also find this url in the manager tab.'
+
   @registerEvent 'service.webhook', _receiveWebhook

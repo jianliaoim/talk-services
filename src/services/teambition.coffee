@@ -587,7 +587,7 @@ module.exports = service.register 'teambition', ->
 
   @title = 'Teambition'
 
-  @template = 'webhook'
+  @template = 'form'
 
   @summary = service.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'
@@ -599,7 +599,9 @@ module.exports = service.register 'teambition', ->
 
   @iconUrl = service.static 'images/icons/teambition@2x.png'
 
-  @addField key: 'events', items: _getEvents.apply this
+  @_fields.push
+    key: 'events'
+    items: _getEvents.apply this
 
   @registerEvent 'service.webhook', _receiveWebhook
 

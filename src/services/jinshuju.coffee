@@ -27,4 +27,12 @@ module.exports = service.register 'jinshuju', ->
 
   @iconUrl = service.static 'images/icons/jinshuju@2x.png'
 
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+    description: service.i18n
+      zh: '您可以在表单的"设置 —— 数据提交"页面的底部找到"将数据以 JSON 格式发送给第三方"，填写 webhook 地址即可接收推送通知。'
+      en: 'At the bottom of the page "Settings -- Data" you may find "Sends the data in JSON format to third parties", fill out the webhook address to receive push notifications.'
+
   @registerEvent 'service.webhook', _receiveWebhook

@@ -46,4 +46,12 @@ module.exports = service.register 'incoming', ->
 
   @iconUrl = service.static 'images/icons/incoming@2x.png'
 
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readOnly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的应用中来启用 Incoming Webhook。'
+      en: 'To start using incoming webhook, copy this url to your application'
+
   @registerEvent 'service.webhook', _receiveWebhook

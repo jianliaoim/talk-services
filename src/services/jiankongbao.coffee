@@ -28,8 +28,6 @@ module.exports = service.register 'jiankongbao', ->
 
   @template = 'webhook'
 
-  @addField key: 'token', type: 'text'
-
   @summary = service.i18n
     zh: '端到端一体化云监控。'
     en: 'Jiankongbao is able to monitor website, servers, network, database, API, applications, performance, etc.'
@@ -39,5 +37,20 @@ module.exports = service.register 'jiankongbao', ->
     en: 'Jiankongbao is able to monitor website, servers, network, database, API, applications, performance, etc. Add after Jiankongbao aggregation for a topic, you can catch up on Talk received the warning notice.'
 
   @iconUrl = service.static 'images/icons/jiankongbao@2x.png'
+
+  @_fields.push
+    key: 'token'
+    type: 'text'
+    description: service.i18n
+      zh: '可选'
+      en: 'Optional'
+
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的监控宝当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
+      en: 'Copy this web hook to your Jiankongbao to use it. You may also find this url in the manager tab.'
 
   @registerEvent 'service.webhook', _receiveWebhook

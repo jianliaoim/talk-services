@@ -68,13 +68,9 @@ module.exports = service.register 'rss', ->
 
   @iconUrl = service.static 'images/icons/rss@2x.png'
 
-  @addField key: 'url', onChange: 'checkRSS'
-
-  @addField key: 'notification', type: 'text'
-
-  @needCustomName false
-  @needCustomDescription false
-  @needCustomIcon false
+  @_fields.push
+    key: 'url'
+    onChange: 'checkRSS'
 
   @serviceUrl = 'http://localhost:7411'
 

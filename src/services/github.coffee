@@ -309,7 +309,9 @@ module.exports = service.register 'github', ->
 
   @iconUrl = service.static 'images/icons/github@2x.png'
 
-  @addField key: 'events', items: _getEvents.apply this
+  @_fields.push
+    key: 'events'
+    items: _getEvents.apply this
 
   @registerEvent 'before.integration.create', _createWebhook
 

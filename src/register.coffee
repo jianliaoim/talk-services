@@ -7,15 +7,19 @@ request = require 'request'
 requestAsync = Promise.promisify request
 
 _getManual = ->
+
   return @_manual if @_manual?
 
   name = @name
   fileNames = glob.sync "#{__dirname}/../manuals/#{name}*.md"
 
   _getContent = (fileName) ->
+    service = require './service'
     baseName = path.basename fileName
     lang = baseName[(name.length + 1)..-4]
-    [lang, fs.readFileSync(fileName, encoding: 'UTF-8')]
+    content = fs.readFileSync(fileName, encoding: 'UTF-8')
+    content = content.replace /\((.*?images.*?)\)/ig, (m, uri) -> '(' + service.static uri + ')'
+    [lang, content]
 
   if fileNames.length is 0
     @_manual = false
@@ -65,10 +69,6 @@ _getFields = ->
     type: 'selector'
   ]
   footerFields = [
-    key: 'webhookUrl'
-    type: 'text'
-    readonly: true
-  ,
     key: 'title'
     type: 'text'
   ,
@@ -120,9 +120,6 @@ class Service
       @_initialized = Promise.all [$robot]
       .then -> self
     @_initialized
-
-  # The the input field and handler
-  addField: (field) -> @_fields.push field
 
   needCustomName: (need) ->
 

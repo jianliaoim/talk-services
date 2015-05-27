@@ -132,6 +132,10 @@ class Service
   registerApi: (name, fn) ->
     @_apis[name] = fn
 
+  getApiUrl: (apiName) ->
+    service = require './service'
+    service.apiHost + "/services/api/#{@name}/#{apiName}"
+
   receiveApi: (name, req, res) ->
     self = this
     Promise.resolve()

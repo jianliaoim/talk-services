@@ -9,10 +9,10 @@ requestAsync = Promise.promisify request
 service = require '../service'
 
 # Hack teambition host
-if process.env.NODE_ENV is 'test'
-  _tbHost = 'http://www.project.ci'
-else
+if process.env.NODE_ENV in ['ga', 'prod']
   _tbHost = 'https://www.teambition.com'
+else
+  _tbHost = 'http://www.project.ci'
 
 _supportEvents = [
   "project.rename", "project.archive", "project.unarchive", "project.member.create", "project.member.remove",
@@ -370,6 +370,28 @@ _removeWebhook = (integration) ->
   , integration.data[_projectId].hookId
   , integration.token
 
+###*
+ * Get project list of user
+ * @param  {Request} req
+ * @param  {Response} res
+ * @return {Promise} projects
+###
+_getProjects = (req, res) ->
+  {token} = req.get()
+  throw new Error('Missing token') unless token
+  requestAsync
+    method: 'GET'
+    headers:
+      "User-Agent": service.userAgent
+      "Authorization": "OAuth2 #{token}"
+    url: "#{_tbHost}/api/projects"
+    json: true
+  .spread (res, projects) ->
+    unless res.statusCode >= 200 and res.statusCode < 300
+      err = new Error("Bad request #{res.statusCode}")
+    throw err if err
+    projects.map (project) -> _.pick project, '_id', 'name'
+
 _getEvents = ->
   [
     key: 'project.rename'
@@ -600,6 +622,10 @@ module.exports = service.register 'teambition', ->
   @iconUrl = service.static 'images/icons/teambition@2x.png'
 
   @_fields.push
+    key: 'project'
+    onLoad: get: @getApiUrl 'getProjects'
+
+  @_fields.push
     key: 'events'
     items: _getEvents.apply this
 
@@ -610,3 +636,5 @@ module.exports = service.register 'teambition', ->
   @registerEvent 'before.integration.update', _updateWebhook
 
   @registerEvent 'before.integration.remove', _removeWebhook
+
+  @registerApi 'getProjects', _getProjects

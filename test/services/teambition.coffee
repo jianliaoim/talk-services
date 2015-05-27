@@ -5,7 +5,7 @@ crypto = require 'crypto'
 
 service = require '../../src/service'
 config = require '../config'
-{prepare, cleanup, req} = require '../util'
+{prepare, cleanup, req, res} = require '../util'
 teambition = service.load 'teambition'
 # Fake client serect
 teambition.clientSecret = 'abc'
@@ -29,6 +29,28 @@ _testWebhook = (event, payload, checkMessage) ->
   req.query = timestamp: "#{timestamp}", nonce: nonce
   req.query.sign = crypto.createHash('sha1').update("#{teambition.clientSecret}#{timestamp}#{nonce}").digest('hex')
   teambition.receiveEvent 'service.webhook', req
+
+describe 'Teambition#GetProjects', ->
+
+  unless config.teambition?.token
+    return console.error """
+    Teambition token is not exist
+    Add it in config.json to test teambition.getProjects api
+    """
+
+  @timeout 5000
+
+  before prepare
+
+  it 'should read the teambition\'s projects of user', (done) ->
+    req.set 'token', config.teambition.token
+    teambition.receiveApi 'getProjects', req, res
+    .then (projects) ->
+      projects.forEach (project) -> project.should.have.properties '_id', 'name'
+      done()
+    .catch done
+
+  after cleanup
 
 describe 'Teambition#IntegrationHooks', ->
 

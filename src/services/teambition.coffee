@@ -395,214 +395,294 @@ _getProjects = (req, res) ->
 _getEvents = ->
   [
     key: 'project.rename'
+    group: 'project'
     label: service.i18n
       zh: '重命名项目'
       en: 'Rename project'
   ,
     key: 'project.archive'
+    group: 'project'
     label: service.i18n
       zh: '归档任务'
       en: 'Archive project'
   ,
     key: 'project.unarchive'
+    group: 'project'
     label: service.i18n
       zh: '恢复归档任务'
       en: 'Unarchive project'
   ,
     key: 'project.member.create'
+    group: 'project'
     label: service.i18n
       zh: '添加项目成员'
       en: 'Invite members to project'
   ,
     key: 'project.member.remove'
+    group: 'project'
     label: service.i18n
       zh: '移除项目成员'
       en: 'Remove project members'
   ,
     key: 'tasklist.create'
+    group: 'task'
     label: service.i18n
       zh: '创建任务列表'
       en: 'Create tasklist'
   ,
     key: 'tasklist.remove'
+    group: 'task'
     label: service.i18n
       zh: '删除任务列表'
       en: 'Remove tasklist'
   ,
     key: 'tasklist.rename'
+    group: 'task'
     label: service.i18n
       zh: '重命名任务列表'
       en: 'Rename tasklist'
   ,
     key: 'task.create'
+    group: 'task'
     label: service.i18n
       zh: '创建任务'
       en: 'Create task'
   ,
     key: 'task.update'
+    group: 'task'
     label: service.i18n
       zh: '更新任务内容'
       en: 'Update content of task'
   ,
     key: 'task.remove'
+    group: 'task'
     label: service.i18n
       zh: '删除任务'
       en: 'Remove task'
   ,
     key: 'task.update.executor'
+    group: 'task'
     label: service.i18n
       zh: '更新任务执行者'
       en: 'Update executor of task'
   ,
     key: 'task.update.dueDate'
+    group: 'task'
     label: service.i18n
       zh: '更新任务截止日期'
       en: 'Update due date of task'
   ,
     key: 'task.update.priority'
+    group: 'task'
     label: service.i18n
       zh: '更新任务优先级'
       en: 'Update priority of task'
   ,
     key: 'task.update.involveMembers'
+    group: 'task'
     label: service.i18n
       zh: '更新任务相关者'
       en: 'Update involved members of task'
   ,
     key: 'task.rename'
+    group: 'task'
     label: service.i18n
       zh: '重命名任务'
       en: 'Update name of task'
   ,
     key: 'task.move'
+    group: 'task'
     label: service.i18n
       zh: '更新任务阶段或列表'
       en: 'Update stage of task'
   ,
     key: 'task.done'
+    group: 'task'
     label: service.i18n
       zh: '完成任务'
       en: 'Finish the task'
   ,
     key: 'subtask.create'
+    group: 'task'
     label: service.i18n
       zh: '创建子任务'
       en: 'Create subtask'
   ,
     key: 'subtask.update.executor'
+    group: 'task'
     label: service.i18n
       zh: '更新子任务执行者'
       en: 'Update executor of subtask'
   ,
     key: 'subtask.update.content'
+    group: 'task'
     label: service.i18n
       zh: '更新子任务内容'
       en: 'Update content of subtask'
   ,
     key: 'subtask.done'
+    group: 'task'
     label: service.i18n
       zh: '完成子任务'
       en: 'Finish the subtask'
   ,
     key: 'tag.create'
+    group: 'tag'
     label: service.i18n
       zh: '创建标签'
       en: 'Create tag'
   ,
     key: 'tag.remove'
+    group: 'tag'
     label: service.i18n
       zh: '删除标签'
       en: 'Remove tag'
   ,
     key: 'post.create'
+    group: 'post'
     label: service.i18n
       zh: '创建分享'
       en: 'Create a post'
   ,
     key: 'post.update'
+    group: 'post'
     label: service.i18n
       zh: '更新分享内容'
       en: 'Update a post'
   ,
     key: 'post.update.involveMembers'
+    group: 'post'
     label: service.i18n
       zh: '更新分享相关者'
       en: 'Update involved members of post'
   ,
     key: 'file.create'
+    group: 'file'
     label: service.i18n
       zh: '上传文件'
       en: 'Upload a file'
   ,
     key: 'file.remove'
+    group: 'file'
     label: service.i18n
       zh: '删除文件'
       en: 'Remove a file'
   ,
     key: 'file.move'
+    group: 'file'
     label: service.i18n
       zh: '移动文件'
       en: 'Move file to another directory'
   ,
     key: 'file.rename'
+    group: 'file'
     label: service.i18n
       zh: '重命名文件'
       en: 'Rename a file'
   ,
     key: 'file.update.version'
+    group: 'file'
     label: service.i18n
       zh: '更新文件版本'
       en: 'Update version of file'
   ,
     key: 'file.update.involveMembers'
+    group: 'file'
     label: service.i18n
       zh: '更新文件相关者'
       en: 'Update involved members of file'
   ,
     key: 'event.create'
+    group: 'event'
     label: service.i18n
       zh: '创建日程'
       en: 'Create event'
   ,
     key: 'event.remove'
+    group: 'event'
     label: service.i18n
       zh: '删除日程'
       en: 'Remove event'
   ,
     key: 'event.update'
+    group: 'event'
     label: service.i18n
       zh: '更新日程内容'
       en: 'Update content of event'
   ,
     key: 'event.update.involveMembers'
+    group: 'event'
     label: service.i18n
       zh: '更新日程相关者'
       en: 'Update involved members of event'
   ,
     key: 'stage.create'
+    group: 'task'
     label: service.i18n
       zh: '创建阶段'
       en: 'Create stage'
   ,
     key: 'stage.rename'
+    group: 'task'
     label: service.i18n
       zh: '重命名阶段'
       en: 'Rename stage'
   ,
     key: 'entry.create'
+    group: 'entry'
     label: service.i18n
       zh: '记录账目'
       en: 'Create a entry'
   ,
     key: 'entry.update'
+    group: 'entry'
     label: service.i18n
       zh: '更新账目'
       en: 'Update a entry'
   ,
     key: 'entry.update.involveMembers'
+    group: 'entry'
     label: service.i18n
       zh: '更新账目相关者'
       en: 'Update involved members of entry'
+  ]
+
+_getGroups = ->
+  [
+    key: 'project'
+    label: service.i18n
+      zh: '项目'
+      en: 'Project'
+  ,
+    key: 'task'
+    label: service.i18n
+      zh: '任务板'
+      en: 'Task'
+  ,
+    key: 'post'
+    label: service.i18n
+      zh: '分享墙'
+      en: 'Post'
+  ,
+    key: 'event'
+    label: service.i18n
+      zh: '日程表'
+      en: 'Event'
+  ,
+    key: 'file'
+    label: service.i18n
+      zh: '文件库'
+      en: 'File'
+  ,
+    key: 'entry'
+    label: service.i18n
+      zh: '记账'
+      en: 'Entry'
+  ,
+    key: 'tag'
+    label: service.i18n
+      zh: '标签'
+      en: 'Tag'
   ]
 
 module.exports = service.register 'teambition', ->
@@ -628,6 +708,7 @@ module.exports = service.register 'teambition', ->
   @_fields.push
     key: 'events'
     items: _getEvents.apply this
+    groups: _getGroups.apply this
 
   @registerEvent 'service.webhook', _receiveWebhook
 

@@ -65,8 +65,10 @@ _checkSign = (query = {}, clientSecret) ->
     err.status = 403
     throw err
 
-_receiveWebhook = ({integration, body, query}) ->
+_receiveWebhook = ({integration, body, query, method}) ->
   _checkSign query, @clientSecret
+
+  return ok: 1 if method is 'HEAD'
 
   {event, data} = body
 

@@ -9,7 +9,7 @@
   "scripts": {
     "test": "[ -f test/config.json ] || cp test/config.example.json test/config.json && NODE_ENV=test ./node_modules/.bin/mocha --require coffee-script/register --require should --reporter spec test/main.coffee",
     "prepublish": "rm -rf lib && coffee -o lib -c src",
-    "postinstall": "[ -f lib ] || coffee -o lib -c src",
+    "postinstall": "[ -d lib ] || coffee -o lib -c src",
     "doc": "cd docs && gitbook build",
     "uploadcdn": "osscmd uploadfromdir static oss://dn-talk"
   },

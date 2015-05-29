@@ -139,7 +139,7 @@ describe 'Teambition#Webhook', ->
 
   it 'receive project.rename', (done) ->
     _testWebhook 'project.rename', payloads['project.rename'], (message) ->
-      message.quote.title.should.eql '[新名] 二师兄 修改了项目 新名'
+      message.quote.title.should.eql '[新名] 二师兄 重命名了项目 新名'
       message.quote.redirectUrl.should.eql payloads['project.rename'].data.project.url
       done()
 

@@ -4,6 +4,7 @@ fs = require 'fs'
 _ = require 'lodash'
 glob = require 'glob'
 request = require 'request'
+marked = require 'marked'
 requestAsync = Promise.promisify request
 
 _getManual = ->
@@ -19,7 +20,7 @@ _getManual = ->
     lang = baseName[(name.length + 1)..-4]
     content = fs.readFileSync(fileName, encoding: 'UTF-8')
     content = content.replace /\((.*?images.*?)\)/ig, (m, uri) -> '(' + service.static uri + ')'
-    [lang, content]
+    [lang, marked(content)]
 
   if fileNames.length is 0
     @_manual = false

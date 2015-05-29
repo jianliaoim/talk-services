@@ -1,0 +1,23 @@
+{
+  "event": "task.rename",
+  "data": {
+    "task": {
+      "_id": "5540885902e7e97278b13ba7",
+      "content": "newtask",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/tasks/scrum/554063098f408b186ab54b90/task/5540885902e7e97278b13ba7"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    },
+    "old": {
+      "content": "task"
+    }
+  }
+}

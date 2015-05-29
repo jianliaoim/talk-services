@@ -13,7 +13,7 @@ payloads = requireDir './github_assets'
 
 describe 'Github#IntegrationHooks', ->
 
-  return  # Skip test with github apis
+  return  # Skip github integration test
 
   unless config.github?.token and config.github?.repos
     return console.error """
@@ -49,6 +49,7 @@ describe 'Github#IntegrationHooks', ->
     .catch done
 
   it 'should update github hook when integration updated', (done) ->
+    integration._original = integration.toJSON()
     integration.notifications =
       push: 1
       create: 1

@@ -7,15 +7,19 @@ request = require 'request'
 requestAsync = Promise.promisify request
 
 _getManual = ->
+
   return @_manual if @_manual?
 
   name = @name
   fileNames = glob.sync "#{__dirname}/../manuals/#{name}*.md"
 
   _getContent = (fileName) ->
+    service = require './service'
     baseName = path.basename fileName
     lang = baseName[(name.length + 1)..-4]
-    [lang, fs.readFileSync(fileName, encoding: 'UTF-8')]
+    content = fs.readFileSync(fileName, encoding: 'UTF-8')
+    content = content.replace /\((.*?images.*?)\)/ig, (m, uri) -> '(' + service.static uri + ')'
+    [lang, content]
 
   if fileNames.length is 0
     @_manual = false
@@ -59,6 +63,23 @@ _initRobot = ->
     throw new Error("Service #{self.name} load robot failed") unless robot
     self.robot = robot
 
+_getFields = ->
+  headerFields = [
+    key: '_roomId'
+    type: 'selector'
+  ]
+  footerFields = [
+    key: 'title'
+    type: 'text'
+  ,
+    key: 'description'
+    type: 'text'
+  ,
+    key: 'iconUrl'
+    type: 'file'
+  ]
+  [].concat headerFields, @_fields, footerFields
+
 class Service
 
   # Shown as title
@@ -79,26 +100,26 @@ class Service
   # Whether if the service displayed in web/android/ios
   isHidden: false
 
+  isCustomized: false
+
   constructor: (@name) ->
     @title = @name
-    @fields = _roomId: type: 'selector'
+    @_fields = []
     # Open api
     @_apis = {}
     # Handler on events
     @_events = {}
     @robot = {}
+    Object.defineProperty this, 'fields', get: _getFields
     Object.defineProperty this, 'manual', get: _getManual
 
   initialize: ->
-    self = this
-
-    $robot = _initRobot.apply this
-
-    Promise.all [$robot]
-    .then -> self
-
-  # The the input field and handler
-  setField: (field, options = {}) ->
+    unless @_initialized
+      self = this
+      $robot = _initRobot.apply this
+      @_initialized = Promise.all [$robot]
+      .then -> self
+    @_initialized
 
   needCustomName: (need) ->
 
@@ -110,6 +131,10 @@ class Service
   # The route of api will be `POST services/:integration_name/:api_name`
   registerApi: (name, fn) ->
     @_apis[name] = fn
+
+  getApiUrl: (apiName) ->
+    service = require './service'
+    service.apiHost + "/services/api/#{@name}/#{apiName}"
 
   receiveApi: (name, req, res) ->
     self = this
@@ -163,6 +188,9 @@ class Service
     iconUrl: @iconUrl
     fields: @fields
     manual: @manual
+    isCustomized: @isCustomized
+
+  toObject: @::toJSON
 
   # ========================== Define build-in functions ==========================
   ###*

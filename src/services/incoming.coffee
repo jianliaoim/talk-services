@@ -32,6 +32,10 @@ module.exports = service.register 'incoming', ->
 
   @title = 'Incoming Webhook'
 
+  @template = 'webhook'
+
+  @isCustomized = true
+
   @summary = service.i18n
     zh: 'Incoming Webhook 是使用普通的 HTTP 请求与 JSON 数据从外部向简聊发送消息的简单方案。'
     en: 'Incoming Webhook makes use of normal HTTP requests with a JSON payload.'
@@ -41,5 +45,13 @@ module.exports = service.register 'incoming', ->
     en: 'Incoming Webhook makes use of normal HTTP requests with a JSON payload. Copy your webhook address to third-party services to configure push notifications.'
 
   @iconUrl = service.static 'images/icons/incoming@2x.png'
+
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readOnly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的应用中来启用 Incoming Webhook。'
+      en: 'To start using incoming webhook, copy this url to your application'
 
   @registerEvent 'service.webhook', _receiveWebhook

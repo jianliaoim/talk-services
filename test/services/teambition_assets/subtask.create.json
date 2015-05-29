@@ -1,0 +1,24 @@
+{
+  "event": "subtask.create",
+  "data": {
+    "subtask": {
+      "_id": "5541d76884b8b4a859be8e06",
+      "content": "subtask",
+      "task": {
+        "_id": "55408a3602e7e97278b13bb3",
+        "content": "subtask",
+        "url": "http://project.ci/project/554063098f408b186ab54b89/tasks/scrum/554063098f408b186ab54b90/task/55408a3602e7e97278b13bb3"
+      }
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    }
+  }
+}

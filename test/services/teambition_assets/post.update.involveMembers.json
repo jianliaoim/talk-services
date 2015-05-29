@@ -1,0 +1,24 @@
+{
+  "event": "post.update.involveMembers",
+  "data": {
+    "del": [
+      "553dd73a307022fe2b7f6d81"
+    ],
+    "add": [],
+    "post": {
+      "_id": "5541d5f384b8b4a859be8dba",
+      "title": "post",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/posts/post/5541d5f384b8b4a859be8dba"
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    }
+  }
+}

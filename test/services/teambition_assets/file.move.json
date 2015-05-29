@@ -1,0 +1,32 @@
+{
+  "event": "file.move",
+  "data": {
+    "file": {
+      "_id": "5541d671e37bab3455d0f461",
+      "fileName": "5.jpg",
+      "collection": {
+        "_id": "5541d66be37bab3455d0f460",
+        "title": "dir",
+        "url": "http://project.ci/project/554063098f408b186ab54b89/files/5541d66be37bab3455d0f460"
+      },
+      "url": "http://project.ci/project/554063098f408b186ab54b89/files/5541d66be37bab3455d0f460/work/5541d671e37bab3455d0f461"
+    },
+    "project": {
+      "_id": "554063098f408b186ab54b89",
+      "name": "新名",
+      "url": "http://project.ci/project/554063098f408b186ab54b89/home"
+    },
+    "user": {
+      "_id": "553dfb95a0417c2260207be5",
+      "name": "二师兄",
+      "avatarUrl": "https://mailimg.teambition.com/logos/20.png"
+    },
+    "old": {
+      "collection": {
+        "_id": "554063098f408b186ab54b8a",
+        "title": "Root",
+        "url": "http://project.ci/project/554063098f408b186ab54b89/files/554063098f408b186ab54b8a"
+      }
+    }
+  }
+}

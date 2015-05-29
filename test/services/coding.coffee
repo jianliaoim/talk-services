@@ -131,6 +131,6 @@ describe 'Coding#Webhook', ->
       category: 'coding'
       token: 'cba'
     coding.receiveEvent 'service.webhook', req
-    .catch (err) -> err.message.should.eql 'Invalid token'
+    .catch (err) -> err.message.should.eql 'Invalid token of coding'
 
   # after cleanup

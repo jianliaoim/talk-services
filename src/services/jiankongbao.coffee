@@ -38,4 +38,19 @@ module.exports = service.register 'jiankongbao', ->
 
   @iconUrl = service.static 'images/icons/jiankongbao@2x.png'
 
+  @_fields.push
+    key: 'token'
+    type: 'text'
+    description: service.i18n
+      zh: '可选'
+      en: 'Optional'
+
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的监控宝当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
+      en: 'Copy this web hook to your Jiankongbao to use it. You may also find this url in the manager tab.'
+
   @registerEvent 'service.webhook', _receiveWebhook

@@ -24,8 +24,7 @@ _receiveWebhook = ({integration, body}) ->
 
   commits or= []
 
-  message =
-    _integrationId: integration._id
+  message = _integrationId: integration._id
 
   message.quote = {}
 
@@ -75,6 +74,8 @@ _receiveWebhook = ({integration, body}) ->
 module.exports = service.register 'gitlab', ->
   @title = 'GitLab'
 
+  @template = 'webhook'
+
   @summary = service.i18n
     zh: '用于仓库管理系统的开源项目。'
     en: 'GitLab is a web-based Git repository manager with wiki and issue tracking features.'
@@ -85,7 +86,13 @@ module.exports = service.register 'gitlab', ->
 
   @iconUrl = service.static 'images/icons/gitlab@2x.png'
 
-  @setField 'url', type: 'text', readOnly: true, autoGen: true
+  @_fields.push
+    key: 'webhookUrl'
+    type: 'text'
+    readOnly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的 GitLab 仓库当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
+      en: 'Copy this web hook to your GitLab repo to use it. You may also find this url in the manager tab.'
 
   # Apply function on `webhook` event
   @registerEvent 'service.webhook', _receiveWebhook

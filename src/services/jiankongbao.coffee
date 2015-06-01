@@ -17,7 +17,7 @@ _receiveWebhook = ({integration, method, body, query}) ->
   message =
     _integrationId: integration._id
     quote:
-      text: content
+      text: decodeURIComponent content or ''
       redirectUrl: "#{jkbUrl}/task/#{task_type}/#{task_id}"
 
   @sendMessage message

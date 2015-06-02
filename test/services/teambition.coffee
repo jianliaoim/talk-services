@@ -27,7 +27,8 @@ _testWebhook = (event, payload, checkMessage) ->
   timestamp = Date.now()
   nonce = 'f2611e70'
   req.query = timestamp: "#{timestamp}", nonce: nonce
-  req.query.sign = crypto.createHash('sha1').update("#{teambition.clientSecret}#{timestamp}#{nonce}").digest('hex')
+  values = [timestamp, nonce, teambition.clientSecret]
+  req.query.sign = crypto.createHash('sha1').update(values.sort().join '').digest('hex')
   teambition.receiveEvent 'service.webhook', req
 
 describe 'Teambition#GetProjects', ->

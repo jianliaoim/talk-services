@@ -60,7 +60,9 @@ _checkSign = (query = {}, clientSecret) ->
     err.status = 403
     throw err
 
-  unless sign is crypto.createHash('sha1').update("#{clientSecret}#{timestamp}#{nonce}").digest('hex')
+  values = [timestamp, nonce, clientSecret]
+
+  unless sign is crypto.createHash('sha1').update(values.sort().join '').digest('hex')
     err = new Error('Signature failed')
     err.status = 403
     throw err

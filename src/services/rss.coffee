@@ -20,7 +20,7 @@ _checkRSS = (req, res) ->
       headers: 'User-Agent': service.userAgent
       encoding: null
     , (err, res, body) ->
-      unless res.statusCode >= 200 and res.statusCode < 300
+      unless res?.statusCode >= 200 and res?.statusCode < 300
         err = new Error("Invalid feed #{url}")
         err.status = 400
         err.phrase = 'INVALID_RSS_URL'

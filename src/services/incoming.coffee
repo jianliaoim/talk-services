@@ -7,6 +7,7 @@ _receiveWebhook = ({integration, query, body}) ->
     , body or {}
 
   {
+    content
     authorName
     title
     text
@@ -14,10 +15,11 @@ _receiveWebhook = ({integration, query, body}) ->
     imageUrl
   } = payload
 
-  throw new Error("Title and text can not be empty") unless title?.length or text?.length
+  throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
     _integrationId: integration._id
+    content: content
     quote:
       authorName: authorName
       title: title

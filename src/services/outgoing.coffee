@@ -1,7 +1,75 @@
 _ = require 'lodash'
+lexer = require 'lexer'
+Promise = require 'bluebird'
+validator = require 'validator'
 service = require '../service'
 
+_trySendMessage = (url, message) ->
+  tryTimes = 0
+  maxTryTimes = 3
+  delay = 1000
+  self = this
+
+  _sendMessage = ->
+    self.httpPost url, message
+
+    .catch (err) ->
+      tryTimes += 1
+      throw err if tryTimes > maxTryTimes
+      Promise.delay delay
+      .then ->
+        delay *= 2
+        _sendMessage()
+
+  _sendMessage()
+
 _postMessage = (message) ->
+  _message = _.pick message, 'team', 'room', 'creator', 'createdAt', 'updatedAt', 'file'
+  # Ignore system messages
+  return unless message.isManual
+  # Ignore integration messages
+  return if message.quote?.category and message.quote.category isnt 'url'
+  # Ignore file upload messages
+  return if message.file
+  # Ignore private chat messages
+  return unless message._roomId
+  _message.content = message.text or lexer(message.content).text()
+  {limbo} = service.components
+  {IntegrationModel} = limbo.use 'talk'
+
+  self = this
+
+  IntegrationModel.findAsync
+    room: message._roomId
+    category: 'outgoing'
+    errorInfo: null
+
+  .map (integration) ->
+    {url} = integration
+
+    _trySendMessage.call self, url, _message
+
+    .then (body) ->
+      return unless body?.content
+      # Send replyMessage to user
+      replyMessage =
+        content: body.content
+        integration: integration
+      replyMessage.quote = authorName: body.username if body.username
+      self.sendMessage replyMessage
+
+    .catch (err) ->
+      integration.errorTimes += 1
+      integration.lastErrorInfo = err.message
+      integration.errorInfo = err.message if integration.errorTimes > 3
+      new Promise (resolve, reject) ->
+        integration.save (err, integration) ->
+          return reject(err) if err
+          resolve()
+
+_checkIntegration = (integration) ->
+  unless validator.isURL(integration.url)
+    throw new Error('Invalid url field')
 
 module.exports = service.register 'outgoing', ->
 
@@ -20,11 +88,12 @@ module.exports = service.register 'outgoing', ->
   @iconUrl = service.static 'images/icons/outgoing@2x.png'
 
   @_fields.push
-    key: 'webhookUrl'
+    key: 'url'
     type: 'text'
-    readOnly: true
     description: service.i18n
-      zh: '复制 web hook 地址到你的应用中来启用 Outgoing Webhook。'
-      en: 'To start using outgoing webhook, copy this url to your application'
+      zh: '请填写你应用中的 Webhook url'
+      en: 'Please fill in the webhook url of your application'
 
   @registerEvent 'message.create', _postMessage
+
+  @registerEvent 'before.integration.create', _checkIntegration

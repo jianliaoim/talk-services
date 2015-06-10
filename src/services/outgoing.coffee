@@ -45,9 +45,12 @@ _postMessage = (message) ->
     errorInfo: null
 
   .map (integration) ->
-    {url} = integration
+    {url, token} = integration
 
-    _trySendMessage.call self, url, _message
+    msg = _.clone _message
+    msg.token = token if token?.length
+
+    _trySendMessage.call self, url, msg
 
     .then (body) ->
       return unless body?.content
@@ -93,8 +96,16 @@ module.exports = service.register 'outgoing', ->
     key: 'url'
     type: 'text'
     description: service.i18n
-      zh: '请填写你应用中的 Webhook url'
-      en: 'Please fill in the webhook url of your application'
+      zh: '请填写你的 Webhook url'
+      en: 'Webhook url of your application'
+
+  @_fields.push
+    key: 'token'
+    type: 'text'
+    autoGen: true
+    description: service.i18n
+      zh: 'Token 会被包含在发送给你的消息中'
+      en: 'Token will include in the received message'
 
   @registerEvent 'message.create', _postMessage
 

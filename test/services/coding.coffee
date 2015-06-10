@@ -27,8 +27,8 @@ describe 'Coding#Webhook', ->
 
   it 'receive push', ->
     testWebhook 'push', payloads.push, (message) ->
-      message.should.have.properties '_integrationId', 'quote'
-      message._integrationId.should.eql '552cc903022844e6d8afb3b4'
+      message.should.have.properties 'integration', 'quote'
+      message.integration._id.should.eql '552cc903022844e6d8afb3b4'
       message.quote.title.should.eql '[test-webhook] 提交了新的代码'
       message.quote.text.should.eql [
         '<a href="https://coding.net/u/sailxjx/p/test-webhook/git/commit/5e321dae429679a4b9ad9e06b543eed5610ff9af" target="_blank">'

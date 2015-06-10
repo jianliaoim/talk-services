@@ -75,7 +75,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
   {event, data} = body
 
   message =
-    _integrationId: integration._id
+    integration: integration
     quote: {}
 
   [scope] = event?.split('.')

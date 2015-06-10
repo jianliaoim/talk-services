@@ -12,7 +12,7 @@ _receiveWebhook = ({integration, body, headers}) ->
     throw new Error("Invalid token of coding")
 
   message =
-    _integrationId: integration._id
+    integration: integration
     quote: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''

@@ -24,7 +24,7 @@ _receiveWebhook = ({integration, body}) ->
 
   commits or= []
 
-  message = _integrationId: integration._id
+  message = integration: integration
 
   message.quote = {}
 

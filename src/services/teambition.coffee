@@ -598,8 +598,6 @@ module.exports = service.register 'teambition', ->
 
   @title = 'Teambition'
 
-  @template = 'form'
-
   @summary = service.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'
     en: 'This integration helps you receive real-time tasks, schedules and posts from Teambition'

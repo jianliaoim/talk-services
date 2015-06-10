@@ -75,6 +75,8 @@ module.exports = service.register 'outgoing', ->
 
   @title = 'Outgoing Webhook'
 
+  @template = 'form'
+
   @isCustomized = true
 
   @summary = service.i18n

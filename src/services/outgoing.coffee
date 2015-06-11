@@ -6,7 +6,7 @@ service = require '../service'
 
 _trySendMessage = (url, message) ->
   tryTimes = 0
-  maxTryTimes = 3
+  maxTryTimes = 5
   delay = 1000
   self = this
 
@@ -18,7 +18,7 @@ _trySendMessage = (url, message) ->
       throw err if tryTimes > maxTryTimes
       Promise.delay delay
       .then ->
-        delay *= 2
+        delay *= 3
         _sendMessage()
 
   _sendMessage()
@@ -30,7 +30,7 @@ _postMessage = (message) ->
   # Ignore integration messages
   return if message.quote?.category and message.quote.category isnt 'url'
   # Ignore file upload messages
-  return if message.file
+  return if message.file?.fileKey
   # Ignore private chat messages
   return unless message._roomId
   _message.content = message.text or lexer(message.content).text()

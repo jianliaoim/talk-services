@@ -24,7 +24,7 @@ _trySendMessage = (url, message) ->
   _sendMessage()
 
 _postMessage = (message) ->
-  _message = _.pick message, 'team', 'room', 'creator', 'createdAt', 'updatedAt', 'file'
+  _message = _.pick message, '_id', 'room', 'creator', 'createdAt', 'updatedAt', "_teamId"
   # Ignore system messages
   return unless message.isManual
   # Ignore integration messages

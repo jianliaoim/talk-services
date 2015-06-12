@@ -53,12 +53,11 @@ _postMessage = (message) ->
     _trySendMessage.call self, url, msg
 
     .then (body) ->
-      return unless body?.content
+      return unless body?.text
       # Send replyMessage to user
       replyMessage =
-        content: body.content
+        quote: body
         integration: integration
-      replyMessage.quote = authorName: body.username if body.username
       self.sendMessage replyMessage
 
     .catch (err) ->

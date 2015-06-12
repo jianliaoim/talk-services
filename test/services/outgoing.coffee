@@ -16,6 +16,7 @@ describe 'Outgoing#Webhook', ->
     creator: name: 'Talkuser'
     room: _id: _roomId, topic: 'OK'
     _roomId: _roomId
+    _teamId: "123"
     team: name: 'Team'
     createdAt: new Date
     updatedAt: new Date
@@ -41,7 +42,7 @@ describe 'Outgoing#Webhook', ->
     ###
     outgoing.httpPost = (url, payload) ->
       url.should.eql "http://www.someurl.com"
-      payload.should.have.properties 'content', 'team', 'room', 'creator', 'createdAt', 'updatedAt'
+      payload.should.have.properties 'content', '_teamId', 'room', 'creator', 'createdAt', 'updatedAt'
       payload.creator.name.should.eql 'Talkuser'
       body =
         username: 'Stack'

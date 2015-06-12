@@ -21,14 +21,17 @@
     "createdAt": "2014-12-23T06:16:06.999Z",          // 创建时间
     "updatedAt": "2014-12-23T06:16:06.999Z"           // 更新时间
     // ...
+}
 ```
 
 如果你希望给这条消息发送一个回复，需要以 JSON 格式返回响应内容，在结果中包含以下结构
 
 ```json
 {
-  "content": "Got it",                // 回复消息内容
-  "username": "Little Finger"         // 在回复消息中显示的用户名（可选）
+  "text": "Got it",                          // 回复消息内容
+  "authorName": "Little Finger",             // 在回复消息中显示的用户名（可选）
+  "redirectUrl": "http://you.service.com"    // 跳转链接（可选）
 }
 ```
 
+![](images/inte-guide/sample-outgoing-1.png)

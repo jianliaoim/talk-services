@@ -175,7 +175,7 @@ _receiveWebhook = ({headers, body, integration}) ->
   {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
 
   message =
-    _integrationId: integration._id
+    integration: integration
     quote:
       userName: sender.login
       userAvatarUrl: sender.avatar_url

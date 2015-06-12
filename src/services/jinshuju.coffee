@@ -4,7 +4,7 @@ _receiveWebhook = ({integration, body}) ->
   payload = body
 
   message =
-    _integrationId: integration._id
+    integration: integration
     quote:
       text: "#{payload.entry?.creator_name} 添加了新的数据"
       redirectUrl: "https://jinshuju.net/forms/#{payload.form}/entries"

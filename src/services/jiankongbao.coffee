@@ -15,7 +15,7 @@ _receiveWebhook = ({integration, method, body, query}) ->
     throw new Error('Invalid jiankongbao payload')
 
   message =
-    _integrationId: integration._id
+    integration: integration
     quote:
       text: decodeURIComponent content or ''
       redirectUrl: "#{jkbUrl}/task/#{task_type}/#{task_id}"

@@ -30,6 +30,8 @@ IntegrationSchema = new Schema
   # Data saved in system
   data: Object
   errorInfo: String
+  errorTimes: type: Number, default: 0
+  lastErrorInfo: String
   createdAt: type: Date, default: Date.now
   updatedAt: type: Date, default: Date.now
 

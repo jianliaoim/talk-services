@@ -18,7 +18,7 @@ _receiveWebhook = ({integration, query, body}) ->
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
-    _integrationId: integration._id
+    integration: integration
     content: content
     quote:
       authorName: authorName

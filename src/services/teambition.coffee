@@ -75,7 +75,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
   {event, data} = body
 
   message =
-    _integrationId: integration._id
+    integration: integration
     quote: {}
 
   [scope] = event?.split('.')
@@ -597,8 +597,6 @@ _getGroups = ->
 module.exports = service.register 'teambition', ->
 
   @title = 'Teambition'
-
-  @template = 'form'
 
   @summary = service.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'

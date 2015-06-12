@@ -3,7 +3,7 @@ service = require '../service'
 _receiveWebhook = ({integration, body}) ->
   payload = body
   message =
-    _integrationId: integration._id
+    integration: integration
     quote:
       text: "Fir.im: #{payload.msg}"
       redirectUrl: payload.link

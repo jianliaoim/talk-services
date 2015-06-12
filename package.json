@@ -43,6 +43,8 @@
     "moment": "^2.10.2",
     "moment-timezone": "^0.3.1",
     "request": "^2.55.0",
-    "require-dir": "^0.1.0"
+    "require-dir": "^0.1.0",
+    "talk-lexer": "^0.1.23",
+    "validator": "^3.40.0"
   }
 }

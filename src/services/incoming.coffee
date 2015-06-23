@@ -6,14 +6,7 @@ _receiveWebhook = ({integration, query, body}) ->
     , query or {}
     , body or {}
 
-  {
-    content
-    authorName
-    title
-    text
-    redirectUrl
-    imageUrl
-  } = payload
+  {content, authorName, title, text, redirectUrl, imageUrl} = payload
 
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 

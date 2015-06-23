@@ -6,20 +6,22 @@
 
   ![](/images/inte-guide/jenkins-2.png)
 
-3. 在提醒目标里选择简聊webhook，在配置表单中，填写提醒目标名称，输入WEBHOOK地址，姓名，及聚合信息标题
+3. 搜索 'jianliao'，安装简聊插件
 
-  ![](/images/inte-guide/kf5-3.png)
+  ![](/images/inte-guide/jenkins-3.png)
 
-4. 填写完后点击右下角按钮进行通信测试
+4. 安装完成后进入系统设置，配置聚合 Webhook 链接和 jenkins 域名以备简聊能正确的跳转回 jenkins
 
-  ![](/images/inte-guide/kf5-4.png)
+  ![](/images/inte-guide/jenkins-4.png)
 
-  ![](/images/inte-guide/kf5-5.png)
+  ![](/images/inte-guide/jenkins-5.png)
 
-5. 在功能管理 > 触发器任务，配置事件触发提醒目标
+5. 在项目中选择配置菜单，在 Jianliao Notifications 中选择你希望收到推送的事件，也可以此任务配置单独的 Webhook 链接
 
-  ![](/images/inte-guide/kf5-6.png)
+  ![](/images/inte-guide/jenkins-6.png)
 
-6. 添加一个或多个触发器，设置适当的条件，如： 工单被创建，执行动作设置为 发送消息到指定目标 简聊webhook（您之前取的提醒目标名称）
+  ![](/images/inte-guide/jenkins-7.png)
 
-  ![](/images/inte-guide/kf5-7.png)
+6. 配置完成后，就可以等待简聊推送构建任务信息啦
+
+  ![](/images/inte-guide/jenkins-8.png)

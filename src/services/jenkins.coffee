@@ -10,17 +10,24 @@ service = require '../service'
  * @return {Promise}
 ###
 _receiveWebhook = ({integration, body}) ->
-  # The errors should be catched and transmit to callback
-  self = this
-  payload = body
+  payload = body or {}
 
-  {repository, commits, object_attributes} = payload
+  {content, authorName, title, text, redirectUrl, imageUrl} = payload
 
-  commits or= []
+  throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
-  message = _integrationId: integration._id
+  message =
+    integration: integration
+    content: content
+    quote:
+      authorName: authorName
+      title: title
+      text: text
+      redirectUrl: redirectUrl
+      thumbnailPicUrl: imageUrl
+      originalPicUrl: imageUrl
 
-  self.sendMessage message
+  @sendMessage message
 
 module.exports = service.register 'jenkins', ->
   @title = 'Jenkins'

@@ -34,4 +34,4 @@ If the handler wishes to post a response, the following JSON should be returned 
 }
 ```
 
-![](images/inte-guide/sample-outgoing-1.png)
+![](/images/inte-guide/sample-outgoing-1.png)

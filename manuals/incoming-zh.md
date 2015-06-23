@@ -20,4 +20,4 @@ curl -d authorName=小艾 -d title=大家好 -d text=打个招呼吧 -d redirect
 **第二步** 填写 Incoming Webhook 自定义名称、描述和头像。
 修改后点击保存。消息将如下图所示
 
-![](images/inte-guide/notice-webhook.png)
+![](/images/inte-guide/notice-webhook.png)

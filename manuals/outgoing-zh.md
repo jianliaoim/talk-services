@@ -34,4 +34,4 @@
 }
 ```
 
-![](images/inte-guide/sample-outgoing-1.png)
+![](/images/inte-guide/sample-outgoing-1.png)

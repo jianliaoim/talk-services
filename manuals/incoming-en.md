@@ -19,4 +19,4 @@ curl -d authorName=小艾 -d title=大家好 -d text=打个招呼吧 -d redirect
 
 **Second Step** Customize name, description and icon. Save your preference.
 WebHook integration message will be pushed to selected topics as the picture below.
-![](images/inte-guide/notice-webhook.png)
+![](/images/inte-guide/notice-webhook.png)

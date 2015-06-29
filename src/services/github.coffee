@@ -219,8 +219,7 @@ _receiveWebhook = ({headers, body, integration}) ->
         """
       message.quote.text = commitArr.join ''
       message.quote.redirectUrl = head_commit.url
-    else
-      return false
+    else return false
 
   @sendMessage message
 

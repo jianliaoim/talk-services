@@ -1,0 +1,293 @@
+{
+  "payload": {
+    "compare": "https://github.com/sailxjx/drips/compare/eeda35fefbb9...aa27316cbc98",
+    "previous_successful_build": null,
+    "build_parameters": null,
+    "oss": true,
+    "committer_date": "2015-06-29T17:39:41+08:00",
+    "steps": [
+      {
+        "name": "Starting the build",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Starting the build",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Starting the build",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:48.392Z",
+            "type": "infrastructure",
+            "messages": [],
+            "start_time": "2015-06-29T09:39:48.220Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 0,
+            "run_time_millis": 172,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Start container",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Start container",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Start container",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:54.049Z",
+            "source": "config",
+            "type": "infrastructure",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/f3937494e2ff0d7f46211955-sailxjx-drips-1-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593423600&Signature=FXCjbFFy66rkxuvKoLR6jLr82NQ%3D",
+            "start_time": "2015-06-29T09:39:48.402Z",
+            "exit_code": 0,
+            "canceled": null,
+            "step": 1,
+            "run_time_millis": 5647,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Enable SSH",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Enable SSH",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Enable SSH",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:55.523Z",
+            "type": "infrastructure",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/64937494e2ff0d7fa6211955-sailxjx-drips-2-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593423600&Signature=9Pk9uUOc0ESt2%2BwzjynLQDWNwsE%3D",
+            "start_time": "2015-06-29T09:39:54.065Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 2,
+            "run_time_millis": 1458,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Restore source cache",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Restore source cache",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Restore source cache",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:55.696Z",
+            "source": "cache",
+            "type": "checkout",
+            "messages": [],
+            "start_time": "2015-06-29T09:39:55.577Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 3,
+            "run_time_millis": 119,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Checkout using deploy key: e3:41:56:bb:db:7b:6a:48:81:1e:b5:56:ad:6d:db:c3",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Checkout using deploy key: e3:41:56:bb:db:7b:6a:48:81:1e:b5:56:ad:6d:db:c3",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Checkout using deploy key: e3:41:56:bb:db:7b:6a:48:81:1e:b5:56:ad:6d:db:c3",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:58.190Z",
+            "source": "config",
+            "type": "checkout",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/84937494e2ff0d7fb6211955-sailxjx-drips-4-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593423600&Signature=qx3e7Nzid7S%2B%2Bq6r1ZK5tZrwmJo%3D",
+            "start_time": "2015-06-29T09:39:55.706Z",
+            "exit_code": 0,
+            "canceled": null,
+            "step": 4,
+            "run_time_millis": 2484,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Configure the build",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Configure the build",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Configure the build",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:58.449Z",
+            "source": "cache",
+            "type": "machine",
+            "messages": [],
+            "start_time": "2015-06-29T09:39:58.220Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 5,
+            "run_time_millis": 229,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Disable SSH",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Disable SSH",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Disable SSH",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:39:58.475Z",
+            "type": "teardown",
+            "messages": [],
+            "start_time": "2015-06-29T09:39:58.462Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 7,
+            "run_time_millis": 13,
+            "has_output": false
+          }
+        ]
+      }
+    ],
+    "body": "",
+    "usage_queued_at": "2015-06-29T09:39:35.980Z",
+    "retry_of": null,
+    "reponame": "drips",
+    "ssh_users": [],
+    "build_url": "https://circleci.com/gh/sailxjx/drips/2",
+    "parallel": 1,
+    "failed": null,
+    "branch": "newbranch",
+    "username": "sailxjx",
+    "author_date": "2015-06-29T17:39:41+08:00",
+    "why": "github",
+    "user": {
+      "is_user": true,
+      "login": "sailxjx",
+      "name": "Xu Jingxin",
+      "email": "sailxjx@gmail.com"
+    },
+    "vcs_revision": "aa27316cbc9806a4a06fd902f14b967484806ae6",
+    "owners": [
+      "sailxjx"
+    ],
+    "build_num": 2,
+    "infrastructure_fail": false,
+    "ssh_enabled": false,
+    "committer_email": "sailxjx@gmail.com",
+    "previous": {
+      "build_time_millis": 13442,
+      "status": "no_tests",
+      "build_num": 1
+    },
+    "status": "no_tests",
+    "committer_name": "Xu Jingxin",
+    "pull_request_urls": [],
+    "retries": null,
+    "subject": "add circle",
+    "timedout": false,
+    "dont_build": null,
+    "feature_flags": {},
+    "lifecycle": "finished",
+    "stop_time": "2015-06-29T09:39:58.677Z",
+    "build_time_millis": 10761,
+    "circle_yml": {
+      "string": "notify:\n  webhooks:\n    - url: https://talk.ai/webhook-receiver/circle\n"
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "message": "It looks like we couldn't infer test settings for your project. Refer to our \"<a href='https://circleci.com/docs/manually'>Setting your build up manually</a>\" document to get started. It should only take a few minutes."
+      }
+    ],
+    "is_first_green_build": false,
+    "job_name": null,
+    "start_time": "2015-06-29T09:39:47.916Z",
+    "all_commit_details": [
+      {
+        "committer_date": "2015-06-29T17:39:41+08:00",
+        "body": "",
+        "branch": "newbranch",
+        "author_date": "2015-06-29T17:39:41+08:00",
+        "committer_email": "sailxjx@gmail.com",
+        "commit": "aa27316cbc9806a4a06fd902f14b967484806ae6",
+        "committer_login": "sailxjx",
+        "committer_name": "Xu Jingxin",
+        "subject": "add circle",
+        "commit_url": "https://github.com/sailxjx/drips/commit/aa27316cbc9806a4a06fd902f14b967484806ae6",
+        "author_login": "sailxjx",
+        "author_name": "Xu Jingxin",
+        "author_email": "sailxjx@gmail.com"
+      }
+    ],
+    "outcome": "no_tests",
+    "vcs_url": "https://github.com/sailxjx/drips",
+    "author_name": "Xu Jingxin",
+    "node": [
+      {
+        "public_ip_addr": "54.159.25.139",
+        "port": 64663,
+        "username": "ubuntu",
+        "image_id": "circletar-0854-21125-20150606T061344Z",
+        "ssh_enabled": null
+      }
+    ],
+    "queued_at": "2015-06-29T09:39:53.191Z",
+    "canceled": false,
+    "author_email": "sailxjx@gmail.com"
+  }
+}

@@ -1,0 +1,429 @@
+{
+  "payload": {
+    "compare": "https://github.com/sailxjx/drips/compare/56ce4e0af412...afc184a9aced",
+    "previous_successful_build": null,
+    "build_parameters": null,
+    "oss": true,
+    "committer_date": "2015-06-29T17:52:20+08:00",
+    "steps": [
+      {
+        "name": "Starting the build",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Starting the build",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Starting the build",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:31.094Z",
+            "type": "infrastructure",
+            "messages": [],
+            "start_time": "2015-06-29T09:52:29.958Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 0,
+            "run_time_millis": 1136,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Start container",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Start container",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Start container",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:34.860Z",
+            "source": "config",
+            "type": "infrastructure",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/ef0287dcdd8d0d7ff5511955-sailxjx-drips-1-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593424366&Signature=LzeGH9oTRHRoOzP%2BFRFPoQTcCDQ%3D",
+            "start_time": "2015-06-29T09:52:31.100Z",
+            "exit_code": 0,
+            "canceled": null,
+            "step": 1,
+            "run_time_millis": 3760,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Enable SSH",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Enable SSH",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Enable SSH",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:36.126Z",
+            "type": "infrastructure",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/ff0287dcdd8d0d7f26511955-sailxjx-drips-2-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593424366&Signature=i2YOw3oaLYsWUfaDbqkw%2BObIgyQ%3D",
+            "start_time": "2015-06-29T09:52:34.870Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 2,
+            "run_time_millis": 1256,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Restore source cache",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Restore source cache",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Restore source cache",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:36.203Z",
+            "source": "cache",
+            "type": "checkout",
+            "messages": [],
+            "start_time": "2015-06-29T09:52:36.142Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 3,
+            "run_time_millis": 61,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Checkout using deploy key: e3:41:56:bb:db:7b:6a:48:81:1e:b5:56:ad:6d:db:c3",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Checkout using deploy key: e3:41:56:bb:db:7b:6a:48:81:1e:b5:56:ad:6d:db:c3",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Checkout using deploy key: e3:41:56:bb:db:7b:6a:48:81:1e:b5:56:ad:6d:db:c3",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:38.392Z",
+            "source": "config",
+            "type": "checkout",
+            "messages": [],
+            "start_time": "2015-06-29T09:52:36.218Z",
+            "exit_code": 0,
+            "canceled": null,
+            "step": 4,
+            "run_time_millis": 2174,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Configure the build",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Configure the build",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Configure the build",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:38.453Z",
+            "source": "cache",
+            "type": "machine",
+            "messages": [],
+            "start_time": "2015-06-29T09:52:38.399Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 5,
+            "run_time_millis": 54,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Restore cache",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Restore cache",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Restore cache",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:38.579Z",
+            "source": "cache",
+            "type": "machine",
+            "messages": [],
+            "start_time": "2015-06-29T09:52:38.459Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 6,
+            "run_time_millis": 120,
+            "has_output": false
+          }
+        ]
+      },
+      {
+        "name": "Save cache",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Save cache",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Save cache",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:38.650Z",
+            "source": "cache",
+            "type": "database",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/401287dcdd8d0d7f66511955-sailxjx-drips-7-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593424366&Signature=rfJ8IHi0W%2FYEEgaQxEAhxazH3gI%3D",
+            "start_time": "2015-06-29T09:52:38.585Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 7,
+            "run_time_millis": 65,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "make test",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "make test",
+            "parallel": false,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "make test",
+            "bash_command": "make test",
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:39.391Z",
+            "source": "config",
+            "type": "test",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/501287dcdd8d0d7f66511955-sailxjx-drips-8-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593424366&Signature=igPtGvhtubILlsr84LWtD4FFW4g%3D",
+            "start_time": "2015-06-29T09:52:38.662Z",
+            "exit_code": 0,
+            "canceled": null,
+            "step": 8,
+            "run_time_millis": 729,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Collect test metadata",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Collect test metadata",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Collect test metadata",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:40.651Z",
+            "type": "teardown",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/601287dcdd8d0d7f76511955-sailxjx-drips-9-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593424366&Signature=3cEIIuRTfiryb516BJVxZbpe%2BtQ%3D",
+            "start_time": "2015-06-29T09:52:39.400Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 9,
+            "run_time_millis": 1251,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Collect artifacts",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Collect artifacts",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Collect artifacts",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:41.904Z",
+            "type": "teardown",
+            "messages": [],
+            "output_url": "https://circle-production-action-output.s3.amazonaws.com/701287dcdd8d0d7f86511955-sailxjx-drips-10-0?AWSAccessKeyId=AKIAI3VNUNBFDODWKRVA&Expires=1593424366&Signature=YkNCawOsoTZcJERTVl%2FdL7asZMw%3D",
+            "start_time": "2015-06-29T09:52:40.658Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 10,
+            "run_time_millis": 1246,
+            "has_output": true
+          }
+        ]
+      },
+      {
+        "name": "Disable SSH",
+        "actions": [
+          {
+            "truncated": false,
+            "index": 0,
+            "command": "Disable SSH",
+            "parallel": true,
+            "failed": null,
+            "infrastructure_fail": null,
+            "name": "Disable SSH",
+            "bash_command": null,
+            "status": "success",
+            "timedout": null,
+            "continue": null,
+            "end_time": "2015-06-29T09:52:41.922Z",
+            "type": "teardown",
+            "messages": [],
+            "start_time": "2015-06-29T09:52:41.914Z",
+            "exit_code": null,
+            "canceled": null,
+            "step": 13,
+            "run_time_millis": 8,
+            "has_output": false
+          }
+        ]
+      }
+    ],
+    "body": "",
+    "usage_queued_at": "2015-06-29T09:52:26.536Z",
+    "retry_of": null,
+    "reponame": "drips",
+    "ssh_users": [],
+    "build_url": "https://circleci.com/gh/sailxjx/drips/5",
+    "parallel": 1,
+    "failed": null,
+    "branch": "newbranch",
+    "username": "sailxjx",
+    "author_date": "2015-06-29T17:52:20+08:00",
+    "why": "github",
+    "user": {
+      "is_user": true,
+      "login": "sailxjx",
+      "name": "Xu Jingxin",
+      "email": "sailxjx@gmail.com"
+    },
+    "vcs_revision": "afc184a9aced8e5eba716d1cc39800054448e67f",
+    "owners": [
+      "sailxjx"
+    ],
+    "build_num": 5,
+    "infrastructure_fail": false,
+    "ssh_enabled": false,
+    "committer_email": "sailxjx@gmail.com",
+    "previous": {
+      "build_time_millis": 9073,
+      "status": "no_tests",
+      "build_num": 4
+    },
+    "status": "fixed",
+    "committer_name": "Xu Jingxin",
+    "pull_request_urls": [],
+    "retries": null,
+    "subject": "add test",
+    "timedout": false,
+    "dont_build": null,
+    "feature_flags": {},
+    "lifecycle": "finished",
+    "stop_time": "2015-06-29T09:52:42.090Z",
+    "build_time_millis": 12359,
+    "circle_yml": {
+      "string": "test:\n  override:\n    - make test\nnotify:\n  webhooks:\n    - url: https://talk.ai/webhook-receiver/circle\n    - url: https://hook.lesschat.com/circleci/b48ad666ba814a828823b600f65b4ae3\n"
+    },
+    "messages": [],
+    "is_first_green_build": true,
+    "job_name": null,
+    "start_time": "2015-06-29T09:52:29.731Z",
+    "all_commit_details": [
+      {
+        "committer_date": "2015-06-29T17:52:20+08:00",
+        "body": "",
+        "branch": "newbranch",
+        "author_date": "2015-06-29T17:52:20+08:00",
+        "committer_email": "sailxjx@gmail.com",
+        "commit": "afc184a9aced8e5eba716d1cc39800054448e67f",
+        "committer_login": "sailxjx",
+        "committer_name": "Xu Jingxin",
+        "subject": "add test",
+        "commit_url": "https://github.com/sailxjx/drips/commit/afc184a9aced8e5eba716d1cc39800054448e67f",
+        "author_login": "sailxjx",
+        "author_name": "Xu Jingxin",
+        "author_email": "sailxjx@gmail.com"
+      }
+    ],
+    "outcome": "success",
+    "vcs_url": "https://github.com/sailxjx/drips",
+    "author_name": "Xu Jingxin",
+    "node": [
+      {
+        "public_ip_addr": "54.157.31.157",
+        "port": 64618,
+        "username": "ubuntu",
+        "image_id": "circletar-0854-21125-20150606T061344Z",
+        "ssh_enabled": null
+      }
+    ],
+    "queued_at": "2015-06-29T09:52:25.899Z",
+    "canceled": false,
+    "author_email": "sailxjx@gmail.com"
+  }
+}

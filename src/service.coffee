@@ -5,6 +5,7 @@ requireDir = require 'require-dir'
 Promise = require 'bluebird'
 
 _services = null
+_robotToServices = null
 
 service =
 

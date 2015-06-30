@@ -22,6 +22,7 @@ The events with `before` prefix are pre hooks of the process, so their callbacks
 | `before.integration.create`  | integration                  |                                      |
 | `before.integration.update`  | integration                  |                                      |
 | `before.integration.remove`  | integration                  |                                      |
+| `message.create`             | message                      |                                      |
 
 [npm-url]: https://npmjs.org/package/talk-services
 [npm-image]: http://img.shields.io/npm/v/talk-services.svg

@@ -9,32 +9,28 @@ service = require '../service'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({integration, body, headers}) ->
   # The errors should be catched and transmit to callback
   self = this
-  payload = body
-
-  throw new Error("Unknown GitCafe event type") unless payload.headers['x-gitcafe-event']
-
-  {query, body} = payload
+  throw new Error("Unknown GitCafe event type") unless headers and headers['x-gitcafe-event']
 
   message = integration: integration
 
   message.quote = {}
 
-  switch payload.headers['x-gitcafe-event']
+  switch headers['x-gitcafe-event']
     when 'commit_comment'
       message.quote.title = "#{body.comment.sender.username} 评论了提交 #{body.commit.message_subject}"
       message.quote.text = "#{marked(body.comment.content)}"
       message.quote.redirectUrl = "#{body.project.html_url}/commit/#{body.commit.sha}#comment-#{body.comment.id}"
 
     when 'pull_request'
-      message.quote.title = "#{body.sender.username} 发起了 Pull Request 请求"
-      message.quote.text = "#{marked('**' + body.pull_request.subject or '' + '**')} (#{marked(body.pull_request.content or '')})"
-      message.quote.redirectUrl = "#{body.project.html_url}/pull/#{body.pull_request.number}"
+      message.quote.title = "#{body.sender.username} 向 #{body.pull_request.head_project.name} 项目发起了 Pull Request 请求"
+      message.quote.text = "#{marked(body.pull_request.subject or '')} (#{marked(body.pull_request.content or '')})"
+      message.quote.redirectUrl = "#{body.pull_request.head_project.html_url}/pull/#{body.pull_request.number}"
 
     when 'pull_request_comment'
-      message.quote.title = "#{body.comment.sender.username} 评论了 Pull Request 请求"
+      message.quote.title = "#{body.comment.sender.username} 评论了 #{body.pull_request.head_project.name} 项目的 Pull Request 请求"
       message.quote.text = "#{marked(body.comment.content or '')}"
       message.quote.redirectUrl = "#{body.project.html_url}/pull/#{body.pull_request.number}#comment-#{body.comment.id}"
 
@@ -52,12 +48,12 @@ _receiveWebhook = ({integration, body}) ->
 
     when 'ticket'
       message.quote.title = "#{body.sender.username} 在 #{body.project.name} 项目创建了工单"
-      message.quote.text = "#{marked('**' + body.ticket.subject or '' + '**')} (#{marked(body.ticket.content or '')})"
+      message.quote.text = "#{marked(body.ticket.subject or '')} (#{marked(body.ticket.content or '')})"
       message.quote.redirectUrl = body.ticket.html_url
 
     when 'ticket_comment'
-      message.quote.title = "#{body.comment.sender.username} 评论了 Ticket #{body.ticket.subject}"
-      message.quote.text = "#{body.comment.content}"
+      message.quote.title = "#{body.comment.sender.username} 评论了工单 #{body.ticket.subject}"
+      message.quote.text = "#{marked(body.comment.content)}"
       message.quote.redirectUrl = "#{body.ticket.html_url}#comment-#{body.comment.id}"
 
     else return false

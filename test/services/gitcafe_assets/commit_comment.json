@@ -1,0 +1,141 @@
+{
+  "headers": {
+    "x-real-ip": "119.254.210.188",
+    "x-forwarded-for": "119.254.210.188",
+    "host": "talk.ai",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "2808",
+    "accept": "*/*; q=0.5, application/xml",
+    "accept-encoding": "gzip, deflate",
+    "x-gitcafe-event": "commit_comment",
+    "content-type": "application/json",
+    "x-gitcafe-delivery": "559224b844c243d1bf000001",
+    "user-agent": "Ruby"
+  },
+  "query": {},
+  "body": {
+    "action": "created",
+    "sender": {
+      "id": "50bce2944dc04c0df4000005",
+      "username": "destec",
+      "email": "codingted@gmail.com",
+      "fullname": "阿猫远征军",
+      "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+      "state": "normal"
+    },
+    "project": {
+      "id": "55920b0244c2434bca00005d",
+      "name": "test",
+      "owner": {
+        "id": "50bce2944dc04c0df4000005",
+        "name": "destec",
+        "url": "",
+        "email": "codingted@gmail.com",
+        "location": "",
+        "company": "",
+        "fullname": "阿猫远征军",
+        "created_at": "2012-12-03T17:34:12Z",
+        "updated_at": "2015-06-30T03:51:34Z",
+        "type": "User",
+        "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+        "html_url": "https://gitcafe.com/destec"
+      },
+      "fullname": "",
+      "description": "",
+      "homepage_url": "",
+      "html_url": "https://gitcafe.com/destec/test",
+      "git_url": "git://gitcafe.com/destec/test.git",
+      "ssh_url": "git@gitcafe.com:destec/test.git",
+      "http_url": "https://gitcafe.com/destec/test.git",
+      "created_at": "2015-06-30T03:20:34Z",
+      "private": false,
+      "forked": false,
+      "upstream_identity": null,
+      "default_branch": "master",
+      "branches": [
+        "master"
+      ],
+      "forks_count": 1,
+      "watchers_count": 0,
+      "watched": false
+    },
+    "commit": {
+      "id": "1df6f2819b212a9cc9ece1ddf238bbc5e9cdb956",
+      "sha": "1df6f2819b212a9cc9ece1ddf238bbc5e9cdb956",
+      "author": {
+        "name": " Ruoxin Zhang",
+        "email": "Catalystx@Pluto.local",
+        "gitcafe_user": null
+      },
+      "committer": {
+        "name": " Ruoxin Zhang",
+        "email": "Catalystx@Pluto.local",
+        "gitcafe_user": null
+      },
+      "message_subject": "fix",
+      "message_body": null,
+      "authored_at": "2015-06-30T03:51:28Z",
+      "committed_at": "2015-06-30T03:51:28Z",
+      "comments_count": 1,
+      "diffs": [
+        {
+          "old_path": "README.md",
+          "new_path": "README.md",
+          "renamed": false,
+          "is_new_file": false,
+          "deleted": false,
+          "similarity_index": 0,
+          "is_image": false,
+          "is_text": true,
+          "empty": false,
+          "mime_type": "application/octet-stream",
+          "old_mode": null,
+          "new_mode": "100644",
+          "content_diff": [
+            {
+              "old_line_number": "...",
+              "new_line_number": "...",
+              "data": "@@ -1,3 +1,3 @@\n",
+              "type": "chunk"
+            },
+            {
+              "old_line_number": 1,
+              "new_line_number": 1,
+              "data": " # test\n",
+              "type": ""
+            },
+            {
+              "old_line_number": 2,
+              "new_line_number": "",
+              "data": "-## tesi\n",
+              "type": "line-remove"
+            },
+            {
+              "old_line_number": "",
+              "new_line_number": 2,
+              "data": "+## test",
+              "type": "line-add"
+            }
+          ]
+        }
+      ]
+    },
+    "comment": {
+      "id": "559224b544c2439cf20008b7",
+      "content": "add a new comment for the `fix`(`1df6f2819b212a9cc9ece1ddf238bbc5e9cdb956`) [url](https://gitcafe.com/destec/test/commit/1df6f2819b212a9cc9ece1ddf238bbc5e9cdb956) commit",
+      "sender": {
+        "id": "50bce2944dc04c0df4000005",
+        "username": "destec",
+        "email": "codingted@gmail.com",
+        "fullname": "阿猫远征军",
+        "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+        "state": "normal"
+      },
+      "created_at": "2015-06-30T05:10:13Z",
+      "updated_at": "2015-06-30T05:10:13Z"
+    },
+    "type": "MessageComment",
+    "line_note": null
+  }
+}

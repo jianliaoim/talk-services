@@ -1,0 +1,101 @@
+{
+  "headers": {
+    "x-real-ip": "119.254.210.188",
+    "x-forwarded-for": "119.254.210.188",
+    "host": "talk.ai",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "2367",
+    "accept": "*/*; q=0.5, application/xml",
+    "accept-encoding": "gzip, deflate",
+    "x-gitcafe-event": "ticket_comment",
+    "content-type": "application/json",
+    "x-gitcafe-delivery": "559212cb44c24370c4000001",
+    "user-agent": "Ruby"
+  },
+  "query": {},
+  "body": {
+    "action": "created",
+    "comment": {
+      "id": "559212c944c2434bca0001d5",
+      "content": "_ this is a test comment for the test ticket. _\r\n\r\n* this is a test comment for the test ticket. *",
+      "sender": {
+        "id": "50bce2944dc04c0df4000005",
+        "username": "destec",
+        "email": "codingted@gmail.com",
+        "fullname": "阿猫远征军",
+        "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+        "state": "normal"
+      },
+      "created_at": "2015-06-30T03:53:45Z",
+      "updated_at": "2015-06-30T03:53:45Z"
+    },
+    "sender": {
+      "id": "50bce2944dc04c0df4000005",
+      "username": "destec",
+      "email": "codingted@gmail.com",
+      "fullname": "阿猫远征军",
+      "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+      "state": "normal"
+    },
+    "ticket": {
+      "id": "559212a144c2439cf20003d3",
+      "project_identity": "destec/test",
+      "url": "https://api.gitcafe.com/api/v1//projects/destec/test/tickets/1",
+      "html_url": "https://gitcafe.com/destec/test/tickets/1",
+      "number": 1,
+      "subject": "new ticket",
+      "creator": {
+        "id": "50bce2944dc04c0df4000005",
+        "username": "destec",
+        "email": "codingted@gmail.com",
+        "fullname": "阿猫远征军",
+        "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+        "state": "normal"
+      },
+      "assignees": [],
+      "replies_count": 1,
+      "content": "## this is a test ticket.\r\n> and some ref.",
+      "state": "open",
+      "labels": [],
+      "created_at": "2015-06-30T03:53:05Z",
+      "updated_at": "2015-06-30T03:53:45Z"
+    },
+    "project": {
+      "id": "55920b0244c2434bca00005d",
+      "name": "test",
+      "owner": {
+        "id": "50bce2944dc04c0df4000005",
+        "name": "destec",
+        "url": "",
+        "email": "codingted@gmail.com",
+        "location": "",
+        "company": "",
+        "fullname": "阿猫远征军",
+        "created_at": "2012-12-03T17:34:12Z",
+        "updated_at": "2015-06-30T03:51:34Z",
+        "type": "User",
+        "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+        "html_url": "https://gitcafe.com/destec"
+      },
+      "fullname": "",
+      "description": "",
+      "homepage_url": "",
+      "html_url": "https://gitcafe.com/destec/test",
+      "git_url": "git://gitcafe.com/destec/test.git",
+      "ssh_url": "git@gitcafe.com:destec/test.git",
+      "http_url": "https://gitcafe.com/destec/test.git",
+      "created_at": "2015-06-30T03:20:34Z",
+      "private": false,
+      "forked": false,
+      "upstream_identity": null,
+      "default_branch": "master",
+      "branches": [
+        "master"
+      ],
+      "forks_count": 1,
+      "watchers_count": 0,
+      "watched": false
+    }
+  }
+}

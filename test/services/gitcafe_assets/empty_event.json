@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-real-ip": "101.231.114.44",
+    "x-forwarded-for": "101.231.114.44",
+    "host": "talk.ai",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "accept-encoding": "gzip, deflate",
+    "accept-language": "zh-cn",
+    "cookie": "_ga=GA1.2.583542870.1424792532; Hm_lpvt_6c88c7aa9cc95e23f10e37fdd1a73c30=1435632232; Hm_lvt_6c88c7aa9cc95e23f10e37fdd1a73c30=1434608409,1434683437,1435245452,1435541873; mp_2fa08c155ec778a576474191f22a6c80_mixpanel=%7B%22distinct_id%22%3A%20%2214bbc414c3d613-01eab1c09-7d7c3c63-fa000-14bbc414c3e676%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Faccount.teambition.com%2Fsignin%3Fservice%3Dtalk%22%2C%22%24initial_referring_domain%22%3A%20%22account.teambition.com%22%7D; sid=s%3AqVEknt91OkBTyBt6Ayu4IFnuTSISYUxk.eOJ6sVjZUed%2B2oFCBvJS9UIR0Hw%2FewhexjPOUq2zgdU",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/600.6.3 (KHTML, like Gecko) Version/8.0.6 Safari/600.6.3"
+  },
+  "query": {},
+  "body": {}
+}

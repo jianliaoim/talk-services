@@ -6,6 +6,9 @@ _sendToRobot = (message) ->
 
   @httpPost @robotUrl, message
 
+  .catch (err) ->
+    return # Mute
+
   .then (body) ->
     return unless body?.content or body?.text
     replyMessage =

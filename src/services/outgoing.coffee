@@ -24,16 +24,8 @@ _trySendMessage = (url, message) ->
   _sendMessage()
 
 _postMessage = (message) ->
-  _message = _.pick message, '_id', 'room', 'creator', 'createdAt', 'updatedAt', "_teamId"
-  # Ignore system messages
-  return unless message.isManual
-  # Ignore integration messages
-  return if message.quote?.category and message.quote.category isnt 'url'
-  # Ignore file upload messages
-  return if message.file?.fileKey
   # Ignore private chat messages
   return unless message._roomId
-  _message.content = message.text or lexer(message.content).text()
   {limbo} = service.components
   {IntegrationModel} = limbo.use 'talk'
 
@@ -47,7 +39,7 @@ _postMessage = (message) ->
   .map (integration) ->
     {url, token} = integration
 
-    msg = _.clone _message
+    msg = _.clone message
     msg.token = token if token?.length
 
     _trySendMessage.call self, url, msg

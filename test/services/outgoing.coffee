@@ -45,19 +45,18 @@ describe 'Outgoing#Webhook', ->
       payload.should.have.properties 'content', '_teamId', 'room', 'creator', 'createdAt', 'updatedAt'
       payload.creator.name.should.eql 'Talkuser'
       body =
-        username: 'Stack'
-        content: 'Winter is coming'
+        authorName: 'Stack'
+        text: 'Winter is coming'
       Promise.resolve body
 
     # Over write the sendMessage
     outgoing.sendMessage = (message) ->
       message.integration._id.should.eql req.integration._id
-      message.content.should.eql 'Winter is coming'
+      message.quote.text.should.eql 'Winter is coming'
       message.quote.authorName.should.eql 'Stack'
+      done()
 
     outgoing.receiveEvent 'message.create', message
-    .then -> done()
-    .catch done
 
   it 'try several times when fire an error response from third party server', (done) ->
     num = 0

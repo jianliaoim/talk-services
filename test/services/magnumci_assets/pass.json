@@ -1,0 +1,3 @@
+{
+  "payload": "{\"id\":172701,\"project_id\":2986,\"title\":\"[PASS] drips #2 (master - afc184a9) by Xu Jingxin\",\"number\":2,\"commit\":\"afc184a9aced8e5eba716d1cc39800054448e67f\",\"author\":\"Xu Jingxin\",\"committer\":\"Xu Jingxin\",\"message\":\"add test\",\"branch\":\"master\",\"state\":\"finished\",\"status\":\"pass\",\"result\":0,\"duration\":5.0,\"duration_string\":\"5s\",\"commit_url\":\"https://github.com/sailxjx/drips/commit/afc184a9aced8e5eba716d1cc39800054448e67f\",\"compare_url\":\"https://github.com/sailxjx/drips/compare/eeda35fefbb9...afc184a9aced\",\"started_at\":\"2015-06-30T03:51:04-05:00\",\"finished_at\":\"2015-06-30T03:51:09-05:00\",\"build_url\":\"http://magnum-ci.com/projects/2986/builds/172701\"}"
+}

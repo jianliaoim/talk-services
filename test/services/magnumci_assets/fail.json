@@ -1,0 +1,3 @@
+{
+  "payload": "{\"id\":172696,\"project_id\":2986,\"title\":\"[FAIL] drips #1 (master - master) by Magnum CI\",\"number\":1,\"commit\":\"master\",\"author\":\"Magnum CI\",\"committer\":\"Magnum CI\",\"message\":\"Test build\",\"branch\":\"master\",\"state\":\"finished\",\"status\":\"fail\",\"result\":2,\"duration\":5.0,\"duration_string\":\"5s\",\"commit_url\":null,\"compare_url\":null,\"started_at\":\"2015-06-30T03:46:03-05:00\",\"finished_at\":\"2015-06-30T03:46:08-05:00\",\"build_url\":\"http://magnum-ci.com/projects/2986/builds/172696\"}"
+}

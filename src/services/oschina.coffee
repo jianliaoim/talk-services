@@ -13,36 +13,7 @@
 #   },
 #   "query": {},
 #   "body": {
-#     "hook": {
-#       "password": "tb123",
-#       "push_data": {
-#         "before": "fae5f9ec25e1424a733986c2ae0d241fd28556cc",
-#         "after": "cdc6e27f9b156a9693cb05369cee6a5686dd8f43",
-#         "ref": "master",
-#         "user_id": 39550,
-#         "user_name": "garrett",
-#         "repository": {
-#           "name": "webcnn",
-#           "url": "git@git.oschina.net:344958185/webcnn.git",
-#           "description": "webcnn",
-#           "homepage": "http://git.oschina.net/344958185/webcnn"
-#         },
-#         "commits": [
-#           {
-#             "id": "cdc6e27f9b156a9693cb05369cee6a5686dd8f43",
-#             "message": "updated readme",
-#             "timestamp": "2015-07-01T10:14:51+08:00",
-#             "url": "http://git.oschina.net/344958185/webcnn/commit/cdc6e27f9b156a9693cb05369cee6a5686dd8f43",
-#             "author": {
-#               "name": "garrett",
-#               "email": "344958185@qq.com",
-#               "time": "2015-07-01T10:14:51+08:00"
-#             }
-#           }
-#         ],
-#         "total_commits_count": 1
-#       }
-#     }
+#     "hook": "{\"password\":\"tb123\",\"push_data\":{\"before\":\"fae5f9ec25e1424a733986c2ae0d241fd28556cc\",\"after\":\"cdc6e27f9b156a9693cb05369cee6a5686dd8f43\",\"ref\":\"master\",\"user_id\":39550,\"user_name\":\"garrett\",\"repository\":{\"name\":\"webcnn\",\"url\":\"git@git.oschina.net:344958185/webcnn.git\",\"description\":\"webcnn\",\"homepage\":\"http://git.oschina.net/344958185/webcnn\"},\"commits\":[{\"id\":\"cdc6e27f9b156a9693cb05369cee6a5686dd8f43\",\"message\":\"updated readme\",\"timestamp\":\"2015-07-01T10:14:51+08:00\",\"url\":\"http://git.oschina.net/344958185/webcnn/commit/cdc6e27f9b156a9693cb05369cee6a5686dd8f43\",\"author\":{\"name\":\"garrett\",\"email\":\"344958185@qq.com\",\"time\":\"2015-07-01T10:14:51+08:00\"}}],\"total_commits_count\":1}}"
 #   }
 # }
 
@@ -59,8 +30,13 @@ service = require '../service'
  * @return {Promise}
 ###
 _receiveWebhook = ({integration, body}) ->
-  payload = body?.hook?.push_data or null
-  return unless payload
+  payloadStr = body?.hook or null
+  return unless payloadStr
+
+  try
+    payload = JSON.parse(payloadStr).push_data
+  catch e
+    return
 
   message =
     integration: integration

@@ -62,7 +62,7 @@ marked = require 'marked'
 service = require '../service'
 
 ###*
- * Define handler when receive incoming webhook from jenkins
+ * Define handler when receive incoming webhook from csdn
  * @param  {Object}   req      Express request object
  * @param  {Object}   res      Express response object
  * @param  {Function} callback
@@ -101,27 +101,27 @@ _receiveWebhook = ({integration, body}) ->
   @sendMessage message
 
 module.exports = service.register 'csdn', ->
-  @title = 'Csdn'
+  @title = 'csdn'
 
   @template = 'webhook'
 
   @summary = service.i18n
     zh: '全球最大中文IT社区'
-    en: ''
+    en: "The world's largest Chinese IT community"
 
   @description = service.i18n
-    zh: 'csdn是中国最大的IT社区和服务平台，为中国的软件开发者和IT从业者提供知识传播、职业发展、软件开发等全生命周期服务'
-    en: ''
+    zh: 'CSDN 是中国最大的IT社区和服务平台，为中国的软件开发者和IT从业者提供知识传播、职业发展、软件开发等全生命周期服务'
+    en: "CSDN is China's largest IT community and service platform to provide knowledge dissemination for the Chinese software developers and IT practitioners, professional development , software development lifecycle services."
 
-  @iconUrl = service.static 'images/icons/csdn@2x.jpg'
+  @iconUrl = service.static 'images/icons/csdn@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
     description: service.i18n
-      zh: '复制 web hook 地址到你的 Jenkins 当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
-      en: 'Copy this web hook to your Jenkins server to use it. You may also find this url in the manager tab.'
+      zh: '复制 web hook 地址到你的 csdn 当中使用。'
+      en: 'Copy this web hook to your csdn server to use it.'
 
   # Apply function on `webhook` event
   @registerEvent 'service.webhook', _receiveWebhook

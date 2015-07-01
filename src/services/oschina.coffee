@@ -52,7 +52,7 @@ marked = require 'marked'
 service = require '../service'
 
 ###*
- * Define handler when receive incoming webhook from jenkins
+ * Define handler when receive incoming webhook from oschina
  * @param  {Object}   req      Express request object
  * @param  {Object}   res      Express response object
  * @param  {Function} callback
@@ -90,7 +90,7 @@ _receiveWebhook = ({integration, body}) ->
 
   @sendMessage message
 
-module.exports = service.register 'csdn', ->
+module.exports = service.register 'oschina', ->
   @title = 'oschina'
 
   @template = 'webhook'
@@ -101,17 +101,17 @@ module.exports = service.register 'csdn', ->
 
   @description = service.i18n
     zh: '开源中国 www.oschina.net 是目前中国最大的开源技术社区。'
-    en: ''
+    en: 'www.oschina.net is the largest open source community in china now.'
 
-  @iconUrl = service.static 'images/icons/csdn@2x.jpg'
+  @iconUrl = service.static 'images/icons/oschina@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
     description: service.i18n
-      zh: '复制 web hook 地址到你的 Jenkins 当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
-      en: 'Copy this web hook to your Jenkins server to use it. You may also find this url in the manager tab.'
+      zh: '复制 web hook 地址到你的 oschina 当中使用。'
+      en: 'Copy this web hook to your oschina server to use it. '
 
   # Apply function on `webhook` event
   @registerEvent 'service.webhook', _receiveWebhook

@@ -1,0 +1,139 @@
+{
+  "headers": {
+    "x-real-ip": "119.254.210.188",
+    "x-forwarded-for": "119.254.210.188",
+    "host": "talk.ai",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "3157",
+    "accept": "*/*; q=0.5, application/xml",
+    "accept-encoding": "gzip, deflate",
+    "x-gitcafe-event": "pull_request",
+    "content-type": "application/json",
+    "x-gitcafe-delivery": "5592257444c2435aa2000001",
+    "user-agent": "Ruby"
+  },
+  "query": {},
+  "body": {
+    "action": "created",
+    "sender": {
+      "id": "50bce2944dc04c0df4000005",
+      "username": "destec",
+      "email": "codingted@gmail.com",
+      "fullname": "阿猫远征军",
+      "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+      "state": "normal"
+    },
+    "pull_request": {
+      "id": "5592257144c2439cf20008f1",
+      "number": 2,
+      "subject": "test pull request",
+      "content": "test pull request content",
+      "creator": {
+        "id": "50bce2944dc04c0df4000005",
+        "username": "destec",
+        "email": "codingted@gmail.com",
+        "fullname": "阿猫远征军",
+        "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+        "state": "normal"
+      },
+      "head_project": {
+        "id": "55920b0244c2434bca00005d",
+        "name": "test",
+        "owner": {
+          "id": "50bce2944dc04c0df4000005",
+          "name": "destec",
+          "url": "",
+          "email": "codingted@gmail.com",
+          "location": "",
+          "company": "",
+          "fullname": "阿猫远征军",
+          "created_at": "2012-12-03T17:34:12Z",
+          "updated_at": "2015-06-30T05:12:23Z",
+          "type": "User",
+          "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+          "html_url": "https://gitcafe.com/destec"
+        },
+        "fullname": "",
+        "description": "",
+        "homepage_url": "",
+        "html_url": "https://gitcafe.com/destec/test",
+        "git_url": "git://gitcafe.com/destec/test.git",
+        "ssh_url": "git@gitcafe.com:destec/test.git",
+        "http_url": "https://gitcafe.com/destec/test.git",
+        "created_at": "2015-06-30T03:20:34Z",
+        "private": false,
+        "forked": false,
+        "upstream_identity": null,
+        "default_branch": "master",
+        "branches": [
+          "master",
+          "feature"
+        ],
+        "forks_count": 1,
+        "watchers_count": 0,
+        "watched": false
+      },
+      "base_project": {
+        "id": "55920b0244c2434bca00005d",
+        "name": "test",
+        "owner": {
+          "id": "50bce2944dc04c0df4000005",
+          "name": "destec",
+          "url": "",
+          "email": "codingted@gmail.com",
+          "location": "",
+          "company": "",
+          "fullname": "阿猫远征军",
+          "created_at": "2012-12-03T17:34:12Z",
+          "updated_at": "2015-06-30T05:12:23Z",
+          "type": "User",
+          "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+          "html_url": "https://gitcafe.com/destec"
+        },
+        "fullname": "",
+        "description": "",
+        "homepage_url": "",
+        "html_url": "https://gitcafe.com/destec/test",
+        "git_url": "git://gitcafe.com/destec/test.git",
+        "ssh_url": "git@gitcafe.com:destec/test.git",
+        "http_url": "https://gitcafe.com/destec/test.git",
+        "created_at": "2015-06-30T03:20:34Z",
+        "private": false,
+        "forked": false,
+        "upstream_identity": null,
+        "default_branch": "master",
+        "branches": [
+          "master",
+          "feature"
+        ],
+        "forks_count": 1,
+        "watchers_count": 0,
+        "watched": false
+      },
+      "head_ref": "feature",
+      "base_ref": "master",
+      "head_commit": "4e402a35ba6d7f59b10a892984ee2ff0f36fdf03",
+      "base_commit": "1df6f2819b212a9cc9ece1ddf238bbc5e9cdb956",
+      "messages": [
+        {
+          "id": "5592257144c2439cf20008f5",
+          "content": "test pull request content",
+          "sender": {
+            "id": "50bce2944dc04c0df4000005",
+            "username": "destec",
+            "email": "codingted@gmail.com",
+            "fullname": "阿猫远征军",
+            "avatar_url": "https://gitcafe.com/avatar/8546b57ec7547e77641446923222627e?default=identicon&secure=true&size=60",
+            "state": "normal"
+          },
+          "created_at": "2015-06-30T05:13:21Z",
+          "updated_at": "2015-06-30T05:13:21Z"
+        }
+      ],
+      "state": "open",
+      "created_at": "2015-06-30T05:13:21Z",
+      "updated_at": "2015-06-30T05:13:21Z"
+    }
+  }
+}

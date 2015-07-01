@@ -73,7 +73,7 @@ module.exports = service.register 'gitcafe', ->
     zh: 'GitCafe 是一个基于 git 的在线托管软件项目的服务平台。'
     en: 'GitCafe is a source code hosting service based on version control system Git.'
 
-  @iconUrl = service.static 'images/icons/gitlcafe@2x.png'
+  @iconUrl = service.static 'images/icons/gitcafe@2x.png'
 
   @_fields.push
     key: 'webhookUrl'

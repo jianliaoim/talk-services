@@ -1,4 +1,4 @@
-**第一步** 在 GitCafe 中进入想要推送消息的项目，选择设置下的 Webhooks，点击创建 webhook按钮。
+**第一步** 在 GitCafe 中进入想要推送消息的项目，选择设置下的 Webhooks，点击创建 webhook 按钮。
 
 **第二步** 在 Url 地址中输入 [LOCALE_LINK](LOCALE_LINK) ，选择需要推送的事件，然后保存配置。
 

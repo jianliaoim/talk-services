@@ -72,7 +72,10 @@ module.exports = service.register 'rss', ->
     key: 'url'
     onChange: 'checkRSS'
 
-  @serviceUrl = 'http://localhost:7411'
+  if process.env.NODE_ENV in ['ga', 'prod']
+    @serviceUrl = 'http://apps.teambition.corp:7411'
+  else
+    @serviceUrl = 'http://localhost:7411'
 
   @registerApi 'checkRSS', _checkRSS
 

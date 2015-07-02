@@ -36,6 +36,9 @@ module.exports = service.register 'weibo', ->
     key: 'events'
     items: _getEvents.apply this
 
-  @serviceUrl = 'http://localhost:7410'
+  if process.env.NODE_ENV in ['ga', 'prod']
+    @serviceUrl = 'http://apps.teambition.corp:7410'
+  else
+    @serviceUrl = 'http://localhost:7410'
 
   @registerEvents ['integration.create', 'integration.remove', 'integration.update']

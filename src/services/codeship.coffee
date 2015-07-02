@@ -52,7 +52,7 @@ module.exports = service.register 'codeship', ->
     zh: 'Codeship 是一个持续集成与部署平台，为你的代码提供一站式测试部署服务'
     en: 'Codeship is a fast and secure hosted Continuous Delivery platform that scales with your needs.'
 
-  @iconUrl = service.static 'images/icons/codeship@2x.jpg'
+  @iconUrl = service.static 'images/icons/codeship@2x.png'
 
   @_fields.push
     key: 'webhookUrl'

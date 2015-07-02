@@ -26,17 +26,17 @@ _receiveWebhook = ({integration, body}) ->
 
 module.exports = service.register 'jobtong', ->
 
-  @title = '周伯通'
+  @title = '周伯通招聘'
 
   @template = 'webhook'
 
   @summary = service.i18n
-    zh: '国内最知名的社会化招聘平台之一'
-    en: 'A leading recruitment website in China'
+    zh: '周伯通，招人喜欢'
+    en: 'Jobtong makes job search more enjoyable.'
 
   @description = service.i18n
-    zh: '周伯通招聘，打造最懂移动互联网的招聘社区。是国内最知名的社会化招聘平台之一，倡导营销化、社会化的招聘服务，引领网络招聘行业新变革。'
-    en: 'jobtong.com is a leading recruitment website in China'
+    zh: '周伯通招聘（ http://www.jobtong.com ），2014年重装上阵，打造最懂互联网的招聘社区。是国内最知名的社会化招聘平台之一，倡导营销化、社会化的招聘服务，引领网络招聘行业新变革！'
+    en: "Jobtong (http://www.jobtong.com), starting in 2014, is trying to build a recruitment community that is most familiar with Internet. It's one of the most famous social recruitment platform in China. We are advocacing marketing and socialization recruitment services and leading the new revolution of online recruitment industry!"
 
   @iconUrl = service.static 'images/icons/jobtong@2x.png'
 

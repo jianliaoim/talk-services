@@ -1,5 +1,5 @@
+1. Log in Jobtong by enterprise account，locate 账号设置->简聊Webhook
 
-**First** Login jobtong.com, click "Account settings" in the dropdown list
 ![](/images/inte-guide/jobtong-1.png)
 
-**Second** Click "简聊 Webhook" and fill in the URL LOCALE_LINK, then you will receive messages when you receive resumes in jobtong.com
+2. Copy and paste Talk.ai's LOCALE_LINK to the "Webhook URL" input box, then click the "提交" button.

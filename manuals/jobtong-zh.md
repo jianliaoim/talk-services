@@ -1,5 +1,5 @@
+1. 登陆周伯通的企业账号，进入账号设置->简聊Webhook
 
-**第一步** 登录 jobtong.com，点击右上角“账号设置”
 ![](/images/inte-guide/jobtong-1.png)
 
-**第二步** 点击“简聊 Webhook”，填写 URL 地址 LOCALE_LINK，保存后每当收到简历时都会在简聊中收到通知
+2. 将简聊中生成的 Webhook 地址 LOCALE_LINK 填入 “Webhook URL” 框内，并点击提交。

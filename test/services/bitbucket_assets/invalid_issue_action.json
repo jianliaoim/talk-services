@@ -1,0 +1,164 @@
+{
+  "headers": {
+    "x-real-ip": "131.103.20.165",
+    "x-forwarded-for": "131.103.20.165",
+    "host": "talk.ai",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "3202",
+    "x-hook-uuid": "8fb1d63a-d36d-4d59-aeae-734021207665",
+    "accept-encoding": "gzip, deflate",
+    "accept": "*/*",
+    "user-agent": "Bitbucket-Webhooks/2.0",
+    "x-event-key": "issue:comment_created1",
+    "content-type": "application/json"
+  },
+  "query": {},
+  "body": {
+    "comment": {
+      "id": 19446825,
+      "created_on": "2015-07-02T09:58:23.213584+00:00",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket/issues/1/comments/19446825"
+        },
+        "html": {
+          "href": "https://bitbucket.org/destec/test-bitbucket/issue/1#comment-19446825"
+        }
+      },
+      "content": {
+        "markup": "markdown",
+        "html": "<p>comment for the issue</p>",
+        "raw": "comment for the issue"
+      },
+      "user": {
+        "uuid": "{fc472368-41d5-4755-8269-c17d79234147}",
+        "username": "destec",
+        "type": "user",
+        "display_name": "Catalyst Zhang",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/users/destec"
+          },
+          "html": {
+            "href": "https://bitbucket.org/destec"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/destec/avatar/32/"
+          }
+        }
+      },
+      "updated_on": null
+    },
+    "issue": {
+      "state": "new",
+      "assignee": null,
+      "created_on": "2015-07-02T09:57:37.665935+00:00",
+      "priority": "trivial",
+      "reporter": {
+        "uuid": "{fc472368-41d5-4755-8269-c17d79234147}",
+        "username": "destec",
+        "type": "user",
+        "display_name": "Catalyst Zhang",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/users/destec"
+          },
+          "html": {
+            "href": "https://bitbucket.org/destec"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/destec/avatar/32/"
+          }
+        }
+      },
+      "id": 1,
+      "watches": 1,
+      "title": "Hi, what is issue?",
+      "votes": 0,
+      "component": null,
+      "milestone": null,
+      "links": {
+        "vote": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket/issues/1/vote"
+        },
+        "comments": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket/issues/1/comments"
+        },
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket/issues/1"
+        },
+        "watch": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket/issues/1/watch"
+        },
+        "html": {
+          "href": "https://bitbucket.org/destec/test-bitbucket/issue/1/hi-what-is-issue"
+        },
+        "attachments": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket/issues/1/attachments"
+        }
+      },
+      "content": {
+        "markup": "markdown",
+        "html": "<p>update the test issue</p>",
+        "raw": "update the test issue"
+      },
+      "version": null,
+      "kind": "proposal",
+      "edited_on": null,
+      "type": "issue",
+      "updated_on": "2015-07-02T09:58:23.217013+00:00"
+    },
+    "repository": {
+      "type": "repository",
+      "full_name": "destec/test-bitbucket",
+      "uuid": "{d49234ac-e970-4821-9f73-246b4b752403}",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/destec/test-bitbucket"
+        },
+        "html": {
+          "href": "https://bitbucket.org/destec/test-bitbucket"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/destec/test-bitbucket/avatar/16/"
+        }
+      },
+      "owner": {
+        "uuid": "{fc472368-41d5-4755-8269-c17d79234147}",
+        "username": "destec",
+        "type": "user",
+        "display_name": "Catalyst Zhang",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/users/destec"
+          },
+          "html": {
+            "href": "https://bitbucket.org/destec"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/destec/avatar/32/"
+          }
+        }
+      },
+      "name": "Test Bitbucket"
+    },
+    "actor": {
+      "uuid": "{fc472368-41d5-4755-8269-c17d79234147}",
+      "username": "destec",
+      "type": "user",
+      "display_name": "Catalyst Zhang",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/users/destec"
+        },
+        "html": {
+          "href": "https://bitbucket.org/destec"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/destec/avatar/32/"
+        }
+      }
+    }
+  }
+}

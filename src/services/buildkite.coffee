@@ -5,6 +5,8 @@ _receiveWebhook = ({integration, body, headers}) ->
   build = payload.build or {}
   project = payload.project or {}
 
+  return unless build.state and project.name
+
   if integration.token and headers["X-Buildkite-Token"] isnt integration.token
     throw new Error('Invalid token')
 

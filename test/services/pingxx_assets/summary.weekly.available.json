@@ -1,0 +1,21 @@
+{
+    "id": "evt_15lLTI2eZvKYlo2CcIuYBxl7",
+    "created": 1427555016,
+    "livemode": false,
+    "type": "summary.weekly.available",
+    "data": {
+        "object": {
+            "acct_id": "acct_0eHSiDyzv9G09ejT",
+            "object": "account_weekly_summary",
+            "acct_display_name": "Company Name",
+            "created": 1425830460,
+            "summary_from": 1425225600,
+            "summary_to": 1425830399,
+            "charges_amount": 2000,
+            "charges_count" : 200
+        }
+    },
+    "object": "event",
+    "pending_webhooks": 0,
+    "request": null
+}

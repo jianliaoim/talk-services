@@ -13,13 +13,12 @@ describe 'Pingxx#Webhook', ->
   it 'receive charge.succeeded', (done) ->
     pingxx.sendMessage = (message) ->
       message.quote.title.should.eql "付款成功 Your Subject"
-      message.quote.text.should.eql '''
+      message.quote.text.indexOf '''
       订单号：123456789
       金额：1 CNY
       商品描述：Your Body
-      付款时间：2015-03-28 11:05:01
-      失效时间：2015-03-29 11:04:36
       '''
+      .should.eql 0
       message.quote.redirectUrl.should.eql 'https://dashboard.pingxx.com/app/detail?app_id=app_1234567890abcDEF'
       done()
 
@@ -32,12 +31,11 @@ describe 'Pingxx#Webhook', ->
   it 'receive summary.daily.available', (done) ->
     pingxx.sendMessage = (message) ->
       message.quote.title.should.eql "日统计 Company Name"
-      message.quote.text.should.eql '''
+      message.quote.text.indexOf '''
       交易金额：10 元
       交易量：100 笔
-      起始时间：2015-02-28 12:00:00
-      终止时间：2015-02-28 11:59:59
       '''
+      .should.eql 0
       done()
 
     req.body = payloads['summary.daily.available']

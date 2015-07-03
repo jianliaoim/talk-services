@@ -12,7 +12,7 @@ _receiveWebhook = ({integration, body}) ->
 
 module.exports = service.register 'firim', ->
 
-  @title = 'Firim'
+  @title = 'Fir.im'
 
   @template = 'webhook'
 

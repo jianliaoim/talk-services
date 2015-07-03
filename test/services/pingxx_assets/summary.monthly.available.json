@@ -1,0 +1,21 @@
+{
+    "id": "evt_tvWU4AvNz79mgOE0MCPN21CM",
+    "created": 1427555016,
+    "livemode": false,
+    "type": "summary.monthly.available",
+    "data": {
+        "object": {
+            "acct_id": "acct_0eHSiDyzv9G09ejT",
+            "object": "account_monthly_summary",
+            "acct_display_name": "Company Name",
+            "created": 1425139260,
+            "summary_from": 1422720000,
+            "summary_to": 1425139199,
+            "charges_amount": 3000,
+            "charges_count" : 300
+        }
+    },
+    "object": "event",
+    "pending_webhooks": 0,
+    "request": null
+}

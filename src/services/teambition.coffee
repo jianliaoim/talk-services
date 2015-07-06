@@ -370,9 +370,13 @@ _removeWebhook = (integration) ->
 
   _projectId = integration.project._id
 
-  _removeProjectHook integration.project._id
-  , integration.data[_projectId].hookId
-  , integration.token
+  return unless integration.data
+
+  Promise.resolve(Object.keys(integration.data))
+  .map (_projectId) ->
+    _removeProjectHook integration.project._id
+    , integration.data[_projectId].hookId
+    , integration.token
 
 ###*
  * Get project list of user

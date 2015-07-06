@@ -91,7 +91,7 @@ module.exports = talkai = service.register 'talkai', ->
 
   @robot.email = 'talkai@talk.ai'
 
-  @iconUrl = service.static 'images/icons/talkai@2x.jpg'
+  @iconUrl = service.static 'images/icons/talkai@2x.png'
 
   @config =
     url: "http://www.tuling123.com/openapi/api"

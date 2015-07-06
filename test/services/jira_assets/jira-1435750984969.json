@@ -1,0 +1,386 @@
+{
+  "headers": {
+    "x-real-ip": "104.192.140.103",
+    "x-forwarded-for": "104.192.140.103",
+    "host": "talk.ai",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "11543",
+    "accept": "*/*",
+    "content-type": "application/json; charset=UTF-8",
+    "via": "1.1 localhost (Apache-HttpClient/4.4.1 (cache))",
+    "user-agent": "Atlassian HttpClient 0.22.3 / JIRA-6.5-OD-07-005 (65007) / Default"
+  },
+  "query": {
+    "user_id": "admin",
+    "user_key": "admin"
+  },
+  "body": {
+    "timestamp": 1435750983815,
+    "webhookEvent": "jira:issue_updated",
+    "user": {
+      "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+      "name": "admin",
+      "key": "admin",
+      "emailAddress": "destec@126.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+        "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+        "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+        "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+      },
+      "displayName": "Destec Zhang [Administrator]",
+      "active": true,
+      "timeZone": "Asia/Shanghai"
+    },
+    "issue": {
+      "id": "10000",
+      "self": "https://yrclab.atlassian.net/rest/api/2/issue/10000",
+      "key": "TP-1",
+      "fields": {
+        "issuetype": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/issuetype/1",
+          "id": "1",
+          "description": "A problem which impairs or prevents the functions of the product.",
+          "iconUrl": "https://yrclab.atlassian.net/images/icons/issuetypes/bug.png",
+          "name": "Bug",
+          "subtask": false
+        },
+        "timespent": 1195200,
+        "project": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/project/10000",
+          "id": "10000",
+          "key": "TP",
+          "name": "test project",
+          "avatarUrls": {
+            "48x48": "https://yrclab.atlassian.net/secure/projectavatar?avatarId=10011",
+            "24x24": "https://yrclab.atlassian.net/secure/projectavatar?size=small&avatarId=10011",
+            "16x16": "https://yrclab.atlassian.net/secure/projectavatar?size=xsmall&avatarId=10011",
+            "32x32": "https://yrclab.atlassian.net/secure/projectavatar?size=medium&avatarId=10011"
+          }
+        },
+        "fixVersions": [],
+        "aggregatetimespent": 1195200,
+        "resolution": null,
+        "resolutiondate": null,
+        "workratio": 202,
+        "lastViewed": "2015-07-01T19:43:03.793+0800",
+        "watches": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/issue/TP-1/watchers",
+          "watchCount": 1,
+          "isWatching": true
+        },
+        "created": "2015-07-01T19:38:45.885+0800",
+        "customfield_10020": null,
+        "customfield_10021": null,
+        "customfield_10022": null,
+        "priority": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/priority/3",
+          "iconUrl": "https://yrclab.atlassian.net/images/icons/priorities/medium.png",
+          "name": "Medium",
+          "id": "3"
+        },
+        "customfield_10023": "Not Started",
+        "customfield_10024": null,
+        "labels": [],
+        "customfield_10016": null,
+        "customfield_10017": null,
+        "customfield_10018": null,
+        "customfield_10019": null,
+        "timeestimate": 0,
+        "aggregatetimeoriginalestimate": 590400,
+        "versions": [],
+        "issuelinks": [],
+        "assignee": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+          "name": "admin",
+          "key": "admin",
+          "emailAddress": "destec@126.com",
+          "avatarUrls": {
+            "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+            "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+            "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+            "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+          },
+          "displayName": "Destec Zhang [Administrator]",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "updated": "2015-07-01T19:43:03.812+0800",
+        "status": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/status/4",
+          "description": "This issue was once resolved, but the resolution was deemed incorrect. From here issues are either marked assigned or resolved.",
+          "iconUrl": "https://yrclab.atlassian.net/images/icons/statuses/reopened.png",
+          "name": "Reopened",
+          "id": "4",
+          "statusCategory": {
+            "self": "https://yrclab.atlassian.net/rest/api/2/statuscategory/2",
+            "id": 2,
+            "key": "new",
+            "colorName": "blue-gray",
+            "name": "To Do"
+          }
+        },
+        "components": [],
+        "timeoriginalestimate": 590400,
+        "description": null,
+        "customfield_10012": "0|hzzzzz:",
+        "customfield_10013": null,
+        "customfield_10014": null,
+        "timetracking": {
+          "originalEstimate": "4w 4h",
+          "remainingEstimate": "0m",
+          "timeSpent": "8w 1d 4h",
+          "originalEstimateSeconds": 590400,
+          "remainingEstimateSeconds": 0,
+          "timeSpentSeconds": 1195200
+        },
+        "customfield_10015": null,
+        "customfield_10007": null,
+        "attachment": [],
+        "customfield_10009": null,
+        "aggregatetimeestimate": 0,
+        "summary": "test bug(updated)",
+        "creator": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+          "name": "admin",
+          "key": "admin",
+          "emailAddress": "destec@126.com",
+          "avatarUrls": {
+            "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+            "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+            "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+            "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+          },
+          "displayName": "Destec Zhang [Administrator]",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "subtasks": [],
+        "reporter": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+          "name": "admin",
+          "key": "admin",
+          "emailAddress": "destec@126.com",
+          "avatarUrls": {
+            "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+            "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+            "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+            "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+          },
+          "displayName": "Destec Zhang [Administrator]",
+          "active": true,
+          "timeZone": "Asia/Shanghai"
+        },
+        "customfield_10000": null,
+        "aggregateprogress": {
+          "progress": 1195200,
+          "total": 1195200,
+          "percent": 100
+        },
+        "customfield_10001": null,
+        "customfield_10002": null,
+        "customfield_10003": null,
+        "customfield_10004": null,
+        "environment": null,
+        "duedate": "2015-07-02",
+        "progress": {
+          "progress": 1195200,
+          "total": 1195200,
+          "percent": 100
+        },
+        "comment": {
+          "startAt": 0,
+          "maxResults": 2,
+          "total": 2,
+          "comments": [
+            {
+              "self": "https://yrclab.atlassian.net/rest/api/2/issue/10000/comment/10000",
+              "id": "10000",
+              "author": {
+                "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+                "name": "admin",
+                "key": "admin",
+                "emailAddress": "destec@126.com",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+                  "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+                  "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+                  "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+                },
+                "displayName": "Destec Zhang [Administrator]",
+                "active": true,
+                "timeZone": "Asia/Shanghai"
+              },
+              "body": "test comment for the issue #1",
+              "updateAuthor": {
+                "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+                "name": "admin",
+                "key": "admin",
+                "emailAddress": "destec@126.com",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+                  "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+                  "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+                  "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+                },
+                "displayName": "Destec Zhang [Administrator]",
+                "active": true,
+                "timeZone": "Asia/Shanghai"
+              },
+              "created": "2015-07-01T19:41:51.458+0800",
+              "updated": "2015-07-01T19:41:51.458+0800"
+            },
+            {
+              "self": "https://yrclab.atlassian.net/rest/api/2/issue/10000/comment/10001",
+              "id": "10001",
+              "author": {
+                "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+                "name": "admin",
+                "key": "admin",
+                "emailAddress": "destec@126.com",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+                  "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+                  "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+                  "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+                },
+                "displayName": "Destec Zhang [Administrator]",
+                "active": true,
+                "timeZone": "Asia/Shanghai"
+              },
+              "body": "reopen the issue",
+              "updateAuthor": {
+                "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+                "name": "admin",
+                "key": "admin",
+                "emailAddress": "destec@126.com",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+                  "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+                  "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+                  "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+                },
+                "displayName": "Destec Zhang [Administrator]",
+                "active": true,
+                "timeZone": "Asia/Shanghai"
+              },
+              "created": "2015-07-01T19:43:03.811+0800",
+              "updated": "2015-07-01T19:43:03.811+0800"
+            }
+          ]
+        },
+        "votes": {
+          "self": "https://yrclab.atlassian.net/rest/api/2/issue/TP-1/votes",
+          "votes": 0,
+          "hasVoted": false
+        },
+        "worklog": {
+          "startAt": 0,
+          "maxResults": 20,
+          "total": 1,
+          "worklogs": [
+            {
+              "self": "https://yrclab.atlassian.net/rest/api/2/issue/10000/worklog/10000",
+              "author": {
+                "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+                "name": "admin",
+                "key": "admin",
+                "emailAddress": "destec@126.com",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+                  "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+                  "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+                  "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+                },
+                "displayName": "Destec Zhang [Administrator]",
+                "active": true,
+                "timeZone": "Asia/Shanghai"
+              },
+              "updateAuthor": {
+                "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+                "name": "admin",
+                "key": "admin",
+                "emailAddress": "destec@126.com",
+                "avatarUrls": {
+                  "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+                  "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+                  "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+                  "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+                },
+                "displayName": "Destec Zhang [Administrator]",
+                "active": true,
+                "timeZone": "Asia/Shanghai"
+              },
+              "comment": "",
+              "created": "2015-07-01T19:42:46.518+0800",
+              "updated": "2015-07-01T19:42:46.518+0800",
+              "started": "2015-07-01T19:42:00.000+0800",
+              "timeSpent": "8w 1d 4h",
+              "timeSpentSeconds": 1195200,
+              "id": "10000"
+            }
+          ]
+        }
+      }
+    },
+    "changelog": {
+      "id": "10004",
+      "items": [
+        {
+          "field": "resolution",
+          "fieldtype": "jira",
+          "from": "1",
+          "fromString": "Fixed",
+          "to": null,
+          "toString": null
+        },
+        {
+          "field": "status",
+          "fieldtype": "jira",
+          "from": "5",
+          "fromString": "Resolved",
+          "to": "4",
+          "toString": "Reopened"
+        }
+      ]
+    },
+    "comment": {
+      "self": "https://yrclab.atlassian.net/rest/api/2/issue/10000/comment/10001",
+      "id": "10001",
+      "author": {
+        "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "emailAddress": "destec@126.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+          "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+          "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+          "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+        },
+        "displayName": "Destec Zhang [Administrator]",
+        "active": true,
+        "timeZone": "Asia/Shanghai"
+      },
+      "body": "reopen the issue",
+      "updateAuthor": {
+        "self": "https://yrclab.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "emailAddress": "destec@126.com",
+        "avatarUrls": {
+          "48x48": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=48",
+          "24x24": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=24",
+          "16x16": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=16",
+          "32x32": "https://secure.gravatar.com/avatar/093f88d13489baf9650df8c2fd1ed4da?d=mm&s=32"
+        },
+        "displayName": "Destec Zhang [Administrator]",
+        "active": true,
+        "timeZone": "Asia/Shanghai"
+      },
+      "created": "2015-07-01T19:43:03.811+0800",
+      "updated": "2015-07-01T19:43:03.811+0800"
+    }
+  }
+}

@@ -35,7 +35,7 @@ module.exports = service.register 'jira', ->
     zh: 'JIRA是Atlassian公司出品的项目与事务跟踪工具，被广泛应用于缺陷跟踪、客户服务、需求收集、流程审批、任务跟踪、项目跟踪和敏捷管理等工作领域。'
     en: 'Track and manage everything with JIRA project and issue tracking software by Atlassian.'
 
-  @iconUrl = service.static 'images/icons/jira@2x.jpg'
+  @iconUrl = service.static 'images/icons/jira@2x.png'
 
   @_fields.push
     key: 'webhookUrl'

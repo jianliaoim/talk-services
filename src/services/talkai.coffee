@@ -67,7 +67,8 @@ _getTuringCallback = (message) ->
     body = {}
     switch data.code
       when turing.textCode
-        body.content = data.text
+        re = new RegExp(/<br>/g)
+        body.content = data.text.replace re, "\n"
       when turing.urlCode
         body.title = data.text
         body.redirectUrl = data.url

@@ -2,3 +2,4 @@
 module.exports =
   redis: require './redis'
   limbo: require './limbo'
+  socket: require './socket'

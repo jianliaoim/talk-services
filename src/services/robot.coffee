@@ -1,3 +1,5 @@
+Promise = require 'bluebird'
+_ = require 'lodash'
 service = require '../service'
 
 ###*
@@ -6,6 +8,80 @@ service = require '../service'
  * @return {Promise}
 ###
 _postMessage = (message) ->
+  {limbo} = service.components
+  {TeamModel, IntegrationModel} = limbo.use 'talk'
+  self = this
+
+  $integration = IntegrationModel.findOneAsync
+    team: message._teamId
+    robot: message._toId
+    errorInfo: null
+
+  $integration.then (integration) ->
+    return unless integration.url
+    {url, token} = integration
+    msg = _.clone message
+    msg.token = token if token
+    self.httpPost url, msg, retryTimes: 5
+    .then (body) ->
+      return unless body?.content or body?.text
+      replyMessage =
+        _creatorId: integration._robotId
+        _teamId: message._teamId
+      if message._roomId
+        replyMessage._roomId = message._roomId
+      else
+        replyMessage._toId = message._creatorId
+      replyMessage.content = body.content if body.content
+      replyMessage.quote = body if body.text
+      self.sendMessage replyMessage
+
+_receiveWebhook = ({integration, query, body}) ->
+  {limbo} = service.components
+  {TeamModel, RoomModel, MemberModel} = limbo.use 'talk'
+  self = this
+
+  payload = _.assign {}
+    , query or {}
+    , body or {}
+
+  {content, authorName, title, text, redirectUrl, imageUrl, thumbnailPicUrl, originalPicUrl, _roomId, _toId} = payload
+  {_teamId} = integration
+  throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
+
+  message =
+    integration: integration
+    content: content
+    quote:
+      authorName: authorName
+      title: title
+      text: text
+      redirectUrl: redirectUrl
+      thumbnailPicUrl: thumbnailPicUrl or imageUrl
+      originalPicUrl: originalPicUrl or imageUrl
+
+  if _roomId
+    $message = RoomModel.findOneAsync _id: _roomId
+    .then (room) ->
+      throw new Error('OBJECT_MISSING', "room #{_roomId}") unless room
+      throw new Error('INVALID_OBJECT', "room #{_roomId}") unless "#{room._teamId}" is "#{_teamId}"
+      message.room = room._id
+      message
+  else if _toId
+    throw new Error("INVALID_OBJECT", "can not send message to self") if "#{_toId}" is "#{integration._robotId}"
+    $message = MemberModel.findOneAsync user: _toId, team: _teamId, isQuit: false
+    .then (member) ->
+      throw new Error("INVALID_OBJECT", "user #{_toId}") unless member
+      message.to = _toId
+      message
+  else
+    $message = RoomModel.findOne team: _teamId, isGeneral: true
+    .then (room) ->
+      throw new Error('OBJECT_MISSING', "general room of team #{_teamId}") unless room
+      message.room = room._id
+      message
+
+  $message.then (message) -> self.sendMessage message
 
 ###*
  * Remove this robot from bundled team
@@ -13,6 +89,16 @@ _postMessage = (message) ->
  * @return {Promise}
 ###
 _removeRobot = (integration) ->
+  {limbo, socket} = service.components
+  {TeamModel} = limbo.use 'talk'
+  return unless integration._robotId
+
+  TeamModel.removeMemberAsync integration._teamId, integration._robotId
+  .then (team) ->
+    data =
+      _teamId: team._id
+      _userId: integration._robotId
+    socket.broadcast "team:#{team._id}", "team:leave", data
 
 ###*
  * Create a new robot and invite him to this team
@@ -21,35 +107,64 @@ _removeRobot = (integration) ->
  * @return {Promise}
 ###
 _createRobot = (integration) ->
+  {limbo, socket} = service.components
+  {TeamModel} = limbo.use 'talk'
+
+  robot =
+    name: integration.title
+    avatarUrl: integration.iconUrl
+
+  $robot = @createRobot()
+
+  $team = $robot.then (robot) ->
+    integration.robot = robot
+    TeamModel.addMemberAsync integration._teamId, robot._id
+
+  $broadcast = Promise.all [$robot, $team]
+
+  .spread (robot, team) ->
+    robot.team = team
+    robot._teamId = team._id
+    socket.broadcast "team:#{team._id}", "team:join", robot
 
 module.exports = service.register 'robot', ->
 
   @title = '自定义机器人'
 
+  @template = 'form'
+
+  @isCustomized = true
+
   @summary = service.i18n
     zh: '自定义的小艾'
-    en: ''
+    en: 'A robot act as a real user'
 
   @description = service.i18n
     zh: '自定义的小艾'
-    en: ''
+    en: 'A robot act as a real user'
 
-  @_fields.push
+  @iconUrl = service.static 'images/icons/robot@2x.png'
+
+  @headerFields = []
+
+  @fields = [
     key: 'url'
     type: 'text'
     description: service.i18n
-      zh: '请填写你的 Webhook url'
-      en: 'Webhook url of your application'
-
-  @_fields.push
+      zh: '（可选）你可以通过 Webhook URL 来接收用户发送给机器人的消息'
+      en: '(Optional) Webhook url of your application'
+  ,
     key: 'token'
     type: 'text'
     autoGen: true
     description: service.i18n
-      zh: 'Token 会被包含在发送给你的消息中'
-      en: 'Token will include in the received message'
+      zh: '（可选）Token 会被包含在发送给你的消息中'
+      en: '(Optional) Token will include in the received message'
+  ]
 
   @registerEvent 'message.create', _postMessage
+
+  @registerEvent 'service.webhook', _receiveWebhook
 
   @registerEvent 'before.integration.create', _createRobot
 

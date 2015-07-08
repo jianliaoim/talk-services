@@ -94,6 +94,7 @@ module.exports = talkai = service.register 'talkai', ->
   @iconUrl = service.static 'images/icons/talkai@2x.png'
 
   @config =
+
     url: "http://www.tuling123.com/openapi/api"
     errorCodes:
       40001: "key的长度错误"

@@ -24,7 +24,7 @@ _postMessage = (message) ->
     msg.token = token if token
     self.httpPost url, msg, retryTimes: 5
     .then (body) ->
-      return unless body?.content or body?.text
+      return unless body?.content or body?.text or body?.title
       replyMessage =
         _creatorId: integration._robotId
         _teamId: message._teamId
@@ -33,7 +33,7 @@ _postMessage = (message) ->
       else
         replyMessage._toId = message._creatorId
       replyMessage.content = body.content if body.content
-      replyMessage.quote = body if body.text
+      replyMessage.quote = body if body.text or body.title
       self.sendMessage replyMessage
 
 _receiveWebhook = ({integration, query, body}) ->
@@ -114,7 +114,7 @@ _createRobot = (integration) ->
     name: integration.title
     avatarUrl: integration.iconUrl
 
-  $robot = @createRobot()
+  $robot = @createRobot robot
 
   $team = $robot.then (robot) ->
     integration.robot = robot

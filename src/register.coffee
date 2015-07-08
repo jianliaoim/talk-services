@@ -254,6 +254,7 @@ class Service
     _tryPost()
 
   createRobot: (user) ->
+    service = require './service'
     {limbo} = service.components
     {UserModel} = limbo.use 'talk'
     robot = new UserModel user

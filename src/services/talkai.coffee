@@ -90,8 +90,6 @@ module.exports = talkai = service.register 'talkai', ->
 
   @iconUrl = service.static 'images/icons/talkai@2x.jpg'
 
-  @isHidden = true
-
   @config =
     url: "http://www.tuling123.com/openapi/api"
     errorCodes:

@@ -1,10 +1,20 @@
 should = require 'should'
 Promise = require 'bluebird'
+_ = require 'lodash'
 service = require '../../src/service'
 {prepare, cleanup, req} = require '../util'
 talkai = service.load 'talkai'
+config = require '../config'
 
 describe 'Talkai#MessageCreate', ->
+
+  unless config.talkai
+    return console.error """
+    Turing key is not exist
+    Add it in config.json to test talkai service
+    """
+
+  talkai.config = _.assign talkai.config, config.talkai
 
   before prepare
 

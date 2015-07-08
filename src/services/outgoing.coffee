@@ -67,6 +67,7 @@ module.exports = service.register 'outgoing', ->
   @_fields.push
     key: 'url'
     type: 'text'
+    required: true
     description: service.i18n
       zh: '请填写你的 Webhook url'
       en: 'Webhook url of your application'

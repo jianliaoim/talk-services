@@ -3,7 +3,7 @@ Promise = require 'bluebird'
 service = require '../../src/service'
 {prepare, cleanup, req} = require '../util'
 {limbo, socket} = service.components
-{IntegrationModel, TeamModel, MessageModel} = limbo.use 'talk'
+{IntegrationModel, TeamModel, MessageModel, RoomModel, UserModel} = limbo.use 'talk'
 robot = service.load 'robot'
 
 describe 'Robot#Events', ->
@@ -11,20 +11,25 @@ describe 'Robot#Events', ->
   team = new TeamModel
     name: 'Team'
 
+  room = new RoomModel
+    topic: 'General'
+    team: team._id
+    isGeneral: true
+
   integration = new IntegrationModel
     category: 'robot'
     team: team._id
     token: 'abc'
     title: robot.title
+    url: "http://www.domain.com"
     iconUrl: robot.iconUrl
 
   before (done) ->
     $prepare = Promise.promisify(prepare)()
-    $integration = new Promise (resolve, reject) ->
-      integration.save (err, integration) -> resolve integration
-    $team = new Promise (resolve, reject) ->
-      team.save (err, team) -> resolve team
-    Promise.all [$prepare, $integration, $team]
+    $integration = integration.$save()
+    $team = team.$save()
+    $room = room.$save()
+    Promise.all [$prepare, $integration, $team, $room]
     .then -> done()
     .catch done
 
@@ -39,21 +44,69 @@ describe 'Robot#Events', ->
       done()
 
     robot.receiveEvent 'before.integration.create', integration
+    .then ->
+      new Promise (resolve, reject) ->
+        integration.save (err, integration) ->
+          return reject(err) if err
+          resolve integration
     .catch done
 
   it 'message.create', (done) ->
+    robot.httpPost = (url, message) ->
+      message.content.should.eql 'abc'
+      return Promise.resolve(content: "Hi")
+
+    robot.sendMessage = (message) ->
+      message.content.should.eql 'Hi'
+      "#{message._toId}".should.eql '559ce208e891ac07a3d6bb2a'
+      "#{message._creatorId}".should.eql "#{integration._robotId}"
+      "#{message._teamId}".should.eql "#{team._id}"
+      done()
+
     message = new MessageModel
-      creator: '1'
-      to: robot._id
+      creator: '559ce208e891ac07a3d6bb2a'
+      team: team._id
+      to: integration._robotId
       content: 'abc'
 
     robot.receiveEvent 'message.create', message
     .catch done
 
   it 'service.webhook', (done) ->
-    done()
+    robot.sendMessage = (message) ->
+      message.should.have.properties '_teamId', '_roomId'
+      message.content.should.eql 'Hi'
+      "#{message._creatorId}".should.eql "#{integration._robotId}"
+      "#{message._roomId}".should.eql "#{room._id}"  # General room
+      done()
+
+    payload = content: "Hi"
+    req.body = payload
+    req.integration = integration
+    robot.receiveEvent 'service.webhook', req
+    .catch done
+
+  it 'before.integration.update', (done) ->
+    integration.title = '滴滴'
+    integration.iconUrl = "http://www.newicon.com"
+
+    robot.receiveEvent 'before.integration.update', integration
+    .then ->
+      UserModel.findOneAsync _id: integration._robotId
+      .then (robot) ->
+        robot.name.should.eql '滴滴'
+        robot.avatarUrl.should.eql "http://www.newicon.com"
+        done()
+    .catch done
 
   it 'before.integration.remove', (done) ->
-    done()
+    socket.broadcast = (channel, event, data, socketId) ->
+      channel.should.eql "team:#{team._id}"
+      event.should.eql 'team:leave'
+      data.should.have.properties '_userId', '_teamId'
+      done()
+
+    robot.receiveEvent 'before.integration.remove', integration
+    .catch done
 
   after cleanup

@@ -253,16 +253,6 @@ class Service
 
     _tryPost()
 
-  createRobot: (user) ->
-    service = require './service'
-    {limbo} = service.components
-    {UserModel} = limbo.use 'talk'
-    robot = new UserModel user
-    robot.isRobot = true
-    new Promise (resolve, reject) ->
-      robot.save (err, robot) ->
-        return reject(err) if err
-        resolve robot
   # ========================== Define build-in functions finish ==========================
 
 register = (name, fn) ->

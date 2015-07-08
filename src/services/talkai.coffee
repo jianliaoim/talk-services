@@ -12,9 +12,6 @@ _sendToRobot = (message) ->
 
   _getTuringCallback message
 
-  .catch (err) ->
-    return # Mute
-
   .then (body) ->
     return unless body?.content or body?.text or body?.title
     ['content', 'title', 'text'].forEach (key) ->

@@ -20,8 +20,8 @@ _postMessage = (message) ->
   $integration.then (integration) ->
     return unless integration.url
     {url, token} = integration
-    msg = _.clone message
-    msg.token = token if token
+    msg = message.toJSON?() or message
+    message.token = token if token
     self.httpPost url, msg, retryTimes: 5
     .then (body) ->
       return unless body?.content or body?.text or body?.title
@@ -52,6 +52,8 @@ _receiveWebhook = ({integration, query, body}) ->
   message =
     integration: integration
     content: content
+    _teamId: _teamId
+    _creatorId: integration._robotId
     quote:
       authorName: authorName
       title: title
@@ -72,13 +74,13 @@ _receiveWebhook = ({integration, query, body}) ->
     $message = MemberModel.findOneAsync user: _toId, team: _teamId, isQuit: false
     .then (member) ->
       throw new Error("INVALID_OBJECT", "user #{_toId}") unless member
-      message.to = _toId
+      message._toId = _toId
       message
   else
     $message = RoomModel.findOne team: _teamId, isGeneral: true
     .then (room) ->
       throw new Error('OBJECT_MISSING', "general room of team #{_teamId}") unless room
-      message.room = room._id
+      message._roomId = room._id
       message
 
   $message.then (message) -> self.sendMessage message
@@ -108,13 +110,17 @@ _removeRobot = (integration) ->
 ###
 _createRobot = (integration) ->
   {limbo, socket} = service.components
-  {TeamModel} = limbo.use 'talk'
+  {UserModel, TeamModel} = limbo.use 'talk'
 
-  robot =
+  robot = new UserModel
     name: integration.title
     avatarUrl: integration.iconUrl
+    isRobot: true
 
-  $robot = @createRobot robot
+  $robot = new Promise (resolve, reject) ->
+    robot.save (err, robot) ->
+      return reject(err) if err
+      resolve robot
 
   $team = $robot.then (robot) ->
     integration.robot = robot
@@ -126,6 +132,26 @@ _createRobot = (integration) ->
     robot.team = team
     robot._teamId = team._id
     socket.broadcast "team:#{team._id}", "team:join", robot
+
+###*
+ * Update robot infomation
+ * @param  {Model} integration
+ * @return {Promise} robot
+###
+_updateRobot = (integration) ->
+  return unless integration._robotId
+  {limbo} = service.components
+  {UserModel, TeamModel} = limbo.use 'talk'
+  $robot = UserModel.findOneAsync _id: integration._robotId
+  .then (robot) ->
+    return unless robot
+    robot.name = integration.title
+    robot.avatarUrl = integration.iconUrl
+    robot.updatedAt = new Date
+    new Promise (resolve, reject) ->
+      robot.save (err, robot) ->
+        return reject(err) if err
+        resolve robot
 
 module.exports = service.register 'robot', ->
 
@@ -167,5 +193,7 @@ module.exports = service.register 'robot', ->
   @registerEvent 'service.webhook', _receiveWebhook
 
   @registerEvent 'before.integration.create', _createRobot
+
+  @registerEvent 'before.integration.update', _updateRobot
 
   @registerEvent 'before.integration.remove', _removeRobot

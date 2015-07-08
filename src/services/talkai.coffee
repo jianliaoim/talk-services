@@ -17,6 +17,9 @@ _sendToRobot = (message) ->
 
   .then (body) ->
     return unless body?.content or body?.text or body?.title
+    ['content', 'title', 'text'].forEach (key) ->
+      return unless body[key]
+      body[key] = body[key].replace? /图灵机器人/g, '小艾'
     replyMessage =
       _creatorId: self.robot._id
       _teamId: message._teamId

@@ -9,7 +9,7 @@ describe 'Firim#Webhook', ->
 
   it 'receive webhook', (done) ->
     firim.sendMessage = (message) ->
-      message.quote.text.should.eql 'Fir.im: 你好'
+      message.quote.text.should.eql 'fir.im: 你好'
       message.quote.redirectUrl.should.eql 'http://fir.im/'
 
     req.body =

@@ -9,12 +9,24 @@ describe 'Firim#Webhook', ->
 
   it 'receive webhook', (done) ->
     firim.sendMessage = (message) ->
-      message.quote.text.should.eql 'fir.im: 你好'
-      message.quote.redirectUrl.should.eql 'http://fir.im/'
+      message.quote.title.should.eql 'fir.im: 小叮当的梦想国-更新'
+      message.quote.text.should.eql '''
+      BUILD 2
+      PLATFORM Android
+      CHANGELOG
+      测试webhook\r\n测试内容：\r\n修改bug
+      '''
+      message.quote.redirectUrl.should.eql 'http://fir.im/6gca'
 
-    req.body =
-      msg: '你好'
-      link: 'http://fir.im/'
+    req.body = {
+      "msg": "小叮当的梦想国-更新",
+      "icon": "http://firicon.fir.im/3f8e9549b93029b9e18828f67af17b0d77525990",
+      "link": "http://fir.im/6gca",
+      "name": "小叮当的梦想国",
+      "changelog": "测试webhook\r\n测试内容：\r\n修改bug",
+      "platform": "Android",
+      "build": "2"
+    }
     req.integration = _id: 1
     firim.receiveEvent 'service.webhook', req
     .then -> done()

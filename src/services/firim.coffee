@@ -2,10 +2,18 @@ service = require '../service'
 
 _receiveWebhook = ({integration, body}) ->
   payload = body
+  return unless payload.msg
+  title = "fir.im: #{payload.msg}"
+  text = ""
+  text += "BUILD #{payload.build}\n" if payload.build
+  text += "PLATFORM #{payload.platform}\n" if payload.platform
+  text += "CHANGELOG\n#{payload.changelog}" if payload.changelog?.length
+
   message =
     integration: integration
     quote:
-      text: "fir.im: #{payload.msg}"
+      title: title
+      text: text
       redirectUrl: payload.link
 
   @sendMessage message

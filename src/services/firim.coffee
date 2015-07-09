@@ -15,6 +15,9 @@ _receiveWebhook = ({integration, body}) ->
       title: title
       text: text
       redirectUrl: payload.link
+      userAvatarUrl: payload.icon
+      thumbnailPicUrl: 'https://tools.teambition.net/qr.png?text=' + encodeURIComponent payload.link
+      originalPicUrl: 'https://tools.teambition.net/qr.png?text=' + encodeURIComponent payload.link
 
   @sendMessage message
 

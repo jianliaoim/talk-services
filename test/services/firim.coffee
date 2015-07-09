@@ -17,6 +17,7 @@ describe 'Firim#Webhook', ->
       测试webhook\r\n测试内容：\r\n修改bug
       '''
       message.quote.redirectUrl.should.eql 'http://fir.im/6gca'
+      message.quote.thumbnailPicUrl.should.eql 'https://tools.teambition.net/qr.png?text=http%3A%2F%2Ffir.im%2F6gca'
 
     req.body = {
       "msg": "小叮当的梦想国-更新",

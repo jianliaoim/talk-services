@@ -5,6 +5,7 @@ module.exports = UserSchema = new Schema
   avatarUrl: type: String
   email: type: String, lowercase: true
   mobile: type: String
+  description: type: String
   createdAt: type: Date, default: Date.now
   updatedAt: type: Date, default: Date.now
   isRobot: type: Boolean, default: false

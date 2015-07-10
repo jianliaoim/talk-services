@@ -115,6 +115,7 @@ _createRobot = (integration) ->
   robot = new UserModel
     name: integration.title
     avatarUrl: integration.iconUrl
+    description: integration.description
     isRobot: true
 
   $robot = new Promise (resolve, reject) ->
@@ -147,6 +148,7 @@ _updateRobot = (integration) ->
     return unless robot
     robot.name = integration.title
     robot.avatarUrl = integration.iconUrl
+    robot.description = integration.description
     robot.updatedAt = new Date
     new Promise (resolve, reject) ->
       robot.save (err, robot) ->
@@ -186,6 +188,14 @@ module.exports = service.register 'robot', ->
     description: service.i18n
       zh: '（可选）Token 会被包含在发送给你的消息中'
       en: '(Optional) Token will include in the received message'
+  ,
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+    showOnSaved: true
+    description: service.i18n
+      zh: '通过 Webhook URL 发送消息给话题或成员'
+      en: 'Send messages to users or channels through webhook URL'
   ]
 
   @registerEvent 'message.create', _postMessage

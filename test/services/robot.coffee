@@ -88,6 +88,7 @@ describe 'Robot#Events', ->
 
   it 'before.integration.update', (done) ->
     integration.title = '滴滴'
+    integration.description = "睡觉啦"
     integration.iconUrl = "http://www.newicon.com"
 
     robot.receiveEvent 'before.integration.update', integration
@@ -95,6 +96,7 @@ describe 'Robot#Events', ->
       UserModel.findOneAsync _id: integration._robotId
       .then (robot) ->
         robot.name.should.eql '滴滴'
+        robot.description.should.eql '睡觉啦'
         robot.avatarUrl.should.eql "http://www.newicon.com"
         done()
     .catch done

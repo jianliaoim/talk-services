@@ -87,4 +87,5 @@ describe 'Talkai#MessageCreate', ->
       content: '红烧肉怎么做'
 
     talkai.receiveEvent 'message.create', message
+
   after cleanup

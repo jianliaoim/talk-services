@@ -35,4 +35,13 @@ service =
 
   userAgent: 'Talk Api Service V1'
 
+  # Complete actived service list
+  activedServices: [
+    'incoming', 'outgoing', 'robot', 'teambition', 'rss', 'github', 'firim', 'jobtong', 'pingxx'
+    'gitlab', 'coding', 'gitcafe', 'bitbucket', 'jinshuju', 'jiankongbao', 'kf5', 'swathub',
+    'csdn', 'oschina', 'buildkite', 'codeship', 'jira',
+    'travis', 'jenkins', 'circleci', 'magnumci',
+    'weibo'
+  ]
+
 module.exports = service

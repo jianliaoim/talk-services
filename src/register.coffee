@@ -65,21 +65,21 @@ _initRobot = ->
     self.robot = robot
 
 _getFields = ->
-  headerFields = [
-    key: '_roomId'
-    type: 'selector'
-  ]
-  footerFields = [
-    key: 'title'
-    type: 'text'
-  ,
-    key: 'description'
-    type: 'text'
-  ,
-    key: 'iconUrl'
-    type: 'file'
-  ]
-  [].concat headerFields, @_fields, footerFields
+  [].concat @headerFields, @_fields, @footerFields
+
+_httpPost = (url, payload) ->
+  service = require './service'
+  requestAsync
+    method: 'POST'
+    url: url
+    headers: 'User-Agent': service.userAgent
+    json: true
+    timeout: 5000
+    body: payload
+  .spread (res, body) ->
+    unless res.statusCode >= 200 and res.statusCode < 300
+      throw new Error("bad request #{res.statusCode}")
+    body
 
 class Service
 
@@ -111,7 +111,21 @@ class Service
     # Handler on events
     @_events = {}
     @robot = {}
-    Object.defineProperty this, 'fields', get: _getFields
+    @headerFields = [
+      key: '_roomId'
+      type: 'selector'
+    ]
+    @footerFields = [
+      key: 'title'
+      type: 'text'
+    ,
+      key: 'description'
+      type: 'text'
+    ,
+      key: 'iconUrl'
+      type: 'file'
+    ]
+    Object.defineProperty this, 'fields', get: _getFields, set: (@_fields) -> @_fields
     Object.defineProperty this, 'manual', get: _getManual
 
   initialize: ->
@@ -214,23 +228,31 @@ class Service
 
   ###*
    * Post data to the thrid part services
-   * @param  {url}      url
-   * @param  {Object}   payload
+   * @param  {String}   URL
+   * @param  {Object}   Payload
+   * @param  {Object}   Options
    * @return {Promise}  Response body
   ###
-  httpPost: (url, payload) ->
-    service = require './service'
-    requestAsync
-      method: 'POST'
-      url: url
-      headers: 'User-Agent': service.userAgent
-      json: true
-      timeout: 5000
-      body: payload
-    .spread (res, body) ->
-      unless res.statusCode >= 200 and res.statusCode < 300
-        throw new Error("bad request #{res.statusCode}")
-      body
+  httpPost: (url, payload, options = {}) ->
+    tryTimes = 0
+    retryTimes = options.retryTimes or 0
+    interval = options.interval or 1000
+    self = this
+
+    return _httpPost url, payload if retryTimes < 1
+
+    _tryPost = ->
+      _httpPost url, payload
+      .catch (err) ->
+        tryTimes += 1
+        throw err if tryTimes > retryTimes
+        Promise.delay interval
+        .then ->
+          interval *= 3
+          _tryPost()
+
+    _tryPost()
+
   # ========================== Define build-in functions finish ==========================
 
 register = (name, fn) ->

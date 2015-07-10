@@ -12,9 +12,6 @@ _sendToRobot = (message) ->
 
   _getTuringCallback message
 
-  .catch (err) ->
-    return # Mute
-
   .then (body) ->
     return unless body?.content or body?.text or body?.title
     ['content', 'title', 'text'].forEach (key) ->
@@ -91,9 +88,10 @@ module.exports = talkai = service.register 'talkai', ->
 
   @robot.email = 'talkai@talk.ai'
 
-  @iconUrl = service.static 'images/icons/talkai@2x.jpg'
+  @iconUrl = service.static 'images/icons/talkai@2x.png'
 
   @config =
+
     url: "http://www.tuling123.com/openapi/api"
     errorCodes:
       40001: "key的长度错误"

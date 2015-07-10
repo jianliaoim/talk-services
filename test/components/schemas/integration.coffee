@@ -8,6 +8,7 @@ IntegrationSchema = new Schema
   room: type: Schema.Types.ObjectId
   category: type: String # Integration category: weibo/github
   hashId: type: String, default: -> crypto.createHash('sha1').update("#{Date.now()}").digest('hex')
+  robot: type: Schema.Types.ObjectId
   # For authorized integrations
   token: String
   # Options
@@ -46,5 +47,9 @@ IntegrationSchema.virtual '_roomId'
 IntegrationSchema.virtual '_teamId'
   .get -> @team?._id or @team
   .set (_id) -> @team = _id
+
+IntegrationSchema.virtual '_robotId'
+  .get -> @robot?._id or @robot
+  .set (_id) -> @robot = _id
 
 module.exports = IntegrationSchema

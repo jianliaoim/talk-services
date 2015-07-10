@@ -4,25 +4,6 @@ Promise = require 'bluebird'
 validator = require 'validator'
 service = require '../service'
 
-_trySendMessage = (url, message) ->
-  tryTimes = 0
-  maxTryTimes = 5
-  delay = 1000
-  self = this
-
-  _sendMessage = ->
-    self.httpPost url, message
-
-    .catch (err) ->
-      tryTimes += 1
-      throw err if tryTimes > maxTryTimes
-      Promise.delay delay
-      .then ->
-        delay *= 3
-        _sendMessage()
-
-  _sendMessage()
-
 _postMessage = (message) ->
   # Ignore private chat messages
   return unless message._roomId
@@ -42,7 +23,7 @@ _postMessage = (message) ->
     msg = _.clone message
     msg.token = token if token?.length
 
-    _trySendMessage.call self, url, msg
+    self.httpPost url, msg, retryTimes: 5
 
     .then (body) ->
       return unless body?.text
@@ -86,6 +67,7 @@ module.exports = service.register 'outgoing', ->
   @_fields.push
     key: 'url'
     type: 'text'
+    required: true
     description: service.i18n
       zh: '请填写你的 Webhook url'
       en: 'Webhook url of your application'

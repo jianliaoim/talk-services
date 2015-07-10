@@ -17,5 +17,12 @@ talkOptions = auth: authdb: config.talkAuthDb if config.talkAuthDb
 talk = limbo.use 'talk',
   conn: mongoose.createConnection config.talk, talkOptions
   schemas: schemas
+  methods:
+    $save: ->
+      model = this
+      new Promise (resolve, reject) ->
+        model.save (err, model) ->
+          return reject(err) if err
+          resolve model
 
 module.exports = limbo

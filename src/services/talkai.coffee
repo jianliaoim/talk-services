@@ -53,29 +53,29 @@ _getTuringCallback = (message) ->
         re = new RegExp(/<br>/g)
         body.content = data.text.replace re, "\n"
       when talkai.config.urlCode
-        body.title = data.text
+        body.text = data.text
         body.redirectUrl = data.url
       when talkai.config.newsCode
-        body.title = data.text
-        body.text = "<ul>"
+        body.text = data.text
+        body.text += "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.article}</a></li>"
         body.text += "</ul>"
       when talkai.config.trainCode
-        body.title = data.text
-        body.text = "<ul>"
+        body.text = data.text
+        body.text += "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.trainnum} #{el.start} - #{el.terminal} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
         body.text += "</ul>"
       when talkai.config.flightCode
-        body.title = data.text
-        body.text = "<ul>"
+        body.text = data.text
+        body.text += "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.flight} #{el.route} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
         body.text += "</ul>"
       when talkai.config.othersCode
-        body.title = data.text
-        body.text = "<ul>"
+        body.text = data.text
+        body.text += "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.name}</a></li>"
         body.text += "</ul>"

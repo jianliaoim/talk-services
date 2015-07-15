@@ -70,7 +70,7 @@ _getTuringCallback = (message) ->
         body.redirectUrl = data.url
       when talkai.config.newsCode
         body.title = "OK, 已经帮您找到#{query.info}"
-        body.text += "<ul>"
+        body.text = "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.article}</a></li>"
         body.text += "</ul>"
@@ -82,13 +82,14 @@ _getTuringCallback = (message) ->
         body.text += "</ul>"
       when talkai.config.flightCode
         body.title = "OK, 已经帮您找到航班信息"
-        body.text += "<ul>"
+        body.text = "<ul>"
         data.list.forEach (el) ->
-          body.text += "<li><a href=" + el.detailurl + ">#{el.flight} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
+          # body.text += "<li><a href=" + el.detailurl + ">#{el.flight} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
+          body.text += "<li>#{el.flight} / 时间: #{el.starttime} - #{el.endtime}</li>"
         body.text += "</ul>"
       when talkai.config.othersCode
         body.title = data.text
-        body.text += "<ul>"
+        body.text = "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.name}</a></li>"
         body.text += "</ul>"

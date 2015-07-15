@@ -50,31 +50,44 @@ _getTuringCallback = (message) ->
     body = {}
     switch data.code
       when talkai.config.textCode
-        re = new RegExp(/<br>/g)
-        body.content = data.text.replace re, "\n"
+        # 判断天气的脏检查
+        if query.info.toString().indexOf('天气') >= 0
+          resultArr = data.text.split(':')
+          # 不是正常天气查询的情况
+          if resultArr.length < 2
+            re = new RegExp(/<br>/g)
+            body.content = data.text.replace re, "\n"
+          else
+            body.content = "OK, 已经帮您查到了#{resultArr[0]}天气：\n"
+            reSemi = new RegExp(/;/g)
+            reComma = new RegExp(/,/g)
+            body.content += data.text.replace(reSemi, "\n").replace(reComma, "， ")
+        else
+          re = new RegExp(/<br>/g)
+          body.content = data.text.replace re, "\n"
       when talkai.config.urlCode
-        body.text = data.text
+        body.title = "OK, 已经帮您找到#{query.info}, 快来点开看看吧~"
         body.redirectUrl = data.url
       when talkai.config.newsCode
-        body.text = data.text
+        body.title = "OK, 已经帮您找到#{query.info}"
         body.text += "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.article}</a></li>"
         body.text += "</ul>"
       when talkai.config.trainCode
-        body.text = data.text
-        body.text += "<ul>"
+        body.title = "OK, 已经帮您找到列车信息"
+        body.text = "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.trainnum} #{el.start} - #{el.terminal} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
         body.text += "</ul>"
       when talkai.config.flightCode
-        body.text = data.text
+        body.title = "OK, 已经帮您找到航班信息"
         body.text += "<ul>"
         data.list.forEach (el) ->
-          body.text += "<li><a href=" + el.detailurl + ">#{el.flight} #{el.route} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
+          body.text += "<li><a href=" + el.detailurl + ">#{el.flight} / 时间: #{el.starttime} - #{el.endtime}</a></li>"
         body.text += "</ul>"
       when talkai.config.othersCode
-        body.text = data.text
+        body.title = data.text
         body.text += "<ul>"
         data.list.forEach (el) ->
           body.text += "<li><a href=" + el.detailurl + ">#{el.name}</a></li>"

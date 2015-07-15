@@ -1,3 +1,4 @@
+moment = require 'moment-timezone'
 service = require '../service'
 
 _receiveWebhook = ({integration, body}) ->
@@ -8,7 +9,7 @@ _receiveWebhook = ({integration, body}) ->
   text = ""
   text += "TITLE: #{info.issue_title}\n" if info.issue_title
   text += "STACK: #{info.issue_stack}\n" if info.issue_stack
-  text += "CREATED_AT: #{info.created_at}" if info.created_at
+  text += "CREATED_AT: #{moment(Number(info.created_at) * 1000).tz('Asia/Shanghai').format('YYYY-MM-DD hh:mm:ss')}" if info.created_at
 
   message =
     integration: integration

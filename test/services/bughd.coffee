@@ -13,7 +13,7 @@ describe 'BugHD#Webhook', ->
       message.quote.text.should.eql '''
       TITLE: *** -[__NSArrayI objectAtIndex:]: index 5 beyond bounds [0 .. 1]
       STACK: 0 CoreFoundation 0x0000000187391e64 <redacted> + 160
-      CREATED_AT: 1423584178
+      CREATED_AT: 2015-02-11 12:02:58
       '''
       done()
 

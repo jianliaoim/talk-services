@@ -36,6 +36,8 @@ describe 'Talkai#MessageCreate', ->
     talkai.sendMessage = (message) ->
       message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
       message.quote.should.have.properties 'title', 'redirectUrl'
+      message.quote.title.indexOf('undefined').should.below 0
+      message.quote.redirectUrl.indexOf('undefined').should.below 0
       done()
 
     message =
@@ -50,6 +52,8 @@ describe 'Talkai#MessageCreate', ->
     talkai.sendMessage = (message) ->
       message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
       message.quote.should.have.properties 'title', 'text'
+      message.quote.title.indexOf('undefined').should.below 0
+      message.quote.text.indexOf('undefined').should.below 0
       done()
 
     message =
@@ -64,6 +68,8 @@ describe 'Talkai#MessageCreate', ->
     talkai.sendMessage = (message) ->
       message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
       message.quote.should.have.properties 'title', 'text'
+      message.quote.title.indexOf('undefined').should.below 0
+      message.quote.text.indexOf('undefined').should.below 0
       done()
 
     message =
@@ -74,10 +80,28 @@ describe 'Talkai#MessageCreate', ->
 
     talkai.receiveEvent 'message.create', message
 
+  it 'receive flight content', (done) ->
+    talkai.sendMessage = (message) ->
+      message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
+      message.quote.should.have.properties 'title', 'text'
+      message.quote.title.indexOf('undefined').should.below 0
+      message.quote.text.indexOf('undefined').should.below 0
+      done()
+
+    message =
+      _toId: talkai.robot._id
+      _creatorId: 1
+      _teamId: 2
+      content: '明天从北京到上海的飞机'
+
+    talkai.receiveEvent 'message.create', message
+
   it 'receive other content', (done) ->
     talkai.sendMessage = (message) ->
       message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
       message.quote.should.have.properties 'title', 'text'
+      message.quote.title.indexOf('undefined').should.below 0
+      message.quote.text.indexOf('undefined').should.below 0
       done()
 
     message =

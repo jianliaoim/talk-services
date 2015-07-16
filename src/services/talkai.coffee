@@ -36,7 +36,7 @@ _getTuringCallback = (message) ->
   query =
     key: talkai.config.apikey
     info: message.content
-
+    userid: message._creatorId.toString()
   requestAsync
     method: 'GET'
     url: "#{talkai.config.url}?#{qs.stringify(query)}"
@@ -61,7 +61,7 @@ _getTuringCallback = (message) ->
             body.content = "OK, 已经帮您查到了#{resultArr[0]}天气：\n"
             reSemi = new RegExp(/;/g)
             reComma = new RegExp(/,/g)
-            body.content += data.text.replace(reSemi, "\n").replace(reComma, "， ")
+            body.content += "\n#{resultArr[1].replace(reSemi, ";\n").replace(reComma, ", ")}"
         else
           re = new RegExp(/<br>/g)
           body.content = data.text.replace re, "\n"

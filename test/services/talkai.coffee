@@ -16,6 +16,8 @@ describe 'Talkai#MessageCreate', ->
 
   talkai.config = _.assign talkai.config, config.talkai
 
+  @timeout 5000
+
   before prepare
 
   it 'receive content', (done) ->

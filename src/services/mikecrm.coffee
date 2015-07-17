@@ -43,7 +43,7 @@ module.exports = service.register 'mikecrm', ->
     type: 'text'
     readonly: true
     description: service.i18n
-      zh: '' #TODO
-      en: '' #TODO
+      zh: '复制 web hook 地址到你的麦客中使用。'
+      en: 'Copy this web hook to your MikeCRM account to use it.'
 
   @registerEvent 'service.webhook', _receiveWebhook

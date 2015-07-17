@@ -50,21 +50,13 @@ _getTuringCallback = (message) ->
     body = {}
     switch data.code
       when talkai.config.textCode
-        # 判断天气的脏检查
-        if query.info.toString().indexOf('天气') >= 0
-          resultArr = data.text.split(':')
-          # 不是正常天气查询的情况
-          if resultArr.length < 2
-            re = new RegExp(/<br>/g)
-            body.content = data.text.replace re, "\n"
-          else
-            body.content = "OK, 已经帮您查到了#{resultArr[0]}天气：\n"
-            reSemi = new RegExp(/;/g)
-            reComma = new RegExp(/,/g)
-            body.content += "\n#{resultArr[1].replace(reSemi, ";\n").replace(reComma, ", ")}"
+        reBr = new RegExp(/<br>/g)
+        reSemi = new RegExp(/;/g)
+        if data.text.split(':').length is 2
+          reComma = new RegExp(/:/g)
+          body.content = data.text.replace(reBr, "\n").replace(reSemi, ";\n").replace(reComma, ":\n")
         else
-          re = new RegExp(/<br>/g)
-          body.content = data.text.replace re, "\n"
+          body.content = data.text.replace(reBr, "\n").replace(reSemi, ";\n")
       when talkai.config.urlCode
         body.title = "OK, 已经帮您找到#{query.info}, 快来点开看看吧~"
         body.redirectUrl = data.url
@@ -121,5 +113,4 @@ module.exports = talkai = service.register 'talkai', ->
     trainCode: 305000
     flightCode: 306000
     othersCode: 308000
-
   @registerEvent 'message.create', _sendToRobot

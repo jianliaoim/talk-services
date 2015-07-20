@@ -9,6 +9,8 @@ describe 'MikeCRM#Webhook', ->
 
   it 'receive webhook', (done) ->
     mikecrm.sendMessage = (message) ->
+      console.log 'mike', message
+
       message.quote.title.should.eql 'MikeCRM: 新的表单 麦田剧社招新啦！'
       message.quote.text.should.eql '''
       姓名 : xingming

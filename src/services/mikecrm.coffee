@@ -24,7 +24,7 @@ _receiveWebhook = ({integration, body}) ->
 
 module.exports = service.register 'mikecrm', ->
 
-  @title = 'MikeCRM'
+  @title = '麦客CRM'
 
   @template = 'webhook'
 

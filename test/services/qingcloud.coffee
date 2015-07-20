@@ -9,6 +9,7 @@ describe 'QingCloud#Webhook', ->
 
   it 'receive webhook', (done) ->
     qingcloud.sendMessage = (message) ->
+      console.log 'qingcloud', message
       message.quote.title.should.eql 'QingCloud: i-fsda5aiv instance'
       message.quote.text.should.eql '''
       RULE_ID: alpr-lr3gv19q STATUS: ok

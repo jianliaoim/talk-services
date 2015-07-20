@@ -30,7 +30,7 @@ _receiveWebhook = ({integration, body}) ->
 
 module.exports = service.register 'qingcloud', ->
 
-  @title = 'QingCloud'
+  @title = '青云'
 
   @template = 'webhook'
 
@@ -49,7 +49,7 @@ module.exports = service.register 'qingcloud', ->
     type: 'text'
     readonly: true
     description: service.i18n
-      zh: '复制 web hook 地址到你的轻云中使用。'
+      zh: '复制 web hook 地址到你的青云中使用。'
       en: 'Copy this web hook to your Qing Cloud account to use it.'
 
   @registerEvent 'service.webhook', _receiveWebhook

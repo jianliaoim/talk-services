@@ -39,7 +39,7 @@ service =
   activedServices: [
     'incoming', 'outgoing', 'robot', 'teambition', 'rss', 'github', 'firim', 'jobtong', 'pingxx'
     'gitlab', 'coding', 'gitcafe', 'bitbucket', 'jinshuju', 'jiankongbao', 'kf5', 'swathub',
-    'csdn', 'oschina', 'buildkite', 'codeship', 'jira',
+    'csdn', 'oschina', 'buildkite', 'codeship', 'jira', 'qingcloud', 'mikecrm'
     'travis', 'jenkins', 'circleci', 'magnumci',
     'weibo'
   ]

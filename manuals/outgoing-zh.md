@@ -5,7 +5,7 @@
 ```json
 {
     "_id": "549908a78cd040715c48caf2",
-    "content": "Winter is coming",                    // 消息正文
+    "body": "Winter is coming",                    // 消息正文
     "room": {
       "_id": "549908a68cd040715c48cadf",
       "topic": "Game of Throne",                      // 话题名称

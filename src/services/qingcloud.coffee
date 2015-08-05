@@ -25,9 +25,12 @@ _receiveWebhook = ({integration, body, res}) ->
 
   message =
     integration: integration
-    quote:
-      title: title
-      text: text
+    attachments: [
+      category: 'quote'
+      data:
+        title: title
+        text: text
+    ]
 
   @sendMessage message
 

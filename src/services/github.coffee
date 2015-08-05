@@ -174,53 +174,55 @@ _receiveWebhook = ({headers, body, integration}) ->
   payload = body
   {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
 
-  message =
-    integration: integration
-    quote:
+  message = integration: integration
+  attachment =
+    category: 'quote'
+    data:
       userName: sender.login
       userAvatarUrl: sender.avatar_url
 
   switch event
     when 'commit_comment'
-      message.quote.title = "#{repository.full_name} commit comment by #{sender?.login}"
-      message.quote.text = "#{marked(comment?.body or '')}"
-      message.quote.redirectUrl = comment?.html_url
+      attachment.data.title = "#{repository.full_name} commit comment by #{sender?.login}"
+      attachment.data.text = "#{marked(comment?.body or '')}"
+      attachment.data.redirectUrl = comment?.html_url
     when 'create'
-      message.quote.title = "#{repository.full_name} #{payload.ref_type} #{payload.ref} created by #{sender?.login}"
-      message.quote.redirectUrl = repository?.html_url
+      attachment.data.title = "#{repository.full_name} #{payload.ref_type} #{payload.ref} created by #{sender?.login}"
+      attachment.data.redirectUrl = repository?.html_url
     when 'delete'
-      message.quote.title = "#{repository.full_name} #{payload.ref_type} #{payload.ref} deleted by #{sender?.login}"
-      message.quote.redirectUrl = repository?.html_url
+      attachment.data.title = "#{repository.full_name} #{payload.ref_type} #{payload.ref} deleted by #{sender?.login}"
+      attachment.data.redirectUrl = repository?.html_url
     when 'fork'
-      message.quote.title = "#{repository.full_name} forked to #{forkee?.full_name}"
-      message.quote.redirectUrl = forkee?.html_url
+      attachment.data.title = "#{repository.full_name} forked to #{forkee?.full_name}"
+      attachment.data.redirectUrl = forkee?.html_url
     when 'issue_comment'
-      message.quote.title = "#{repository.full_name} issue comment by #{sender?.login}"
-      message.quote.text = "#{marked(comment?.body or '')}"
-      message.quote.redirectUrl = comment?.html_url
+      attachment.data.title = "#{repository.full_name} issue comment by #{sender?.login}"
+      attachment.data.text = "#{marked(comment?.body or '')}"
+      attachment.data.redirectUrl = comment?.html_url
     when 'issues'
-      message.quote.title = "#{repository.full_name} issue #{action or ''} #{issue?.title}"
-      message.quote.text = marked(issue?.body or '')
-      message.quote.redirectUrl = issue?.html_url
+      attachment.data.title = "#{repository.full_name} issue #{action or ''} #{issue?.title}"
+      attachment.data.text = marked(issue?.body or '')
+      attachment.data.redirectUrl = issue?.html_url
     when 'pull_request'
-      message.quote.title = "#{repository.full_name} pull request #{pull_request?.title}"
-      message.quote.text = marked(pull_request?.body or '')
-      message.quote.redirectUrl = pull_request?.html_url
+      attachment.data.title = "#{repository.full_name} pull request #{pull_request?.title}"
+      attachment.data.text = marked(pull_request?.body or '')
+      attachment.data.redirectUrl = pull_request?.html_url
     when 'pull_request_review_comment'
-      message.quote.title = "#{repository.full_name} review comment by #{sender?.login}"
-      message.quote.text = marked(comment?.body or '')
-      message.quote.redirectUrl = comment?.html_url
+      attachment.data.title = "#{repository.full_name} review comment by #{sender?.login}"
+      attachment.data.text = marked(comment?.body or '')
+      attachment.data.redirectUrl = comment?.html_url
     when 'push'
       return false unless commits?.length
-      message.quote.title = "#{repository.full_name} commits to #{payload.ref}"
+      attachment.data.title = "#{repository.full_name} commits to #{payload.ref}"
       commitArr = commits.map (commit) ->
         """
         <a href="#{commit.url}" target="_blank"><code>#{commit?.id?[0...6]}:</code></a> #{commit?.message}<br>
         """
-      message.quote.text = commitArr.join ''
-      message.quote.redirectUrl = head_commit.url
+      attachment.data.text = commitArr.join ''
+      attachment.data.redirectUrl = head_commit.url
     else return false
 
+  message.attachments = [attachment]
   @sendMessage message
 
 _getEvents = ->

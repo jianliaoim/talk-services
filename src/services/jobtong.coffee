@@ -16,12 +16,14 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    quote:
-      title: payload.title
-      text: texts.join '\n'
-      redirectUrl: payload.url
-      thumbnailPicUrl: payload.face_url
-
+    attachments: [
+      category: 'quote'
+      data:
+        title: payload.title
+        text: texts.join '\n'
+        redirectUrl: payload.url
+        imageUrl: payload.face_url
+    ]
   @sendMessage message
 
 module.exports = service.register 'jobtong', ->

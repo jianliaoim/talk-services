@@ -27,8 +27,8 @@ describe 'Jira#Webhook', ->
 
   it 'receive create type webhook', (done) ->
     jira.sendMessage = (message) ->
-      message.quote.title.should.eql 'Destec Zhang [Administrator] created an issue for project test project'
-      message.quote.text.should.eql 'Summary: test bug'
+      message.attachments[0].data.title.should.eql 'Destec Zhang [Administrator] created an issue for project test project'
+      message.attachments[0].data.text.should.eql 'Summary: test bug'
       done()
 
     req = payloads['create-issue']
@@ -37,8 +37,8 @@ describe 'Jira#Webhook', ->
 
   it 'receive update type webhook', (done) ->
     jira.sendMessage = (message) ->
-      message.quote.title.should.eql 'Destec Zhang [Administrator] updated an issue for project test project'
-      message.quote.text.should.eql 'Summary: test bug'
+      message.attachments[0].data.title.should.eql 'Destec Zhang [Administrator] updated an issue for project test project'
+      message.attachments[0].data.text.should.eql 'Summary: test bug'
       done()
 
     req = payloads['update-issue']

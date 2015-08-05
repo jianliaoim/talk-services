@@ -13,9 +13,8 @@ _receiveWebhook = ({integration, body}) ->
   payload = body or null
   return unless payload
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
   projectUrl = payload.repository?.homepage
@@ -24,11 +23,11 @@ _receiveWebhook = ({integration, body}) ->
 
   # Prepare to send the message
   if payload.before?[...6] is '000000'
-    message.quote.title = "#{projectName}新建了分支 #{payload.ref}"
+    attachment.data.title = "#{projectName}新建了分支 #{payload.ref}"
   else if payload.after?[...6] is '000000'
-    message.quote.title = "#{projectName}删除了分支 #{payload.ref}"
+    attachment.data.title = "#{projectName}删除了分支 #{payload.ref}"
   else
-    message.quote.title = "#{projectName}提交了新的代码"
+    attachment.data.title = "#{projectName}提交了新的代码"
     if payload.commits?.length
       commitArr = payload.commits.map (commit) ->
         commitUrl = commit.url
@@ -36,8 +35,9 @@ _receiveWebhook = ({integration, body}) ->
         <a href="#{commitUrl}" target="_blank"><code>#{commit.id[...6]}:</code></a> #{commit.message}<br>
         """
       text = commitArr.join ''
-      message.quote.text = text
-  message.quote.redirectUrl = projectUrl
+      attachment.data.text = text
+  attachment.data.redirectUrl = projectUrl
+  message.attachments = [attachment]
 
   @sendMessage message
 

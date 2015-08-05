@@ -11,13 +11,15 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    quote:
-      title: title
-      text: text
-      redirectUrl: payload.link
-      userAvatarUrl: payload.icon
-      thumbnailPicUrl: 'https://tools.teambition.net/qr.png?text=' + encodeURIComponent payload.link
-      originalPicUrl: 'https://tools.teambition.net/qr.png?text=' + encodeURIComponent payload.link
+    attachments: [
+      category: 'quote'
+      data:
+        title: title
+        text: text
+        redirectUrl: payload.link
+        userAvatarUrl: payload.icon
+        imageUrl: 'https://tools.teambition.net/qr.png?text=' + encodeURIComponent payload.link
+    ]
 
   @sendMessage message
 

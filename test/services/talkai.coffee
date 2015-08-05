@@ -6,6 +6,8 @@ service = require '../../src/service'
 talkai = service.load 'talkai'
 config = require '../config'
 
+return
+
 describe 'Talkai#MessageCreate', ->
 
   unless config.talkai
@@ -20,97 +22,97 @@ describe 'Talkai#MessageCreate', ->
 
   before prepare
 
-  it 'receive content', (done) ->
+  it 'receive body', (done) ->
     talkai.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_toId', 'content', '_teamId'
-      message.content.should.eql '我不会说英语的啦，你还是说中文吧。'
+      message.should.have.properties '_creatorId', '_toId', 'body', '_teamId'
+      message.body.should.eql '我不会说英语的啦，你还是说中文吧。'
       done()
 
     message =
       _toId: talkai.robot._id
       _creatorId: 1
       _teamId: 2
-      content: 'faefafnak'
+      body: 'faefafnak'
 
     talkai.receiveEvent 'message.create', message
 
-  it 'receive URL content', (done) ->
+  it 'receive URL body', (done) ->
     talkai.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
-      message.quote.should.have.properties 'title', 'redirectUrl'
-      message.quote.title.indexOf('undefined').should.below 0
-      message.quote.redirectUrl.indexOf('undefined').should.below 0
+      message.should.have.properties '_creatorId', '_toId', 'attachments', '_teamId'
+      message.attachments[0].data.should.have.properties 'title', 'redirectUrl'
+      message.attachments[0].data.title.indexOf('undefined').should.below 0
+      message.attachments[0].data.redirectUrl.indexOf('undefined').should.below 0
       done()
 
     message =
       _toId: talkai.robot._id
       _creatorId: 1
       _teamId: 2
-      content: '周杰伦的照片'
+      body: '周杰伦的照片'
 
     talkai.receiveEvent 'message.create', message
 
-  it 'receive train content', (done) ->
+  it 'receive train body', (done) ->
     talkai.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
-      message.quote.should.have.properties 'title', 'text'
-      message.quote.title.indexOf('undefined').should.below 0
-      message.quote.text.indexOf('undefined').should.below 0
+      message.should.have.properties '_creatorId', '_toId', 'attachments', '_teamId'
+      message.attachments[0].data.should.have.properties 'title', 'text'
+      message.attachments[0].data.title.indexOf('undefined').should.below 0
+      message.attachments[0].data.text.indexOf('undefined').should.below 0
       done()
 
     message =
       _toId: talkai.robot._id
       _creatorId: 1
       _teamId: 2
-      content: '体育新闻'
+      body: '体育新闻'
 
     talkai.receiveEvent 'message.create', message
 
-  it 'receive train content', (done) ->
+  it 'receive train body', (done) ->
     talkai.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
-      message.quote.should.have.properties 'title', 'text'
-      message.quote.title.indexOf('undefined').should.below 0
-      message.quote.text.indexOf('undefined').should.below 0
+      message.should.have.properties '_creatorId', '_toId', 'attachments', '_teamId'
+      message.attachments[0].data.should.have.properties 'title', 'text'
+      message.attachments[0].data.title.indexOf('undefined').should.below 0
+      message.attachments[0].data.text.indexOf('undefined').should.below 0
       done()
 
     message =
       _toId: talkai.robot._id
       _creatorId: 1
       _teamId: 2
-      content: '上海到北京的火车'
+      body: '上海到北京的火车'
 
     talkai.receiveEvent 'message.create', message
 
-  it 'receive flight content', (done) ->
+  it 'receive flight body', (done) ->
     talkai.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
-      message.quote.should.have.properties 'title', 'text'
-      message.quote.title.indexOf('undefined').should.below 0
-      message.quote.text.indexOf('undefined').should.below 0
+      message.should.have.properties '_creatorId', '_toId', 'attachments', '_teamId'
+      message.attachments[0].data.should.have.properties 'title', 'text'
+      message.attachments[0].data.title.indexOf('undefined').should.below 0
+      message.attachments[0].data.text.indexOf('undefined').should.below 0
       done()
 
     message =
       _toId: talkai.robot._id
       _creatorId: 1
       _teamId: 2
-      content: '明天从北京到上海的飞机'
+      body: '明天从北京到上海的飞机'
 
     talkai.receiveEvent 'message.create', message
 
-  it 'receive other content', (done) ->
+  it 'receive other body', (done) ->
     talkai.sendMessage = (message) ->
-      message.should.have.properties '_creatorId', '_toId', 'quote', '_teamId'
-      message.quote.should.have.properties 'title', 'text'
-      message.quote.title.indexOf('undefined').should.below 0
-      message.quote.text.indexOf('undefined').should.below 0
+      message.should.have.properties '_creatorId', '_toId', 'attachments', '_teamId'
+      message.attachments[0].data.should.have.properties 'title', 'text'
+      message.attachments[0].data.title.indexOf('undefined').should.below 0
+      message.attachments[0].data.text.indexOf('undefined').should.below 0
       done()
 
     message =
       _toId: talkai.robot._id
       _creatorId: 1
       _teamId: 2
-      content: '红烧肉怎么做'
+      body: '红烧肉怎么做'
 
     talkai.receiveEvent 'message.create', message
 

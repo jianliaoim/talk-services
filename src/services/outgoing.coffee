@@ -28,9 +28,11 @@ _postMessage = (message) ->
     .then (body) ->
       return unless body?.text
       # Send replyMessage to user
+      attachment = category: 'quote', data: body
+      attachment.data.category = 'outgoing'
       replyMessage =
-        quote: body
         integration: integration
+        attachments: [attachment]
       self.sendMessage replyMessage
 
     .catch (err) ->

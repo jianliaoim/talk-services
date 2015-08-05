@@ -10,7 +10,7 @@ describe 'Incoming#Webhook', ->
   it 'receive webhook', (done) ->
     incoming.sendMessage = (message) ->
       message.should.have.properties 'integration'
-      message.quote.should.have.properties 'authorName', 'title', 'text', 'redirectUrl', 'thumbnailPicUrl', 'originalPicUrl'
+      message.attachments[0].data.should.have.properties 'authorName', 'title', 'text', 'redirectUrl', 'imageUrl'
 
     req.body =
       authorName: '路人甲'

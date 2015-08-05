@@ -13,9 +13,8 @@ _receiveWebhook = ({integration, body}) ->
   build = body?.build
   return unless build
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   projectName = if build.project_name then "[#{build.project_name}] " else ''
   projectUrl = build.build_url
@@ -26,17 +25,17 @@ _receiveWebhook = ({integration, body}) ->
 
   switch status
     when 'testing'
-      message.quote.title = "#{projectName}new commits on testing stage"
+      attachment.data.title = "#{projectName}new commits on testing stage"
     when 'success'
-      message.quote.title = "#{projectName}new commits on success stage"
+      attachment.data.title = "#{projectName}new commits on success stage"
     else return false
 
-  message.quote.text =
+  attachment.data.text =
     """
     <a href="#{commitUrl}" target="_blank"><code>#{build.commit_id[...6]}:</code></a> #{build.message}<br>
     """
-  message.quote.redirectUrl = projectUrl
-
+  attachment.data.redirectUrl = projectUrl
+  message.attachments = [attachment]
   @sendMessage message
 
 module.exports = service.register 'codeship', ->

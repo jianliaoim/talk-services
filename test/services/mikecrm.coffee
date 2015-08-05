@@ -9,8 +9,8 @@ describe 'MikeCRM#Webhook', ->
 
   it 'receive webhook', (done) ->
     mikecrm.sendMessage = (message) ->
-      message.quote.title.should.eql 'MikeCRM: 新的表单 麦田剧社招新啦！'
-      message.quote.text.should.eql '''
+      message.attachments[0].data.title.should.eql 'MikeCRM: 新的表单 麦田剧社招新啦！'
+      message.attachments[0].data.text.should.eql '''
       姓名 : xingming
       性别 : 帅哥
       学号 : 1213121313
@@ -20,7 +20,7 @@ describe 'MikeCRM#Webhook', ->
       自我评价一下吧！ : ziwopingjia
       有没有什么爱好及特长 : aihaotechang
       '''
-      message.quote.redirectUrl.should.eql 'http://www.mikecrm.com/formFeedback.php?ID=284153'
+      message.attachments[0].data.redirectUrl.should.eql 'http://www.mikecrm.com/formFeedback.php?ID=284153'
 
       done()
 

@@ -3,22 +3,22 @@ service = require '../service'
 _receiveWebhook = ({integration, body}) ->
   payload = body
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   JIRA_CREATE_EVENT = "jira:issue_created"
   JIRA_UPDATE_EVENT = "jira:issue_updated"
 
   if body.webhookEvent is JIRA_CREATE_EVENT
-    message.quote.title = "#{body.user.displayName} created an issue for project #{body.issue.fields.project.name}"
-    message.quote.text = "Summary: #{body.issue.fields.summary}"
+    attachment.data.title = "#{body.user.displayName} created an issue for project #{body.issue.fields.project.name}"
+    attachment.data.text = "Summary: #{body.issue.fields.summary}"
   else if body.webhookEvent is JIRA_UPDATE_EVENT
-    message.quote.title = "#{body.user.displayName} updated an issue for project #{body.issue.fields.project.name}"
-    message.quote.text = "Summary: #{body.issue.fields.summary}"
+    attachment.data.title = "#{body.user.displayName} updated an issue for project #{body.issue.fields.project.name}"
+    attachment.data.text = "Summary: #{body.issue.fields.summary}"
   else
     throw new Error("Unknown Jira event type")
 
+  message.attachments = [attachment]
   @sendMessage message
 
 module.exports = service.register 'jira', ->

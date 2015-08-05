@@ -5,7 +5,7 @@ Message Structure
 ```json
 {
     "_id": "549908a78cd040715c48caf2",
-    "content": "Winter is coming",                    // Message Body
+    "body": "Winter is coming",                    // Message Body
     "room": {
       "_id": "549908a68cd040715c48cadf",
       "topic": "Game of Throne",                      // Topic Name

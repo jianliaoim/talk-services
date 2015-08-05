@@ -21,10 +21,11 @@ _sendToRobot = (message) ->
       _creatorId: self.robot._id
       _teamId: message._teamId
       _toId: message._creatorId
-    replyMessage.content = body.content if body.content
+    replyMessage.body = body.content if body.content
     if body.text or body.title
-      replyMessage.quote = body
-      replyMessage.quote.category = 'talkai'
+      attachment = category: 'quote', data: body
+      attachment.data.category = 'talkai'
+      replyMessage.attachments = [attachment]
     self.sendMessage replyMessage
 
 _errorHandler = (req) ->

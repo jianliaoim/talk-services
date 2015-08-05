@@ -6,8 +6,6 @@ service = require '../../src/service'
 talkai = service.load 'talkai'
 config = require '../config'
 
-return
-
 describe 'Talkai#MessageCreate', ->
 
   unless config.talkai

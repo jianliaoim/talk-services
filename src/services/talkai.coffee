@@ -36,7 +36,7 @@ _getTuringCallback = (message) ->
 
   query =
     key: talkai.config.apikey
-    info: message.content
+    info: message.body
     userid: message._creatorId.toString()
   requestAsync
     method: 'GET'

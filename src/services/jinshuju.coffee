@@ -5,10 +5,12 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    quote:
-      text: "#{payload.entry?.creator_name} 添加了新的数据"
-      redirectUrl: "https://jinshuju.net/forms/#{payload.form}/entries"
-
+    attachments: [
+      category: 'quote'
+      data:
+        text: "#{payload.entry?.creator_name} 添加了新的数据"
+        redirectUrl: "https://jinshuju.net/forms/#{payload.form}/entries"
+    ]
   @sendMessage message
 
 module.exports = service.register 'jinshuju', ->

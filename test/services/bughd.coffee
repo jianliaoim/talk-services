@@ -9,8 +9,8 @@ describe 'BugHD#Webhook', ->
 
   it 'receive webhook', (done) ->
     bughd.sendMessage = (message) ->
-      message.quote.title.should.eql 'SDKTestApp 1.1.6(Build 1)'
-      message.quote.text.should.eql '''
+      message.attachments[0].data.title.should.eql 'SDKTestApp 1.1.6(Build 1)'
+      message.attachments[0].data.text.should.eql '''
       TITLE: *** -[__NSArrayI objectAtIndex:]: index 5 beyond bounds [0 .. 1]
       STACK: 0 CoreFoundation 0x0000000187391e64 <redacted> + 160
       CREATED_AT: 2015-02-11 12:02:58

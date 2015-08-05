@@ -73,15 +73,15 @@ describe 'Csdn#Webhook', ->
 
   it 'receive push', ->
     testWebhook payload, (message) ->
-      message.should.have.properties 'integration', 'quote'
+      message.should.have.properties 'integration'
       message.integration._id.should.eql '552cc903022844e6d8afb3b4'
-      message.quote.title.should.eql '[webcnn] 提交了新的代码'
-      message.quote.text.should.eql [
+      message.attachments[0].data.title.should.eql '[webcnn] 提交了新的代码'
+      message.attachments[0].data.text.should.eql [
         '<a href="https://code.csdn.net/white715/webcnn/commit/59acbad155b77f3d03412094aab3877a1ff2887c" target="_blank">'
         '<code>59acba:</code></a> c\n<br>'
         '<a href="https://code.csdn.net/white715/webcnn/commit/e32a60eccbb10f434ed498c0a9b77f366e91a8dc" target="_blank">'
         '<code>e32a60:</code></a> b\n<br>'
       ].join ''
-      message.quote.redirectUrl.should.eql 'https://code.csdn.net/white715/webcnn'
+      message.attachments[0].data.redirectUrl.should.eql 'https://code.csdn.net/white715/webcnn'
 
   # after cleanup

@@ -9,8 +9,8 @@ describe 'QingCloud#Webhook', ->
 
   it 'receive webhook', (done) ->
     qingcloud.sendMessage = (message) ->
-      message.quote.title.should.eql 'QingCloud: i-fsda5aiv instance'
-      message.quote.text.should.eql '''
+      message.attachments[0].data.title.should.eql 'QingCloud: i-fsda5aiv instance'
+      message.attachments[0].data.text.should.eql '''
       RULE_ID: alpr-lr3gv19q STATUS: ok
       RULE_ID: alpr-u8vue5g6 STATUS: alarm
       RULE_ID: alpr-wkjaaqvh STATUS: ok

@@ -9,15 +9,15 @@ describe 'Firim#Webhook', ->
 
   it 'receive webhook', (done) ->
     firim.sendMessage = (message) ->
-      message.quote.title.should.eql 'fir.im: 小叮当的梦想国-更新'
-      message.quote.text.should.eql '''
+      message.attachments[0].data.title.should.eql 'fir.im: 小叮当的梦想国-更新'
+      message.attachments[0].data.text.should.eql '''
       BUILD 2
       PLATFORM Android
       CHANGELOG
       测试webhook\r\n测试内容：\r\n修改bug
       '''
-      message.quote.redirectUrl.should.eql 'http://fir.im/6gca'
-      message.quote.thumbnailPicUrl.should.eql 'https://tools.teambition.net/qr.png?text=http%3A%2F%2Ffir.im%2F6gca'
+      message.attachments[0].data.redirectUrl.should.eql 'http://fir.im/6gca'
+      message.attachments[0].data.imageUrl.should.eql 'https://tools.teambition.net/qr.png?text=http%3A%2F%2Ffir.im%2F6gca'
 
     req.body = {
       "msg": "小叮当的梦想国-更新",

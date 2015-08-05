@@ -31,8 +31,8 @@ describe 'Jinshuju#Webhook', ->
 
   it 'should create new message when receive jinshuju webhook', (done) ->
     jinshuju.sendMessage = (message) ->
-      message.quote.text.should.eql "sailxjx 添加了新的数据"
-      message.quote.redirectUrl.should.eql "https://jinshuju.net/forms/PXmEGx/entries"
+      message.attachments[0].data.text.should.eql "sailxjx 添加了新的数据"
+      message.attachments[0].data.redirectUrl.should.eql "https://jinshuju.net/forms/PXmEGx/entries"
 
     req.body = payload
 

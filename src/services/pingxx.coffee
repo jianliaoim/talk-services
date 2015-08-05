@@ -41,10 +41,13 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    quote:
-      title: title
-      text: texts.join '\n'
-      redirectUrl: redirectUrl
+    attachments: [
+      category: 'quote'
+      data:
+        title: title
+        text: texts.join '\n'
+        redirectUrl: redirectUrl
+    ]
 
   @sendMessage message
 

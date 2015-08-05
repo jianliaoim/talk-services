@@ -9,8 +9,8 @@ describe 'Jobtong#Webhook', ->
 
   it 'receive webhook', (done) ->
     jobtong.sendMessage = (message) ->
-      message.quote.title.should.eql '天朝来的求职者'
-      message.quote.text.should.eql """
+      message.attachments[0].data.title.should.eql '天朝来的求职者'
+      message.attachments[0].data.text.should.eql """
       性别：gay
       年龄：0
       学历：小学辍学
@@ -19,8 +19,8 @@ describe 'Jobtong#Webhook', ->
       当前职位：酱油
       简历投递日期：2015-07-02T02:52:55.563Z
       """
-      message.quote.redirectUrl.should.eql 'http://www.url.com'
-      message.quote.thumbnailPicUrl.should.eql 'http://www.face.com'
+      message.attachments[0].data.redirectUrl.should.eql 'http://www.url.com'
+      message.attachments[0].data.imageUrl.should.eql 'http://www.face.com'
       done()
 
     req.body =

@@ -9,9 +9,9 @@ describe 'Magnumci#Webhook', ->
 
   it 'receive webhook', (done) ->
     magnumci.sendMessage = (message) ->
-      message.quote.title.should.eql '[FAIL] drips #1 (master - master) by Magnum CI'
-      message.quote.text.should.eql 'Test build'
-      message.quote.redirectUrl.should.eql 'http://magnum-ci.com/projects/2986/builds/172696'
+      message.attachments[0].data.title.should.eql '[FAIL] drips #1 (master - master) by Magnum CI'
+      message.attachments[0].data.text.should.eql 'Test build'
+      message.attachments[0].data.redirectUrl.should.eql 'http://magnum-ci.com/projects/2986/builds/172696'
       done()
 
     req.body = require './magnumci_assets/fail.json'

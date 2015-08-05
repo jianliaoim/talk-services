@@ -15,11 +15,13 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    quote:
-      title: title
-      text: text
-      redirectUrl: payload.body.form.url
-
+    attachments: [
+      category: 'quote'
+      data:
+        title: title
+        text: text
+        redirectUrl: payload.body.form.url
+    ]
   @sendMessage message
 
 module.exports = service.register 'mikecrm', ->

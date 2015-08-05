@@ -43,13 +43,13 @@ describe 'oschina#Webhook', ->
 
   it 'receive push', ->
     testWebhook payload, (message) ->
-      message.should.have.properties 'integration', 'quote'
+      message.should.have.properties 'integration'
       message.integration._id.should.eql '552cc903022844e6d8afb3b4'
-      message.quote.title.should.eql '[webcnn] 提交了新的代码'
-      message.quote.text.should.eql [
+      message.attachments[0].data.title.should.eql '[webcnn] 提交了新的代码'
+      message.attachments[0].data.text.should.eql [
         '<a href="http://git.oschina.net/344958185/webcnn/commit/cdc6e27f9b156a9693cb05369cee6a5686dd8f43" target="_blank">'
         '<code>cdc6e2:</code></a> updated readme<br>'
       ].join ''
-      message.quote.redirectUrl.should.eql 'http://git.oschina.net/344958185/webcnn'
+      message.attachments[0].data.redirectUrl.should.eql 'http://git.oschina.net/344958185/webcnn'
 
   # after cleanup

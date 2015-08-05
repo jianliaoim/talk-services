@@ -1,23 +1,3 @@
-# {
-#   "headers": {
-#     "x-real-ip": "124.202.141.60",
-#     "x-forwarded-for": "124.202.141.60",
-#     "host": "talk.ai",
-#     "x-nginx-proxy": "true",
-#     "connection": "Upgrade",
-#     "content-length": "994",
-#     "accept": "*/*; q=0.5, application/xml",
-#     "accept-encoding": "gzip, deflate",
-#     "content-type": "application/x-www-form-urlencoded",
-#     "user-agent": "Ruby"
-#   },
-#   "query": {},
-#   "body": {
-#     "hook": "{\"password\":\"tb123\",\"push_data\":{\"before\":\"fae5f9ec25e1424a733986c2ae0d241fd28556cc\",\"after\":\"cdc6e27f9b156a9693cb05369cee6a5686dd8f43\",\"ref\":\"master\",\"user_id\":39550,\"user_name\":\"garrett\",\"repository\":{\"name\":\"webcnn\",\"url\":\"git@git.oschina.net:344958185/webcnn.git\",\"description\":\"webcnn\",\"homepage\":\"http://git.oschina.net/344958185/webcnn\"},\"commits\":[{\"id\":\"cdc6e27f9b156a9693cb05369cee6a5686dd8f43\",\"message\":\"updated readme\",\"timestamp\":\"2015-07-01T10:14:51+08:00\",\"url\":\"http://git.oschina.net/344958185/webcnn/commit/cdc6e27f9b156a9693cb05369cee6a5686dd8f43\",\"author\":{\"name\":\"garrett\",\"email\":\"344958185@qq.com\",\"time\":\"2015-07-01T10:14:51+08:00\"}}],\"total_commits_count\":1}}"
-#   }
-# }
-
-
 Promise = require 'bluebird'
 marked = require 'marked'
 service = require '../service'
@@ -38,9 +18,8 @@ _receiveWebhook = ({integration, body}) ->
   catch e
     return
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
   projectUrl = payload.repository?.homepage
@@ -49,11 +28,11 @@ _receiveWebhook = ({integration, body}) ->
 
   # Prepare to send the message
   if payload.before?[...6] is '000000'
-    message.quote.title = "#{projectName}新建了分支 #{payload.ref}"
+    attachment.data.title = "#{projectName}新建了分支 #{payload.ref}"
   else if payload.after?[...6] is '000000'
-    message.quote.title = "#{projectName}删除了分支 #{payload.ref}"
+    attachment.data.title = "#{projectName}删除了分支 #{payload.ref}"
   else
-    message.quote.title = "#{projectName}提交了新的代码"
+    attachment.data.title = "#{projectName}提交了新的代码"
     if payload.commits?.length
       commitArr = payload.commits.map (commit) ->
         commitUrl = commit.url
@@ -61,9 +40,10 @@ _receiveWebhook = ({integration, body}) ->
         <a href="#{commitUrl}" target="_blank"><code>#{commit.id[...6]}:</code></a> #{commit.message}<br>
         """
       text = commitArr.join ''
-      message.quote.text = text
-  message.quote.redirectUrl = projectUrl
-
+      attachment.data.text = text
+  attachment.data.redirectUrl = projectUrl
+  attachment.data.category = 'oschina'
+  message.attachments = [attachment]
   @sendMessage message
 
 module.exports = service.register 'oschina', ->

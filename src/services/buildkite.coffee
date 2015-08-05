@@ -16,10 +16,13 @@ _receiveWebhook = ({integration, body, headers}) ->
 
   message =
     integration: integration
-    quote:
-      title: title
-      text: build.message
-      redirectUrl: build.web_url
+    attachments: [
+      category: 'quote'
+      data:
+        title: title
+        text: build.message
+        redirectUrl: build.web_url
+    ]
 
   @sendMessage message
 

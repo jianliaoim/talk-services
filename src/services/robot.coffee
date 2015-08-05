@@ -32,8 +32,11 @@ _postMessage = (message) ->
         replyMessage._roomId = message._roomId
       else
         replyMessage._toId = message._creatorId
-      replyMessage.content = body.content if body.content
-      replyMessage.quote = body if body.text or body.title
+      replyMessage.body = body.content if body.content
+      if body.text or body.title
+        attachment = category: 'quote', data: body
+        attachment.data.category = 'robot'
+        replyMessage.attachments = [attachment]
       self.sendMessage replyMessage
 
 _receiveWebhook = ({integration, query, body}) ->
@@ -45,22 +48,24 @@ _receiveWebhook = ({integration, query, body}) ->
     , query or {}
     , body or {}
 
-  {content, authorName, title, text, redirectUrl, imageUrl, thumbnailPicUrl, originalPicUrl, _roomId, _toId} = payload
+  {content, authorName, title, text, redirectUrl, imageUrl, thumbnailPicUrl, _roomId, _toId} = payload
   {_teamId} = integration
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
     integration: integration
-    content: content
+    body: content
     _teamId: _teamId
     _creatorId: integration._robotId
-    quote:
+
+  attachment =
+    category: 'quote'
+    data:
       authorName: authorName
       title: title
       text: text
       redirectUrl: redirectUrl
-      thumbnailPicUrl: thumbnailPicUrl or imageUrl
-      originalPicUrl: originalPicUrl or imageUrl
+      imageUrl: thumbnailPicUrl or imageUrl
 
   if _roomId
     $message = RoomModel.findOneAsync _id: _roomId
@@ -83,7 +88,9 @@ _receiveWebhook = ({integration, query, body}) ->
       message._roomId = room._id
       message
 
-  $message.then (message) -> self.sendMessage message
+  $message.then (message) ->
+    message.attachments = [attachment]
+    self.sendMessage message
 
 ###*
  * Remove this robot from bundled team

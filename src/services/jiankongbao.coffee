@@ -16,9 +16,12 @@ _receiveWebhook = ({integration, method, body, query}) ->
 
   message =
     integration: integration
-    quote:
-      text: decodeURIComponent content or ''
-      redirectUrl: "#{jkbUrl}/task/#{task_type}/#{task_id}"
+    attachments: [
+      category: 'quote'
+      data:
+        text: decodeURIComponent content or ''
+        redirectUrl: "#{jkbUrl}/task/#{task_type}/#{task_id}"
+    ]
 
   @sendMessage message
 

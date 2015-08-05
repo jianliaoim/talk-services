@@ -3,7 +3,7 @@
   ```json
   {
       "_id": "549908a78cd040715c48caf2",
-      "content": "Winter is coming",                    // 消息正文
+      "body": "Winter is coming",                    // 消息正文
       "room": {
         "_id": "549908a68cd040715c48cadf",
         "topic": "Game of Throne",                      // 话题名称
@@ -26,7 +26,7 @@
 
   ```json
   {
-    "content": "Thanks!",                             // 回复消息正文内容（content 与 text 至少有一个参数不为空）
+    "content": "Thanks!",                      // 回复消息正文内容（content 与 text 至少有一个参数不为空）
     "text": "Got it",                          // 回复消息附加内容（显示在聚合消息的区域中）
     "authorName": "Little Finger",             // 在回复消息中显示的用户名（可选）
     "redirectUrl": "http://you.service.com"    // 跳转链接（可选）

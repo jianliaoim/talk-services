@@ -9,9 +9,9 @@ describe 'Buildkite#Webhook', ->
 
   it 'receive webhook', (done) ->
     buildkite.sendMessage = (message) ->
-      message.quote.title.should.eql '[scheduled] drips #4 (master - 91f48ae) by Xu Jingxin'
-      message.quote.text.should.eql 'Fix build'
-      message.quote.redirectUrl.should.eql 'https://buildkite.com/teambition/drips/builds/4'
+      message.attachments[0].data.title.should.eql '[scheduled] drips #4 (master - 91f48ae) by Xu Jingxin'
+      message.attachments[0].data.text.should.eql 'Fix build'
+      message.attachments[0].data.redirectUrl.should.eql 'https://buildkite.com/teambition/drips/builds/4'
       done()
 
     req.body = require './buildkite_assets/payload.json'

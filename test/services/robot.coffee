@@ -53,11 +53,11 @@ describe 'Robot#Events', ->
 
   it 'message.create', (done) ->
     robot.httpPost = (url, message) ->
-      message.content.should.eql 'abc'
+      message.body.should.eql 'abc'
       return Promise.resolve(content: "Hi")
 
     robot.sendMessage = (message) ->
-      message.content.should.eql 'Hi'
+      message.body.should.eql 'Hi'
       "#{message._toId}".should.eql '559ce208e891ac07a3d6bb2a'
       "#{message._creatorId}".should.eql "#{integration._robotId}"
       "#{message._teamId}".should.eql "#{team._id}"
@@ -67,7 +67,7 @@ describe 'Robot#Events', ->
       creator: '559ce208e891ac07a3d6bb2a'
       team: team._id
       to: integration._robotId
-      content: 'abc'
+      body: 'abc'
 
     robot.receiveEvent 'message.create', message
     .catch done
@@ -75,7 +75,7 @@ describe 'Robot#Events', ->
   it 'service.webhook', (done) ->
     robot.sendMessage = (message) ->
       message.should.have.properties '_teamId', '_roomId'
-      message.content.should.eql 'Hi'
+      message.body.should.eql 'Hi'
       "#{message._creatorId}".should.eql "#{integration._robotId}"
       "#{message._roomId}".should.eql "#{room._id}"  # General room
       done()

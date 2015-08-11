@@ -1,9 +1,12 @@
 service = require '../service'
 _ = require 'lodash'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({integration, body, res}) ->
   payload = body
-  return unless payload.resource
+
+  unless payload.resource
+    res.resType = 'text'
+    return integration.token
 
   title = ''
   if payload.resource.resource_name isnt ''
@@ -43,6 +46,13 @@ module.exports = service.register 'qingcloud', ->
     en: 'QingCloud can acquire the computing resource within the second time, realize the function of virtual router and switch, and provide the distribution according to demands, the flexible calculation and networking ability.'
 
   @iconUrl = service.static 'images/icons/qingcloud@2x.png'
+
+  @_fields.push
+    key: 'token'
+    type: 'text'
+    description: service.i18n
+      zh: '必填'
+      en: 'Required'
 
   @_fields.push
     key: 'webhookUrl'

@@ -20,12 +20,12 @@ module.exports = service.register 'newrelic', ->
   @iconUrl = service.static 'images/icons/newrelic@2x.png'
 
   @_fields.push
-  key: 'webhookUrl'
-  type: 'text'
-  readonly: true
-  description: service.i18n
-    zh: '复制 web hook 地址到你的 New Relic 中使用。'
-    en: 'Copy this web hook to your New Relic account to use it.'
+    key: 'webhookUrl'
+    type: 'text'
+    readonly: true
+    description: service.i18n
+      zh: '复制 web hook 地址到你的 New Relic 中使用。'
+      en: 'Copy this web hook to your New Relic account to use it.'
 
   # Apply function on `webhook` event
   @registerEvent 'service.webhook', _receiveWebhook

@@ -200,7 +200,7 @@ describe 'Teambition#Webhook', ->
 
   it 'receive task.remove.executor', (done) ->
     _testWebhook 'task.remove.executor', payloads['task.remove.executor'], (message) ->
-      message.attachments[0].data.title.should.eql '[新名] 二师兄 移除了任务 task 的执行者'
+      message.attachments[0].data.title.should.eql '[新名] 二师兄 移除了任务的执行者 task'
       done()
 
   it 'receive task.update.priority', (done) ->

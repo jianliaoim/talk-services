@@ -133,7 +133,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
       if data.task.executor?.name
         attachment.data.title = "将任务 #{data.task.content} 指派给 #{data.task.executor.name}"
       else
-        attachment.data.title = "移除了任务 #{data.task.content} 的执行者"
+        attachment.data.title = "移除了任务的执行者 #{data.task.content}"
 
     when 'task.update.priority'
       priorities =
@@ -146,7 +146,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
       if data.task.dueDate
         attachment.data.title = "更新了任务 #{data.task.content} 的截止日期 #{moment(data.task.dueDate).tz('Asia/Shanghai').format('MM月DD日')}"
       else
-        attachment.data.title = "删除了任务 #{data.task.content} 的截止日期"
+        attachment.data.title = "删除了任务的截止日期 #{data.task.content}"
 
     when 'task.move'
       attachment.data.title = "将任务 #{data.task.content} 移动到 #{data.task.tasklist.title}列表，#{data.task.stage.name}阶段"
@@ -168,7 +168,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
       if data.subtask.executor?.name
         attachment.data.title = "将子任务 #{data.subtask.content} 指派给 #{data.subtask.executor.name}"
       else
-        attachment.data.title = "移除了子任务 #{data.subtask.content} 的执行者"
+        attachment.data.title = "移除了子任务的执行者 #{data.subtask.content}"
 
     when 'tag.create', 'tag.remove'
       actions =

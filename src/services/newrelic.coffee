@@ -2,7 +2,41 @@ _ = require 'lodash'
 Promise = require 'bluebird'
 service = require '../service'
 
-_receiveWebhook = () ->
+###*
+ * Define handler when receive incoming webhook from new relic
+ * @param  {Object}   req      Express request object
+ * @param  {Object}   res      Express response object
+ * @param  {Function} callback
+ * @return {Promise}
+###
+
+_receiveWebhook = ({ integration, body }) ->
+  payload = body
+
+  return unless payload
+
+  title = []
+  title.push payload.event_type, ': '
+  if payload.condition_name isnt ''
+    title.push payload.condition_name
+
+  text = []
+  if payload.owner isnt ''
+    text.push 'Owner: ', payload.owner, '\n'
+  if payload.details isnt ''
+    text.push 'Incident: ', payload.details
+
+  message =
+    integration: integration
+    attachments: [
+      category: 'quote'
+      data:
+        redirectUrl: payload.incident_url
+        title: title.join ''
+        text: text.join ''
+    ]
+
+  @sendMessage message
 
 module.exports = service.register 'newrelic', ->
   @title = 'New Relic'

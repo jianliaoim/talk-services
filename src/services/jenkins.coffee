@@ -18,14 +18,16 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    content: content
-    quote:
-      authorName: authorName
-      title: title
-      text: text
-      redirectUrl: redirectUrl
-      thumbnailPicUrl: imageUrl
-      originalPicUrl: imageUrl
+    body: content
+    attachments: [
+      category: 'quote'
+      data:
+        authorName: authorName
+        title: title
+        text: text
+        redirectUrl: redirectUrl
+        imageUrl: imageUrl
+    ]
 
   @sendMessage message
 

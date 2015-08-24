@@ -5,20 +5,19 @@ _receiveWebhook = ({integration, body}) ->
 
   return unless payload
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   if payload?.outcome is 'success'
-    message.quote.title = "[#{payload.reponame}] Build success: #{payload.subject}"
+    attachment.data.title = "[#{payload.reponame}] Build success: #{payload.subject}"
   else
-    message.quote.title = "[#{payload.reponame}] Build fail: #{payload.outcome}"
+    attachment.data.title = "[#{payload.reponame}] Build fail: #{payload.outcome}"
     if toString.call(payload.messages) is '[object Array]'
-      message.quote.text = payload.messages?.map (message) -> message?.message or ''
+      attachment.data.text = payload.messages?.map (message) -> message?.message or ''
         .join '<br>'
 
-  message.quote.redirectUrl = payload.build_url
-
+  attachment.data.redirectUrl = payload.build_url
+  message.attachments = [attachment]
   @sendMessage message
 
 module.exports = service.register 'circleci', ->

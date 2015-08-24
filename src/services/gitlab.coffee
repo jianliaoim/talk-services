@@ -25,32 +25,31 @@ _receiveWebhook = ({integration, body}) ->
   commits or= []
 
   message = integration: integration
-
-  message.quote = {}
+  attachment = category: 'quote', data: {}
 
   switch payload.event
     when 'push'
-      message.quote.title = "#{repository?.name}"
+      attachment.data.title = "#{repository?.name}"
       if payload.before is '0000000000000000000000000000000000000000'
-        message.quote.title += " create branch #{payload.ref}"
+        attachment.data.title += " create branch #{payload.ref}"
       else if payload.after is '0000000000000000000000000000000000000000'
-        message.quote.title += " remove branch #{payload.ref}"
+        attachment.data.title += " remove branch #{payload.ref}"
       else
-        message.quote.title += " new commits"
+        attachment.data.title += " new commits"
       commitArr = commits.map (commit) ->
         """
         <a href="#{commit.url}" target="_blank"><code>#{commit?.id?[0...6]}:</code></a> #{commit?.message}<br>
         """
-      message.quote.text = commitArr.join ''
-      message.quote.redirectUrl = repository?.homepage
+      attachment.data.text = commitArr.join ''
+      attachment.data.redirectUrl = repository?.homepage
     when 'merge_request'
-      message.quote.title = "[#{object_attributes?.state}] #{object_attributes?.title}"
-      message.quote.text = """
+      attachment.data.title = "[#{object_attributes?.state}] #{object_attributes?.title}"
+      attachment.data.text = """
       #{marked(object_attributes?.description or '')}
       """
     when 'issues'
-      message.quote.title = "[#{object_attributes?.state}] #{object_attributes?.title}"
-      message.quote.text = """
+      attachment.data.title = "[#{object_attributes?.state}] #{object_attributes?.title}"
+      attachment.data.text = """
       #{marked(object_attributes?.description or '')}
       """
 
@@ -69,6 +68,7 @@ _receiveWebhook = ({integration, body}) ->
 
   .then (isLocked) ->
     return if isLocked
+    message.attachments = [attachment]
     self.sendMessage message
 
 module.exports = service.register 'gitlab', ->

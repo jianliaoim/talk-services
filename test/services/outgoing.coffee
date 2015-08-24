@@ -12,7 +12,7 @@ describe 'Outgoing#Webhook', ->
   _roomId = mongoose.Types.ObjectId()
 
   message =
-    content: 'Hello'
+    body: 'Hello'
     creator: name: 'Talkuser'
     room: _id: _roomId, topic: 'OK'
     _roomId: _roomId
@@ -20,7 +20,6 @@ describe 'Outgoing#Webhook', ->
     team: name: 'Team'
     createdAt: new Date
     updatedAt: new Date
-    isManual: true
 
   integration = new IntegrationModel
     room: _roomId
@@ -42,7 +41,7 @@ describe 'Outgoing#Webhook', ->
     ###
     outgoing.httpPost = (url, payload) ->
       url.should.eql "http://www.someurl.com"
-      payload.should.have.properties 'content', '_teamId', 'room', 'creator', 'createdAt', 'updatedAt'
+      payload.should.have.properties 'body', '_teamId', 'room', 'creator', 'createdAt', 'updatedAt'
       payload.creator.name.should.eql 'Talkuser'
       body =
         authorName: 'Stack'
@@ -52,8 +51,8 @@ describe 'Outgoing#Webhook', ->
     # Over write the sendMessage
     outgoing.sendMessage = (message) ->
       message.integration._id.should.eql req.integration._id
-      message.quote.text.should.eql 'Winter is coming'
-      message.quote.authorName.should.eql 'Stack'
+      message.attachments[0].data.text.should.eql 'Winter is coming'
+      message.attachments[0].data.authorName.should.eql 'Stack'
       done()
 
     outgoing.receiveEvent 'message.create', message

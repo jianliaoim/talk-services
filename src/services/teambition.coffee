@@ -74,9 +74,8 @@ _receiveWebhook = ({integration, body, query, method}) ->
 
   {event, data} = body
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   [scope] = event?.split('.')
 
@@ -85,17 +84,17 @@ _receiveWebhook = ({integration, body, query, method}) ->
   # Set the redirect url by specific scope name
   switch scope
     when 'subtask'
-      message.quote.redirectUrl = data.subtask.task?.url
+      attachment.data.redirectUrl = data.subtask.task?.url
     when 'file'
       if toString.call(data.file) is '[object Array]'
-        message.quote.redirectUrl = data.file[0].url
+        attachment.data.redirectUrl = data.file[0].url
       else
-        message.quote.redirectUrl = data.file.url
+        attachment.data.redirectUrl = data.file.url
     when 'stage'
-      message.quote.redirectUrl = data.stage.tasklist?.url
-    else message.quote.redirectUrl = data[scope]?.url
+      attachment.data.redirectUrl = data.stage.tasklist?.url
+    else attachment.data.redirectUrl = data[scope]?.url
 
-  message.quote.redirectUrl or= data.project.url
+  attachment.data.redirectUrl or= data.project.url
 
   switch event
     when 'project.rename', 'project.archive', 'project.unarchive'
@@ -103,7 +102,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
         'project.rename': "重命名了"
         'project.archive': "归档了"
         'project.unarchive': "恢复了"
-      message.quote.title = "#{actions[event]}项目 #{data.project.name}"
+      attachment.data.title = "#{actions[event]}项目 #{data.project.name}"
 
     when 'project.member.create', 'project.member.remove'
       members = if toString.call(data.member) is '[object Array]' then data.member else [data.member]
@@ -113,14 +112,14 @@ _receiveWebhook = ({integration, body, query, method}) ->
       actions =
         'project.member.create': "邀请了"
         'project.member.remove': "移除了"
-      message.quote.title = "#{actions[event]}成员 #{memberNames}"
+      attachment.data.title = "#{actions[event]}成员 #{memberNames}"
 
     when 'tasklist.create', 'tasklist.remove', 'tasklist.rename'
       actions =
         "tasklist.create": "创建了"
         "tasklist.remove": "删除了"
         "tasklist.rename": "修改了"
-      message.quote.title = "#{actions[event]}任务列表 #{data.tasklist.title}"
+      attachment.data.title = "#{actions[event]}任务列表 #{data.tasklist.title}"
 
     when 'task.create', 'task.remove', 'task.rename', 'task.done'
       actions =
@@ -128,29 +127,29 @@ _receiveWebhook = ({integration, body, query, method}) ->
         "task.remove": "删除了"
         'task.rename': "重命名了"
         'task.done': "完成了"
-      message.quote.title = "#{actions[event]}任务 #{data.task.content}"
+      attachment.data.title = "#{actions[event]}任务 #{data.task.content}"
 
     when 'task.update.executor'
       if data.task.executor?.name
-        message.quote.title = "将任务 #{data.task.content} 指派给 #{data.task.executor.name}"
+        attachment.data.title = "将任务 #{data.task.content} 指派给 #{data.task.executor.name}"
       else
-        message.quote.title = "移除了任务 #{data.task.content} 的执行者"
+        attachment.data.title = "移除了任务的执行者 #{data.task.content}"
 
     when 'task.update.priority'
       priorities =
         'normal': '普通'
         'high': '紧急'
         'urgent': '非常紧急'
-      message.quote.title = "更新了任务 #{data.task.content} 的优先级 #{priorities[data.task.priority]}"
+      attachment.data.title = "更新了任务 #{data.task.content} 的优先级 #{priorities[data.task.priority]}"
 
     when 'task.update.dueDate'
       if data.task.dueDate
-        message.quote.title = "更新了任务 #{data.task.content} 的截止日期 #{moment(data.task.dueDate).tz('Asia/Shanghai').format('MM月DD日')}"
+        attachment.data.title = "更新了任务 #{data.task.content} 的截止日期 #{moment(data.task.dueDate).tz('Asia/Shanghai').format('MM月DD日')}"
       else
-        message.quote.title = "删除了任务 #{data.task.content} 的截止日期"
+        attachment.data.title = "删除了任务的截止日期 #{data.task.content}"
 
     when 'task.move'
-      message.quote.title = "将任务 #{data.task.content} 移动到 #{data.task.tasklist.title}列表，#{data.task.stage.name}阶段"
+      attachment.data.title = "将任务 #{data.task.content} 移动到 #{data.task.tasklist.title}列表，#{data.task.stage.name}阶段"
 
     when 'task.update.involveMembers'
       ###*
@@ -163,29 +162,29 @@ _receiveWebhook = ({integration, body, query, method}) ->
         'subtask.create': '创建了'
         'subtask.update.content': '更新了'
         'subtask.done': '完成了'
-      message.quote.title = "#{actions[event]}子任务 #{data.subtask.content}"
+      attachment.data.title = "#{actions[event]}子任务 #{data.subtask.content}"
 
     when 'subtask.update.executor'
       if data.subtask.executor?.name
-        message.quote.title = "将子任务 #{data.subtask.content} 指派给 #{data.subtask.executor.name}"
+        attachment.data.title = "将子任务 #{data.subtask.content} 指派给 #{data.subtask.executor.name}"
       else
-        message.quote.title = "移除了子任务 #{data.subtask.content} 的执行者"
+        attachment.data.title = "移除了子任务的执行者 #{data.subtask.content}"
 
     when 'tag.create', 'tag.remove'
       actions =
         'tag.create': '创建了'
         'tag.remove': "删除了"
-      message.quote.title = "#{actions[event]}标签 #{data.tag.name}"
+      attachment.data.title = "#{actions[event]}标签 #{data.tag.name}"
 
     when 'post.create', 'post.update'
       actions =
         'post.create': '发布了'
         'post.update': '更新了'
-      message.quote.title = "#{actions[event]}分享 #{data.post.title}"
+      attachment.data.title = "#{actions[event]}分享 #{data.post.title}"
       if data.post.postMode is 'md'
-        message.quote.text = marked(data.post.content)
+        attachment.data.text = marked(data.post.content)
       else
-        message.quote.text = data.post.content
+        attachment.data.text = data.post.content
 
     when 'post.update.involveMembers'
       ###*
@@ -203,47 +202,48 @@ _receiveWebhook = ({integration, body, query, method}) ->
         fileNames = data.file
           .map (file) -> file.fileName
           .join '，'
-        message.quote.thumbnailPicUrl = data.file[0].thumbnail
+        attachment.data.imageUrl = data.file[0].thumbnail
       else
         fileNames = data.file.fileName
-        message.quote.thumbnailPicUrl = data.file.thumbnail
-      message.quote.title = "#{actions[event]}文件 #{fileNames}"
+        attachment.data.imageUrl = data.file.thumbnail
+      attachment.data.title = "#{actions[event]}文件 #{fileNames}"
 
     when 'file.move'
-      message.quote.title = "将文件 #{data.file.fileName} 移动到 #{data.file.collection.title}"
+      attachment.data.title = "将文件 #{data.file.fileName} 移动到 #{data.file.collection.title}"
 
     when 'event.create', 'event.update'
       actions =
         'event.create': '创建了'
         'event.update': '更新了'
-      message.quote.title = [
+      attachment.data.title = [
         "#{actions[event]}日程 #{data.event.title} "
         "地点：#{data.event.location}，"
         "开始时间：#{moment(data.event.startDate).tz('Asia/Shanghai').format('MM月DD日HH:mm:ss')}，"
         "结束时间：#{moment(data.event.endDate).tz('Asia/Shanghai').format('MM月DD日HH:mm:ss')}"
       ].join ''
-      message.quote.text = marked(data.event.content)
+      attachment.data.text = marked(data.event.content)
 
     when 'event.remove'
-      message.quote.title = "删除了日程 #{data.event.title}"
+      attachment.data.title = "删除了日程 #{data.event.title}"
 
     when 'stage.create', 'stage.rename'
       actions =
         'stage.create': '创建了'
         'stage.rename': '重命名了'
-      message.quote.title = "#{actions[event]}阶段 #{data.stage.name}"
+      attachment.data.title = "#{actions[event]}阶段 #{data.stage.name}"
 
     when 'entry.create', 'entry.update'
       actions =
         'entry.create': '创建了'
         'entry.update': '更新了'
       incoming = if data.entry.type is 1 then "收入" else "支出"
-      message.quote.title = "#{actions[event]}账单 #{data.entry.content}，#{incoming} #{data.entry.amount} 元"
+      attachment.data.title = "#{actions[event]}账单 #{data.entry.content}，#{incoming} #{data.entry.amount} 元"
 
     else return false
 
   # Add project name and executor prefix
-  message.quote.title = "[#{data.project.name}] #{data.user.name} #{message.quote.title}"
+  attachment.data.title = "[#{data.project.name}] #{data.user.name} #{attachment.data.title}"
+  message.attachments = [attachment]
 
   @sendMessage message
 

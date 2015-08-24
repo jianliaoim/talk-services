@@ -7,64 +7,64 @@ _receiveWebhook = ({integration, body, headers}) ->
     throw new Error('Invalid event format')
   throw new Error('Invalid event type') unless type in ['repo', 'issue', 'pullrequest']
 
-  message =
-    integration: integration
-    quote: {}
+  message = integration: integration
+  attachment = category: 'quote', data: {}
 
   switch type
     when 'repo'
       throw new Error('Unsupported action') unless action in ['push', 'commit_comment_created']
       if action is 'push'
-        message.quote.title = "A new push for project #{body.repository.name}"
-        message.quote.text = "Committer: #{body.actor.display_name}"
-        message.quote.redirectUrl = body.repository.links.html.href
+        attachment.data.title = "A new push for project #{body.repository.name}"
+        attachment.data.text = "Committer: #{body.actor.display_name}"
+        attachment.data.redirectUrl = body.repository.links.html.href
       else if action is 'commit_comment_created'
-        message.quote.title = "A new comment for #{body.repository.name}"
-        message.quote.text = body.comment.content.raw
-        message.quote.redirectUrl = body.comment.links.html.href
+        attachment.data.title = "A new comment for #{body.repository.name}"
+        attachment.data.text = body.comment.content.raw
+        attachment.data.redirectUrl = body.comment.links.html.href
 
     when 'issue'
       throw new Error('Unsupported action') unless action in ['created', 'updated', 'comment_created']
       if action is 'created'
-        message.quote.title = "#{body.actor.display_name} created an issue for project #{body.repository.full_name}"
-        message.quote.text = body.issue.content.raw
-        message.quote.redirectUrl = body.issue.links.html.href
+        attachment.data.title = "#{body.actor.display_name} created an issue for project #{body.repository.full_name}"
+        attachment.data.text = body.issue.content.raw
+        attachment.data.redirectUrl = body.issue.links.html.href
       else if action is 'updated'
-        message.quote.title = "#{body.actor.display_name} updated an issue for project #{body.repository.full_name}"
-        message.quote.text = body.changes.content.new
-        message.quote.redirectUrl = body.issue.links.html.href
+        attachment.data.title = "#{body.actor.display_name} updated an issue for project #{body.repository.full_name}"
+        attachment.data.text = body.changes.content.new
+        attachment.data.redirectUrl = body.issue.links.html.href
       else if action is 'comment_created'
-        message.quote.title = "#{body.actor.display_name} created a comment for project #{body.repository.full_name}"
-        message.quote.text = body.comment.content.raw
-        message.quote.redirectUrl = body.comment.links.html.href
+        attachment.data.title = "#{body.actor.display_name} created a comment for project #{body.repository.full_name}"
+        attachment.data.text = body.comment.content.raw
+        attachment.data.redirectUrl = body.comment.links.html.href
 
     when 'pullrequest'
       throw new Error('Unsupported action') unless action in ['created', 'updated', 'comment_created', 'comment_deleted', 'fulfilled', 'rejected']
       if action is 'created'
-        message.quote.title = "#{body.actor.display_name} created a pull request for #{body.repository.name}"
-        message.quote.text = body.pullrequest.title
-        message.quote.redirectUrl = body.pullrequest.links.html.href
+        attachment.data.title = "#{body.actor.display_name} created a pull request for #{body.repository.name}"
+        attachment.data.text = body.pullrequest.title
+        attachment.data.redirectUrl = body.pullrequest.links.html.href
       else if action is 'updated'
-        message.quote.title = "#{body.actor.display_name} updated a pull request for #{body.repository.name}"
-        message.quote.text = body.pullrequest.title
-        message.quote.redirectUrl = body.pullrequest.links.html.href
+        attachment.data.title = "#{body.actor.display_name} updated a pull request for #{body.repository.name}"
+        attachment.data.text = body.pullrequest.title
+        attachment.data.redirectUrl = body.pullrequest.links.html.href
       else if action is 'comment_created'
-        message.quote.title = "#{body.actor.display_name} created a comment for pull request #{body.pullrequest.title}"
-        message.quote.text = body.comment.pullrequest.title
-        message.quote.redirectUrl = body.pullrequest.links.html.href
+        attachment.data.title = "#{body.actor.display_name} created a comment for pull request #{body.pullrequest.title}"
+        attachment.data.text = body.comment.pullrequest.title
+        attachment.data.redirectUrl = body.pullrequest.links.html.href
       else if action is 'comment_deleted'
-        message.quote.title = "#{body.actor.display_name} deleted a comment for pull request #{body.pullrequest.title}"
-        message.quote.text = body.comment.pullrequest.title
-        message.quote.redirectUrl = body.pullrequest.links.html.href
+        attachment.data.title = "#{body.actor.display_name} deleted a comment for pull request #{body.pullrequest.title}"
+        attachment.data.text = body.comment.pullrequest.title
+        attachment.data.redirectUrl = body.pullrequest.links.html.href
       else if action is 'fulfilled'
-        message.quote.title = "#{body.actor.display_name} fulfilled the pull request #{body.pullrequest.title}"
-        message.quote.text = ""
-        message.quote.redirectUrl = body.pullrequest.links.html.href
+        attachment.data.title = "#{body.actor.display_name} fulfilled the pull request #{body.pullrequest.title}"
+        attachment.data.text = ""
+        attachment.data.redirectUrl = body.pullrequest.links.html.href
       else if action is 'rejected'
-        message.quote.title = "#{body.actor.display_name} rejected the pull request #{body.pullrequest.title}"
-        message.quote.text = ""
-        message.quote.redirectUrl = body.pullrequest.links.html.href
+        attachment.data.title = "#{body.actor.display_name} rejected the pull request #{body.pullrequest.title}"
+        attachment.data.text = ""
+        attachment.data.redirectUrl = body.pullrequest.links.html.href
 
+  message.attachments = [attachment]
   @sendMessage message
 
 module.exports = service.register 'bitbucket', ->

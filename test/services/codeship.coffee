@@ -56,13 +56,13 @@ describe 'codeship#Webhook', ->
 
   it 'receive push', ->
     testWebhook payload, (message) ->
-      message.should.have.properties 'integration', 'quote'
+      message.should.have.properties 'integration'
       message.integration._id.should.eql '552cc903022844e6d8afb3b4'
-      message.quote.title.should.eql '[lee715/easy-hotkey] new commits on success stage'
-      message.quote.text.should.eql [
+      message.attachments[0].data.title.should.eql '[lee715/easy-hotkey] new commits on success stage'
+      message.attachments[0].data.text.should.eql [
         '<a href="https://github.com/lee715/easy-hotkey/commit/fda4ca3ee0a4d2d92b68a11c8cdc6d319fbe7c19" target="_blank">'
         '<code>fda4ca:</code></a> add new<br>'
       ].join ''
-      message.quote.redirectUrl.should.eql 'https://codeship.com/projects/88500/builds/6639402'
+      message.attachments[0].data.redirectUrl.should.eql 'https://codeship.com/projects/88500/builds/6639402'
 
   after cleanup

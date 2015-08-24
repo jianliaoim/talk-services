@@ -12,14 +12,14 @@ describe 'Pingxx#Webhook', ->
 
   it 'receive charge.succeeded', (done) ->
     pingxx.sendMessage = (message) ->
-      message.quote.title.should.eql "付款成功 Your Subject"
-      message.quote.text.indexOf '''
+      message.attachments[0].data.title.should.eql "付款成功 Your Subject"
+      message.attachments[0].data.text.indexOf '''
       订单号：123456789
       金额：1 CNY
       商品描述：Your Body
       '''
       .should.eql 0
-      message.quote.redirectUrl.should.eql 'https://dashboard.pingxx.com/app/detail?app_id=app_1234567890abcDEF'
+      message.attachments[0].data.redirectUrl.should.eql 'https://dashboard.pingxx.com/app/detail?app_id=app_1234567890abcDEF'
       done()
 
     req.body = payloads['charge.succeeded']
@@ -30,8 +30,8 @@ describe 'Pingxx#Webhook', ->
 
   it 'receive summary.daily.available', (done) ->
     pingxx.sendMessage = (message) ->
-      message.quote.title.should.eql "日统计 Company Name"
-      message.quote.text.indexOf '''
+      message.attachments[0].data.title.should.eql "日统计 Company Name"
+      message.attachments[0].data.text.indexOf '''
       交易金额：10 元
       交易量：100 笔
       '''

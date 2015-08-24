@@ -14,11 +14,13 @@ _receiveWebhook = ({integration, body}) ->
 
   message =
     integration: integration
-    quote:
-      title: payload.title
-      text: payload.message
-      redirectUrl: payload.build_url
-
+    attachments: [
+      category: 'quote'
+      data:
+        title: payload.title
+        text: payload.message
+        redirectUrl: payload.build_url
+    ]
   @sendMessage message
 
 module.exports = service.register 'magnumci', ->

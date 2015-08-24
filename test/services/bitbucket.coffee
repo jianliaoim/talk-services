@@ -69,9 +69,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive repository push', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'A new push for project Test Bitbucket'
-      message.quote.text.should.eql 'Committer: Catalyst Zhang'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket'
+      message.attachments[0].data.title.should.eql 'A new push for project Test Bitbucket'
+      message.attachments[0].data.text.should.eql 'Committer: Catalyst Zhang'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket'
       done()
 
     data = require './bitbucket_assets/repo_push.json'
@@ -86,9 +86,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive repository comment', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'A new comment for Test Bitbucket'
-      message.quote.text.should.eql 'a comment for the commit.'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/commits/024cb7dc2cea5cc1360dad6531661a037e492a8d#comment-2066462'
+      message.attachments[0].data.title.should.eql 'A new comment for Test Bitbucket'
+      message.attachments[0].data.text.should.eql 'a comment for the commit.'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/commits/024cb7dc2cea5cc1360dad6531661a037e492a8d#comment-2066462'
       done()
 
     data = require './bitbucket_assets/repo_commit_comment_created.json'
@@ -103,9 +103,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive issue comment notifycation', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang created a comment for project destec/test-bitbucket'
-      message.quote.text.should.eql 'comment for the issue'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/issue/1#comment-19446825'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang created a comment for project destec/test-bitbucket'
+      message.attachments[0].data.text.should.eql 'comment for the issue'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/issue/1#comment-19446825'
       done()
 
     data = require './bitbucket_assets/issue_comment_created.json'
@@ -120,9 +120,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive issue created notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang created an issue for project destec/test-bitbucket'
-      message.quote.text.should.eql 'the test issue'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/issue/1/hi-what-is-issue'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang created an issue for project destec/test-bitbucket'
+      message.attachments[0].data.text.should.eql 'the test issue'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/issue/1/hi-what-is-issue'
       done()
 
     data = require './bitbucket_assets/issue_created.json'
@@ -137,9 +137,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive issue updated notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang updated an issue for project destec/test-bitbucket'
-      message.quote.text.should.eql 'update the test issue'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/issue/1/hi-what-is-issue'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang updated an issue for project destec/test-bitbucket'
+      message.attachments[0].data.text.should.eql 'update the test issue'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/issue/1/hi-what-is-issue'
       done()
 
     data = require './bitbucket_assets/issue_updated.json'
@@ -154,9 +154,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive pull request created notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang created a pull request for Test Bitbucket'
-      message.quote.text.should.eql 'first br'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang created a pull request for Test Bitbucket'
+      message.attachments[0].data.text.should.eql 'first br'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
       done()
 
     data = require './bitbucket_assets/pullrequest_created.json'
@@ -171,9 +171,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive pull request updated notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang updated a pull request for Test Bitbucket'
-      message.quote.text.should.eql 'first br'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang updated a pull request for Test Bitbucket'
+      message.attachments[0].data.text.should.eql 'first br'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
       done()
 
     data = require './bitbucket_assets/pullrequest_updated.json'
@@ -188,9 +188,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive pull request fulfilled notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang fulfilled the pull request update pr'
-      message.quote.text.should.eql ''
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang fulfilled the pull request update pr'
+      message.attachments[0].data.text.should.eql ''
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
       done()
 
     data = require './bitbucket_assets/pullrequest_fulfilled.json'
@@ -205,9 +205,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive pull request rejected notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang rejected the pull request second pr'
-      message.quote.text.should.eql ''
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/2'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang rejected the pull request second pr'
+      message.attachments[0].data.text.should.eql ''
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/2'
       done()
 
     data = require './bitbucket_assets/pullrequest_rejected.json'
@@ -222,9 +222,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive pull request comment created notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang created a comment for pull request update pr'
-      message.quote.text.should.eql 'update pr'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang created a comment for pull request update pr'
+      message.attachments[0].data.text.should.eql 'update pr'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
       done()
 
     data = require './bitbucket_assets/pullrequest_comment_created.json'
@@ -239,9 +239,9 @@ describe 'Bitbucket#Webhook', ->
 
   it 'receive pull request comment updated notification', (done) ->
     bitbucket.sendMessage = (message) ->
-      message.quote.title.should.eql 'Catalyst Zhang deleted a comment for pull request update pr'
-      message.quote.text.should.eql 'update pr'
-      message.quote.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
+      message.attachments[0].data.title.should.eql 'Catalyst Zhang deleted a comment for pull request update pr'
+      message.attachments[0].data.text.should.eql 'update pr'
+      message.attachments[0].data.redirectUrl.should.eql 'https://bitbucket.org/destec/test-bitbucket/pull-request/1'
       done()
 
     data = require './bitbucket_assets/pullrequest_comment_deleted.json'

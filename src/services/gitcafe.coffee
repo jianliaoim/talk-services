@@ -15,27 +15,26 @@ _receiveWebhook = ({integration, body, headers}) ->
   throw new Error("Unknown GitCafe event type") unless headers and headers['x-gitcafe-event']
 
   message = integration: integration
-
-  message.quote = {}
+  attachment = category: 'quote', data: {}
 
   switch headers['x-gitcafe-event']
     when 'commit_comment'
-      message.quote.title = "#{body.comment.sender.username} 评论了提交 #{body.commit.message_subject}"
-      message.quote.text = "#{marked(body.comment.content)}"
-      message.quote.redirectUrl = "#{body.project.html_url}/commit/#{body.commit.sha}#comment-#{body.comment.id}"
+      attachment.data.title = "#{body.comment.sender.username} 评论了提交 #{body.commit.message_subject}"
+      attachment.data.text = "#{marked(body.comment.content)}"
+      attachment.data.redirectUrl = "#{body.project.html_url}/commit/#{body.commit.sha}#comment-#{body.comment.id}"
 
     when 'pull_request'
-      message.quote.title = "#{body.sender.username} 向 #{body.pull_request.head_project.name} 项目发起了 Pull Request 请求"
-      message.quote.text = "#{marked(body.pull_request.subject or '')} (#{marked(body.pull_request.content or '')})"
-      message.quote.redirectUrl = "#{body.pull_request.head_project.html_url}/pull/#{body.pull_request.number}"
+      attachment.data.title = "#{body.sender.username} 向 #{body.pull_request.head_project.name} 项目发起了 Pull Request 请求"
+      attachment.data.text = "#{marked(body.pull_request.subject or '')} (#{marked(body.pull_request.content or '')})"
+      attachment.data.redirectUrl = "#{body.pull_request.head_project.html_url}/pull/#{body.pull_request.number}"
 
     when 'pull_request_comment'
-      message.quote.title = "#{body.comment.sender.username} 评论了 #{body.pull_request.head_project.name} 项目的 Pull Request 请求"
-      message.quote.text = "#{marked(body.comment.content or '')}"
-      message.quote.redirectUrl = "#{body.project.html_url}/pull/#{body.pull_request.number}#comment-#{body.comment.id}"
+      attachment.data.title = "#{body.comment.sender.username} 评论了 #{body.pull_request.head_project.name} 项目的 Pull Request 请求"
+      attachment.data.text = "#{marked(body.comment.content or '')}"
+      attachment.data.redirectUrl = "#{body.project.html_url}/pull/#{body.pull_request.number}#comment-#{body.comment.id}"
 
     when 'push'
-      message.quote.title = "#{body.sender.username} 向 #{body.project.name} 项目提交了代码"
+      attachment.data.title = "#{body.sender.username} 向 #{body.project.name} 项目提交了代码"
       if body.commits?.length
         commitArr = body.commits.map (commit) ->
           commitUrl = "#{body.project.html_url}/commit/#{commit.sha}"
@@ -43,21 +42,22 @@ _receiveWebhook = ({integration, body, headers}) ->
           <a href="#{commitUrl}" target="_blank"><code>#{commit.sha[...6]}:</code></a> #{commit.message_subject}<br>
           """
         text = commitArr.join ''
-      message.quote.text = text
-      message.quote.redirectUrl = "#{body.project.html_url}/commits/#{body.project.default_branch}"
+      attachment.data.text = text
+      attachment.data.redirectUrl = "#{body.project.html_url}/commits/#{body.project.default_branch}"
 
     when 'ticket'
-      message.quote.title = "#{body.sender.username} 在 #{body.project.name} 项目创建了工单"
-      message.quote.text = "#{marked(body.ticket.subject or '')} (#{marked(body.ticket.content or '')})"
-      message.quote.redirectUrl = body.ticket.html_url
+      attachment.data.title = "#{body.sender.username} 在 #{body.project.name} 项目创建了工单"
+      attachment.data.text = "#{marked(body.ticket.subject or '')} (#{marked(body.ticket.content or '')})"
+      attachment.data.redirectUrl = body.ticket.html_url
 
     when 'ticket_comment'
-      message.quote.title = "#{body.comment.sender.username} 评论了工单 #{body.ticket.subject}"
-      message.quote.text = "#{marked(body.comment.content)}"
-      message.quote.redirectUrl = "#{body.ticket.html_url}#comment-#{body.comment.id}"
+      attachment.data.title = "#{body.comment.sender.username} 评论了工单 #{body.ticket.subject}"
+      attachment.data.text = "#{marked(body.comment.content)}"
+      attachment.data.redirectUrl = "#{body.ticket.html_url}#comment-#{body.comment.id}"
 
     else return false
 
+  message.attachments = [attachment]
   self.sendMessage message
 
 module.exports = service.register 'gitcafe', ->

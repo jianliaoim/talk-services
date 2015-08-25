@@ -7,6 +7,7 @@ IntegrationSchema = new Schema
   team: type: Schema.Types.ObjectId
   room: type: Schema.Types.ObjectId
   category: type: String # Integration category: weibo/github
+  group: type: String
   hashId: type: String, default: -> crypto.createHash('sha1').update("#{Date.now()}").digest('hex')
   robot: type: Schema.Types.ObjectId
   # For authorized integrations

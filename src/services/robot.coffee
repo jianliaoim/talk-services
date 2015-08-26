@@ -171,11 +171,11 @@ module.exports = service.register 'robot', ->
   @isCustomized = true
 
   @summary = service.i18n
-    zh: '自定义的小艾'
+    zh: '我们提供了开放的数据接口，你可以利用自定义机器人开发各种应用和服务。'
     en: 'A robot act as a real user'
 
   @description = service.i18n
-    zh: '自定义的小艾'
+    zh: '自定义机器人的功能不限，你可以利用我们提供的开放数据接口，开发更多简聊的相关应用和服务。'
     en: 'A robot act as a real user'
 
   @iconUrl = service.static 'images/icons/robot@2x.png'

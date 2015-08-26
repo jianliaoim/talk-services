@@ -5,7 +5,7 @@ options =
   method: 'POST'
   headers: "Content-Type": "application/json"
   json: true
-  url: 'http://talk.ci/v2/services/webhook/84d783307b261074b3e9d370ab83162ed2d3c27d'
+  url: 'http://talk.bi/v2/services/webhook/a08ce4f12b3f07a178a6d732c770b24ba1e39775'
 
 [
   'push'

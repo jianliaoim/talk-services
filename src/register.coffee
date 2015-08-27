@@ -61,6 +61,7 @@ _initRobot = ->
       new: true
 
   .then (robot) ->
+    robot = robot[0] if toString.call(robot) is '[object Array]'
     throw new Error("Service #{self.name} load robot failed") unless robot
     self.robot = robot
 

@@ -18,7 +18,7 @@ _postMessage = (message) ->
     errorInfo: null
 
   $integration.then (integration) ->
-    return unless integration.url
+    return unless integration?.url
     {url, token} = integration
     msg = message.toJSON?() or message
     message.token = token if token

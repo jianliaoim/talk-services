@@ -182,7 +182,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
         'post.update': '更新了'
       attachment.data.title = "#{actions[event]}分享 #{data.post.title}"
       if data.post.postMode is 'md'
-        attachment.data.text = marked(data.post.content)
+        attachment.data.text = marked(data.post.content or '')
       else
         attachment.data.text = data.post.content
 
@@ -221,7 +221,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
         "开始时间：#{moment(data.event.startDate).tz('Asia/Shanghai').format('MM月DD日HH:mm:ss')}，"
         "结束时间：#{moment(data.event.endDate).tz('Asia/Shanghai').format('MM月DD日HH:mm:ss')}"
       ].join ''
-      attachment.data.text = marked(data.event.content)
+      attachment.data.text = marked(data.event.content or '')
 
     when 'event.remove'
       attachment.data.title = "删除了日程 #{data.event.title}"

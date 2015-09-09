@@ -37,13 +37,11 @@ _initRobot = ->
 
   # Set default properties of robot
   @robot.name or= @title or @name
-  @robot.email or= "#{@name}bot@talk.ai"
   @robot.avatarUrl or= @iconUrl
   @robot.isRobot = true
+  @robot.service = @name
 
-  conditions =
-    email: @robot.email
-    isRobot: true
+  conditions = service: @name, isRobot: true
 
   $robot = UserModel.findOneAsync conditions
 

@@ -19,7 +19,7 @@ describe 'Service#LoadAll', ->
   it 'should load robots of each services when the promise is fulfilled', (done) ->
 
     _checkService = (service) ->
-      service.robot.should.have.properties 'name', 'avatarUrl', 'email', 'createdAt', 'updatedAt'
+      service.robot.should.have.properties 'name', 'avatarUrl', 'service', 'createdAt', 'updatedAt'
       service.robot.isRobot.should.eql true
 
     services = service.loadAll()

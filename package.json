@@ -1,6 +1,6 @@
 {
   "name": "talk-services",
-  "version": "2.0.7",
+  "version": "2.1.0",
   "description": "talk-services",
   "main": "./lib/service.js",
   "directories": {

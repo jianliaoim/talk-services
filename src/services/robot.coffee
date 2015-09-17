@@ -22,7 +22,9 @@ _postMessage = (message) ->
     {url, token} = integration
     msg = message.toJSON?() or message
     message.token = token if token
+
     self.httpPost url, msg, retryTimes: 5
+
     .then (body) ->
       return unless body?.content or body?.text or body?.title
       replyMessage =
@@ -38,6 +40,15 @@ _postMessage = (message) ->
         attachment.data.category = 'robot'
         replyMessage.attachments = [attachment]
       self.sendMessage replyMessage
+
+    .catch (err) ->
+      integration.errorTimes += 1
+      integration.lastErrorInfo = err.message
+      integration.errorInfo = err.message if integration.errorTimes > 5
+      new Promise (resolve, reject) ->
+        integration.save (err, integration) ->
+          return reject(err) if err
+          resolve()
 
 _receiveWebhook = ({integration, query, body}) ->
   {limbo} = service.components

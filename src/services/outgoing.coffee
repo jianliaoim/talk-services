@@ -38,7 +38,7 @@ _postMessage = (message) ->
     .catch (err) ->
       integration.errorTimes += 1
       integration.lastErrorInfo = err.message
-      integration.errorInfo = err.message if integration.errorTimes > 3
+      integration.errorInfo = err.message if integration.errorTimes > 5
       new Promise (resolve, reject) ->
         integration.save (err, integration) ->
           return reject(err) if err

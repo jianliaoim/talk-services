@@ -8,6 +8,8 @@ _sendToRobot = (message) ->
 
   self = this
 
+  return unless message.body?.length
+
   return unless talkai.config.apikey and talkai.config.devid
 
   _getTuringCallback message

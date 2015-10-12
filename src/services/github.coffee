@@ -53,10 +53,14 @@ _removeHook = (repos, hookId, token) ->
       'User-Agent': service.userAgent
       'Authorization': "token #{token}"
     json: true
+
   .spread (res, body) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("bad request #{res.statusCode}")
     throw err if err
+
+  # Ignore github errors
+  .catch (err) -> return false
 
 ###*
  * Update github hook

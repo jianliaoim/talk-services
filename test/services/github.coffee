@@ -181,8 +181,8 @@ describe 'Github#Webhook', ->
     github.sendMessage = (message) ->
       message.attachments[0].data.title.should.eql 'teambition/limbo commits to refs/heads/master'
       message.attachments[0].data.text.should.eql [
-        '<a href="https://github.com/teambition/limbo/commit/20b0e57a9acaf05987da1813480739caece54999" target="_blank"><code>20b0e5:</code></a> update readme<br>'
-        '<a href="https://github.com/teambition/limbo/commit/90654779287d9de686422daaa4dbff0b4d6e5542" target="_blank"><code>906547:</code></a> Merge pull request #3 from sailxjx/master\n\nupdate readme<br>'
+        '<a href="https://github.com/teambition/limbo/commit/20b0e57a9acaf05987da1813480739caece54999" target="_blank"><code>20b0e5:</code></a> [sailxjx] update readme<br>'
+        '<a href="https://github.com/teambition/limbo/commit/90654779287d9de686422daaa4dbff0b4d6e5542" target="_blank"><code>906547:</code></a> [Xu Jingxin] Merge pull request #3 from sailxjx/master\n\nupdate readme<br>'
       ].join ''
       message.attachments[0].data.redirectUrl.should.eql 'https://github.com/teambition/limbo/commit/90654779287d9de686422daaa4dbff0b4d6e5542'
 

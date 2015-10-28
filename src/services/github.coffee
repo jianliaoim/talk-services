@@ -219,8 +219,9 @@ _receiveWebhook = ({headers, body, integration}) ->
       return false unless commits?.length
       attachment.data.title = "#{repository.full_name} commits to #{payload.ref}"
       commitArr = commits.map (commit) ->
+        authorPrefix = if commit?.committer?.name then " [#{commit.committer.name}] " else " "
         """
-        <a href="#{commit.url}" target="_blank"><code>#{commit?.id?[0...6]}:</code></a> #{commit?.message}<br>
+        <a href="#{commit.url}" target="_blank"><code>#{commit?.id?[0...6]}:</code></a>#{authorPrefix}#{commit?.message}<br>
         """
       attachment.data.text = commitArr.join ''
       attachment.data.redirectUrl = head_commit.url

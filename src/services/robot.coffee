@@ -66,13 +66,13 @@ _receiveWebhook = ({integration, query, body}) ->
   message =
     integration: integration
     body: content
+    authorName: authorName
     _teamId: _teamId
     _creatorId: integration._robotId
 
   attachment =
     category: 'quote'
     data:
-      authorName: authorName
       title: title
       text: text
       redirectUrl: redirectUrl

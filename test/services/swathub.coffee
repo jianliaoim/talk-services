@@ -9,7 +9,8 @@ describe 'SWATHub#Webhook', ->
 
   it 'receive webhook', (done) ->
     swathub.sendMessage = (message) ->
-      message.attachments[0].data.should.have.properties 'authorName', 'title', 'text', 'redirectUrl', 'imageUrl'
+      message.should.have.properties 'authorName'
+      message.attachments[0].data.should.have.properties 'title', 'text', 'redirectUrl', 'imageUrl'
 
     req.body =
       authorName: '路人甲'

@@ -9,8 +9,8 @@ describe 'Jenkins#Webhook', ->
 
   it 'receive webhook', (done) ->
     jenkins.sendMessage = (message) ->
-      message.should.have.properties 'integration'
-      message.attachments[0].data.should.have.properties 'authorName', 'title', 'text', 'redirectUrl', 'imageUrl'
+      message.should.have.properties 'integration', 'authorName'
+      message.attachments[0].data.should.have.properties 'title', 'text', 'redirectUrl', 'imageUrl'
 
     req.body =
       authorName: '路人甲'

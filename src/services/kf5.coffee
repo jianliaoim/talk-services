@@ -20,10 +20,10 @@ _receiveWebhook = ({integration, query, body}) ->
   message =
     integration: integration
     body: content
+    authorName: authorName
     attachments: [
       category: 'quote'
       data:
-        authorName: authorName
         title: title
         text: text
         redirectUrl: redirectUrl

@@ -9,6 +9,7 @@ describe 'BugHD#Webhook', ->
 
   it 'receive webhook', (done) ->
     bughd.sendMessage = (message) ->
+      message.attachments[0].data.should.have.properties 'title', 'text', 'redirectUrl'
       message.attachments[0].data.title.should.eql 'SDKTestApp 1.1.6(Build 1)'
       message.attachments[0].data.text.should.eql '''
       TITLE: *** -[__NSArrayI objectAtIndex:]: index 5 beyond bounds [0 .. 1]
@@ -26,7 +27,8 @@ describe 'BugHD#Webhook', ->
           'project_version': '1.1.6(Build 1)',
           'issue_title': '*** -[__NSArrayI objectAtIndex:]: index 5 beyond bounds [0 .. 1]',
           'issue_stack': '0 CoreFoundation 0x0000000187391e64 <redacted> + 160',
-          'created_at': '1423584178'
+          'created_at': '1423584178',
+          "uri": "http://bughd.com/project/5620****************000c/issue/5630****************0008"
         }
       ]
     }

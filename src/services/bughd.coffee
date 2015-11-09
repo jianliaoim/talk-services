@@ -18,6 +18,7 @@ _receiveWebhook = ({integration, body}) ->
       data:
         title: title
         text: text
+        redirectUrl: if info.uri?.length then info.uri else undefined
     ]
 
   @sendMessage message

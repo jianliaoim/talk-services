@@ -69,9 +69,8 @@ describe 'Talkai#MessageCreate', ->
   it 'receive train body', (done) ->
     talkai.sendMessage = (message) ->
       message.should.have.properties '_creatorId', '_toId', 'attachments', '_teamId'
-      message.attachments[0].data.should.have.properties 'title', 'text'
+      message.attachments[0].data.should.have.properties 'title'
       message.attachments[0].data.title.indexOf('undefined').should.below 0
-      message.attachments[0].data.text.indexOf('undefined').should.below 0
       done()
 
     message =

@@ -12,7 +12,8 @@ describe 'Goldxitudaily#BeforeIntegrationCreate', ->
   it 'should modify the url of integration to xitu\'s feed url', (done) ->
     integration = new IntegrationModel
       category: 'goldxitudaily'
-    goldxitudaily.receiveEvent 'before.integration.create', integration
+    req.integration = integration
+    goldxitudaily.receiveEvent 'before.integration.create', req
     .then ->
       integration.url.should.eql 'http://dev.gold.avosapps.com/jianliao/rss'
       done()

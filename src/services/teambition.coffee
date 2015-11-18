@@ -9,10 +9,13 @@ requestAsync = Promise.promisify request
 service = require '../service'
 
 # Hack teambition host
-if process.env.NODE_ENV in ['ga', 'prod']
-  _tbHost = 'https://www.teambition.com'
-else
-  _tbHost = 'http://www.project.ci'
+switch process.env.NODE_ENV
+  when 'ga', 'prod'
+    _tbHost = 'https://www.teambition.com'
+  when 'test'
+    _tbHost = 'http://127.0.0.1:7632/tb'
+  else
+    _tbHost = 'http://www.project.ci'
 
 _supportEvents = [
   "project.rename", "project.archive", "project.unarchive", "project.member.create", "project.member.remove",
@@ -29,6 +32,20 @@ _supportEvents = [
 #   _projectId1:
 #     hookId: xxx
 
+_getTbToken = (accountToken) ->
+  $token = service.sdk.getAccountUserAsync accountToken
+  .then (user) ->
+    accessToken = null
+    user?.unions?.some (union) ->
+      if union?.refer is 'teambition' and union.accessToken
+        accessToken = union.accessToken
+        return true
+    unless accessToken
+      err = new Error '你没有绑定 Teambition 账号'
+      err.phrase = 'NO_PERMISSION'
+      throw err
+    accessToken
+
 ###*
  * Validate the integration
  * @param  {Model} integration - Integration model
@@ -37,9 +54,6 @@ _supportEvents = [
 _preValidate = (integration) ->
   unless integration.project?._id
     throw new Error('Missing project in teambition integration!')
-
-  unless integration.token
-    throw new Error('Missing token in teambition integration')
 
   unless integration.events
     throw new Error('Missing events in teambition integration')
@@ -306,13 +320,19 @@ _removeProjectHook = (_projectId, hookId, token) ->
     throw err if err
     body
 
-_createWebhook = (integration) ->
+_createWebhook = (req) ->
+  {integration} = req
+  {accountToken} = req.get()
+
   _preValidate integration
 
-  _createProjectHook integration.project._id
-  , integration.token
-  , integration.events
-  , integration.hashId
+  $token = _getTbToken accountToken
+
+  $token.then (token) ->
+    _createProjectHook integration.project._id
+    , token
+    , integration.events
+    , integration.hashId
 
   .then (body) ->
     integration.data or= {}
@@ -321,27 +341,33 @@ _createWebhook = (integration) ->
     integration.markModified 'data'
     integration
 
-_updateWebhook = (integration) ->
+_updateWebhook = (req) ->
+  {integration} = req
+  {accountToken} = req.get()
   return unless ['project._id', 'events'].some (field) -> integration.isDirectModified field
 
   _preValidate integration
+
+  $token = _getTbToken accountToken
 
   {_original} = integration
   if integration.isDirectModified 'project._id'
     _originalProjectId = _original.project._id
 
-    $removeOldProjectHook = _removeProjectHook _originalProjectId
-    , _original.data[_originalProjectId].hookId
-    , integration.token
+    $removeOldProjectHook = $token.then (token) ->
+      _removeProjectHook _originalProjectId
+      , _original.data[_originalProjectId].hookId
+      , token
 
     .then (body) ->
       delete integration.data[_originalProjectId]
       integration
 
-    $createNewProjectHook = _createProjectHook integration.project._id
-    , integration.token
-    , integration.events
-    , integration.hashId
+    $createNewProjectHook = $token.then (token) ->
+      _createProjectHook integration.project._id
+      , token
+      , integration.events
+      , integration.hashId
 
     .then (body) ->
       integration.data or= {}
@@ -355,28 +381,35 @@ _updateWebhook = (integration) ->
   else if integration.isDirectModified 'events'
     _projectId = integration.project._id
 
-    $integration = _updateProjectHook _projectId
-    , integration.data[_projectId].hookId
-    , integration.token
-    , integration.events
-    , integration.hashId
+    $integration = $token.then (token) ->
+      _updateProjectHook _projectId
+      , integration.data[_projectId].hookId
+      , token
+      , integration.events
+      , integration.hashId
 
     .then (body) -> integration
 
   $integration
 
-_removeWebhook = (integration) ->
+_removeWebhook = (req) ->
+  {integration} = req
+  {accountToken} = req.get()
+
   _preValidate integration
 
   _projectId = integration.project._id
 
   return unless integration.data
 
+  $token = _getTbToken accountToken
+
   Promise.resolve(Object.keys(integration.data))
   .map (_projectId) ->
-    _removeProjectHook integration.project._id
-    , integration.data[_projectId].hookId
-    , integration.token
+    $token.then (token) ->
+      _removeProjectHook integration.project._id
+      , integration.data[_projectId].hookId
+      , token
 
 ###*
  * Get project list of user
@@ -385,20 +418,22 @@ _removeWebhook = (integration) ->
  * @return {Promise} projects
 ###
 _getProjects = (req, res) ->
-  {token} = req.get()
-  throw new Error('Missing token') unless token
-  requestAsync
-    method: 'GET'
-    headers:
-      "User-Agent": service.userAgent
-      "Authorization": "OAuth2 #{token}"
-    url: "#{_tbHost}/api/projects"
-    json: true
-  .spread (res, projects) ->
-    unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
-    projects.map (project) -> _.pick project, '_id', 'name'
+  {accountToken} = req.get()
+  $token = _getTbToken accountToken
+
+  $token.then (token) ->
+    requestAsync
+      method: 'GET'
+      headers:
+        "User-Agent": service.userAgent
+        "Authorization": "OAuth2 #{token}"
+      url: "#{_tbHost}/api/projects"
+      json: true
+    .spread (res, projects) ->
+      unless res.statusCode >= 200 and res.statusCode < 300
+        err = new Error("Bad request #{res.statusCode}")
+      throw err if err
+      projects.map (project) -> _.pick project, '_id', 'name'
 
 _getEvents = ->
   [

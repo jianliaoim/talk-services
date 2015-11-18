@@ -1,7 +1,7 @@
 _ = require 'lodash'
 
 service = require '../src/service'
-service.components = require './components'
+
 util = require './util'
 
 {prepare, cleanup} = util

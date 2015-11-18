@@ -5,7 +5,7 @@ service = require '../service'
 rssUrl = 'http://dev.gold.avosapps.com/jianliao/rss'
 
 # 添加稀土掘金 Feed 为默认 Url
-_addRSSUrl = (integration) ->
+_addRSSUrl = ({integration}) ->
   integration.url = rssUrl
   return integration
 

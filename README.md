@@ -19,9 +19,9 @@ The events with `before` prefix are pre hooks of the process, so their callbacks
 | `integration.update`         | integration                  |                                      |
 | `integration.remove`         | integration                  |                                      |
 | `service.webhook`            | `req` with integration       | Emitted when receive webhook request |
-| `before.integration.create`  | integration                  |                                      |
-| `before.integration.update`  | integration                  |                                      |
-| `before.integration.remove`  | integration                  |                                      |
+| `before.integration.create`  | `req` with integration       |                                      |
+| `before.integration.update`  | `req` with integration       |                                      |
+| `before.integration.remove`  | `req` with integration       |                                      |
 | `message.create`             | message                      |                                      |
 
 [npm-url]: https://npmjs.org/package/talk-services

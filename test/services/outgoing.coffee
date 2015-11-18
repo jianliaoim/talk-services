@@ -85,7 +85,8 @@ describe 'Outgoing#IntegrationHooks', ->
     url: 'invalidurl'
 
   it 'should throw an error when url is invalid', (done) ->
-    outgoing.receiveEvent 'before.integration.create', integration
+    req.integration = integration
+    outgoing.receiveEvent 'before.integration.create', req
     .then -> done(new Error('Should emit error here'))
     .catch (err) ->
       err.message.should.eql 'Invalid url field'

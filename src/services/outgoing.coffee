@@ -44,7 +44,7 @@ _postMessage = (message) ->
           return reject(err) if err
           resolve()
 
-_checkIntegration = (integration) ->
+_checkIntegration = ({integration}) ->
   unless validator.isURL(integration.url)
     throw new Error('Invalid url field')
 

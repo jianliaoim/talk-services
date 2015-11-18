@@ -93,7 +93,7 @@ _updateHook = (repos, hookId, token, events, hashId) ->
     throw err if err
     body
 
-_createWebhook = (integration) ->
+_createWebhook = ({integration}) ->
   self = this
   data = {}
 
@@ -115,7 +115,7 @@ _createWebhook = (integration) ->
     integration.data = data
     integration
 
-_removeWebhook = (integration) ->
+_removeWebhook = ({integration}) ->
   self = this
   reposes = integration.repos
   data = integration.data or {}
@@ -129,7 +129,7 @@ _removeWebhook = (integration) ->
     , hookId
     , integration.token
 
-_updateWebhook = (integration) ->
+_updateWebhook = ({integration}) ->
   self = this
   return unless ['repos', 'events'].some (field) -> integration.isDirectModified field
   {_original} = integration

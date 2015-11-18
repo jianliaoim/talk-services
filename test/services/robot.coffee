@@ -43,7 +43,8 @@ describe 'Robot#Events', ->
       data.isRobot.should.eql true
       done()
 
-    robot.receiveEvent 'before.integration.create', integration
+    req.integration = integration
+    robot.receiveEvent 'before.integration.create', req
     .then ->
       new Promise (resolve, reject) ->
         integration.save (err, integration) ->
@@ -91,7 +92,8 @@ describe 'Robot#Events', ->
     integration.description = "睡觉啦"
     integration.iconUrl = "http://www.newicon.com"
 
-    robot.receiveEvent 'before.integration.update', integration
+    req.integration = integration
+    robot.receiveEvent 'before.integration.update', req
     .then ->
       UserModel.findOneAsync _id: integration._robotId
       .then (robot) ->
@@ -108,7 +110,8 @@ describe 'Robot#Events', ->
       data.should.have.properties '_userId', '_teamId'
       done()
 
-    robot.receiveEvent 'before.integration.remove', integration
+    req.integration = integration
+    robot.receiveEvent 'before.integration.remove', req
     .catch done
 
   after cleanup

@@ -108,7 +108,7 @@ _receiveWebhook = ({integration, query, body}) ->
  * @param  {Model} integration
  * @return {Promise}
 ###
-_removeRobot = (integration) ->
+_removeRobot = ({integration}) ->
   {limbo, socket} = service.components
   {TeamModel} = limbo.use 'talk'
   return unless integration._robotId
@@ -126,7 +126,7 @@ _removeRobot = (integration) ->
  * @param  {Model} integration
  * @return {Promise}
 ###
-_createRobot = (integration) ->
+_createRobot = ({integration}) ->
   {limbo, socket} = service.components
   {UserModel, TeamModel} = limbo.use 'talk'
 
@@ -157,7 +157,7 @@ _createRobot = (integration) ->
  * @param  {Model} integration
  * @return {Promise} robot
 ###
-_updateRobot = (integration) ->
+_updateRobot = ({integration}) ->
   return unless integration._robotId
   {limbo} = service.components
   {UserModel, TeamModel} = limbo.use 'talk'

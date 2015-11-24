@@ -1,5 +1,4 @@
 _ = require 'lodash'
-lexer = require 'talk-lexer'
 Promise = require 'bluebird'
 validator = require 'validator'
 service = require '../service'

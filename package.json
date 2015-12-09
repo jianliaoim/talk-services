@@ -2,7 +2,7 @@
   "name": "talk-services",
   "version": "2.2.2",
   "description": "talk-services",
-  "main": "./lib/service.js",
+  "main": "./lib/loader.js",
   "directories": {
     "test": "test"
   },
@@ -30,12 +30,10 @@
   },
   "dependencies": {
     "bluebird": "^3.0.5",
-    "body-parser": "^1.14.1",
     "charset": "^1.0.0",
     "coffee-script": "^1.10.0",
     "config": "^1.17.1",
     "err1st": "^0.2.4",
-    "express": "^4.13.3",
     "feedparser": "^1.1.4",
     "glob": "^6.0.1",
     "graceful-logger": "^0.4.3",
@@ -47,12 +45,10 @@
     "marked": "^0.3.5",
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",
-    "morgan": "^1.6.1",
-    "qs": "^6.0.0",
+    "qs": "^6.0.1",
     "redis": "^2.3.1",
     "request": "^2.67.0",
     "require-dir": "^0.3.0",
-    "sundae": "^0.5.10",
     "validator": "^4.3.0"
   }
 }

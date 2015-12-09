@@ -7,7 +7,15 @@ talk-services
 
 Integration services of talk.ai
 
-### Events
+# Code structure
+
+```
+- components  # Stand alone components
+- initializers  # Components initialized with app
+- apis(controllers)  # Api controllers
+```
+
+# Events
 
 In general, events are emitted after the api server response the http request, so the name of events are reference to `controller.action` pattern. You can checkout all the `controller.action`s from the [`discover` api](https://talk.ai/v1/discover).
 

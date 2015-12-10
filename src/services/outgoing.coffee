@@ -4,45 +4,26 @@ validator = require 'validator'
 
 util = require '../util'
 
-_postMessage = (message) ->
+_postMessage = ({message, integration}) ->
   # Ignore private chat messages
-  return unless message._roomId
-  {limbo} = service.components
-  {IntegrationModel} = limbo.use 'talk'
-
   self = this
+  {url, token} = integration
+  msg = _.clone message
+  msg.token = token if token?.length
 
-  IntegrationModel.findAsync
-    room: message._roomId
-    category: 'outgoing'
-    errorInfo: null
+  self.httpPost url, msg, retryTimes: 5
 
-  .map (integration) ->
-    {url, token} = integration
-
-    msg = _.clone message
-    msg.token = token if token?.length
-
-    self.httpPost url, msg, retryTimes: 5
-
-    .then (body) ->
-      return unless body?.text
-      # Send replyMessage to user
+  .then (body = {}) ->
+    return unless body.text or body.content
+    # Send replyMessage to user
+    replyMessage =
+      body: body.content
+      authorName: body.authorName
+    if body.text
       attachment = category: 'quote', data: body
       attachment.data.category = 'outgoing'
-      replyMessage =
-        integration: integration
-        attachments: [attachment]
-      self.sendMessage replyMessage
-
-    .catch (err) ->
-      integration.errorTimes += 1
-      integration.lastErrorInfo = err.message
-      integration.errorInfo = err.message if integration.errorTimes > 5
-      new Promise (resolve, reject) ->
-        integration.save (err, integration) ->
-          return reject(err) if err
-          resolve()
+      replyMessage.attachments = [attachment]
+    replyMessage
 
 _checkIntegration = ({integration}) ->
   unless validator.isURL(integration.url)

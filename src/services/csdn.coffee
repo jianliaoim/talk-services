@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 marked = require 'marked'
-service = require '../service'
+
+util = require '../util'
 
 ###*
  * Define handler when receive incoming webhook from csdn
@@ -41,26 +42,26 @@ _receiveWebhook = ({integration, body}) ->
 
   @sendMessage message
 
-module.exports = service.register 'csdn', ->
+module.exports = ->
   @title = 'csdn'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '全球最大中文IT社区'
     en: "The world's largest Chinese IT community"
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'CSDN 是中国最大的IT社区和服务平台，为中国的软件开发者和IT从业者提供知识传播、职业发展、软件开发等全生命周期服务'
     en: "CSDN is China's largest IT community and service platform to provide knowledge dissemination for the Chinese software developers and IT practitioners, professional development , software development lifecycle services."
 
-  @iconUrl = service.static 'images/icons/csdn@2x.png'
+  @iconUrl = util.static 'images/icons/csdn@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 csdn 当中使用。'
       en: 'Copy this web hook to your csdn server to use it.'
 

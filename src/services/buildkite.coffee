@@ -1,4 +1,4 @@
-service = require '../service'
+util = require '../util'
 
 _receiveWebhook = ({integration, body, headers}) ->
   payload = body or {}
@@ -26,26 +26,26 @@ _receiveWebhook = ({integration, body, headers}) ->
 
   @sendMessage message
 
-module.exports = service.register 'buildkite', ->
+module.exports = ->
 
   @title = 'Buildkite'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '持续集成服务'
     en: 'A continuous integration service.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'Buildkite 是一个在线的持续集成服务，用来构建及测试你的代码。'
     en: 'Buildkite is a continuous integration service.'
 
-  @iconUrl = service.static 'images/icons/buildkite@2x.png'
+  @iconUrl = util.static 'images/icons/buildkite@2x.png'
 
   @_fields.push
     key: 'token'
     type: 'text'
-    description: service.i18n
+    description: util.i18n
       zh: '可选'
       en: 'Optional'
 
@@ -53,7 +53,7 @@ module.exports = service.register 'buildkite', ->
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到 buildkite.com 中使用'
       en: 'Copy this web hook to your buildkite.com to use it.'
 

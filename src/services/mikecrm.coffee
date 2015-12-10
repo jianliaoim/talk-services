@@ -1,5 +1,6 @@
-service = require '../service'
 _ = require 'lodash'
+
+util = require '../util'
 
 _receiveWebhook = ({integration, body}) ->
   payload = body
@@ -24,27 +25,27 @@ _receiveWebhook = ({integration, body}) ->
     ]
   @sendMessage message
 
-module.exports = service.register 'mikecrm', ->
+module.exports = ->
 
   @title = '麦客CRM'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '麦客CRM是一款轻量好用的表单和联系人管理工具。'
     en: 'MikeCRM is a light and useful tool for organizations or individuals to make, release and collect online-forms for all kind of reasons, mostly for marketing and customer management.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '麦客CRM是一款轻量好用的表单和联系人管理工具。以表单收集信息、以联系人管理信息、再以邮件和短信为营销出口，使企业能够更好地将信息传达给最终客户，从而帮助企业更轻松地达成客户管理和市场营销目标。'
     en: 'MikeCRM is a light and useful tool for organizations or individuals to make, release and collect online-forms for all kinds of reasons, mostly for marketing and customer management. MikeCRM collects form feedback, extracts valuable information about customers, and afterwards, trying to reach them by e-mail or short messages in due course. Through this "feedback and touch" way, MikeCRM is supposed to build a short and direct path connecting customers and their own customers.'
 
-  @iconUrl = service.static 'images/icons/mikecrm@2x.png'
+  @iconUrl = util.static 'images/icons/mikecrm@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的麦客中使用。'
       en: 'Copy this web hook to your MikeCRM account to use it.'
 

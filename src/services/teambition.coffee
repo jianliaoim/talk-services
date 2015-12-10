@@ -6,7 +6,7 @@ marked = require 'marked'
 crypto = require 'crypto'
 requestAsync = Promise.promisify request
 
-service = require '../service'
+util = require '../util'
 
 # Hack teambition host
 switch process.env.NODE_ENV
@@ -439,163 +439,163 @@ _getEvents = ->
   [
     key: 'project.member.create'
     group: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '添加项目成员'
       en: 'Invite members to project'
   ,
     key: 'project.member.remove'
     group: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '移除项目成员'
       en: 'Remove project members'
   ,
     key: 'project.rename'
     group: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '修改项目名称'
       en: 'Rename project'
   ,
     key: 'task.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '创建任务'
       en: 'Create task'
   ,
     key: 'task.update.executor'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '分配执行者'
       en: 'Update executor of task'
   ,
     key: 'task.update.dueDate'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '设置截止日期'
       en: 'Update due date of task'
   ,
     key: 'task.update.priority'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '设置优先级'
       en: 'Update priority of task'
   ,
     key: 'task.rename'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '重命名任务'
       en: 'Update name of task'
   ,
     key: 'task.move'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '移动任务'
       en: 'Update stage of task'
   ,
     key: 'task.done'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '完成任务'
       en: 'Finish the task'
   ,
     key: 'tasklist.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '创建任务分组'
       en: 'Create tasklist'
   ,
     key: 'tasklist.rename'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '重命名任务分组'
       en: 'Rename tasklist'
   ,
     key: 'stage.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '添加新阶段'
       en: 'Create stage'
   ,
     key: 'stage.rename'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '重命名任务阶段'
       en: 'Rename stage'
   ,
     key: 'subtask.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '添加子任务'
       en: 'Create subtask'
   ,
     key: 'subtask.update.executor'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '子任务分配了执行者'
       en: 'Update executor of subtask'
   ,
     key: 'subtask.update.content'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '编辑子任务'
       en: 'Update content of subtask'
   ,
     key: 'subtask.done'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '完成子任务'
       en: 'Finish the subtask'
   ,
     key: 'post.create'
     group: 'post'
-    label: service.i18n
+    label: util.i18n
       zh: '添加分享'
       en: 'Create a post'
   ,
     key: 'post.update'
     group: 'post'
-    label: service.i18n
+    label: util.i18n
       zh: '修改分享'
       en: 'Update a post'
   ,
     key: 'file.create'
     group: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '上传文件'
       en: 'Upload a file'
   ,
     key: 'file.update.version'
     group: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '更新文件'
       en: 'Update version of file'
   ,
     key: 'file.move'
     group: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '移动文件'
       en: 'Move file to another directory'
   ,
     key: 'event.create'
     group: 'event'
-    label: service.i18n
+    label: util.i18n
       zh: '创建日程'
       en: 'Create event'
   ,
     key: 'event.update'
     group: 'event'
-    label: service.i18n
+    label: util.i18n
       zh: '更新日程'
       en: 'Update content of event'
   ,
     key: 'entry.create'
     group: 'entry'
-    label: service.i18n
+    label: util.i18n
       zh: '记录账目'
       en: 'Create a entry'
   ,
     key: 'entry.update'
     group: 'entry'
-    label: service.i18n
+    label: util.i18n
       zh: '修改记录'
       en: 'Update a entry'
   ]
@@ -603,49 +603,49 @@ _getEvents = ->
 _getGroups = ->
   [
     key: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '项目'
       en: 'Project'
   ,
     key: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '任务板'
       en: 'Task'
   ,
     key: 'post'
-    label: service.i18n
+    label: util.i18n
       zh: '分享墙'
       en: 'Post'
   ,
     key: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '文件库'
       en: 'File'
   ,
     key: 'event'
-    label: service.i18n
+    label: util.i18n
       zh: '日程表'
       en: 'Event'
   ,
     key: 'entry'
-    label: service.i18n
+    label: util.i18n
       zh: '记账'
       en: 'Entry'
   ]
 
-module.exports = service.register 'teambition', ->
+module.exports = ->
 
   @title = 'Teambition'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'
     en: 'This integration helps you receive real-time tasks, schedules and posts from Teambition'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'
     en: 'This integration helps you receive real-time tasks, schedules and posts from Teambition'
 
-  @iconUrl = service.static 'images/icons/teambition@2x.png'
+  @iconUrl = util.static 'images/icons/teambition@2x.png'
 
   @_fields.push
     key: 'project'

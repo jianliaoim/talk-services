@@ -1,17 +1,12 @@
 # Initialize service
 requireDir = require 'require-dir'
+loader = require '../src/loader'
+loader.config =
+  apiHost: ""
+  cdnPrefix: ""
 
 # Load all services
 require './loader'
 
-# service = require '../src/service'
-# service.components = require './components'
-# service.sdk = require './sdk'
+# requireDir './servers'
 
-# servers = requireDir './servers'
-
-# # Test service
-# require './service'
-
-# # Subtestcases of each service
-# requireDir './services'

@@ -1,4 +1,4 @@
-service = require '../service'
+util = require '../util'
 
 _receiveWebhook = ({integration, body}) ->
   payload = body?.payload
@@ -20,27 +20,27 @@ _receiveWebhook = ({integration, body}) ->
   message.attachments = [attachment]
   @sendMessage message
 
-module.exports = service.register 'circleci', ->
+module.exports = ->
 
   @title = 'Circle CI'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '持续集成平台'
     en: 'Hosted Continuous Integration for web applications.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '持续集成平台'
     en: 'Hosted Continuous Integration for web applications. Set up your application for testing in one click, on the fastest testing platform on the internet.'
 
-  @iconUrl = service.static 'images/icons/circleci@2x.png'
+  @iconUrl = util.static 'images/icons/circleci@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到 .circle.yml 中使用。'
       en: 'Copy this web hook to .circle.yml to use it.'
 

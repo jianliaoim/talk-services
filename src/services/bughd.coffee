@@ -1,5 +1,6 @@
 moment = require 'moment-timezone'
-service = require '../service'
+
+util = require '../util'
 
 _receiveWebhook = ({integration, body}) ->
   payload = body
@@ -23,28 +24,28 @@ _receiveWebhook = ({integration, body}) ->
 
   @sendMessage message
 
-module.exports = service.register 'bughd', ->
+module.exports = ->
 
   @title = 'BugHD'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '实时收集应用崩溃信息，定位应用崩溃原因。'
     en: 'BugHD is a real-time crashes collection tool, it can find out the reasons of app crashes.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'BugHD 可实时收集应用崩溃信息，帮你定位应用崩溃原因。可提供详尽的崩溃分析报告，快速地定位崩溃到代码行。'
     en: 'BugHD is a real-time crashes collection tool, it can find out the reasons of app crashes.
 It also provides detailed reports of crash analysis, which can help you find out the wrong lines of code quickly.'
 
-  @iconUrl = service.static 'images/icons/bughd@2x.png'
+  @iconUrl = util.static 'images/icons/bughd@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 BugHD 中使用。'
       en: 'Copy this web hook to your BugHD account to use it.'
 

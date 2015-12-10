@@ -70,13 +70,14 @@ _receiveWebhook = ({integration, query, body}) ->
     _teamId: _teamId
     _creatorId: integration._robotId
 
-  attachment =
-    category: 'quote'
-    data:
-      title: title
-      text: text
-      redirectUrl: redirectUrl
-      imageUrl: thumbnailPicUrl or imageUrl
+  if title or text or redirectUrl or thumbnailPicUrl or imageUrl
+    attachment =
+      category: 'quote'
+      data:
+        title: title
+        text: text
+        redirectUrl: redirectUrl
+        imageUrl: thumbnailPicUrl or imageUrl
 
   if _roomId
     $message = RoomModel.findOneAsync _id: _roomId
@@ -100,7 +101,7 @@ _receiveWebhook = ({integration, query, body}) ->
       message
 
   $message.then (message) ->
-    message.attachments = [attachment]
+    message.attachments = [attachment] if attachment
     self.sendMessage message
 
 ###*

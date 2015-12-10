@@ -14,7 +14,9 @@ _receiveWebhook = ({integration, query, body}) ->
     integration: integration
     body: content
     authorName: authorName
-    attachments: [
+
+  if title or text or redirectUrl or imageUrl
+    message.attachments = [
       category: 'quote'
       data:
         title: title

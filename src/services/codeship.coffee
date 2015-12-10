@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 marked = require 'marked'
-service = require '../service'
+
+util = require '../util'
 
 ###*
  * Define handler when receive incoming webhook from jenkins
@@ -38,26 +39,26 @@ _receiveWebhook = ({integration, body}) ->
   message.attachments = [attachment]
   @sendMessage message
 
-module.exports = service.register 'codeship', ->
+module.exports = ->
   @title = 'codeship'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '持续集成与部署平台'
     en: 'Codeship is a fast and secure hosted Continuous Delivery platform that scales with your needs.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'Codeship 是一个持续集成与部署平台，为你的代码提供一站式测试部署服务'
     en: 'Codeship is a fast and secure hosted Continuous Delivery platform that scales with your needs.'
 
-  @iconUrl = service.static 'images/icons/codeship@2x.png'
+  @iconUrl = util.static 'images/icons/codeship@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 Codeship 当中使用。'
       en: 'Copy this web hook to your Codeship server to use it.'
 

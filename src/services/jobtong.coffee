@@ -1,5 +1,5 @@
 _ = require 'lodash'
-service = require '../service'
+util = require '../util'
 
 _receiveWebhook = ({integration, body}) ->
   payload = body or {}
@@ -26,27 +26,27 @@ _receiveWebhook = ({integration, body}) ->
     ]
   @sendMessage message
 
-module.exports = service.register 'jobtong', ->
+module.exports = ->
 
   @title = '周伯通招聘'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '周伯通，招人喜欢'
     en: 'Jobtong makes job search more enjoyable.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '周伯通招聘（ http://www.jobtong.com ），2014年重装上阵，打造最懂互联网的招聘社区。是国内最知名的社会化招聘平台之一，倡导营销化、社会化的招聘服务，引领网络招聘行业新变革！'
     en: "Jobtong (http://www.jobtong.com), starting in 2014, is trying to build a recruitment community that is most familiar with Internet. It's one of the most famous social recruitment platform in China. We are advocacing marketing and socialization recruitment services and leading the new revolution of online recruitment industry!"
 
-  @iconUrl = service.static 'images/icons/jobtong@2x.png'
+  @iconUrl = util.static 'images/icons/jobtong@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: 'Webhook URL'
       en: 'Webhook URL'
 

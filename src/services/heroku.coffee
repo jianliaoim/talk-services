@@ -1,6 +1,7 @@
 _ = require 'lodash'
 Promise = require 'bluebird'
-service = require '../service'
+
+util = require '../util'
 
 ###*
  * Define handler when receive incoming webhook from heroku
@@ -30,26 +31,27 @@ _receiveWebhook = ({ integration, body }) ->
 
   @sendMessage message
 
-module.exports = service.register 'heroku', ->
+module.exports = ->
+
   @title = 'Heroku'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '支持多种编程语言的云平台即服务。'
     en: 'A cloud platform as a service (PaaS).'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'Heroku 是支持多种编程语言的云平台即服务（PaaS）。接入后可以收到部署的通知。'
     en: 'Heroku is a cloud platform as a service (PaaS) supporting several programming languages.'
 
-  @iconUrl = service.static 'images/icons/heroku@2x.png'
+  @iconUrl = util.static 'images/icons/heroku@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 Heroku 中使用。'
       en: 'Copy this web hook to your Heroku account to use it.'
 

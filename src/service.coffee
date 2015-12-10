@@ -1,12 +1,13 @@
 path = require 'path'
 fs = require 'fs'
 
-config = require 'config'
 Promise = require 'bluebird'
 _ = require 'lodash'
 glob = require 'glob'
 request = require 'request'
 marked = require 'marked'
+
+util = require './util'
 
 requestAsync = Promise.promisify request
 
@@ -22,7 +23,7 @@ _getManual = ->
     baseName = path.basename fileName
     lang = baseName[(name.length + 1)..-4]
     content = fs.readFileSync(fileName, encoding: 'UTF-8')
-    content = content.replace /\((.*?images.*?)\)/ig, (m, uri) -> '(' + self.static uri + ')'
+    content = content.replace /\((.*?images.*?)\)/ig, (m, uri) -> '(' + util.static uri + ')'
     [lang, marked(content)]
 
   if fileNames.length is 0
@@ -57,8 +58,6 @@ class Service
 
   isCustomized: false
 
-  userAgent: 'Talk Api Service V1'
-
   register: (@name) ->
     @title = @name
     @_fields = []
@@ -82,32 +81,10 @@ class Service
     ]
     Object.defineProperty this, 'fields', get: _getFields, set: (@_fields) -> @_fields
     Object.defineProperty this, 'manual', get: _getManual
-  ###*
-   * Handle i18n objects
-   * @param  {Object} locales
-   * @return {Object} locales
-  ###
-  i18n: (locales) -> locales
-
-  ###*
-   * Get url of static resource
-   * @param  {String} str - Relative path of local resource
-   * @return {String} url - Url of static resource
-  ###
-  static: (str) -> path.join __dirname, '../static', str
 
   # Register open apis
   # The route of api will be `POST services/:integration_name/:api_name`
   registerApi: (name, fn) -> @_apis[name] = fn
-
-  ###*
-   * Get url of apis from services, group by service name
-   * @param  {String} apiName - Api name
-   * @return {String} url - The complete api url
-  ###
-  getApiUrl: (apiName) ->
-    service = require './service'
-    config.apiHost + "/services/api/#{@name}/#{apiName}"
 
   registerEvents: (events) ->
     self = this
@@ -119,6 +96,13 @@ class Service
         handler = events[event]
         self.registerEvent event, handler
     else throw new Error('Events are invalid')
+
+  ###*
+   * Get url of apis from services, group by service name
+   * @param  {String} apiName - Api name
+   * @return {String} url - The complete api url
+  ###
+  getApiUrl: (apiName) -> util.getApiUrl @name, apiName
 
   receiveApi: (name, req, res) ->
     self = this
@@ -206,7 +190,7 @@ class Service
     requestAsync
       method: 'POST'
       url: url
-      headers: 'User-Agent': @userAgent
+      headers: 'User-Agent': util.userAgent
       json: true
       timeout: 5000
       body: payload

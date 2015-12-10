@@ -3,8 +3,6 @@ path = require 'path'
 _ = require 'lodash'
 Promise = require 'bluebird'
 
-Service = require './service'
-
 # Sort services
 serviceNames = [
   'incoming', 'outgoing', 'robot', 'teambition', 'rss', 'github', 'firim', 'jobtong', 'pingxx',
@@ -14,16 +12,17 @@ serviceNames = [
   'weibo'
 ]
 
-serviceNames = ['incoming']
-
 class ServiceLoader
+
+  config: {}
 
   loadAll: ->
     unless @$_services
+      Service = require './service'
       _serviceInstances = serviceNames.map (serviceName) ->
         service = new Service
         service.register serviceName
-        require("./services/#{serviceName}").apply service
+        require("./services/#{serviceName}").call service, service
         service
       @$_services = Promise.props _.zipObject serviceNames, _serviceInstances
     @$_services
@@ -36,4 +35,6 @@ class ServiceLoader
         _.mapValues services, (service) -> service.toJSON()
     @$_settings
 
-module.exports = new ServiceLoader
+loader = new ServiceLoader
+
+module.exports = loader

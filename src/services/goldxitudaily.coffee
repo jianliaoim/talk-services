@@ -1,6 +1,7 @@
 _ = require 'lodash'
 Promise = require 'bluebird'
-service = require '../service'
+
+util = require '../util'
 
 rssUrl = 'http://dev.gold.avosapps.com/jianliao/rss'
 
@@ -9,7 +10,7 @@ _addRSSUrl = ({integration}) ->
   integration.url = rssUrl
   return integration
 
-module.exports = service.register 'goldxitudaily', ->
+module.exports = ->
 
   @title = '稀土掘金日报'
 
@@ -17,15 +18,15 @@ module.exports = service.register 'goldxitudaily', ->
 
   @group = 'rss'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '挖掘最优质的互联网技术'
     en: 'Digging the best of Internet technology'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '挖掘最优质的互联网技术'
     en: 'Digging the best of Internet technology'
 
-  @iconUrl = service.static 'images/icons/goldxitudaily@2x.png'
+  @iconUrl = util.static 'images/icons/goldxitudaily@2x.png'
 
   if process.env.NODE_ENV in ['ga', 'prod']
     @serviceUrl = 'http://apps.teambition.corp:7411'

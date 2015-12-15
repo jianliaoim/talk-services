@@ -1,4 +1,7 @@
 path = require 'path'
+Promise = require 'bluebird'
+request = require 'request'
+Err = require 'err1st'
 loader = require './loader'
 
 module.exports = util =
@@ -28,4 +31,15 @@ module.exports = util =
   getApiUrl: (category, apiName) ->
     loader.config.apiHost + "/services/api/#{category}/#{apiName}"
 
+  getAccountUser: (accountToken, callback) ->
+    options =
+      url: loader.config.talkAccountApiUrl + '/v1/user/get'
+      json: true
+      qs: accountToken: accountToken
+    request options, (err, res, user) ->
+      return callback(new Err('TOKEN_EXPIRED')) unless user?._id
+      callback err, user
+
 Object.defineProperty util, 'config', get: -> loader.config
+
+Promise.promisifyAll util

@@ -11,4 +11,7 @@ app.use (err, req, res, next) ->
     code: 400
     message: err.message
 
+app.use '/tb', require './teambition'
+app.use '/account', require './account'
+
 app.listen 7632

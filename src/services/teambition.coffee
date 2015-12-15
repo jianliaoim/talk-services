@@ -4,18 +4,10 @@ request = require 'request'
 moment = require 'moment-timezone'
 marked = require 'marked'
 crypto = require 'crypto'
+Err = require 'err1st'
 requestAsync = Promise.promisify request
 
 util = require '../util'
-
-# Hack teambition host
-switch process.env.NODE_ENV
-  when 'ga', 'prod'
-    _tbHost = 'https://www.teambition.com'
-  when 'test'
-    _tbHost = 'http://127.0.0.1:7632/tb'
-  else
-    _tbHost = 'http://www.project.ci'
 
 _supportEvents = [
   "project.rename", "project.archive", "project.unarchive", "project.member.create", "project.member.remove",
@@ -33,7 +25,8 @@ _supportEvents = [
 #     hookId: xxx
 
 _getTbToken = (accountToken) ->
-  $token = service.sdk.getAccountUserAsync accountToken
+  $token = util.getAccountUserAsync accountToken
+
   .then (user) ->
     accessToken = null
     user?.unions?.some (union) ->
@@ -41,9 +34,7 @@ _getTbToken = (accountToken) ->
         accessToken = union.accessToken
         return true
     unless accessToken
-      err = new Error '你没有绑定 Teambition 账号'
-      err.phrase = 'NO_PERMISSION'
-      throw err
+      throw new Err 'NO_PERMISSION', '你没有绑定 Teambition 账号'
     accessToken
 
 ###*
@@ -53,47 +44,41 @@ _getTbToken = (accountToken) ->
 ###
 _preValidate = (integration) ->
   unless integration.project?._id
-    throw new Error('Missing project in teambition integration!')
+    throw new Err 'PARAMS_MISSING', 'Missing project in teambition integration!'
 
   unless integration.events
-    throw new Error('Missing events in teambition integration')
+    throw new Err 'PARAMS_MISSING', 'Missing events in teambition integration'
 
   invalidEvents = integration.events.filter (event) -> event not in _supportEvents
   if invalidEvents.length
-    throw new Error("Invalid events #{invalidEvents}")
+    throw new Err 'PARAMS_INVALID', "Invalid events #{invalidEvents}"
 
-_checkSign = (query = {}, clientSecret) ->
+_checkSign = (query = {}) ->
   {sign, timestamp, nonce} = query
   unless sign and timestamp and nonce
-    err = new Error('Signature failed')
-    err.status = 403
-    throw err
+    throw new Err('SIGNATURE_FAILED')
 
   unless (Date.now() - Number(timestamp)) < 60000  # Less than 1 minute
-    err = new Error('Expired')
-    err.status = 403
-    throw err
+    throw new Err('TOKEN_EXPIRED')
 
-  values = [timestamp, nonce, clientSecret]
+  values = [timestamp, nonce, util.config.teambition.clientSecret]
 
   unless sign is crypto.createHash('sha1').update(values.sort().join '').digest('hex')
-    err = new Error('Signature failed')
-    err.status = 403
-    throw err
+    throw new Err('SIGNATURE_FAILED')
 
 _receiveWebhook = ({integration, body, query, method}) ->
-  _checkSign query, @clientSecret
+  _checkSign query
 
-  return ok: 1 if method is 'HEAD'
+  return if method is 'HEAD'
 
   {event, data} = body
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   [scope] = event?.split('.')
 
-  throw new Error("Invalid event of teambition integration") unless scope
+  throw new Err("PARAMS_INVALID", "Invalid event of teambition integration") unless scope
 
   # Set the redirect url by specific scope name
   switch scope
@@ -259,7 +244,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
   attachment.data.title = "[#{data.project.name}] #{data.user.name} #{attachment.data.title}"
   message.attachments = [attachment]
 
-  @sendMessage message
+  message
 
 ###*
  * Create teambition project hook
@@ -273,51 +258,48 @@ _createProjectHook = (_projectId, token, events, hashId) ->
   requestAsync
     method: 'POST'
     headers:
-      "User-Agent": service.userAgent
+      "User-Agent": util.userAgent
       "Authorization": "OAuth2 #{token}"
-    url: "#{_tbHost}/api/projects/#{_projectId}/hooks"
+    url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks"
     json: true
     body:
-      callbackURL: "#{service.apiHost}/services/webhook/#{hashId}"
+      callbackURL: "#{util.config.apiHost}/services/webhook/#{hashId}"
       events: events
 
   .spread (res, body) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
+      throw new Err("BAD_REQUEST", res.statusCode)
     body
 
 _updateProjectHook = (_projectId, hookId, token, events, hashId) ->
   requestAsync
     method: 'PUT'
     headers:
-      "User-Agent": service.userAgent
+      "User-Agent": util.userAgent
       "Authorization": "OAuth2 #{token}"
-    url: "#{_tbHost}/api/projects/#{_projectId}/hooks/#{hookId}"
+    url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks/#{hookId}"
     json: true
     body:
-      callbackURL: "#{service.apiHost}/services/webhook/#{hashId}"
+      callbackURL: "#{util.config.apiHost}/services/webhook/#{hashId}"
       events: events
 
   .spread (res, body) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
+      throw new Err("BAD_REQUEST", res.statusCode)
     body
 
 _removeProjectHook = (_projectId, hookId, token) ->
   requestAsync
     method: 'DELETE'
-    url: "#{_tbHost}/api/projects/#{_projectId}/hooks/#{hookId}"
+    url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks/#{hookId}"
     headers:
-      "User-Agent": service.userAgent
+      "User-Agent": util.userAgent
       "Authorization": "OAuth2 #{token}"
     json: true
 
   .spread (res, body) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
+      throw new Err("BAD_REQUEST", res.statusCode)
     body
 
 _createWebhook = (req) ->
@@ -335,23 +317,25 @@ _createWebhook = (req) ->
     , integration.hashId
 
   .then (body) ->
-    integration.data or= {}
-    integration.data[integration.project._id] = hookId: body._id
+    data = integration.data or {}
+    data[integration.project._id] = hookId: body._id
     # Mark the mixed field as modified
-    integration.markModified 'data'
+    integration.data = data
     integration
 
 _updateWebhook = (req) ->
   {integration} = req
-  {accountToken} = req.get()
-  return unless ['project._id', 'events'].some (field) -> integration.isDirectModified field
+  {accountToken, events, project} = req.get()
+
+  return unless events or project
 
   _preValidate integration
 
   $token = _getTbToken accountToken
 
   {_original} = integration
-  if integration.isDirectModified 'project._id'
+
+  if project
     _originalProjectId = _original.project._id
 
     $removeOldProjectHook = $token.then (token) ->
@@ -370,15 +354,15 @@ _updateWebhook = (req) ->
       , integration.hashId
 
     .then (body) ->
-      integration.data or= {}
-      integration.data[integration.project._id] = hookId: body._id
-      integration.markModified 'data'
+      data = integration.data or {}
+      data[integration.project._id] = hookId: body._id
+      integration.data = data
       integration
 
     $integration = Promise.all [$removeOldProjectHook, $createNewProjectHook]
     .then -> integration
 
-  else if integration.isDirectModified 'events'
+  else if events
     _projectId = integration.project._id
 
     $integration = $token.then (token) ->
@@ -425,14 +409,13 @@ _getProjects = (req, res) ->
     requestAsync
       method: 'GET'
       headers:
-        "User-Agent": service.userAgent
+        "User-Agent": util.userAgent
         "Authorization": "OAuth2 #{token}"
-      url: "#{_tbHost}/api/projects"
+      url: "#{util.config.teambition.host}/api/projects"
       json: true
     .spread (res, projects) ->
       unless res.statusCode >= 200 and res.statusCode < 300
-        err = new Error("Bad request #{res.statusCode}")
-      throw err if err
+        throw new Err("BAD_REQUEST", res.statusCode)
       projects.map (project) -> _.pick project, '_id', 'name'
 
 _getEvents = ->

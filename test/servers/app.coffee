@@ -13,5 +13,6 @@ app.use (err, req, res, next) ->
 
 app.use '/tb', require './teambition'
 app.use '/account', require './account'
+app.use '/rss', require './rss'
 
 app.listen 7632

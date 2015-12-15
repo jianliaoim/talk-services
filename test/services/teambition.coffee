@@ -5,7 +5,6 @@ crypto = require 'crypto'
 _ = require 'lodash'
 
 loader = require '../../src/loader'
-
 {req, res} = require '../util'
 
 $teambition = loader.load 'teambition'

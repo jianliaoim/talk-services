@@ -7,6 +7,7 @@ jschardet = require 'jschardet'
 FeedParser = require 'feedparser'
 stream = require 'stream'
 he = require 'he'
+
 util = require '../util'
 
 _checkRSS = (req, res) ->
@@ -72,10 +73,7 @@ module.exports = ->
     key: 'url'
     onChange: 'checkRSS'
 
-  if process.env.NODE_ENV in ['ga', 'prod']
-    @serviceUrl = 'http://apps.teambition.corp:7411'
-  else
-    @serviceUrl = 'http://localhost:7411'
+  @serviceUrl = util.config.rss.serviceUrl
 
   @registerApi 'checkRSS', _checkRSS
 

@@ -2,13 +2,7 @@
 http = require 'http'
 Promise = require 'bluebird'
 
-prepare = (done) -> done()
-
-cleanup = (done) -> done()
-
-util =
-  prepare: prepare
-  cleanup: cleanup
+util = {}
 
 Object.defineProperty util, 'req',
   get: ->

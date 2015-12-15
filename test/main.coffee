@@ -11,6 +11,8 @@ loader.config =
   teambition:
     clientSecret: 'abc'
     host: 'http://127.0.0.1:7632/tb'
+  rss:
+    serviceUrl: 'http://localhost:7411'
 
 # Load all services
 require './loader'
@@ -20,5 +22,6 @@ require './loader'
 # require './services/incoming'
 # require './services/outgoing'
 # require './services/robot'  # Not implement
-require './services/teambition'
+# require './services/teambition'
+require './services/rss'
 

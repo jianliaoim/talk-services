@@ -60,18 +60,16 @@ describe 'Teambition#IntegrationHooks', ->
     .nodeify done
 
   it 'should update teambition webhook when update integration', (done) ->
-    integration._original = _.cloneDeep integration
-    integration.events = ["task.create", "subtask.create"]
     req.integration = integration
+    req.set 'events', ["task.create", "subtask.create"]
     $teambition.then (teambition) ->
       teambition.receiveEvent 'before.integration.update', req
     .then ->
       integration.data[_projectId].hookId.should.eql hookId
+      integration.events = ["task.create", "subtask.create"]
     .nodeify done
 
   it 'should update the hookId when update integration project id', (done) ->
-    integration._original = _.cloneDeep integration
-    integration.project._id = _newProjectId
     req.integration = integration
     req.set 'project', _id: _newProjectId
     $teambition.then (teambition) ->
@@ -79,6 +77,7 @@ describe 'Teambition#IntegrationHooks', ->
     .then ->
       integration.data[_newProjectId].hookId.should.not.eql hookId
       integration.data.should.not.have.properties _projectId
+      integration.project = _id: _newProjectId
     .nodeify done
 
   it 'should remove the teambition hook when remove integration', (done) ->

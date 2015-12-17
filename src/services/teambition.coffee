@@ -333,14 +333,12 @@ _updateWebhook = (req) ->
 
   $token = _getTbToken accountToken
 
-  {_original} = integration
-
-  if project
-    _originalProjectId = _original.project._id
+  if project and not _.isEqual "#{project?._id}", "#{integration.project?._id}"
+    _originalProjectId = integration.project._id
 
     $removeOldProjectHook = $token.then (token) ->
       _removeProjectHook _originalProjectId
-      , _original.data[_originalProjectId].hookId
+      , integration.data[_originalProjectId].hookId
       , token
 
     .then (body) ->
@@ -348,31 +346,33 @@ _updateWebhook = (req) ->
       integration
 
     $createNewProjectHook = $token.then (token) ->
-      _createProjectHook integration.project._id
+      _createProjectHook project._id
       , token
-      , integration.events
+      , events or integration.events
       , integration.hashId
 
     .then (body) ->
       data = integration.data or {}
-      data[integration.project._id] = hookId: body._id
+      data[project._id] = hookId: body._id
       integration.data = data
       integration
 
     $integration = Promise.all [$removeOldProjectHook, $createNewProjectHook]
     .then -> integration
 
-  else if events
+  else if events and not _.isEqual events, integration.events
     _projectId = integration.project._id
 
     $integration = $token.then (token) ->
       _updateProjectHook _projectId
       , integration.data[_projectId].hookId
       , token
-      , integration.events
+      , events
       , integration.hashId
 
     .then (body) -> integration
+
+  else $integration = Promise.resolve(integration)
 
   $integration
 

@@ -12,10 +12,12 @@ loader.config =
     clientSecret: 'abc'
     host: 'http://127.0.0.1:7632/tb'
   rss:
-    serviceUrl: 'http://localhost:7411'
+    serviceUrl: 'http://127.0.0.1:7411'
+  github:
+    apiHost: 'http://127.0.0.1:7632/github'
 
-# Load all services
-require './loader'
+# # Load all services
+# require './loader'
 
 # requireDir './servers'
 
@@ -23,5 +25,6 @@ require './loader'
 # require './services/outgoing'
 # require './services/robot'  # Not implement
 # require './services/teambition'
-require './services/rss'
-
+# require './services/rss'
+require './services/github'
+# require './services/firim'

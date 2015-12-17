@@ -6,8 +6,7 @@ requestAsync = Promise.promisify request
 
 util = require '../util'
 
-_apiHost = 'https://api.github.com'
-_pageHost = 'https://github.com'
+_getGitHubApiHost = -> util.config.github?.apiHost or 'https://api.github.com'
 
 ###*
  * Create github hook
@@ -20,7 +19,7 @@ _pageHost = 'https://github.com'
 _createHook = (repos, token, events, hashId) ->
   requestAsync
     method: 'POST'
-    url: "#{_apiHost}/repos/#{repos}/hooks"
+    url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks"
     headers:
       'User-Agent': util.userAgent
       'Authorization': "token #{token}"
@@ -49,7 +48,7 @@ _createHook = (repos, token, events, hashId) ->
 _removeHook = (repos, hookId, token) ->
   requestAsync
     method: 'DELETE'
-    url: "#{_apiHost}/repos/#{repos}/hooks/#{hookId}"
+    url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks/#{hookId}"
     headers:
       'User-Agent': util.userAgent
       'Authorization': "token #{token}"
@@ -75,8 +74,9 @@ _removeHook = (repos, hookId, token) ->
 _updateHook = (repos, hookId, token, events, hashId) ->
   requestAsync
     method: 'PATCH'
-    url: "#{_apiHost}/repos/#{repos}/hooks/#{hookId}"
+    url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks/#{hookId}"
     headers:
+      'User-Agent': util.userAgent
       'User-Agent': util.userAgent
       'Authorization': "token #{token}"
     json: true
@@ -130,14 +130,14 @@ _removeWebhook = ({integration}) ->
     , hookId
     , integration.token
 
-_updateWebhook = ({integration}) ->
-  self = this
-  return unless ['repos', 'events'].some (field) -> integration.isDirectModified field
-  {_original} = integration
-  data = integration.data or {}
+_updateWebhook = (req) ->
+  {integration} = req
+  {events, repos} = req.get()
+  return unless events?.length and repos?.length
 
-  if integration.isDirectModified 'repos'
-    $removeOldRepos = Promise.resolve _original.repos
+  data = integration.data or {}
+  if repos and not _.isEqual repos, integration.repos
+    $removeOldRepos = Promise.resolve integration.repos
     .map (repos) ->
       return if repos in reposes  # Do not remove when the repos exist in the new array
       _repos = repos.split('.').join('_')
@@ -152,20 +152,20 @@ _updateWebhook = ({integration}) ->
   .map (repos) ->
     _repos = repos.split('.').join('_')
     # Update exist hook
-    if (repos in _original.repos) or not integration.isDirectModified 'repos'
+    if _.isEqual integration.repos, repos
       # Do not update when notifications is not modified
-      return unless integration.isDirectModified 'events'
+      return if _.isEqual events, integration.events
       hookId = data[_repos]?.hookId
       throw new Error('Github hook not found') unless hookId  # Stop the update process when hookId not found
       _updateHook repos
       , hookId
       , integration.token
-      , integration.events
+      , events
       , integration.hashId
     else  # Create new hook
       _createHook repos
       , integration.token
-      , integration.events
+      , events
       , integration.hashId
 
       .then (body) -> data[_repos] = hookId: body?.id
@@ -179,7 +179,7 @@ _receiveWebhook = ({headers, body, integration}) ->
   payload = body
   {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
 
-  message = integration: integration
+  message = {}
   attachment =
     category: 'quote'
     data:
@@ -229,7 +229,7 @@ _receiveWebhook = ({headers, body, integration}) ->
     else return false
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 _getEvents = ->
   [

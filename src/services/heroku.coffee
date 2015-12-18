@@ -11,13 +11,12 @@ util = require '../util'
  * @return {Promise}
 ###
 
-_receiveWebhook = ({ integration, body }) ->
+_receiveWebhook = ({body}) ->
   payload = body
 
   return unless payload
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -29,7 +28,7 @@ _receiveWebhook = ({ integration, body }) ->
         title: "#{ payload.app }"
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

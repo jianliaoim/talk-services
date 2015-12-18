@@ -1,6 +1,6 @@
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body?.payload
 
   try
@@ -17,7 +17,6 @@ _receiveWebhook = ({integration, body}) ->
           "(#{payload.branch} - #{payload.commit[0...7]}) by #{payload.author_name}"
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -26,7 +25,7 @@ _receiveWebhook = ({integration, body}) ->
         redirectUrl: payload.build_url
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

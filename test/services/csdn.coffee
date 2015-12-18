@@ -1,8 +1,8 @@
 should = require 'should'
 requireDir = require 'require-dir'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-csdn = service.load 'csdn'
+loader = require '../../src/loader'
+{req} = require '../util'
+$csdn = loader.load 'csdn'
 
 payload = {
   "headers": {
@@ -53,28 +53,24 @@ payload = {
   }
 }
 
-testWebhook = (payload, checkMessage) ->
+testWebhook = (payload) ->
   # Overwrite the sendMessage function of coding
-  csdn.sendMessage = checkMessage
   req.body = payload.body
-  csdn.receiveEvent 'service.webhook', req
+  $csdn.then (csdn) -> csdn.receiveEvent 'service.webhook', req
 
 describe 'Csdn#Webhook', ->
-
-  before prepare
 
   req.integration =
     _id: '552cc903022844e6d8afb3b4'
     category: 'coding'
 
   it 'receive zen', ->
-    testWebhook {}, (message) ->
-      throw new Error('Should not response to zen')
+    testWebhook {}
+    .then (message) -> should(message).be.empty
 
   it 'receive push', ->
-    testWebhook payload, (message) ->
-      message.should.have.properties 'integration'
-      message.integration._id.should.eql '552cc903022844e6d8afb3b4'
+    testWebhook payload
+    .then (message) ->
       message.attachments[0].data.title.should.eql '[webcnn] 提交了新的代码'
       message.attachments[0].data.text.should.eql [
         '<a href="https://code.csdn.net/white715/webcnn/commit/59acbad155b77f3d03412094aab3877a1ff2887c" target="_blank">'
@@ -83,5 +79,3 @@ describe 'Csdn#Webhook', ->
         '<code>e32a60:</code></a> b\n<br>'
       ].join ''
       message.attachments[0].data.redirectUrl.should.eql 'https://code.csdn.net/white715/webcnn'
-
-  # after cleanup

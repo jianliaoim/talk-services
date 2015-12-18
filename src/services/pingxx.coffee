@@ -2,7 +2,7 @@ _ = require 'lodash'
 moment = require 'moment-timezone'
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   object = body?.data?.object or {}
 
   return unless body?.type
@@ -40,7 +40,6 @@ _receiveWebhook = ({integration, body}) ->
     else return false
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -49,7 +48,7 @@ _receiveWebhook = ({integration, body}) ->
         redirectUrl: redirectUrl
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

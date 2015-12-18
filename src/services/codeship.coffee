@@ -10,11 +10,11 @@ util = require '../util'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   build = body?.build
   return unless build
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   projectName = if build.project_name then "[#{build.project_name}] " else ''
@@ -37,7 +37,7 @@ _receiveWebhook = ({integration, body}) ->
     """
   attachment.data.redirectUrl = projectUrl
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 module.exports = ->
   @title = 'codeship'

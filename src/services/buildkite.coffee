@@ -15,7 +15,6 @@ _receiveWebhook = ({integration, body, headers}) ->
           "(#{build.branch} - #{build.commit?[0...7]}) by #{payload.sender?.name}"
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -24,7 +23,7 @@ _receiveWebhook = ({integration, body, headers}) ->
         redirectUrl: build.web_url
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

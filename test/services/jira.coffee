@@ -1,15 +1,13 @@
 should = require 'should'
 requireDir = require 'require-dir'
 
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-jira = service.load 'jira'
+loader = require '../../src/loader'
+{req} = require '../util'
+$jira = loader.load 'jira'
 
 payloads = requireDir './jira_assets'
 
 describe 'Jira#Webhook', ->
-
-  before prepare
 
   req.integration =
     _id: 'xxx'
@@ -20,29 +18,28 @@ describe 'Jira#Webhook', ->
 
     req = payloads['empty-event']
 
-    jira.receiveEvent 'service.webhook', req
+    $jira.then (jira) -> jira.receiveEvent 'service.webhook', req
+    .then -> done new Error 'Should not pass'
     .catch (err) ->
       err.message.should.eql 'Unknown Jira event type'
       done()
 
   it 'receive create type webhook', (done) ->
-    jira.sendMessage = (message) ->
-      message.attachments[0].data.title.should.eql 'Destec Zhang [Administrator] created an issue for project test project'
-      message.attachments[0].data.text.should.eql 'Summary: test bug'
-      done()
 
     req = payloads['create-issue']
 
-    jira.receiveEvent 'service.webhook', req
+    $jira.then (jira) -> jira.receiveEvent 'service.webhook', req
+    .then (message) ->
+      message.attachments[0].data.title.should.eql 'Destec Zhang [Administrator] created an issue for project test project'
+      message.attachments[0].data.text.should.eql 'Summary: test bug'
+    .nodeify done
 
   it 'receive update type webhook', (done) ->
-    jira.sendMessage = (message) ->
-      message.attachments[0].data.title.should.eql 'Destec Zhang [Administrator] updated an issue for project test project'
-      message.attachments[0].data.text.should.eql 'Summary: test bug'
-      done()
 
     req = payloads['update-issue']
 
-    jira.receiveEvent 'service.webhook', req
-
-  after cleanup
+    $jira.then (jira) -> jira.receiveEvent 'service.webhook', req
+    .then (message) ->
+      message.attachments[0].data.title.should.eql 'Destec Zhang [Administrator] updated an issue for project test project'
+      message.attachments[0].data.text.should.eql 'Summary: test bug'
+    .nodeify done

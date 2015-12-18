@@ -2,7 +2,7 @@ _ = require 'lodash'
 
 util = require '../util'
 
-_receiveWebhook = ({integration, query, body}) ->
+_receiveWebhook = ({query, body}) ->
   payload = _.assign {}
     , query or {}
     , body or {}
@@ -19,7 +19,6 @@ _receiveWebhook = ({integration, query, body}) ->
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
-    integration: integration
     body: content
     authorName: authorName
     attachments: [
@@ -31,7 +30,7 @@ _receiveWebhook = ({integration, query, body}) ->
         imageUrl: imageUrl
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

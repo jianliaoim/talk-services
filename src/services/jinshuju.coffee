@@ -1,17 +1,17 @@
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
         text: "#{payload.entry?.creator_name} 添加了新的数据"
         redirectUrl: "https://jinshuju.net/forms/#{payload.form}/entries"
     ]
-  @sendMessage message
+
+  message
 
 module.exports = ->
 

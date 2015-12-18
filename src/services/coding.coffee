@@ -11,7 +11,7 @@ _receiveWebhook = ({integration, body, headers}) ->
   if integration.token and integration.token isnt payload.token
     throw new Error("Invalid token of coding")
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
@@ -116,7 +116,7 @@ _receiveWebhook = ({integration, body, headers}) ->
     else return false
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 # Register the coding service
 module.exports = ->

@@ -15,7 +15,6 @@ _receiveWebhook = ({integration, body}) ->
   text = text.join '\n'
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -23,7 +22,7 @@ _receiveWebhook = ({integration, body}) ->
         text: text
         redirectUrl: payload.body.form.url
     ]
-  @sendMessage message
+  message
 
 module.exports = ->
 

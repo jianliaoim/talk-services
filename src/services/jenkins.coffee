@@ -10,7 +10,7 @@ util = require '../util'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body or {}
 
   {content, authorName, title, text, redirectUrl, imageUrl} = payload
@@ -18,7 +18,6 @@ _receiveWebhook = ({integration, body}) ->
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
-    integration: integration
     body: content
     authorName: authorName
     attachments: [
@@ -30,7 +29,7 @@ _receiveWebhook = ({integration, body}) ->
         imageUrl: imageUrl
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
   @title = 'Jenkins'

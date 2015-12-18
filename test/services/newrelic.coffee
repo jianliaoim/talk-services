@@ -1,7 +1,7 @@
 should = require 'should'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-newrelic = service.load 'newrelic'
+loader = require '../../src/loader'
+{req} = require '../util'
+$newrelic = loader.load 'newrelic'
 
 payload =
   policy_url: "https://alerts.newrelic.com/accounts/1065273/policies/0"
@@ -34,11 +34,11 @@ describe 'NewRelic#Webhook', ->
 
   req.integration = _id: '123'
 
-  before prepare
-
   it 'receive webhook', (done) ->
-    newrelic.sendMessage = (message) ->
-      message.should.have.properties 'integration'
+    req.body = payload
+
+    $newrelic.then (newrelic) -> newrelic.receiveEvent 'service.webhook', req
+    .then (message) ->
       message.attachments[0].data.redirectUrl.should.eql payload.incident_url
       message.attachments[0].data.title.should.eql '''
         NOTIFICATION: New Relic Alert - Test Condition
@@ -47,9 +47,4 @@ describe 'NewRelic#Webhook', ->
         Owner: Test User
         Incident: New Relic Alert - Channel Test
       '''
-
-    req.body = payload
-
-    newrelic.receiveEvent 'service.webhook', req
-    .then -> done()
-    .catch done
+    .nodeify done

@@ -1,7 +1,7 @@
 _ = require 'lodash'
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body or {}
 
   texts = []
@@ -15,7 +15,6 @@ _receiveWebhook = ({integration, body}) ->
   texts.push "简历投递日期：#{payload.apply_at}" if payload.apply_at
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -24,7 +23,8 @@ _receiveWebhook = ({integration, body}) ->
         redirectUrl: payload.url
         imageUrl: payload.face_url
     ]
-  @sendMessage message
+
+  message
 
 module.exports = ->
 

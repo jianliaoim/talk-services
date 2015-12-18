@@ -1,11 +1,11 @@
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body?.payload
 
   return unless payload
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   if payload?.outcome is 'success'
@@ -18,7 +18,7 @@ _receiveWebhook = ({integration, body}) ->
 
   attachment.data.redirectUrl = payload.build_url
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 module.exports = ->
 

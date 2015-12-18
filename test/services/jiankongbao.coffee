@@ -1,7 +1,7 @@
 should = require 'should'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-jiankongbao = service.load 'jiankongbao'
+loader = require '../../src/loader'
+{req} = require '../util'
+$jiankongbao = loader.load 'jiankongbao'
 
 payload =
   msg_id: 1
@@ -15,17 +15,11 @@ describe 'Jiankongbao#Webhook', ->
 
   req.integration = _id: 123
 
-  before prepare
-
   it 'should create new message when receive jiankongbao webhook', (done) ->
-    jiankongbao.sendMessage = (message) ->
-      message.attachments[0].data.text.should.eql payload.content
-      message.attachments[0].data.redirectUrl.should.eql 'https://qiye.jiankongbao.com/task/http/2'
-
     req.body = payload
 
-    jiankongbao.receiveEvent 'service.webhook', req
-    .then -> done()
-    .catch done
-
-  after cleanup
+    $jiankongbao.then (jiankongbao) -> jiankongbao.receiveEvent 'service.webhook', req
+    .then (message) ->
+      message.attachments[0].data.text.should.eql payload.content
+      message.attachments[0].data.redirectUrl.should.eql 'https://qiye.jiankongbao.com/task/http/2'
+    .nodeify done

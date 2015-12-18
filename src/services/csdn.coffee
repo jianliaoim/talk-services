@@ -10,11 +10,11 @@ util = require '../util'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body or null
   return unless payload
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
@@ -40,7 +40,7 @@ _receiveWebhook = ({integration, body}) ->
   attachment.data.redirectUrl = projectUrl
   message.attachments = [attachment]
 
-  @sendMessage message
+  message
 
 module.exports = ->
   @title = 'csdn'

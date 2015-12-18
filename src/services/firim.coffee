@@ -10,7 +10,6 @@ _receiveWebhook = ({integration, body}) ->
   text += "CHANGELOG\n#{payload.changelog}" if payload.changelog?.length
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -21,7 +20,7 @@ _receiveWebhook = ({integration, body}) ->
         imageUrl: 'https://tools.teambition.net/qr.png?text=' + encodeURIComponent payload.link
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

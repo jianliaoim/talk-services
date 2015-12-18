@@ -16,7 +16,6 @@ _receiveWebhook = ({integration, method, body, query}) ->
     throw new Error('Invalid jiankongbao payload')
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -24,7 +23,7 @@ _receiveWebhook = ({integration, method, body, query}) ->
         redirectUrl: "#{jkbUrl}/task/#{task_type}/#{task_id}"
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

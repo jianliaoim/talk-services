@@ -28,7 +28,6 @@ _receiveWebhook = ({ integration, body }) ->
     text.push 'Incident: ', payload.details
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -37,7 +36,7 @@ _receiveWebhook = ({ integration, body }) ->
         text: text.join ''
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

@@ -6,11 +6,9 @@ util = require '../util'
 ###*
  * Define handler when receive incoming webhook from oschina
  * @param  {Object}   req      Express request object
- * @param  {Object}   res      Express response object
- * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payloadStr = body?.hook or null
   return unless payloadStr
 
@@ -19,7 +17,7 @@ _receiveWebhook = ({integration, body}) ->
   catch e
     return
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
@@ -45,7 +43,7 @@ _receiveWebhook = ({integration, body}) ->
   attachment.data.redirectUrl = projectUrl
   attachment.data.category = 'oschina'
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 module.exports = ->
   @title = 'oschina'

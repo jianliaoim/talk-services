@@ -1,9 +1,9 @@
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   JIRA_CREATE_EVENT = "jira:issue_created"
@@ -19,7 +19,7 @@ _receiveWebhook = ({integration, body}) ->
     throw new Error("Unknown Jira event type")
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 module.exports = ->
 

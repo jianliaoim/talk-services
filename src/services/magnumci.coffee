@@ -1,6 +1,6 @@
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body?.payload
 
   try
@@ -13,7 +13,6 @@ _receiveWebhook = ({integration, body}) ->
   throw new Error('Params missing') unless payload.title
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -21,7 +20,8 @@ _receiveWebhook = ({integration, body}) ->
         text: payload.message
         redirectUrl: payload.build_url
     ]
-  @sendMessage message
+
+  message
 
 module.exports = ->
 

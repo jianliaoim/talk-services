@@ -4,6 +4,8 @@ request = require 'request'
 Err = require 'err1st'
 loader = require './loader'
 
+lockMap = {}
+
 module.exports = util =
 
   userAgent: 'Talk Api Service V1'
@@ -39,6 +41,14 @@ module.exports = util =
     request options, (err, res, user) ->
       return callback(new Err('TOKEN_EXPIRED')) unless user?._id
       callback err, user
+
+  lock: (key, timeout = 10000) ->
+    lockMap[key] = 1
+    setTimeout ->
+      delete lockMap[key]
+    , timeout
+
+  isLocked: (key) -> lockMap[key]
 
 Object.defineProperty util, 'config', get: -> loader.config
 

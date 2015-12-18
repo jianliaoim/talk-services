@@ -5,14 +5,12 @@ util = require '../util'
 ###*
  * Define handler when receive incoming webhook from gitlab
  * @param  {Object}   req      Express request object
- * @param  {Object}   res      Express response object
  * @param  {Function} callback
  * @return {Promise}
 ###
 _receiveWebhook = ({integration, body}) ->
   # The errors should be catched and transmit to callback
   self = this
-  {redis} = service.components
   payload = body
 
   switch payload.object_kind
@@ -24,7 +22,7 @@ _receiveWebhook = ({integration, body}) ->
 
   commits or= []
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   switch payload.event
@@ -59,18 +57,10 @@ _receiveWebhook = ({integration, body}) ->
   ###*
    * @todo Find out the reason why gitlab will post same event and payload more than once
   ###
-  new Promise (resolve, reject) ->
-    redis.multi()
-    .getset lockKey, 1
-    .expire lockKey, 20  # Do not save the save event in 20 seconds
-    .exec (err, [isLocked]) ->
-      return reject(err) if err
-      resolve isLocked
-
-  .then (isLocked) ->
-    return if isLocked
-    message.attachments = [attachment]
-    self.sendMessage message
+  return if util.isLocked lockKey
+  util.lock lockKey, 20000
+  message.attachments = [attachment]
+  message
 
 module.exports = ->
   @title = 'GitLab'

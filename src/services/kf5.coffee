@@ -19,7 +19,6 @@ _receiveWebhook = ({integration, query, body}) ->
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
-    integration: integration
     body: content
     authorName: authorName
     attachments: [
@@ -30,7 +29,8 @@ _receiveWebhook = ({integration, query, body}) ->
         redirectUrl: redirectUrl
         imageUrl: imageUrl
     ]
-  @sendMessage message
+
+  message
 
 module.exports = ->
 

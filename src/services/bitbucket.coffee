@@ -1,13 +1,13 @@
 util = require '../util'
 
-_receiveWebhook = ({integration, body, headers}) ->
+_receiveWebhook = ({body, headers}) ->
   try
     [type, action] = headers['x-event-key'].split(":")
   catch
     throw new Error('Invalid event format')
   throw new Error('Invalid event type') unless type in ['repo', 'issue', 'pullrequest']
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   switch type
@@ -65,7 +65,7 @@ _receiveWebhook = ({integration, body, headers}) ->
         attachment.data.redirectUrl = body.pullrequest.links.html.href
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 module.exports = ->
 

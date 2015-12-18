@@ -1,16 +1,13 @@
 should = require 'should'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-jenkins = service.load 'jenkins'
+loader = require '../../src/loader'
+{req} = require '../util'
+$jenkins = loader.load 'jenkins'
 
 describe 'Jenkins#Webhook', ->
 
   req.integration = _id: '123'
 
   it 'receive webhook', (done) ->
-    jenkins.sendMessage = (message) ->
-      message.should.have.properties 'integration', 'authorName'
-      message.attachments[0].data.should.have.properties 'title', 'text', 'redirectUrl', 'imageUrl'
 
     req.body =
       authorName: '路人甲'
@@ -19,6 +16,8 @@ describe 'Jenkins#Webhook', ->
       redirectUrl: 'https://talk.ai/site'
       imageUrl: 'https://dn-talk.oss.aliyuncs.com/site/images/workspace-84060cfd.jpg'
 
-    jenkins.receiveEvent 'service.webhook', req
-    .then -> done()
-    .catch done
+    $jenkins.then (jenkins) -> jenkins.receiveEvent 'service.webhook', req
+    .then (message) ->
+      message.should.have.properties 'authorName'
+      message.attachments[0].data.should.have.properties 'title', 'text', 'redirectUrl', 'imageUrl'
+    .nodeify done

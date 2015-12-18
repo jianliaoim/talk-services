@@ -10,12 +10,11 @@ util = require '../util'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body, headers}) ->
+_receiveWebhook = ({body, headers}) ->
   # The errors should be catched and transmit to callback
-  self = this
   throw new Error("Unknown GitCafe event type") unless headers and headers['x-gitcafe-event']
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   switch headers['x-gitcafe-event']
@@ -59,7 +58,7 @@ _receiveWebhook = ({integration, body, headers}) ->
     else return false
 
   message.attachments = [attachment]
-  self.sendMessage message
+  message
 
 module.exports = ->
   @title = 'GitCafe'

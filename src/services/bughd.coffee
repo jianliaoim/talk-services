@@ -2,7 +2,7 @@ moment = require 'moment-timezone'
 
 util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body
   return unless (payload.user_name == 'BugHD')
   info = payload.datas[0]
@@ -13,7 +13,6 @@ _receiveWebhook = ({integration, body}) ->
   text += "CREATED_AT: #{moment(Number(info.created_at) * 1000).tz('Asia/Shanghai').format('YYYY-MM-DD hh:mm:ss')}" if info.created_at
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -22,7 +21,7 @@ _receiveWebhook = ({integration, body}) ->
         redirectUrl: if info.uri?.length then info.uri else undefined
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

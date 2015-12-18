@@ -1,7 +1,7 @@
 should = require 'should'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-jinshuju = service.load 'jinshuju'
+loader = require '../../src/loader'
+{req} = require '../util'
+$jinshuju = loader.load 'jinshuju'
 
 payload = {
   "form": "PXmEGx",
@@ -27,17 +27,11 @@ describe 'Jinshuju#Webhook', ->
 
   req.integration = _id: 1
 
-  before prepare
-
   it 'should create new message when receive jinshuju webhook', (done) ->
-    jinshuju.sendMessage = (message) ->
-      message.attachments[0].data.text.should.eql "sailxjx 添加了新的数据"
-      message.attachments[0].data.redirectUrl.should.eql "https://jinshuju.net/forms/PXmEGx/entries"
-
     req.body = payload
 
-    jinshuju.receiveEvent 'service.webhook', req
-    .then -> done()
-    .catch done
-
-  after cleanup
+    $jinshuju.then (jinshuju) -> jinshuju.receiveEvent 'service.webhook', req
+    .then (message) ->
+      message.attachments[0].data.text.should.eql "sailxjx 添加了新的数据"
+      message.attachments[0].data.redirectUrl.should.eql "https://jinshuju.net/forms/PXmEGx/entries"
+    .nodeify done

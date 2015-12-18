@@ -1,8 +1,8 @@
 should = require 'should'
 requireDir = require 'require-dir'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-oschina = service.load 'oschina'
+loader = require '../../src/loader'
+{req} = require '../util'
+$oschina = loader.load 'oschina'
 
 payload = {
   "headers": {
@@ -23,33 +23,27 @@ payload = {
   }
 }
 
-testWebhook = (payload, checkMessage) ->
+testWebhook = (payload) ->
   # Overwrite the sendMessage function of coding
-  oschina.sendMessage = checkMessage
   req.body = payload.body
-  oschina.receiveEvent 'service.webhook', req
+  $oschina.then (oschina) -> oschina.receiveEvent 'service.webhook', req
 
 describe 'oschina#Webhook', ->
-
-  before prepare
 
   req.integration =
     _id: '552cc903022844e6d8afb3b4'
     category: 'oschina'
 
   it 'receive zen', ->
-    testWebhook {}, (message) ->
-      throw new Error('Should not response to zen')
+    testWebhook {}
+    .then (message) -> should(message).be.empty
 
   it 'receive push', ->
-    testWebhook payload, (message) ->
-      message.should.have.properties 'integration'
-      message.integration._id.should.eql '552cc903022844e6d8afb3b4'
+    testWebhook payload
+    .then (message) ->
       message.attachments[0].data.title.should.eql '[webcnn] 提交了新的代码'
       message.attachments[0].data.text.should.eql [
         '<a href="http://git.oschina.net/344958185/webcnn/commit/cdc6e27f9b156a9693cb05369cee6a5686dd8f43" target="_blank">'
         '<code>cdc6e2:</code></a> updated readme<br>'
       ].join ''
       message.attachments[0].data.redirectUrl.should.eql 'http://git.oschina.net/344958185/webcnn'
-
-  # after cleanup

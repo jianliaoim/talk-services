@@ -266,10 +266,10 @@ _createProjectHook = (_projectId, token, events, hashId) ->
       callbackURL: "#{util.config.apiHost}/services/webhook/#{hashId}"
       events: events
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       throw new Err("BAD_REQUEST", res.statusCode)
-    body
+    res.body
 
 _updateProjectHook = (_projectId, hookId, token, events, hashId) ->
   requestAsync
@@ -283,10 +283,10 @@ _updateProjectHook = (_projectId, hookId, token, events, hashId) ->
       callbackURL: "#{util.config.apiHost}/services/webhook/#{hashId}"
       events: events
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       throw new Err("BAD_REQUEST", res.statusCode)
-    body
+    res.body
 
 _removeProjectHook = (_projectId, hookId, token) ->
   requestAsync
@@ -297,10 +297,10 @@ _removeProjectHook = (_projectId, hookId, token) ->
       "Authorization": "OAuth2 #{token}"
     json: true
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       throw new Err("BAD_REQUEST", res.statusCode)
-    body
+    res.body
 
 _createWebhook = (req) ->
   {integration} = req
@@ -413,9 +413,10 @@ _getProjects = (req, res) ->
         "Authorization": "OAuth2 #{token}"
       url: "#{util.config.teambition.host}/api/projects"
       json: true
-    .spread (res, projects) ->
+    .then (res) ->
       unless res.statusCode >= 200 and res.statusCode < 300
         throw new Err("BAD_REQUEST", res.statusCode)
+      projects = res.body
       projects.map (project) -> _.pick project, '_id', 'name'
 
 _getEvents = ->

@@ -32,11 +32,11 @@ _createHook = (repos, token, events, hashId) ->
         url: "#{util.config.apiHost}/services/webhook/#{hashId}"
         content_type: 'json'
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("Bad request #{res.statusCode}")
     throw err if err
-    body
+    res.body
 
 ###*
  * Remove github hook
@@ -54,7 +54,7 @@ _removeHook = (repos, hookId, token) ->
       'Authorization': "token #{token}"
     json: true
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("bad request #{res.statusCode}")
     throw err if err
@@ -88,11 +88,11 @@ _updateHook = (repos, hookId, token, events, hashId) ->
         url: "#{util.config.apiHost}/services/webhook/#{hashId}"
         content_type: 'json'
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("bad request #{res.statusCode}")
     throw err if err
-    body
+    res.body
 
 _createWebhook = ({integration}) ->
   self = this

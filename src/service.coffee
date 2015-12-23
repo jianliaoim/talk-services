@@ -41,7 +41,7 @@ service =
     'gitlab', 'coding', 'gitcafe', 'bitbucket', 'jinshuju', 'jiankongbao', 'kf5', 'swathub',
     'csdn', 'oschina', 'buildkite', 'codeship', 'jira', 'qingcloud', 'mikecrm', 'bughd',
     'travis', 'jenkins', 'circleci', 'magnumci', 'newrelic', 'heroku', 'goldxitudaily',
-    'weibo'
+    'weibo', 'cloudinsight'
   ]
 
 module.exports = service

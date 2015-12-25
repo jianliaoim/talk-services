@@ -19,7 +19,7 @@ loader.config =
 # Load all services
 require './loader'
 
-# requireDir './servers'
+requireDir './servers'
 
 require './services/incoming'
 require './services/outgoing'
@@ -43,7 +43,7 @@ require './services/oschina'
 require './services/buildkite'
 require './services/codeship'
 require './services/jira'
-# require './services/qingcloud'  # Need implement in api
+require './services/qingcloud'
 require './services/mikecrm'
 require './services/bughd'
 require './services/travis'

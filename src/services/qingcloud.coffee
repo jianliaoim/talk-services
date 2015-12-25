@@ -2,12 +2,10 @@ _ = require 'lodash'
 
 util = require '../util'
 
-_receiveWebhook = ({integration, body, res}) ->
+_receiveWebhook = ({integration, body}) ->
   payload = body
 
-  unless payload.resource
-    res.resType = 'text'
-    return integration.token
+  return integration.token unless payload.resource
 
   title = ''
   if payload.resource.resource_name isnt ''
@@ -25,7 +23,6 @@ _receiveWebhook = ({integration, body, res}) ->
   text = text.join '\n'
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -33,7 +30,7 @@ _receiveWebhook = ({integration, body, res}) ->
         text: text
     ]
 
-  @sendMessage message
+  message
 
 module.exports = ->
 

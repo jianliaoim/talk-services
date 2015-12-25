@@ -1,5 +1,6 @@
 Promise = require 'bluebird'
 _ = require 'lodash'
+
 util = require '../util'
 
 ###*
@@ -7,7 +8,7 @@ util = require '../util'
  * @param  {Model} message
  * @return {Promise}
 ###
-_postMessage = (message) ->
+_postMessage = ({message, integration}) ->
   {limbo} = service.components
   {TeamModel, IntegrationModel} = limbo.use 'talk'
   self = this

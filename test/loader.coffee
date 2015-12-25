@@ -1,24 +1,28 @@
 should = require 'should'
+Promise = require 'bluebird'
 _ = require 'lodash'
-service = require '../src/loader'
+loader = require '../src/loader'
 Service = require '../src/service'
 
 describe 'Loader#LoadAll', ->
 
-  it 'should all services', (done) ->
+  it 'should services', (done) ->
 
-    service.loadAll().then (services) ->
-      _.values(services).length.should.above 0
-      _.values(services).forEach (service) ->
-        service.should.instanceOf Service
+    $incoming = loader.load 'incoming'
+    $teambition = loader.load 'teambition'
+    $rss = loader.load 'rss'
 
+    Promise.all [$incoming, $teambition, $rss]
+    .then (services) ->
+      services.length.should.above 0
+      services.forEach (service) -> service.should.instanceOf Service
     .nodeify done
 
   it 'should get settings of each service', (done) ->
 
-    service.settings().then (settings) ->
-      _.values(settings).length.should.above 0
-      _.values(settings).forEach (setting) ->
+    loader.settings().then (settings) ->
+      settings.length.should.above 0
+      settings.forEach (setting) ->
         setting.should.not.instanceOf Service
         setting.should.have.properties 'name', 'title', 'manual'
 

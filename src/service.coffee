@@ -58,7 +58,9 @@ class Service
 
   isCustomized: false
 
-  register: (@name) ->
+  constructor: (@name) ->
+
+  register: ->
     @title = @name
     @_fields = []
     # Open api

@@ -1,22 +1,11 @@
 should = require 'should'
-service = require '../../src/service'
-{prepare, cleanup, req} = require '../util'
-qingcloud = service.load 'qingcloud'
+loader = require '../../src/loader'
+{req} = require '../util'
+$qingcloud = loader.load 'qingcloud'
 
 describe 'QingCloud#Webhook', ->
 
-  before prepare
-
   it 'receive webhook', (done) ->
-    qingcloud.sendMessage = (message) ->
-      message.attachments[0].data.title.should.eql 'QingCloud: i-fsda5aiv instance'
-      message.attachments[0].data.text.should.eql '''
-      RULE_ID: alpr-lr3gv19q STATUS: ok
-      RULE_ID: alpr-u8vue5g6 STATUS: alarm
-      RULE_ID: alpr-wkjaaqvh STATUS: ok
-      '''
-
-      done()
 
     req.body = {
       "alarm_policy": "inst",
@@ -86,9 +75,13 @@ describe 'QingCloud#Webhook', ->
 
     req.integration = _id: 1
 
-    qingcloud.receiveEvent 'service.webhook', req
-    .catch done
-
-  after cleanup
-
-
+    $qingcloud.then (qingcloud) ->
+      qingcloud.receiveEvent 'service.webhook', req
+    .then (message) ->
+      message.attachments[0].data.title.should.eql 'QingCloud: i-fsda5aiv instance'
+      message.attachments[0].data.text.should.eql '''
+      RULE_ID: alpr-lr3gv19q STATUS: ok
+      RULE_ID: alpr-u8vue5g6 STATUS: alarm
+      RULE_ID: alpr-wkjaaqvh STATUS: ok
+      '''
+    .nodeify done

@@ -15,14 +15,14 @@ The events with `before` prefix are pre hooks of the process, so their callbacks
 
 | Event name                   | Params                       | Need callbacks           | Description                          |
 |------------------------------|------------------------------|--------------------------|--------------------------------------|
-| `integration.create`         | integration                  |                          |                                      |
-| `integration.update`         | integration                  |                          |                                      |
-| `integration.remove`         | integration                  |                          |                                      |
+| `integration.create`         | `req` with integration       |                          |                                      |
+| `integration.update`         | `req` with integration       |                          |                                      |
+| `integration.remove`         | `req` with integration       |                          |                                      |
 | `service.webhook`            | `req`                        | message                  | Emitted when receive webhook request |
 | `before.integration.create`  | `req` with integration       |                          |                                      |
 | `before.integration.update`  | `req` with integration       |                          |                                      |
 | `before.integration.remove`  | `req` with integration       |                          |                                      |
-| `message.create`             | message                      |                          |                                      |
+| `message.create`             | `req` with message           | message or undefined     |                                      |
 
 [npm-url]: https://npmjs.org/package/talk-services
 [npm-image]: http://img.shields.io/npm/v/talk-services.svg

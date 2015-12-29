@@ -9,7 +9,6 @@ util = require '../util'
  * @return {Promise}
 ###
 _postMessage = ({message, integration}) ->
-  {limbo} = service.components
   {TeamModel, IntegrationModel} = limbo.use 'talk'
   self = this
 
@@ -123,38 +122,6 @@ _removeRobot = ({integration}) ->
     socket.broadcast "team:#{team._id}", "team:leave", data
 
 ###*
- * Create a new robot and invite him to this team
- * Fork current robot as the bundle user of this integration
- * @param  {Model} integration
- * @return {Promise}
-###
-_createRobot = ({integration}) ->
-  {limbo, socket} = service.components
-  {UserModel, TeamModel} = limbo.use 'talk'
-
-  robot = new UserModel
-    name: integration.title
-    avatarUrl: integration.iconUrl
-    description: integration.description
-    isRobot: true
-
-  $robot = new Promise (resolve, reject) ->
-    robot.save (err, robot) ->
-      return reject(err) if err
-      resolve robot
-
-  $team = $robot.then (robot) ->
-    integration.robot = robot
-    TeamModel.addMemberAsync integration._teamId, robot._id
-
-  $broadcast = Promise.all [$robot, $team]
-
-  .spread (robot, team) ->
-    robot.team = team
-    robot._teamId = team._id
-    socket.broadcast "team:#{team._id}", "team:join", robot
-
-###*
  * Update robot infomation
  * @param  {Model} integration
  * @return {Promise} robot
@@ -217,13 +184,3 @@ module.exports = ->
       zh: '通过 Webhook URL 发送消息给话题或成员'
       en: 'Send messages to users or channels through webhook URL'
   ]
-
-  @registerEvent 'message.create', _postMessage
-
-  @registerEvent 'service.webhook', _receiveWebhook
-
-  @registerEvent 'before.integration.create', _createRobot
-
-  @registerEvent 'before.integration.update', _updateRobot
-
-  @registerEvent 'before.integration.remove', _removeRobot

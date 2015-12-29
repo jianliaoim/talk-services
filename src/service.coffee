@@ -36,6 +36,19 @@ _getManual = ->
 _getFields = ->
   [].concat @headerFields, @_fields, @footerFields
 
+_httpPost = (url, payload) ->
+  requestAsync
+    method: 'POST'
+    url: url
+    headers: 'User-Agent': util.userAgent
+    json: true
+    timeout: 5000
+    body: payload
+  .then (res) ->
+    unless res.statusCode >= 200 and res.statusCode < 300
+      throw new Error("bad request #{res.statusCode}")
+    res.body
+
 class Service
 
   # Shown as title
@@ -174,10 +187,10 @@ class Service
     interval = options.interval or 1000
     self = this
 
-    return @_httpPost url, payload if retryTimes < 1
+    return _httpPost url, payload if retryTimes < 1
 
     _tryPost = ->
-      self._httpPost url, payload
+      _httpPost url, payload
       .catch (err) ->
         tryTimes += 1
         throw err if tryTimes > retryTimes
@@ -187,19 +200,6 @@ class Service
           _tryPost()
 
     _tryPost()
-
-  _httpPost = (url, payload) ->
-    requestAsync
-      method: 'POST'
-      url: url
-      headers: 'User-Agent': util.userAgent
-      json: true
-      timeout: 5000
-      body: payload
-    .spread (res, body) ->
-      unless res.statusCode >= 200 and res.statusCode < 300
-        throw new Error("bad request #{res.statusCode}")
-      body
   # ========================== Define build-in functions finish ==========================
 
 module.exports = Service

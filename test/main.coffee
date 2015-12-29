@@ -24,6 +24,7 @@ requireDir './servers'
 require './services/incoming'
 require './services/outgoing'
 # require './services/robot'  # Not implement
+# require './services/talkai'  # Not implement
 require './services/teambition'
 require './services/rss'
 require './services/github'

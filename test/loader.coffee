@@ -18,12 +18,19 @@ describe 'Loader#LoadAll', ->
       services.forEach (service) -> service.should.instanceOf Service
     .nodeify done
 
-  it 'should get settings of each service', (done) ->
+  it 'should load a service and apply reg function again', (done) ->
 
-    loader.settings().then (settings) ->
-      settings.length.should.above 0
-      settings.forEach (setting) ->
-        setting.should.not.instanceOf Service
-        setting.should.have.properties 'name', 'title', 'manual'
+    $custom = loader.load 'custom', (custom) ->
+      Promise.delay(100).then -> custom.customName = 'customName'
 
-    .nodeify done
+    $custom = loader.load('custom').then (custom) ->
+      custom.customName.should.eql 'customName'
+
+    $custom.nodeify done
+
+
+  it 'should get an error message when service register was not existing and reg function was not provided', (done) ->
+
+    loader.load 'unknown'
+    .then -> done new Error('Should not pass')
+    .catch (err) -> done()

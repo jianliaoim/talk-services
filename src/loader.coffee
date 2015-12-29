@@ -1,24 +1,11 @@
-path = require 'path'
-
-_ = require 'lodash'
 Promise = require 'bluebird'
-
-# Sort services
-serviceNames = [
-  'incoming', 'outgoing', 'robot', 'teambition', 'rss', 'cloudinsight', 'github', 'firim', 'jobtong', 'pingxx',
-  'gitlab', 'coding', 'gitcafe', 'bitbucket', 'jinshuju', 'jiankongbao', 'kf5', 'swathub',
-  'csdn', 'oschina', 'buildkite', 'codeship', 'jira', 'qingcloud', 'mikecrm', 'bughd',
-  'travis', 'jenkins', 'circleci', 'magnumci', 'newrelic', 'heroku', 'goldxitudaily',
-  'weibo'
-]
+Err = require 'err1st'
 
 class ServiceLoader
 
   config: {}
 
   $_services: {}
-
-  $_settings: []
 
   ###*
    * Load a service
@@ -29,25 +16,29 @@ class ServiceLoader
   load: (name, regFn) ->
     unless @$_services[name]
 
+      ERR = new Error('TRACE')
+
       Service = require './service'
 
       @$_services[name] = Promise.resolve(new Service(name)).then (service) ->
 
-        Promise.resolve(service.register())
-        .then ->
-          regFn or= require("./services/#{name}")
-          regFn.call service, service
+        Promise.resolve(service.register()).then ->
+          try
+            initializer = require "./services/#{name}"
+          catch err
+            unless toString.call(regFn) is '[object Function]'
+              console.log ERR.stack
+              throw new Err("INVALID_SERVICE", name)
+            return
+          initializer.call service, service
         .then -> service
 
-      @$_settings.push @$_services[name].then (service) -> service.toJSON()
+    if toString.call(regFn) is '[object Function]'
+      @$_services[name] = @$_services[name].then (service) ->
+        Promise.resolve(regFn.call service, service)
+        .then -> service
 
     @$_services[name]
-
-  ###*
-   * Service settings
-   * @return {Promsie} Settings array of services
-  ###
-  settings: -> Promise.all @$_settings
 
 loader = new ServiceLoader
 

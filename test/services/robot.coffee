@@ -24,34 +24,6 @@ describe 'Robot#Events', ->
     url: "http://www.domain.com"
     iconUrl: robot.iconUrl
 
-  before (done) ->
-    $prepare = Promise.promisify(prepare)()
-    $integration = integration.$save()
-    $team = team.$save()
-    $room = room.$save()
-    Promise.all [$prepare, $integration, $team, $room]
-    .then -> done()
-    .catch done
-
-  it 'before.integration.create', (done) ->
-    socket.broadcast = (channel, event, data, socketId) ->
-      channel.should.eql "team:#{team._id}"
-      event.should.eql 'team:join'
-      data.should.have.properties 'name', 'team', '_teamId'
-      data.name.should.eql robot.title
-      data.avatarUrl.should.eql robot.iconUrl
-      data.isRobot.should.eql true
-      done()
-
-    req.integration = integration
-    robot.receiveEvent 'before.integration.create', req
-    .then ->
-      new Promise (resolve, reject) ->
-        integration.save (err, integration) ->
-          return reject(err) if err
-          resolve integration
-    .catch done
-
   it 'message.create', (done) ->
     robot.httpPost = (url, message) ->
       message.body.should.eql 'abc'

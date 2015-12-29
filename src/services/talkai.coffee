@@ -1,8 +1,9 @@
-service = require '../service'
 qs = require 'qs'
 Promise = require 'bluebird'
 request = require 'request'
 requestAsync = Promise.promisify request
+
+util = require '../util'
 
 _sendToRobot = (message) ->
 
@@ -44,9 +45,10 @@ _getTuringCallback = (message) ->
     method: 'GET'
     url: "#{talkai.config.url}?#{qs.stringify(query)}"
     timeout: 20000
-  .spread (res, resp) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       throw new Error("bad request #{res.statusCode}")
+    resp = res.body
     data = JSON.parse resp
     if data.code.toString() in Object.keys talkai.config.errorCodes
       throw new Error("bad response from Tuling123.com: #{_errorHandler(data)}")
@@ -91,11 +93,11 @@ _getTuringCallback = (message) ->
 
     return body
 
-module.exports = talkai = service.register 'talkai', ->
+module.exports = ->
 
   @title = '小艾'
 
-  @iconUrl = service.static 'images/icons/talkai@2x.png'
+  @iconUrl = util.static 'images/icons/talkai@2x.png'
 
   @config =
 
@@ -114,4 +116,5 @@ module.exports = talkai = service.register 'talkai', ->
     trainCode: 305000
     flightCode: 306000
     othersCode: 308000
+
   @registerEvent 'message.create', _sendToRobot

@@ -18,7 +18,9 @@ _getEvents = ->
       en: 'Comment'
   ]
 
-module.exports = (service) ->
+module.exports = ->
+
+  service = this
 
   @title = '微博'
 
@@ -41,4 +43,10 @@ module.exports = (service) ->
   else
     @serviceUrl = 'http://localhost:7410'
 
-  @registerEvents ['integration.create', 'integration.remove', 'integration.update']
+  events = ['integration.create', 'integration.remove', 'integration.update']
+
+  events.forEach (event) ->
+    service.registerEvent event, (req) ->
+      service.httpPost service.serviceUrl,
+        event: event
+        data: req.integration

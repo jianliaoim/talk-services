@@ -12,9 +12,12 @@ loader.config =
     clientSecret: 'abc'
     host: 'http://127.0.0.1:7632/tb'
   rss:
-    serviceUrl: 'http://127.0.0.1:7411'
+    serviceUrl: 'http://127.0.0.1:7632/rss/worker'
   github:
     apiHost: 'http://127.0.0.1:7632/github'
+  talkai:
+    apikey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    devid: "123456"
 
 # Load all services
 require './loader'
@@ -23,8 +26,8 @@ requireDir './servers'
 
 require './services/incoming'
 require './services/outgoing'
-# require './services/robot'  # Not implement
-# require './services/talkai'  # Not implement
+require './services/robot'
+require './services/talkai'
 require './services/teambition'
 require './services/rss'
 require './services/github'

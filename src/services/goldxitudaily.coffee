@@ -12,6 +12,8 @@ _addRSSUrl = ({integration}) ->
 
 module.exports = ->
 
+  service = this
+
   @title = '稀土掘金日报'
 
   @template = 'form'
@@ -35,4 +37,10 @@ module.exports = ->
 
   @registerEvent 'before.integration.create', _addRSSUrl
 
-  @registerEvents ['integration.create', 'integration.remove', 'integration.update']
+  events = ['integration.create', 'integration.remove', 'integration.update']
+
+  events.forEach (event) ->
+    service.registerEvent event, (req) ->
+      service.httpPost service.serviceUrl,
+        event: event
+        data: req.integration

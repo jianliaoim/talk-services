@@ -1,5 +1,9 @@
-service = require '../service'
+util = require '../util'
 
-module.exports = service.register 'email', ->
+module.exports = ->
 
   @title = 'Email'
+
+  @isHidden = true
+
+  @iconUrl = util.static 'images/icons/email@2x.png'

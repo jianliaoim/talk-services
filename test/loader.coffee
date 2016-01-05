@@ -28,7 +28,6 @@ describe 'Loader#LoadAll', ->
 
     $custom.nodeify done
 
-
   it 'should get an error message when service register was not existing and reg function was not provided', (done) ->
 
     loader.load 'unknown'

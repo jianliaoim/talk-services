@@ -46,7 +46,7 @@ _httpPost = (url, payload) ->
     body: payload
   .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      throw new Error("bad request #{res.statusCode}")
+      throw new Error("Bad request #{res.statusCode}")
     res.body
 
 class Service
@@ -130,17 +130,9 @@ class Service
 
   registerEvent: (event, handler) ->
     self = this
-    unless toString.call(handler) is '[object Function]'
-      throw new Error('Service url is not defined') unless @serviceUrl
-      serviceUrl = @serviceUrl
-      handler = (payload) ->
-        self.httpPost serviceUrl
-        ,
-          event: event
-          data: payload
 
-    if handler.length is 2
-      handler = Promise.promisify(handler)
+    unless toString.call(handler) is '[object Function]'
+      throw new Error('Event handler is undefined')
 
     @_events[event] = handler
 
@@ -150,8 +142,8 @@ class Service
 
     self = this
 
-    Promise.resolve()
-    .then -> self._events[event].call self, req, res
+    Promise.resolve().then ->
+      self._events[event].call self, req, res
 
   toJSON: ->
     name: @name
@@ -185,7 +177,6 @@ class Service
     tryTimes = 0
     retryTimes = options.retryTimes or 0
     interval = options.interval or 1000
-    self = this
 
     return _httpPost url, payload if retryTimes < 1
 

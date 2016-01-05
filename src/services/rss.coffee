@@ -57,6 +57,8 @@ _checkRSS = (req, res) ->
 
 module.exports = ->
 
+  service = this
+
   @title = 'RSS'
 
   @summary = util.i18n
@@ -77,4 +79,10 @@ module.exports = ->
 
   @registerApi 'checkRSS', _checkRSS
 
-  @registerEvents ['integration.create', 'integration.remove', 'integration.update']
+  events = ['integration.create', 'integration.remove', 'integration.update']
+
+  events.forEach (event) ->
+    service.registerEvent event, (req) ->
+      service.httpPost service.serviceUrl,
+        event: event
+        data: req.integration

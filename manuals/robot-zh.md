@@ -44,11 +44,14 @@
     "title": "Winter is coming",                    // 聚合消息标题
     "text": "",                                     // 聚合消息正文
     "redirectUrl": "https://talk.ai/site",          // 跳转链接
-    "thumbnailPicUrl": "http://your.image.url"      // 消息中可添加一张预览图片
+    "thumbnailPicUrl": "http://your.image.url",     // 消息中可添加一张预览图片
+    "_roomId": "549908a68cd040715c48cad3"           // 发送消息到话题中
+    "_toId": "549908a68cd040715c48cad2"             // 发送消息到私聊中，不能与 _roomId 一起存在
   }
   ```
 
 ## 重要更新（2016.01.01）
 
 1. 基于隐私问题，Robot 将只能接收来自私聊的消息，并且返回内容会直接发送给消息来源
-2. 话题中加入 Robot 并 at 此 Robot 可接收到新的消息（开发中）
+2. 如果通过 Webhook 发送消息到话题中，需要确保该 Robot 在对应的 _roomId 中
+3. 话题中加入 Robot 并 at 此 Robot 可接收到新的消息（开发中）

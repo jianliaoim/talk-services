@@ -3,53 +3,6 @@ _ = require 'lodash'
 
 util = require '../util'
 
-###*
- * Post message to the bundled url
- * @param  {Model} message
- * @return {Promise}
-###
-_postMessage = ({message, integration}) ->
-  {TeamModel, IntegrationModel} = limbo.use 'talk'
-  self = this
-
-  $integration = IntegrationModel.findOneAsync
-    team: message._teamId
-    robot: message._toId
-    errorInfo: null
-
-  $integration.then (integration) ->
-    return unless integration?.url
-    {url, token} = integration
-    msg = message.toJSON?() or message
-    message.token = token if token
-
-    self.httpPost url, msg, retryTimes: 5
-
-    .then (body) ->
-      return unless body?.content or body?.text or body?.title
-      replyMessage =
-        _creatorId: integration._robotId
-        _teamId: message._teamId
-      if message._roomId
-        replyMessage._roomId = message._roomId
-      else
-        replyMessage._toId = message._creatorId
-      replyMessage.body = body.content if body.content
-      if body.text or body.title
-        attachment = category: 'quote', data: body
-        attachment.data.category = 'robot'
-        replyMessage.attachments = [attachment]
-      self.sendMessage replyMessage
-
-    .catch (err) ->
-      integration.errorTimes += 1
-      integration.lastErrorInfo = err.message
-      integration.errorInfo = err.message if integration.errorTimes > 5
-      new Promise (resolve, reject) ->
-        integration.save (err, integration) ->
-          return reject(err) if err
-          resolve()
-
 _receiveWebhook = ({integration, query, body}) ->
   {limbo} = service.components
   {TeamModel, RoomModel, MemberModel} = limbo.use 'talk'
@@ -103,44 +56,6 @@ _receiveWebhook = ({integration, query, body}) ->
   $message.then (message) ->
     message.attachments = [attachment] if attachment
     self.sendMessage message
-
-###*
- * Remove this robot from bundled team
- * @param  {Model} integration
- * @return {Promise}
-###
-_removeRobot = ({integration}) ->
-  {limbo, socket} = service.components
-  {TeamModel} = limbo.use 'talk'
-  return unless integration._robotId
-
-  TeamModel.removeMemberAsync integration._teamId, integration._robotId
-  .then (team) ->
-    data =
-      _teamId: team._id
-      _userId: integration._robotId
-    socket.broadcast "team:#{team._id}", "team:leave", data
-
-###*
- * Update robot infomation
- * @param  {Model} integration
- * @return {Promise} robot
-###
-_updateRobot = ({integration}) ->
-  return unless integration._robotId
-  {limbo} = service.components
-  {UserModel, TeamModel} = limbo.use 'talk'
-  $robot = UserModel.findOneAsync _id: integration._robotId
-  .then (robot) ->
-    return unless robot
-    robot.name = integration.title
-    robot.avatarUrl = integration.iconUrl
-    robot.description = integration.description
-    robot.updatedAt = new Date
-    new Promise (resolve, reject) ->
-      robot.save (err, robot) ->
-        return reject(err) if err
-        resolve robot
 
 module.exports = ->
 

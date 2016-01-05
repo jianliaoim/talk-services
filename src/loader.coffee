@@ -16,8 +16,6 @@ class ServiceLoader
   load: (name, regFn) ->
     unless @$_services[name]
 
-      ERR = new Error('TRACE')
-
       Service = require './service'
 
       @$_services[name] = Promise.resolve(new Service(name)).then (service) ->
@@ -27,7 +25,6 @@ class ServiceLoader
             initializer = require "./services/#{name}"
           catch err
             unless toString.call(regFn) is '[object Function]'
-              console.log ERR.stack
               throw new Err("INVALID_SERVICE", name)
             return
           initializer.call service, service

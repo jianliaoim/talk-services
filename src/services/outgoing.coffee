@@ -4,27 +4,6 @@ validator = require 'validator'
 
 util = require '../util'
 
-_postMessage = ({message, integration}) ->
-  # Ignore private chat messages
-  self = this
-  {url, token} = integration
-  msg = _.clone message
-  msg.token = token if token?.length
-
-  self.httpPost url, msg, retryTimes: 5
-
-  .then (body = {}) ->
-    return unless body.text or body.content
-    # Send replyMessage to user
-    replyMessage =
-      body: body.content
-      authorName: body.authorName
-    if body.text
-      attachment = category: 'quote', data: body
-      attachment.data.category = 'outgoing'
-      replyMessage.attachments = [attachment]
-    replyMessage
-
 _checkIntegration = ({integration}) ->
   unless validator.isURL(integration.url)
     throw new Error('Invalid url field')
@@ -62,7 +41,5 @@ module.exports = ->
     description: util.i18n
       zh: 'Token 会被包含在发送给你的消息中'
       en: 'Token will include in the received message'
-
-  @registerEvent 'message.create', _postMessage
 
   @registerEvent 'before.integration.create', _checkIntegration

@@ -5,6 +5,7 @@ charset = require 'charset'
 iconv = require 'iconv-lite'
 jschardet = require 'jschardet'
 FeedParser = require 'feedparser'
+Err = require 'err1st'
 stream = require 'stream'
 he = require 'he'
 
@@ -22,9 +23,8 @@ _checkRSS = (req, res) ->
       encoding: null
     , (err, res, body) ->
       unless res?.statusCode >= 200 and res?.statusCode < 300
-        err = new Error("Invalid feed #{url}")
-        err.status = 400
-        err.phrase = 'INVALID_RSS_URL'
+        return reject new Error('Invalid feed')
+
       return reject(err) if err
 
       encoding = charset res.headers, body
@@ -54,6 +54,8 @@ _checkRSS = (req, res) ->
     ['title', 'description'].forEach (key) ->
       data[key] = he.decode(meta[key]) if meta[key]
     data
+
+  .catch (err) -> throw new Err "INVALID_RSS_URL", url
 
 module.exports = ->
 

@@ -1,4 +1,4 @@
-qs = require 'qs'
+qs = require 'querystring'
 Promise = require 'bluebird'
 request = require 'request'
 _ = require 'lodash'

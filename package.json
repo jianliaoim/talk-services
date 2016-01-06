@@ -43,7 +43,6 @@
     "marked": "^0.3.5",
     "moment": "^2.10.6",
     "moment-timezone": "^0.4.1",
-    "qs": "^6.0.1",
     "request": "^2.67.0",
     "require-dir": "^0.3.0",
     "validator": "^4.3.0"

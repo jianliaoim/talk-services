@@ -4,4 +4,4 @@ Webhook 可以让你的系统直接收到青云的通知。当监控告警发生
 
 每加入一条新的 Webhook URL 都需要先进行验证。验证方法是在 URL Response 中返回指定的 token ，一旦通过验证就无需再在 Response 中保留这个 token 。 每个 URL 对于同一个用户只需验证一次。
 
-![webhook 设置界面](https://docs.qingcloud.com/_images/add_notification_webhook.png)
+![webhook 设置界面](/images/inte-guide/sample-qingcloud.png)

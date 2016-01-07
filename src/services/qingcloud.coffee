@@ -8,13 +8,19 @@ _receiveWebhook = ({integration, body}) ->
   return integration.token unless payload.resource
 
   title = ''
-  if payload.resource.resource_name isnt ''
-    title += "QingCloud: #{payload.resource.resource_id} #{payload.resource.resource_name} #{payload.resource.resource_type}"
+  resource = payload.resource.replace(/(')|(u\')/g, '"')
+  resource_json = JSON.parse resource
+
+  rules = payload.rules.replace(/'/g, '"')
+  rules_json = JSON.parse rules
+
+  if resource_json.resource_name isnt ''
+    title += "QingCloud: #{resource_json.resource_id} #{resource_json.resource_name} #{resource_json.resource_type}"
   else
-    title += "QingCloud: #{payload.resource.resource_id} #{payload.resource.resource_type}"
+    title += "QingCloud: #{resource_json.resource_id} #{resource_json.resource_type}"
 
   text = []
-  _.forIn payload.rules, (rule) ->
+  _.forIn rules_json, (rule) ->
     if rule.alarm_policy_rule_name isnt ''
       text.push "RULE_ID: #{rule.alarm_policy_rule_id} RULE_NAME: #{rule.alarm_policy_rule_name} STATUS: #{rule.status}"
     else

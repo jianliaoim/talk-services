@@ -4,10 +4,10 @@ util = require '../util'
 
 _receiveWebhook = ({integration, body}) ->
   payload = body
-  return unless payload.headers
-  title = "MikeCRM: #{payload.body.form.name} #{payload.body.form.title}"
+  return unless payload.form
+  title = "MikeCRM: #{payload.form.name} #{payload.form.title}"
   text = []
-  _.forIn payload.body.component, (component) ->
+  _.forIn payload.component, (component) ->
     if component.title and component.value
       if typeof component.value is 'object' then text.push "#{component.title} : #{String(_.values component.value)}"
       else text.push "#{component.title} : #{component.value}"
@@ -20,7 +20,7 @@ _receiveWebhook = ({integration, body}) ->
       data:
         title: title
         text: text
-        redirectUrl: payload.body.form.url
+        redirectUrl: payload.form.url
     ]
   message
 

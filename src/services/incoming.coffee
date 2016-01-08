@@ -13,6 +13,7 @@ _receiveWebhook = ({query, body}) ->
   message =
     body: content
     authorName: authorName
+    displayType: payload.displayType
 
   if title or text or redirectUrl or imageUrl
     message.attachments = [

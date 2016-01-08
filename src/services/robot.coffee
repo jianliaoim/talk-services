@@ -3,60 +3,6 @@ _ = require 'lodash'
 
 util = require '../util'
 
-_receiveWebhook = ({integration, query, body}) ->
-  {limbo} = service.components
-  {TeamModel, RoomModel, MemberModel} = limbo.use 'talk'
-  self = this
-
-  payload = _.assign {}
-    , query or {}
-    , body or {}
-
-  {content, authorName, title, text, redirectUrl, imageUrl, thumbnailPicUrl, _roomId, _toId} = payload
-  {_teamId} = integration
-  throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
-
-  message =
-    integration: integration
-    body: content
-    authorName: authorName
-    _teamId: _teamId
-    _creatorId: integration._robotId
-
-  if title or text or redirectUrl or thumbnailPicUrl or imageUrl
-    attachment =
-      category: 'quote'
-      data:
-        title: title
-        text: text
-        redirectUrl: redirectUrl
-        imageUrl: thumbnailPicUrl or imageUrl
-
-  if _roomId
-    $message = RoomModel.findOneAsync _id: _roomId
-    .then (room) ->
-      throw new Error('OBJECT_MISSING', "room #{_roomId}") unless room
-      throw new Error('INVALID_OBJECT', "room #{_roomId}") unless "#{room._teamId}" is "#{_teamId}"
-      message.room = room._id
-      message
-  else if _toId
-    throw new Error("INVALID_OBJECT", "can not send message to self") if "#{_toId}" is "#{integration._robotId}"
-    $message = MemberModel.findOneAsync user: _toId, team: _teamId, isQuit: false
-    .then (member) ->
-      throw new Error("INVALID_OBJECT", "user #{_toId}") unless member
-      message._toId = _toId
-      message
-  else
-    $message = RoomModel.findOne team: _teamId, isGeneral: true
-    .then (room) ->
-      throw new Error('OBJECT_MISSING', "general room of team #{_teamId}") unless room
-      message._roomId = room._id
-      message
-
-  $message.then (message) ->
-    message.attachments = [attachment] if attachment
-    self.sendMessage message
-
 module.exports = ->
 
   @title = '自定义机器人'

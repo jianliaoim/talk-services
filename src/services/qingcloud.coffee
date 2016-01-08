@@ -58,8 +58,8 @@ module.exports = ->
     key: 'token'
     type: 'text'
     description: util.i18n
-      zh: '必填'
-      en: 'Required'
+      zh: '第一次添加聚合时必填'
+      en: 'Required for creating a integration'
 
   @_fields.push
     key: 'webhookUrl'

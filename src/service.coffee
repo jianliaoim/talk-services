@@ -66,6 +66,9 @@ class Service
   # Template of settings page
   template: ''
 
+  # Whether it should be displayed on the integration list page
+  display: true
+
   # Whether if the service displayed in web/android/ios
   isHidden: false
 
@@ -155,6 +158,7 @@ class Service
     fields: @fields
     manual: @manual
     isCustomized: @isCustomized
+    display: @display
 
   toObject: @::toJSON
 

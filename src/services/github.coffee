@@ -3,10 +3,10 @@ marked = require 'marked'
 _ = require 'lodash'
 request = require 'request'
 requestAsync = Promise.promisify request
-service = require '../service'
 
-_apiHost = 'https://api.github.com'
-_pageHost = 'https://github.com'
+util = require '../util'
+
+_getGitHubApiHost = -> util.config.github?.apiHost or 'https://api.github.com'
 
 ###*
  * Create github hook
@@ -19,9 +19,9 @@ _pageHost = 'https://github.com'
 _createHook = (repos, token, events, hashId) ->
   requestAsync
     method: 'POST'
-    url: "#{_apiHost}/repos/#{repos}/hooks"
+    url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks"
     headers:
-      'User-Agent': service.userAgent
+      'User-Agent': util.userAgent
       'Authorization': "token #{token}"
     json: true
     body:
@@ -29,14 +29,14 @@ _createHook = (repos, token, events, hashId) ->
       active: true,
       events: events
       config:
-        url: "#{service.apiHost}/services/webhook/#{hashId}"
+        url: "#{util.config.apiHost}/services/webhook/#{hashId}"
         content_type: 'json'
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("Bad request #{res.statusCode}")
     throw err if err
-    body
+    res.body
 
 ###*
  * Remove github hook
@@ -48,13 +48,13 @@ _createHook = (repos, token, events, hashId) ->
 _removeHook = (repos, hookId, token) ->
   requestAsync
     method: 'DELETE'
-    url: "#{_apiHost}/repos/#{repos}/hooks/#{hookId}"
+    url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks/#{hookId}"
     headers:
-      'User-Agent': service.userAgent
+      'User-Agent': util.userAgent
       'Authorization': "token #{token}"
     json: true
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("bad request #{res.statusCode}")
     throw err if err
@@ -74,9 +74,10 @@ _removeHook = (repos, hookId, token) ->
 _updateHook = (repos, hookId, token, events, hashId) ->
   requestAsync
     method: 'PATCH'
-    url: "#{_apiHost}/repos/#{repos}/hooks/#{hookId}"
+    url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks/#{hookId}"
     headers:
-      'User-Agent': service.userAgent
+      'User-Agent': util.userAgent
+      'User-Agent': util.userAgent
       'Authorization': "token #{token}"
     json: true
     body:
@@ -84,14 +85,14 @@ _updateHook = (repos, hookId, token, events, hashId) ->
       active: true,
       events: events
       config:
-        url: "#{service.apiHost}/services/webhook/#{hashId}"
+        url: "#{util.config.apiHost}/services/webhook/#{hashId}"
         content_type: 'json'
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
       err = new Error("bad request #{res.statusCode}")
     throw err if err
-    body
+    res.body
 
 _createWebhook = ({integration}) ->
   self = this
@@ -129,14 +130,14 @@ _removeWebhook = ({integration}) ->
     , hookId
     , integration.token
 
-_updateWebhook = ({integration}) ->
-  self = this
-  return unless ['repos', 'events'].some (field) -> integration.isDirectModified field
-  {_original} = integration
-  data = integration.data or {}
+_updateWebhook = (req) ->
+  {integration} = req
+  {events, repos} = req.get()
+  return unless events?.length and repos?.length
 
-  if integration.isDirectModified 'repos'
-    $removeOldRepos = Promise.resolve _original.repos
+  data = integration.data or {}
+  if repos and not _.isEqual repos, integration.repos
+    $removeOldRepos = Promise.resolve integration.repos
     .map (repos) ->
       return if repos in reposes  # Do not remove when the repos exist in the new array
       _repos = repos.split('.').join('_')
@@ -151,20 +152,20 @@ _updateWebhook = ({integration}) ->
   .map (repos) ->
     _repos = repos.split('.').join('_')
     # Update exist hook
-    if (repos in _original.repos) or not integration.isDirectModified 'repos'
+    if _.isEqual integration.repos, repos
       # Do not update when notifications is not modified
-      return unless integration.isDirectModified 'events'
+      return if _.isEqual events, integration.events
       hookId = data[_repos]?.hookId
       throw new Error('Github hook not found') unless hookId  # Stop the update process when hookId not found
       _updateHook repos
       , hookId
       , integration.token
-      , integration.events
+      , events
       , integration.hashId
     else  # Create new hook
       _createHook repos
       , integration.token
-      , integration.events
+      , events
       , integration.hashId
 
       .then (body) -> data[_repos] = hookId: body?.id
@@ -178,7 +179,7 @@ _receiveWebhook = ({headers, body, integration}) ->
   payload = body
   {sender, issue, action, comment, repository, forkee, head_commit, commits, pull_request} = payload
 
-  message = integration: integration
+  message = {}
   attachment =
     category: 'quote'
     data:
@@ -228,92 +229,92 @@ _receiveWebhook = ({headers, body, integration}) ->
     else return false
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 _getEvents = ->
   [
     key: 'push'
-    label: service.i18n
+    label: util.i18n
       zh: 'Push'
       en: 'Push'
-    title: service.i18n
+    title: util.i18n
       zh: "仓库的 Push, 包括编辑 tag 或者分支. 通过 API 发布的改变了缩印的 commit 也包括在内. 这是默认事件"
       en: "Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. This is the default event"
     checked: true
   ,
     key: 'commit_comment'
-    label: service.i18n
+    label: util.i18n
       zh: 'Commit 被评论'
       en: 'Comment on commit'
-    title: service.i18n
+    title: util.i18n
       en: 'Any time a Commit is commented on'
   ,
     key: 'create'
-    label: service.i18n
+    label: util.i18n
       zh: '创建分支或者 tag'
       en: 'Create branch or tag'
-    title: service.i18n
+    title: util.i18n
       en: 'Any time a Branch or Tag is created'
   ,
     key: 'delete'
-    label: service.i18n
+    label: util.i18n
       zh: '删除分支或者 tag'
       en: 'Delete branch or tag'
-    title: service.i18n
+    title: util.i18n
       en: 'Any time a Branch or Tag is deleted'
   ,
     key: 'fork'
-    label: service.i18n
+    label: util.i18n
       zh: '仓库被 Fork'
       en: 'Fork'
-    title: service.i18n
+    title: util.i18n
       en: 'Any time a Repository is forked'
   ,
     key: 'issue_comment'
-    label: service.i18n
+    label: util.i18n
       zh: 'Issue 被评论'
       en: 'Comment on issue'
-    title: service.i18n
+    title: util.i18n
       en: 'Any time an Issue is commented on'
   ,
     key: 'issues'
-    label: service.i18n
+    label: util.i18n
       zh: 'Issues'
       en: 'Issues'
-    title: service.i18n
+    title: util.i18n
       zh: 'Issue 被指定, 取消指定, 标记, 取消标记, 创建, 关闭, 重新打开'
       en: 'Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened'
   ,
     key: 'pull_request_review_comment'
-    label: service.i18n
+    label: util.i18n
       zh: 'PR 中增加 Commit'
       en: 'Commit in PR'
-    title: service.i18n
+    title: util.i18n
       zh: 'Pull Request（的文件页面）当中的 Commit 被评论'
       en: 'Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab)'
   ,
     key: 'pull_request'
-    label: service.i18n
+    label: util.i18n
       zh: 'Pull request'
       en: 'Pull request'
-    title: service.i18n
+    title: util.i18n
       zh: 'Pull Request 被指定, 取消指定, 标记, 取消标记, 打开, 关闭, 重新打开, 或者同步（pull request 正在追踪的分支上新的 Push 引起的更新）'
       en: 'Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking)'
   ]
 
-module.exports = service.register 'github', ->
+module.exports = ->
 
   @title = 'GitHub'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '分布式的版本控制系统。'
     en: 'GitHub offers online source code hosting for Git projects.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'GitHub 是一个分布式的版本控制系统。选择一个话题添加 GitHub 聚合后，你就可以在被评论、创建或删除分支、仓库被 fork 等情形下收到简聊通知。'
     en: 'GitHub offers online source code hosting for Git projects. This integration allows you receive GitHub comments, pull request, etc. '
 
-  @iconUrl = service.static 'images/icons/github@2x.png'
+  @iconUrl = util.static 'images/icons/github@2x.png'
 
   @_fields.push
     key: 'events'

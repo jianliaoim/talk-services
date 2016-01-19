@@ -40,12 +40,18 @@
   ```json
   {
     "content": "Hello",                             // 消息正文
-    "_roomId": "559b7f7a57c4d18ad796e1df",          // 指定话题 ID，不可与 _toId 同时存在
-    "_toId": "559b7f9357c4d18ad796e1e0",            // 指定私聊对象 ID，不可与 _roomId 同时存在。如果 _roomId 和 _toId 都不存在，消息会自动发送到团队公告板中
     "authorName": "Stack",                          // 消息发送者的姓名，如果留空将显示为机器人的名字
     "title": "Winter is coming",                    // 聚合消息标题
     "text": "",                                     // 聚合消息正文
     "redirectUrl": "https://talk.ai/site",          // 跳转链接
-    "thumbnailPicUrl": "http://your.image.url"      // 消息中可添加一张预览图片
+    "thumbnailPicUrl": "http://your.image.url",     // 消息中可添加一张预览图片
+    "_roomId": "549908a68cd040715c48cad3"           // 发送消息到话题中
+    "_toId": "549908a68cd040715c48cad2"             // 发送消息到私聊中，不能与 _roomId 一起存在
   }
   ```
+
+## 重要更新（2016.01.01）
+
+1. 基于隐私问题，Robot 将只能接收来自私聊的消息，并且返回内容会直接发送给消息来源
+2. 如果通过 Webhook 发送消息到话题中，需要确保该 Robot 在对应的 _roomId 中
+3. 话题中加入 Robot 并 at 此 Robot 可接收到新的消息（开发中）

@@ -1,6 +1,6 @@
-service = require '../service'
+util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body?.payload
 
   try
@@ -17,7 +17,6 @@ _receiveWebhook = ({integration, body}) ->
           "(#{payload.branch} - #{payload.commit[0...7]}) by #{payload.author_name}"
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -26,29 +25,29 @@ _receiveWebhook = ({integration, body}) ->
         redirectUrl: payload.build_url
     ]
 
-  @sendMessage message
+  message
 
-module.exports = service.register 'travis', ->
+module.exports = ->
 
   @title = 'Travis CI'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '分布式持续集成服务'
-    en: 'A distributed continuous integration service.'
+    en: 'A distributed continuous integration @'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'Travis CI 是一个在线的，分布式的持续集成服务，用来构建及测试在 GitHub 托管的代码。'
-    en: 'Travis CI is a distributed continuous integration service.'
+    en: 'Travis CI is a distributed continuous integration @'
 
-  @iconUrl = service.static 'images/icons/travis@2x.png'
+  @iconUrl = util.static 'images/icons/travis@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到 .travis.yml 中使用。'
       en: 'Copy this web hook to your .travis.yml to use it.'
 

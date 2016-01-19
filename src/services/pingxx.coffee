@@ -1,8 +1,8 @@
 _ = require 'lodash'
 moment = require 'moment-timezone'
-service = require '../service'
+util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   object = body?.data?.object or {}
 
   return unless body?.type
@@ -40,7 +40,6 @@ _receiveWebhook = ({integration, body}) ->
     else return false
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -49,19 +48,19 @@ _receiveWebhook = ({integration, body}) ->
         redirectUrl: redirectUrl
     ]
 
-  @sendMessage message
+  message
 
-module.exports = service.register 'pingxx', ->
+module.exports = ->
 
   @title = 'Ping++'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '移动应用支付解决方案'
     en: 'Mobile Payment Solution Provider'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'Ping++ 是为移动应用量身打造的下一代支付系统。移动开发者只需一次性接入 Ping++ 的 SDK，即可快速完成当前主流的支付渠道接入，并可按需定制自己的支付系统。让所有 App接入支付，像大厦接入电力一样简单。
 开发者本应专注于产品本身，而不是复杂冗余的支付申请配置流程。Ping++ 为开发者完成这部分繁重的工作，提交一次申请资料+几行代码，即可一次性接入包括支付宝，微信，银联、京东支付、百度钱包、易宝支付、Apple Pay 等在内的多种支付渠道。接入之后，对交易的管理也可以通过统一的管理后台实现。在管理平台上，Ping++ 整合各渠道交易数据，定期提供交易报表，让交易数据一目了然。
 Ping++ 致力于成为一个移动互联网经济的基础设施，为每一个 App 提供「支付力」。更多请访问官网 www.pingxx.com 。'
@@ -71,13 +70,13 @@ Our products are aimed to help mobile business to accelerate on payment channel 
 
 Everyone is welcome to lean on us, to move a bit faster ;)"
 
-  @iconUrl = service.static 'images/icons/pingxx@2x.png'
+  @iconUrl = util.static 'images/icons/pingxx@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: 'Webhook URL'
       en: 'Webhook URL'
 

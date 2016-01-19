@@ -1,13 +1,13 @@
-service = require '../service'
+util = require '../util'
 
-_receiveWebhook = ({integration, body, headers}) ->
+_receiveWebhook = ({body, headers}) ->
   try
     [type, action] = headers['x-event-key'].split(":")
   catch
     throw new Error('Invalid event format')
   throw new Error('Invalid event type') unless type in ['repo', 'issue', 'pullrequest']
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   switch type
@@ -65,29 +65,29 @@ _receiveWebhook = ({integration, body, headers}) ->
         attachment.data.redirectUrl = body.pullrequest.links.html.href
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
-module.exports = service.register 'bitbucket', ->
+module.exports = ->
 
   @title = 'Bitbucket'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '免费的代码托管服务'
     en: 'Free code management service.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'BitBucket 是一家采用Mercurial和Git作为分布式版本控制系统源代码托管云服务'
     en: 'Bitbucket is a Git and Mercurial based source code management and collaboration solution in the cloud.'
 
-  @iconUrl = service.static 'images/icons/bitbucket@2x.png'
+  @iconUrl = util.static 'images/icons/bitbucket@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 webhook 地址到 bitbucket.org 中使用'
       en: 'Copy this webhook to your bitbucket.org to use it.'
 

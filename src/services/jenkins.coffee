@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 marked = require 'marked'
-service = require '../service'
+
+util = require '../util'
 
 ###*
  * Define handler when receive incoming webhook from jenkins
@@ -9,7 +10,7 @@ service = require '../service'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body or {}
 
   {content, authorName, title, text, redirectUrl, imageUrl} = payload
@@ -17,7 +18,6 @@ _receiveWebhook = ({integration, body}) ->
   throw new Error("Title and text can not be empty") unless title?.length or text?.length or content?.length
 
   message =
-    integration: integration
     body: content
     authorName: authorName
     attachments: [
@@ -29,28 +29,28 @@ _receiveWebhook = ({integration, body}) ->
         imageUrl: imageUrl
     ]
 
-  @sendMessage message
+  message
 
-module.exports = service.register 'jenkins', ->
+module.exports = ->
   @title = 'Jenkins'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '开源持续集成服务'
     en: 'An open source continuous integration server.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'Jenkins 是一个开源持续集成服务。它提供超过 800 个插件来支持各种项目的构建和测试。'
     en: 'Jenkins CI is the leading open-source continuous integration server. It provides over 800 plugins to support building and testing virtually any project.'
 
-  @iconUrl = service.static 'images/icons/jenkins@2x.png'
+  @iconUrl = util.static 'images/icons/jenkins@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 Jenkins 当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
       en: 'Copy this web hook to your Jenkins server to use it. You may also find this url in the manager tab.'
 

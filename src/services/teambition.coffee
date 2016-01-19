@@ -4,18 +4,10 @@ request = require 'request'
 moment = require 'moment-timezone'
 marked = require 'marked'
 crypto = require 'crypto'
+Err = require 'err1st'
 requestAsync = Promise.promisify request
 
-service = require '../service'
-
-# Hack teambition host
-switch process.env.NODE_ENV
-  when 'ga', 'prod'
-    _tbHost = 'https://www.teambition.com'
-  when 'test'
-    _tbHost = 'http://127.0.0.1:7632/tb'
-  else
-    _tbHost = 'http://www.project.ci'
+util = require '../util'
 
 _supportEvents = [
   "project.rename", "project.archive", "project.unarchive", "project.member.create", "project.member.remove",
@@ -33,7 +25,8 @@ _supportEvents = [
 #     hookId: xxx
 
 _getTbToken = (accountToken) ->
-  $token = service.sdk.getAccountUserAsync accountToken
+  $token = util.getAccountUserAsync accountToken
+
   .then (user) ->
     accessToken = null
     user?.unions?.some (union) ->
@@ -41,9 +34,7 @@ _getTbToken = (accountToken) ->
         accessToken = union.accessToken
         return true
     unless accessToken
-      err = new Error '你没有绑定 Teambition 账号'
-      err.phrase = 'NO_PERMISSION'
-      throw err
+      throw new Err 'NO_PERMISSION', '你没有绑定 Teambition 账号'
     accessToken
 
 ###*
@@ -53,47 +44,41 @@ _getTbToken = (accountToken) ->
 ###
 _preValidate = (integration) ->
   unless integration.project?._id
-    throw new Error('Missing project in teambition integration!')
+    throw new Err 'PARAMS_MISSING', 'Missing project in teambition integration!'
 
   unless integration.events
-    throw new Error('Missing events in teambition integration')
+    throw new Err 'PARAMS_MISSING', 'Missing events in teambition integration'
 
   invalidEvents = integration.events.filter (event) -> event not in _supportEvents
   if invalidEvents.length
-    throw new Error("Invalid events #{invalidEvents}")
+    throw new Err 'PARAMS_INVALID', "Invalid events #{invalidEvents}"
 
-_checkSign = (query = {}, clientSecret) ->
+_checkSign = (query = {}) ->
   {sign, timestamp, nonce} = query
   unless sign and timestamp and nonce
-    err = new Error('Signature failed')
-    err.status = 403
-    throw err
+    throw new Err('SIGNATURE_FAILED')
 
   unless (Date.now() - Number(timestamp)) < 60000  # Less than 1 minute
-    err = new Error('Expired')
-    err.status = 403
-    throw err
+    throw new Err('TOKEN_EXPIRED')
 
-  values = [timestamp, nonce, clientSecret]
+  values = [timestamp, nonce, util.config.teambition.clientSecret]
 
   unless sign is crypto.createHash('sha1').update(values.sort().join '').digest('hex')
-    err = new Error('Signature failed')
-    err.status = 403
-    throw err
+    throw new Err('SIGNATURE_FAILED')
 
 _receiveWebhook = ({integration, body, query, method}) ->
-  _checkSign query, @clientSecret
+  _checkSign query
 
-  return ok: 1 if method is 'HEAD'
+  return if method is 'HEAD'
 
   {event, data} = body
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   [scope] = event?.split('.')
 
-  throw new Error("Invalid event of teambition integration") unless scope
+  throw new Err("PARAMS_INVALID", "Invalid event of teambition integration") unless scope
 
   # Set the redirect url by specific scope name
   switch scope
@@ -259,7 +244,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
   attachment.data.title = "[#{data.project.name}] #{data.user.name} #{attachment.data.title}"
   message.attachments = [attachment]
 
-  @sendMessage message
+  message
 
 ###*
  * Create teambition project hook
@@ -273,52 +258,49 @@ _createProjectHook = (_projectId, token, events, hashId) ->
   requestAsync
     method: 'POST'
     headers:
-      "User-Agent": service.userAgent
+      "User-Agent": util.userAgent
       "Authorization": "OAuth2 #{token}"
-    url: "#{_tbHost}/api/projects/#{_projectId}/hooks"
+    url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks"
     json: true
     body:
-      callbackURL: "#{service.apiHost}/services/webhook/#{hashId}"
+      callbackURL: "#{util.config.apiHost}/services/webhook/#{hashId}"
       events: events
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
-    body
+      throw new Err("BAD_REQUEST", res.statusCode)
+    res.body
 
 _updateProjectHook = (_projectId, hookId, token, events, hashId) ->
   requestAsync
     method: 'PUT'
     headers:
-      "User-Agent": service.userAgent
+      "User-Agent": util.userAgent
       "Authorization": "OAuth2 #{token}"
-    url: "#{_tbHost}/api/projects/#{_projectId}/hooks/#{hookId}"
+    url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks/#{hookId}"
     json: true
     body:
-      callbackURL: "#{service.apiHost}/services/webhook/#{hashId}"
+      callbackURL: "#{util.config.apiHost}/services/webhook/#{hashId}"
       events: events
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
-    body
+      throw new Err("BAD_REQUEST", res.statusCode)
+    res.body
 
 _removeProjectHook = (_projectId, hookId, token) ->
   requestAsync
     method: 'DELETE'
-    url: "#{_tbHost}/api/projects/#{_projectId}/hooks/#{hookId}"
+    url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks/#{hookId}"
     headers:
-      "User-Agent": service.userAgent
+      "User-Agent": util.userAgent
       "Authorization": "OAuth2 #{token}"
     json: true
 
-  .spread (res, body) ->
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      err = new Error("Bad request #{res.statusCode}")
-    throw err if err
-    body
+      throw new Err("BAD_REQUEST", res.statusCode)
+    res.body
 
 _createWebhook = (req) ->
   {integration} = req
@@ -335,28 +317,28 @@ _createWebhook = (req) ->
     , integration.hashId
 
   .then (body) ->
-    integration.data or= {}
-    integration.data[integration.project._id] = hookId: body._id
+    data = integration.data or {}
+    data[integration.project._id] = hookId: body._id
     # Mark the mixed field as modified
-    integration.markModified 'data'
+    integration.data = data
     integration
 
 _updateWebhook = (req) ->
   {integration} = req
-  {accountToken} = req.get()
-  return unless ['project._id', 'events'].some (field) -> integration.isDirectModified field
+  {accountToken, events, project} = req.get()
+
+  return unless events or project
 
   _preValidate integration
 
   $token = _getTbToken accountToken
 
-  {_original} = integration
-  if integration.isDirectModified 'project._id'
-    _originalProjectId = _original.project._id
+  if project and not _.isEqual "#{project?._id}", "#{integration.project?._id}"
+    _originalProjectId = integration.project._id
 
     $removeOldProjectHook = $token.then (token) ->
       _removeProjectHook _originalProjectId
-      , _original.data[_originalProjectId].hookId
+      , integration.data[_originalProjectId].hookId
       , token
 
     .then (body) ->
@@ -364,31 +346,33 @@ _updateWebhook = (req) ->
       integration
 
     $createNewProjectHook = $token.then (token) ->
-      _createProjectHook integration.project._id
+      _createProjectHook project._id
       , token
-      , integration.events
+      , events or integration.events
       , integration.hashId
 
     .then (body) ->
-      integration.data or= {}
-      integration.data[integration.project._id] = hookId: body._id
-      integration.markModified 'data'
+      data = integration.data or {}
+      data[project._id] = hookId: body._id
+      integration.data = data
       integration
 
     $integration = Promise.all [$removeOldProjectHook, $createNewProjectHook]
     .then -> integration
 
-  else if integration.isDirectModified 'events'
+  else if events and not _.isEqual events, integration.events
     _projectId = integration.project._id
 
     $integration = $token.then (token) ->
       _updateProjectHook _projectId
       , integration.data[_projectId].hookId
       , token
-      , integration.events
+      , events
       , integration.hashId
 
     .then (body) -> integration
+
+  else $integration = Promise.resolve(integration)
 
   $integration
 
@@ -425,177 +409,177 @@ _getProjects = (req, res) ->
     requestAsync
       method: 'GET'
       headers:
-        "User-Agent": service.userAgent
+        "User-Agent": util.userAgent
         "Authorization": "OAuth2 #{token}"
-      url: "#{_tbHost}/api/projects"
+      url: "#{util.config.teambition.host}/api/projects"
       json: true
-    .spread (res, projects) ->
+    .then (res) ->
       unless res.statusCode >= 200 and res.statusCode < 300
-        err = new Error("Bad request #{res.statusCode}")
-      throw err if err
+        throw new Err("BAD_REQUEST", res.statusCode)
+      projects = res.body
       projects.map (project) -> _.pick project, '_id', 'name'
 
 _getEvents = ->
   [
     key: 'project.member.create'
     group: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '添加项目成员'
       en: 'Invite members to project'
   ,
     key: 'project.member.remove'
     group: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '移除项目成员'
       en: 'Remove project members'
   ,
     key: 'project.rename'
     group: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '修改项目名称'
       en: 'Rename project'
   ,
     key: 'task.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '创建任务'
       en: 'Create task'
   ,
     key: 'task.update.executor'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '分配执行者'
       en: 'Update executor of task'
   ,
     key: 'task.update.dueDate'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '设置截止日期'
       en: 'Update due date of task'
   ,
     key: 'task.update.priority'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '设置优先级'
       en: 'Update priority of task'
   ,
     key: 'task.rename'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '重命名任务'
       en: 'Update name of task'
   ,
     key: 'task.move'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '移动任务'
       en: 'Update stage of task'
   ,
     key: 'task.done'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '完成任务'
       en: 'Finish the task'
   ,
     key: 'tasklist.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '创建任务分组'
       en: 'Create tasklist'
   ,
     key: 'tasklist.rename'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '重命名任务分组'
       en: 'Rename tasklist'
   ,
     key: 'stage.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '添加新阶段'
       en: 'Create stage'
   ,
     key: 'stage.rename'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '重命名任务阶段'
       en: 'Rename stage'
   ,
     key: 'subtask.create'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '添加子任务'
       en: 'Create subtask'
   ,
     key: 'subtask.update.executor'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '子任务分配了执行者'
       en: 'Update executor of subtask'
   ,
     key: 'subtask.update.content'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '编辑子任务'
       en: 'Update content of subtask'
   ,
     key: 'subtask.done'
     group: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '完成子任务'
       en: 'Finish the subtask'
   ,
     key: 'post.create'
     group: 'post'
-    label: service.i18n
+    label: util.i18n
       zh: '添加分享'
       en: 'Create a post'
   ,
     key: 'post.update'
     group: 'post'
-    label: service.i18n
+    label: util.i18n
       zh: '修改分享'
       en: 'Update a post'
   ,
     key: 'file.create'
     group: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '上传文件'
       en: 'Upload a file'
   ,
     key: 'file.update.version'
     group: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '更新文件'
       en: 'Update version of file'
   ,
     key: 'file.move'
     group: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '移动文件'
       en: 'Move file to another directory'
   ,
     key: 'event.create'
     group: 'event'
-    label: service.i18n
+    label: util.i18n
       zh: '创建日程'
       en: 'Create event'
   ,
     key: 'event.update'
     group: 'event'
-    label: service.i18n
+    label: util.i18n
       zh: '更新日程'
       en: 'Update content of event'
   ,
     key: 'entry.create'
     group: 'entry'
-    label: service.i18n
+    label: util.i18n
       zh: '记录账目'
       en: 'Create a entry'
   ,
     key: 'entry.update'
     group: 'entry'
-    label: service.i18n
+    label: util.i18n
       zh: '修改记录'
       en: 'Update a entry'
   ]
@@ -603,49 +587,49 @@ _getEvents = ->
 _getGroups = ->
   [
     key: 'project'
-    label: service.i18n
+    label: util.i18n
       zh: '项目'
       en: 'Project'
   ,
     key: 'task'
-    label: service.i18n
+    label: util.i18n
       zh: '任务板'
       en: 'Task'
   ,
     key: 'post'
-    label: service.i18n
+    label: util.i18n
       zh: '分享墙'
       en: 'Post'
   ,
     key: 'file'
-    label: service.i18n
+    label: util.i18n
       zh: '文件库'
       en: 'File'
   ,
     key: 'event'
-    label: service.i18n
+    label: util.i18n
       zh: '日程表'
       en: 'Event'
   ,
     key: 'entry'
-    label: service.i18n
+    label: util.i18n
       zh: '记账'
       en: 'Entry'
   ]
 
-module.exports = service.register 'teambition', ->
+module.exports = ->
 
   @title = 'Teambition'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'
     en: 'This integration helps you receive real-time tasks, schedules and posts from Teambition'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '配置 Teambition 聚合，实时接收来自 Teambition 的任务，日程，分享等消息'
     en: 'This integration helps you receive real-time tasks, schedules and posts from Teambition'
 
-  @iconUrl = service.static 'images/icons/teambition@2x.png'
+  @iconUrl = util.static 'images/icons/teambition@2x.png'
 
   @_fields.push
     key: 'project'

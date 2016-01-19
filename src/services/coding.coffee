@@ -1,6 +1,6 @@
 moment = require 'moment-timezone'
 marked = require 'marked'
-service = require '../service'
+util = require '../util'
 
 _receiveWebhook = ({integration, body, headers}) ->
   payload = body
@@ -11,7 +11,7 @@ _receiveWebhook = ({integration, body, headers}) ->
   if integration.token and integration.token isnt payload.token
     throw new Error("Invalid token of coding")
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
@@ -116,30 +116,30 @@ _receiveWebhook = ({integration, body, headers}) ->
     else return false
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
 # Register the coding service
-module.exports = service.register 'coding', ->
+module.exports = ->
 
   @title = 'Coding.net'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     en: 'Coding.net is a developer-oriented cloud development platform, provides a running space, quality control, providing code hosting, project management, and other functions.'
     zh: '面向开发者的云端开发平台。'
 
-  @description = service.i18n
+  @description = util.i18n
     en: "Coding.net is a developer-oriented cloud development platform, provides a running space, quality control, providing code hosting, project management, and other functions. When you Git version of the repository on the Coding.net when there is a new Push, you'll catch up on Talk received this Push on and information about the repository."
     zh: 'Coding.net 是面向开发者的云端开发平台，提供了提供代码托管、运行空间、质量控制、项目管理等功能。当您在 Coding.net 上的 Git 版本仓库有新的 Push 的时候，你会在简聊上收到本次 Push 以及本仓库的相关信息。'
 
-  @iconUrl = service.static 'images/icons/coding@2x.png'
+  @iconUrl = util.static 'images/icons/coding@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: '进入你的 Coding.net 项目设置，选择 WebHook 设置，添加 WebHook 地址到项目中即可接收推送通知。'
       en: 'Open your project settings on Coding.net, select the WebHook settings, add a WebHook address to your project to receive push notifications.'
 

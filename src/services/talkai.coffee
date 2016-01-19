@@ -1,55 +1,62 @@
-service = require '../service'
-qs = require 'qs'
+qs = require 'querystring'
 Promise = require 'bluebird'
 request = require 'request'
+_ = require 'lodash'
 requestAsync = Promise.promisify request
 
-_sendToRobot = (message) ->
+util = require '../util'
 
-  self = this
+_sendToRobot = ({message}) ->
+
+  talkai = this
 
   return unless message.body?.length
 
   return unless talkai.config.apikey and talkai.config.devid
 
-  _getTuringCallback message
+  _getTuringCallback.call this, message
 
   .then (body) ->
+
     return unless body?.content or body?.text or body?.title
+
     ['content', 'title', 'text'].forEach (key) ->
       return unless body[key]
       body[key] = body[key].replace? /图灵机器人/g, '小艾'
-    replyMessage =
-      _creatorId: self.robot._id
-      _teamId: message._teamId
-      _toId: message._creatorId
+
+    replyMessage = {}
     replyMessage.body = body.content if body.content
+
     if body.text or body.title
       attachment = category: 'quote', data: body
       attachment.data.category = 'talkai'
       replyMessage.attachments = [attachment]
-    self.sendMessage replyMessage
 
-_errorHandler = (req) ->
-  code = parseInt(req.code)
-  return talkai.config.errorCodes[req.code]
+    replyMessage
 
 _getTuringCallback = (message) ->
+
+  talkai = this
 
   query =
     key: talkai.config.apikey
     info: message.body
     userid: message._creatorId.toString()
+
   requestAsync
     method: 'GET'
     url: "#{talkai.config.url}?#{qs.stringify(query)}"
     timeout: 20000
-  .spread (res, resp) ->
+
+  .then (res) ->
     unless res.statusCode >= 200 and res.statusCode < 300
-      throw new Error("bad request #{res.statusCode}")
+      throw new Error("Bad request #{res.statusCode}")
+    resp = res.body
     data = JSON.parse resp
     if data.code.toString() in Object.keys talkai.config.errorCodes
-      throw new Error("bad response from Tuling123.com: #{_errorHandler(data)}")
+      code = parseInt(req.code)
+      errMsg = talkai.config.errorCodes[req.code]
+      throw new Error("Bad response from Tuling123.com: #{errMsg}")
     body = {}
     switch data.code
       when talkai.config.textCode
@@ -91,14 +98,15 @@ _getTuringCallback = (message) ->
 
     return body
 
-module.exports = talkai = service.register 'talkai', ->
+module.exports = ->
 
   @title = '小艾'
 
-  @iconUrl = service.static 'images/icons/talkai@2x.png'
+  @isHidden = true
 
-  @config =
+  @iconUrl = util.static 'images/icons/talkai@2x.png'
 
+  @config = _.assign
     url: "http://www.tuling123.com/openapi/api"
     errorCodes:
       40001: "key的长度错误"
@@ -114,4 +122,6 @@ module.exports = talkai = service.register 'talkai', ->
     trainCode: 305000
     flightCode: 306000
     othersCode: 308000
+  , util.config.talkai
+
   @registerEvent 'message.create', _sendToRobot

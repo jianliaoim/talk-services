@@ -5,9 +5,11 @@ charset = require 'charset'
 iconv = require 'iconv-lite'
 jschardet = require 'jschardet'
 FeedParser = require 'feedparser'
+Err = require 'err1st'
 stream = require 'stream'
 he = require 'he'
-service = require '../service'
+
+util = require '../util'
 
 _checkRSS = (req, res) ->
   {url} = req.get()
@@ -17,13 +19,12 @@ _checkRSS = (req, res) ->
     request
       url: url
       method: 'GET'
-      headers: 'User-Agent': service.userAgent
+      headers: 'User-Agent': util.userAgent
       encoding: null
     , (err, res, body) ->
       unless res?.statusCode >= 200 and res?.statusCode < 300
-        err = new Error("Invalid feed #{url}")
-        err.status = 400
-        err.phrase = 'INVALID_RSS_URL'
+        return reject new Error('Invalid feed')
+
       return reject(err) if err
 
       encoding = charset res.headers, body
@@ -54,29 +55,36 @@ _checkRSS = (req, res) ->
       data[key] = he.decode(meta[key]) if meta[key]
     data
 
-module.exports = service.register 'rss', ->
+  .catch (err) -> throw new Err "INVALID_RSS_URL", url
+
+module.exports = ->
+
+  service = this
 
   @title = 'RSS'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '添加订阅地址，帮助你获取网站内容的最新更新。'
     en: 'RSS automatically syncs the latest site contents.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '你可以为某一个话题添加来自其他网站的 RSS 订阅，这能够帮助你即时获取网站的最新内容。你可以在简聊上阅读来自 RSS 订阅的文章，甚至无需离开页面。'
     en: 'RSS automatically syncs the latest site contents. This integration allows you read RSS feed without leaving Talk.'
 
-  @iconUrl = service.static 'images/icons/rss@2x.png'
+  @iconUrl = util.static 'images/icons/rss@2x.png'
 
   @_fields.push
     key: 'url'
     onChange: 'checkRSS'
 
-  if process.env.NODE_ENV in ['ga', 'prod']
-    @serviceUrl = 'http://apps.teambition.corp:7411'
-  else
-    @serviceUrl = 'http://localhost:7411'
+  @serviceUrl = util.config.rss.serviceUrl
 
   @registerApi 'checkRSS', _checkRSS
 
-  @registerEvents ['integration.create', 'integration.remove', 'integration.update']
+  events = ['integration.create', 'integration.remove', 'integration.update']
+
+  events.forEach (event) ->
+    service.registerEvent event, (req) ->
+      service.httpPost service.serviceUrl,
+        event: event
+        data: req.integration

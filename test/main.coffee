@@ -1,13 +1,27 @@
 # Initialize service
 requireDir = require 'require-dir'
-service = require '../src/service'
-service.components = require './components'
-service.sdk = require './sdk'
+# Load mocked servers
+require './servers/app'
 
-servers = requireDir './servers'
+loader = require '../src/loader'
+loader.config =
+  apiHost: ""
+  cdnPrefix: ""
+  talkAccountApiUrl: "http://127.0.0.1:7632/account"
+  teambition:
+    clientSecret: 'abc'
+    host: 'http://127.0.0.1:7632/tb'
+  rss:
+    serviceUrl: 'http://127.0.0.1:7632/rss/worker'
+  github:
+    apiHost: 'http://127.0.0.1:7632/github'
+  talkai:
+    apikey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    devid: "123456"
 
-# Test service
-require './service'
+# Load all services
+require './loader'
 
-# Subtestcases of each service
+requireDir './servers'
+
 requireDir './services'

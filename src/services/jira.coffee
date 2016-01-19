@@ -1,9 +1,9 @@
-service = require '../service'
+util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   JIRA_CREATE_EVENT = "jira:issue_created"
@@ -19,29 +19,29 @@ _receiveWebhook = ({integration, body}) ->
     throw new Error("Unknown Jira event type")
 
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
-module.exports = service.register 'jira', ->
+module.exports = ->
 
   @title = 'Jira'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '项目管理和事务追踪'
     en: 'The flexible and scalable issue tracker for software teams.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'JIRA是Atlassian公司出品的项目与事务跟踪工具，被广泛应用于缺陷跟踪、客户服务、需求收集、流程审批、任务跟踪、项目跟踪和敏捷管理等工作领域。'
     en: 'Track and manage everything with JIRA project and issue tracking software by Atlassian.'
 
-  @iconUrl = service.static 'images/icons/jira@2x.png'
+  @iconUrl = util.static 'images/icons/jira@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 webhook 地址到你的 Jira 的项目配置当中使用。'
       en: 'Copy this webhook to your Jira project setting to use it.'
 

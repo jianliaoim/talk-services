@@ -1,15 +1,14 @@
 Promise = require 'bluebird'
 marked = require 'marked'
-service = require '../service'
+
+util = require '../util'
 
 ###*
  * Define handler when receive incoming webhook from oschina
  * @param  {Object}   req      Express request object
- * @param  {Object}   res      Express response object
- * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payloadStr = body?.hook or null
   return unless payloadStr
 
@@ -18,7 +17,7 @@ _receiveWebhook = ({integration, body}) ->
   catch e
     return
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   projectName = if payload.repository?.name then "[#{payload.repository.name}] " else ''
@@ -44,28 +43,28 @@ _receiveWebhook = ({integration, body}) ->
   attachment.data.redirectUrl = projectUrl
   attachment.data.category = 'oschina'
   message.attachments = [attachment]
-  @sendMessage message
+  message
 
-module.exports = service.register 'oschina', ->
+module.exports = ->
   @title = 'oschina'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '中国最大的开源技术社区'
     en: "China's largest open source community"
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '开源中国 www.oschina.net 是目前中国最大的开源技术社区。'
     en: 'www.oschina.net is the largest open source community in china now.'
 
-  @iconUrl = service.static 'images/icons/oschina@2x.png'
+  @iconUrl = util.static 'images/icons/oschina@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 oschina 当中使用。'
       en: 'Copy this web hook to your oschina server to use it. '
 

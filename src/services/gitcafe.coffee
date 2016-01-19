@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 marked = require 'marked'
-service = require '../service'
+
+util = require '../util'
 
 ###*
  * Define handler when receive incoming webhook from gitlab
@@ -9,12 +10,11 @@ service = require '../service'
  * @param  {Function} callback
  * @return {Promise}
 ###
-_receiveWebhook = ({integration, body, headers}) ->
+_receiveWebhook = ({body, headers}) ->
   # The errors should be catched and transmit to callback
-  self = this
   throw new Error("Unknown GitCafe event type") unless headers and headers['x-gitcafe-event']
 
-  message = integration: integration
+  message = {}
   attachment = category: 'quote', data: {}
 
   switch headers['x-gitcafe-event']
@@ -58,28 +58,28 @@ _receiveWebhook = ({integration, body, headers}) ->
     else return false
 
   message.attachments = [attachment]
-  self.sendMessage message
+  message
 
-module.exports = service.register 'gitcafe', ->
+module.exports = ->
   @title = 'GitCafe'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: 'GitCafe 是一个基于 git 的在线托管软件项目的服务平台。'
     en: 'GitCafe is a source code hosting service based on version control system Git.'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: 'GitCafe 是一个基于 git 的在线托管软件项目的服务平台。'
     en: 'GitCafe is a source code hosting service based on version control system Git.'
 
-  @iconUrl = service.static 'images/icons/gitcafe@2x.png'
+  @iconUrl = util.static 'images/icons/gitcafe@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readOnly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 GitCafe 仓库当中使用。你也可以在管理界面当中找到这个 web hook 地址。'
       en: 'Copy this web hook to your GitCafe repo to use it. You may also find this url in the manager tab.'
 

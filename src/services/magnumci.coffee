@@ -1,6 +1,6 @@
-service = require '../service'
+util = require '../util'
 
-_receiveWebhook = ({integration, body}) ->
+_receiveWebhook = ({body}) ->
   payload = body?.payload
 
   try
@@ -13,7 +13,6 @@ _receiveWebhook = ({integration, body}) ->
   throw new Error('Params missing') unless payload.title
 
   message =
-    integration: integration
     attachments: [
       category: 'quote'
       data:
@@ -21,29 +20,30 @@ _receiveWebhook = ({integration, body}) ->
         text: payload.message
         redirectUrl: payload.build_url
     ]
-  @sendMessage message
 
-module.exports = service.register 'magnumci', ->
+  message
+
+module.exports = ->
 
   @title = 'Magnum CI'
 
   @template = 'webhook'
 
-  @summary = service.i18n
+  @summary = util.i18n
     zh: '可用于私有项目的持续集成平台'
     en: 'Hosted Continuous Integration Platform for Private Repositories'
 
-  @description = service.i18n
+  @description = util.i18n
     zh: '可用于私有项目的持续集成平台'
     en: 'Hosted Continuous Integration Platform for Private Repositories'
 
-  @iconUrl = service.static 'images/icons/magnumci@2x.png'
+  @iconUrl = util.static 'images/icons/magnumci@2x.png'
 
   @_fields.push
     key: 'webhookUrl'
     type: 'text'
     readonly: true
-    description: service.i18n
+    description: util.i18n
       zh: '复制 web hook 地址到你的 Magnum CI 中使用。'
       en: 'Copy this web hook to your Magnum CI account to use it.'
 

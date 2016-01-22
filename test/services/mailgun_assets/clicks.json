@@ -1,0 +1,34 @@
+{
+  "headers": {
+    "x-real-ip": "173.203.37.69",
+    "x-forwarded-for": "173.203.37.69",
+    "host": "jianliao.com",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "578",
+    "content-type": "application/x-www-form-urlencoded",
+    "accept-encoding": "gzip",
+    "accept": "*/*",
+    "user-agent": "mailgun/treq-15.0.0"
+  },
+  "query": {},
+  "body": {
+    "city": "San Francisco",
+    "domain": "mail.jianliao.com",
+    "device-type": "desktop",
+    "my_var_1": "Mailgun Variable #1",
+    "country": "US",
+    "region": "CA",
+    "client-name": "Chrome",
+    "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31",
+    "client-os": "Linux",
+    "my-var-2": "awesome",
+    "url": "http://mailgun.net",
+    "ip": "50.56.129.169",
+    "client-type": "browser",
+    "recipient": "alice@example.com",
+    "event": "clicked",
+    "timestamp": "1453443177",
+    "body-plain": ""
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "headers": {
+    "x-real-ip": "173.203.37.68",
+    "x-forwarded-for": "173.203.37.68",
+    "host": "jianliao.com",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "1207",
+    "content-type": "application/x-www-form-urlencoded",
+    "accept-encoding": "gzip",
+    "accept": "*/*",
+    "user-agent": "mailgun/treq-15.0.0"
+  },
+  "query": {},
+  "body": {
+    "domain": "mail.jianliao.com",
+    "my_var_1": "Mailgun Variable #1",
+    "my-var-2": "awesome",
+    "message-headers": "[[\"Received\", \"by luna.mailgun.net with SMTP mgrt 8734663311733; Fri, 03 May 2013 18:26:27 +0000\"], [\"Content-Type\", [\"multipart/alternative\", {\"boundary\": \"eb663d73ae0a4d6c9153cc0aec8b7520\"}]], [\"Mime-Version\", \"1.0\"], [\"Subject\", \"Test deliver webhook\"], [\"From\", \"Bob <bob@mail.jianliao.com>\"], [\"To\", \"Alice <alice@example.com>\"], [\"Message-Id\", \"<20130503182626.18666.16540@mail.jianliao.com>\"], [\"X-Mailgun-Variables\", \"{\\\"my_var_1\\\": \\\"Mailgun Variable #1\\\", \\\"my-var-2\\\": \\\"awesome\\\"}\"], [\"Date\", \"Fri, 03 May 2013 18:26:27 +0000\"], [\"Sender\", \"bob@mail.jianliao.com\"]]",
+    "Message-Id": "<20130503182626.18666.16540@mail.jianliao.com>",
+    "recipient": "alice@example.com",
+    "event": "delivered",
+    "timestamp": "1453443045",
+    "body-plain": ""
+  }
+}

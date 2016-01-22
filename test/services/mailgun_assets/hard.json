@@ -1,0 +1,29 @@
+{
+  "headers": {
+    "x-real-ip": "173.203.37.69",
+    "x-forwarded-for": "173.203.37.69",
+    "host": "jianliao.com",
+    "x-nginx-proxy": "true",
+    "connection": "Upgrade",
+    "content-length": "4172",
+    "content-type": "multipart/form-data; boundary=c735b3ac-8d62-400e-a57b-1fda9df7bd4a",
+    "accept-encoding": "gzip",
+    "accept": "*/*",
+    "user-agent": "mailgun/treq-15.0.0"
+  },
+  "query": {},
+  "body": {
+    "Message-Id": "<20130503182626.18666.16540@mail.jianliao.com>",
+    "X-Mailgun-Sid": "WyIwNzI5MCIsICJhbGljZUBleGFtcGxlLmNvbSIsICI2Il0=",
+    "attachment-count": "1",
+    "code": "550",
+    "domain": "mail.jianliao.com",
+    "error": "5.1.1 The email account that you tried to reach does not exist. Please try\n5.1.1 double-checking the recipient's email address for typos or\n5.1.1 unnecessary spaces. Learn more at\n5.1.1 http://support.example.com/mail/bin/answer.py",
+    "event": "bounced",
+    "message-headers": "[[\"Received\", \"by luna.mailgun.net with SMTP mgrt 8734663311733; Fri, 03 May 2013 18:26:27 +0000\"], [\"Content-Type\", [\"multipart/alternative\", {\"boundary\": \"eb663d73ae0a4d6c9153cc0aec8b7520\"}]], [\"Mime-Version\", \"1.0\"], [\"Subject\", \"Test bounces webhook\"], [\"From\", \"Bob <bob@mail.jianliao.com>\"], [\"To\", \"Alice <alice@example.com>\"], [\"Message-Id\", \"<20130503182626.18666.16540@mail.jianliao.com>\"], [\"List-Unsubscribe\", \"<mailto:u+na6tmy3ege4tgnldmyytqojqmfsdembyme3tmy3cha4wcndbgaydqyrgoi6wszdpovrhi5dinfzw63tfmv4gs43uomstimdhnvqws3bomnxw2jtuhusteqjgmq6tm@mail.jianliao.com>\"], [\"X-Mailgun-Sid\", \"WyIwNzI5MCIsICJhbGljZUBleGFtcGxlLmNvbSIsICI2Il0=\"], [\"X-Mailgun-Variables\", \"{\\\"my_var_1\\\": \\\"Mailgun Variable #1\\\", \\\"my-var-2\\\": \\\"awesome\\\"}\"], [\"Date\", \"Fri, 03 May 2013 18:26:27 +0000\"], [\"Sender\", \"bob@mail.jianliao.com\"]]",
+    "my-var-2": "awesome",
+    "my_var_1": "Mailgun Variable #1",
+    "recipient": "alice@example.com",
+    "timestamp": "1453443086"
+  }
+}

@@ -45,7 +45,7 @@
     "text": "",                                     // 聚合消息正文
     "redirectUrl": "https://talk.ai/site",          // 跳转链接
     "thumbnailPicUrl": "http://your.image.url",     // 消息中可添加一张预览图片
-    "_roomId": "549908a68cd040715c48cad3"           // 发送消息到话题中，不能与 _toId, _storyId 同时存在
+    "_roomId": "549908a68cd040715c48cad3",          // 发送消息到话题中，不能与 _toId, _storyId 同时存在
     "_toId": "549908a68cd040715c48cad2",            // 发送消息到私聊中，不能与 _roomId, _storyId 同时存在
     "_storyId": "549908a68cd040715c48cad5"          // 发送消息到分享中，不能与 _toId, _roomId 同时存在
   }

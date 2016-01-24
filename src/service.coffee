@@ -71,6 +71,8 @@ class Service
 
   isCustomized: false
 
+  showRobot: false
+
   constructor: (@name) ->
 
   register: ->
@@ -155,6 +157,7 @@ class Service
     fields: @fields
     manual: @manual
     isCustomized: @isCustomized
+    showRobot: @showRobot
 
   toObject: @::toJSON
 

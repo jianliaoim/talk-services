@@ -11,6 +11,8 @@ module.exports = ->
 
   @isCustomized = true
 
+  @showRobot = true
+
   @summary = util.i18n
     zh: '我们提供了开放的数据接口，你可以利用自定义机器人开发各种应用和服务。'
     en: 'A robot act as a real user'

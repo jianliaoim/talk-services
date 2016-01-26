@@ -44,7 +44,7 @@
     "title": "Winter is coming",                    // Attachment title
     "text": "",                                     // Attachment content
     "redirectUrl": "https://talk.ai/site",          // Redirect url
-    "thumbnailPicUrl": "http://your.image.url",     // A thumbnail picture url
+    "imageUrl": "http://your.image.url",            // A thumbnail picture url
     "_roomId": "549908a68cd040715c48cad3",          // Room id
     "_toId": "549908a68cd040715c48cad2",            // Private chat user id
     "_storyId": "549908a68cd040715c48cad5"          // Story id

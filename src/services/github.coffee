@@ -98,6 +98,8 @@ _createWebhook = ({integration}) ->
   self = this
   data = {}
 
+  return if integration.url
+
   Promise.resolve integration.repos
 
   .map (repos) ->
@@ -118,6 +120,8 @@ _createWebhook = ({integration}) ->
 
 _removeWebhook = ({integration}) ->
   self = this
+  return if integration.url
+
   reposes = integration.repos
   data = integration.data or {}
   Promise.resolve reposes
@@ -132,6 +136,8 @@ _removeWebhook = ({integration}) ->
 
 _updateWebhook = (req) ->
   {integration} = req
+  return if integration.url
+
   {events, repos} = req.get()
   return unless events?.length and repos?.length
 

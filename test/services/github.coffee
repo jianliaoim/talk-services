@@ -46,7 +46,21 @@ describe 'Github#IntegrationHooks', ->
       github.receiveEvent 'before.integration.remove', req
     .nodeify done
 
-describe 'Github#Webhook', ->
+describe 'GitHub#IntegrationWithUrl', ->
+
+  it 'should create integration with url and do not send request to GitHub', (done) ->
+
+    req.integration =
+      category: 'github'
+      url: 'https://github.com'
+
+    $github.then (github) ->
+      github.receiveEvent 'before.integration.update', req
+    .then ->
+      req.integration.should.have.properties 'url'
+    .nodeify done
+
+describe 'GitHub#Webhook', ->
 
   req.integration = _id: 'xxx'
 

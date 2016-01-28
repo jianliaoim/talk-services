@@ -22,6 +22,8 @@ Talk Services
 1. 每个服务都需要在代码中配置相关名称，模板，描述等，例如 `incoming.coffee` 文件中定义的 `Incoming Webhook` 服务
 
   ```coffee
+  util = require '../util'
+
   module.exports = ->
 
     # 服务标题，可使用中文名
@@ -124,7 +126,7 @@ Talk Services
         authorName: '路人甲'
         title: '你好'
         text: '天气不错'
-        redirectUrl: 'https://talk.ai/site'
+        redirectUrl: 'https://jianliao.com/site'
         imageUrl: 'https://dn-talk.oss.aliyuncs.com/site/images/workspace-84060cfd.jpg'
 
       $incoming.then (incoming) ->
@@ -144,8 +146,8 @@ Talk Services
 [npm-url]: https://npmjs.org/package/talk-services
 [npm-image]: http://img.shields.io/npm/v/talk-services.svg
 
-[travis-url]: https://travis-ci.org/teambition/talk-services
-[travis-image]: http://img.shields.io/travis/teambition/talk-services.svg
+[travis-url]: https://travis-ci.org/jianliaoim/talk-services
+[travis-image]: http://img.shields.io/travis/jianliaoim/talk-services.svg
 
-[talk-url]: https://guest.talk.ai/rooms/4f5dc4b04w
+[talk-url]: https://guest.jianliao.com/rooms/4f5dc4b04w
 [talk-image]: https://img.shields.io/talk/t/4f5dc4b04w.svg

@@ -118,7 +118,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
         "tasklist.create": "创建了"
         "tasklist.remove": "删除了"
         "tasklist.rename": "修改了"
-      attachment.data.title = "#{actions[event]}任务列表 #{data.tasklist.title}"
+      attachment.data.title = "#{actions[event]}任务列表 #{data.tasklist?.title}"
 
     when 'task.create', 'task.remove', 'task.rename', 'task.done'
       actions =
@@ -126,7 +126,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
         "task.remove": "删除了"
         'task.rename': "重命名了"
         'task.done': "完成了"
-      attachment.data.title = "#{actions[event]}任务 #{data.task.content}"
+      attachment.data.title = "#{actions[event]}任务 #{data.task?.content}"
 
     when 'task.update.executor'
       if data.task.executor?.name
@@ -148,7 +148,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
         attachment.data.title = "删除了任务的截止日期 #{data.task.content}"
 
     when 'task.move'
-      attachment.data.title = "将任务 #{data.task.content} 移动到 #{data.task.tasklist.title}列表，#{data.task.stage.name}阶段"
+      attachment.data.title = "将任务 #{data.task?.content} 移动到 #{data.tasklist?.title}列表，#{data.stage?.name}阶段"
 
     when 'task.update.involveMembers'
       ###*
@@ -165,7 +165,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
 
     when 'subtask.update.executor'
       if data.subtask.executor?.name
-        attachment.data.title = "将子任务 #{data.subtask.content} 指派给 #{data.subtask.executor.name}"
+        attachment.data.title = "将子任务 #{data.subtask.content} 指派给 #{data.subtask.executor?.name}"
       else
         attachment.data.title = "移除了子任务的执行者 #{data.subtask.content}"
 
@@ -208,7 +208,7 @@ _receiveWebhook = ({integration, body, query, method}) ->
       attachment.data.title = "#{actions[event]}文件 #{fileNames}"
 
     when 'file.move'
-      attachment.data.title = "将文件 #{data.file.fileName} 移动到 #{data.file.collection.title}"
+      attachment.data.title = "将文件 #{data.file.fileName} 移动到 #{data.file.collection?.title}"
 
     when 'event.create', 'event.update'
       actions =

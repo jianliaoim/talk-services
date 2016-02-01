@@ -4,15 +4,15 @@
     "task": {
       "_id": "5541d52de37bab3455d0f44b",
       "content": "task",
-      "stage": {
-        "_id": "5541d52ae37bab3455d0f44a",
-        "name": "DOING"
-      },
-      "tasklist": {
-        "_id": "5541d51fe37bab3455d0f446",
-        "title": "tasklist"
-      },
       "url": "http://project.ci/project/554063098f408b186ab54b89/tasks/scrum/5541d51fe37bab3455d0f446/task/5541d52de37bab3455d0f44b"
+    },
+    "stage": {
+      "_id": "5541d52ae37bab3455d0f44a",
+      "name": "DOING"
+    },
+    "tasklist": {
+      "_id": "5541d51fe37bab3455d0f446",
+      "title": "tasklist"
     },
     "project": {
       "_id": "554063098f408b186ab54b89",

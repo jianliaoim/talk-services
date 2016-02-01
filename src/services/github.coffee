@@ -323,11 +323,12 @@ module.exports = ->
   @iconUrl = util.static 'images/icons/github@2x.png'
 
   @_fields.push
-    key: 'url'
+    key: 'webhookUrl'
     type: 'text'
+    readOnly: true
     description: util.i18n
-      zh: '请填写您的 GitHub Webhook 地址，以便能正确的推送消息到简聊中'
-      en: 'Copy and paste your github webhook url here'
+      zh: '请复制您的 Webhook 地址到 GitHub 中使用'
+      en: 'Copy and paste your github webhook url'
 
   @_fields.push
     key: 'events'

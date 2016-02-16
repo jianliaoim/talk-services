@@ -1,3 +1,4 @@
+_ = require 'lodash'
 Promise = require 'bluebird'
 marked = require 'marked'
 util = require '../util'
@@ -14,8 +15,9 @@ _receiveWebhook = ({integration, body}) ->
   payload = body
 
   switch payload.object_kind
-    when 'merge_request' then payload.event = 'merge_request'
+    when 'build' then payload.event = 'build'
     when 'issue' then payload.event = 'issues'
+    when 'merge_request' then payload.event = 'merge_request'
     else payload.event = 'push'
 
   {repository, commits, object_attributes} = payload
@@ -51,6 +53,43 @@ _receiveWebhook = ({integration, body}) ->
       attachment.data.text = """
       #{marked(object_attributes?.description or '')}
       """
+    when 'build'
+      # Gitlab API 更改了部分参数, 所以老的一些赋值方法可能失效
+      {
+        ref
+        commit
+        build_id
+        build_name
+        repository
+        build_status
+        project_name
+        build_duration
+      } = payload
+
+      goodStatus = ['success', 'failed', 'canceled']
+      return if build_status not in goodStatus
+
+      color =
+        switch build_status
+          when goodStatus[0] then 'GREEN'
+          when goodStatus[1] then 'RED'
+          when goodStatus[2] then 'YELLOW'
+
+      commitUrl = "#{repository.homepage}/commit/#{commit.sha}"
+
+      text = """
+        ref: #{ref}
+        commit: [#{commit.sha[..7]}](#{commitUrl})
+        author: #{commit.author_name}
+        status: #{build_status}
+        duration: #{Math.round build_duration}s
+      """
+
+      attachment.data =
+        color: color
+        redirectUrl: commitUrl
+        text: marked(text).trim()
+        title: "Build: #{project_name}"
 
   lockKey = "lock:gitlab:#{integration._roomId}:#{integration._teamId}:#{integration._id}:#{payload.event}"
 

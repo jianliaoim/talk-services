@@ -7,7 +7,7 @@ $gitlab = loader.load 'gitlab'
 
 payloads = requireDir './gitlab_assets'
 
-describe.only 'GitLab#Webhook', ->
+describe 'GitLab#Webhook', ->
 
   req.integration =
     _id: 'xxx'

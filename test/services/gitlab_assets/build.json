@@ -1,0 +1,42 @@
+{
+  "object_kind": "build",
+  "ref": "v3.1.1-rc5",
+  "tag": true,
+  "before_sha": "0000000000000000000000000000000000000000",
+  "sha": "c68ce36e991ee739f00c9ca0a9a4e1b2d3cf9204",
+  "build_id": 88,
+  "build_name": "test_job",
+  "build_stage": "test",
+  "build_status": "failed",
+  "build_started_at": "2016-02-16 17:33:39 +0800",
+  "build_finished_at": "2016-02-16 17:34:36 +0800",
+  "build_duration": 57.486490465,
+  "build_allow_failure": false,
+  "project_id": 20,
+  "project_name": "Talk / talk-web",
+  "user": {
+    "id": 73,
+    "name": "Boshen",
+    "email": "boshen@teambition.com"
+  },
+  "commit": {
+    "id": 55,
+    "sha": "c68ce36e991ee739f00c9ca0a9a4e1b2d3cf9204",
+    "message": "3.1.1-rc5\n",
+    "author_name": "Boshen",
+    "author_email": "boshen@teambition.com",
+    "status": "failed",
+    "duration": 142,
+    "started_at": "2016-02-16 17:32:13 +0800",
+    "finished_at": "2016-02-16 17:34:36 +0800"
+  },
+  "repository": {
+    "name": "talk-web",
+    "url": "git@code.teambition.com:talk/talk-web.git",
+    "description": "",
+    "homepage": "https://code.teambition.com/talk/talk-web",
+    "git_http_url": "https://code.teambition.com/talk/talk-web.git",
+    "git_ssh_url": "git@code.teambition.com:talk/talk-web.git",
+    "visibility_level": 0
+  }
+}

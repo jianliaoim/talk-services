@@ -1,6 +1,6 @@
 {
   "name": "talk-services",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "description": "talk-services",
   "main": "./lib/loader.js",
   "directories": {

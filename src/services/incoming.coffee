@@ -18,6 +18,7 @@ _receiveWebhook = ({query, body}) ->
   if title or text or redirectUrl or imageUrl
     message.attachments = [
       category: 'quote'
+      color: payload.color
       data:
         title: title
         text: text

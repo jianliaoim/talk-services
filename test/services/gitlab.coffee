@@ -59,8 +59,8 @@ describe 'GitLab#Webhook', ->
     .then (gitlab) ->
       gitlab.receiveEvent 'service.webhook', req
     .then (message) ->
+      message.attachments[0].color.should.eql 'red'
       message.attachments[0].data.should.eql
-        color: 'RED'
         redirectUrl: 'https://code.teambition.com/talk/talk-web/commit/c68ce36e991ee739f00c9ca0a9a4e1b2d3cf9204'
         text: '<p>ref: v3.1.1-rc5\ncommit: <a href="https://code.teambition.com/talk/talk-web/commit/c68ce36e991ee739f00c9ca0a9a4e1b2d3cf9204">c68ce36e</a>\nauthor: Boshen\nstatus: failed\nduration: 57s</p>'
         title: "Build: Talk / talk-web"

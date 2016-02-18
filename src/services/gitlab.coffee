@@ -71,9 +71,9 @@ _receiveWebhook = ({integration, body}) ->
 
       color =
         switch build_status
-          when goodStatus[0] then 'GREEN'
-          when goodStatus[1] then 'RED'
-          when goodStatus[2] then 'YELLOW'
+          when goodStatus[0] then attachment.color = 'green'
+          when goodStatus[1] then attachment.color = 'red'
+          when goodStatus[2] then attachment.color = 'yellow'
 
       commitUrl = "#{repository.homepage}/commit/#{commit.sha}"
 
@@ -86,7 +86,6 @@ _receiveWebhook = ({integration, body}) ->
       """
 
       attachment.data =
-        color: color
         redirectUrl: commitUrl
         text: marked(text).trim()
         title: "Build: #{project_name}"

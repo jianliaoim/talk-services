@@ -18,10 +18,13 @@ loader.config =
   talkai:
     apikey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     devid: "123456"
+  trello:
+    apiKey: 'aaa'
+    apiHost: 'http://127.0.0.1:7632/trello'
 
 # Load all services
 require './loader'
 
-requireDir './servers'
+require './servers/app'
 
 requireDir './services'

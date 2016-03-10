@@ -11,6 +11,9 @@ app.get '/v1/user/get', (req, res) ->
     unions: [
       refer: 'teambition'
       accessToken: 'some account token'
+    ,
+      refer: 'trello'
+      accessToken: 'trello token'
     ]
 
 module.exports = app

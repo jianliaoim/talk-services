@@ -258,7 +258,7 @@ _createProjectHook = (_projectId, token, events, hashId) ->
   requestAsync
     method: 'POST'
     headers:
-      "User-Agent": util.userAgent
+      "User-Agent": util.getUserAgent()
       "Authorization": "OAuth2 #{token}"
     url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks"
     json: true
@@ -275,7 +275,7 @@ _updateProjectHook = (_projectId, hookId, token, events, hashId) ->
   requestAsync
     method: 'PUT'
     headers:
-      "User-Agent": util.userAgent
+      "User-Agent": util.getUserAgent()
       "Authorization": "OAuth2 #{token}"
     url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks/#{hookId}"
     json: true
@@ -293,7 +293,7 @@ _removeProjectHook = (_projectId, hookId, token) ->
     method: 'DELETE'
     url: "#{util.config.teambition.host}/api/projects/#{_projectId}/hooks/#{hookId}"
     headers:
-      "User-Agent": util.userAgent
+      "User-Agent": util.getUserAgent()
       "Authorization": "OAuth2 #{token}"
     json: true
 
@@ -409,7 +409,7 @@ _getProjects = (req, res) ->
     requestAsync
       method: 'GET'
       headers:
-        "User-Agent": util.userAgent
+        "User-Agent": util.getUserAgent()
         "Authorization": "OAuth2 #{token}"
       url: "#{util.config.teambition.host}/api/projects"
       json: true

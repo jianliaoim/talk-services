@@ -15,5 +15,6 @@ app.use '/tb', require './teambition'
 app.use '/account', require './account'
 app.use '/rss', require './rss'
 app.use '/github', require './github'
+app.use '/trello', require './trello'
 
 app.listen 7632

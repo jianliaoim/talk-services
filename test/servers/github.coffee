@@ -1,7 +1,6 @@
 express = require 'express'
 
-reposToHook =
-  awesome: id: 1
+reposToHook = awesome: id: 1
 
 app = express()
 

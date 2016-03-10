@@ -29,7 +29,7 @@ _testWebhook = (event, payload, checkMessage) ->
 describe 'Teambition#GetProjects', ->
 
   it 'should read the teambition\'s projects of user', (done) ->
-    req.set 'accountToken', 'xxx'
+    req.set 'accountToken', 'teambition'
     $teambition.then (teambition) ->
       teambition.receiveApi 'getProjects', req, res
     .then (projects) ->
@@ -48,9 +48,8 @@ describe 'Teambition#IntegrationHooks', ->
     events: ["task.create"]
     project: _id: _projectId, name: 'Test'
 
-  req.set 'accountToken', 'xxx'
-
   it 'should create teambition webhook when creating integration', (done) ->
+    req.set 'accountToken', 'teambition'
     req.integration = integration
     $teambition.then (teambition) ->
       teambition.receiveEvent 'before.integration.create', req

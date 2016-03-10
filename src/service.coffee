@@ -40,7 +40,7 @@ _httpPost = (url, payload) ->
   requestAsync
     method: 'POST'
     url: url
-    headers: 'User-Agent': util.userAgent
+    headers: 'User-Agent': util.getUserAgent()
     json: true
     timeout: 5000
     body: payload

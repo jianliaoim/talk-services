@@ -21,7 +21,7 @@ _createHook = (repos, token, events, hashId) ->
     method: 'POST'
     url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks"
     headers:
-      'User-Agent': util.userAgent
+      'User-Agent': util.getUserAgent()
       'Authorization': "token #{token}"
     json: true
     body:
@@ -50,7 +50,7 @@ _removeHook = (repos, hookId, token) ->
     method: 'DELETE'
     url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks/#{hookId}"
     headers:
-      'User-Agent': util.userAgent
+      'User-Agent': util.getUserAgent()
       'Authorization': "token #{token}"
     json: true
 
@@ -76,8 +76,7 @@ _updateHook = (repos, hookId, token, events, hashId) ->
     method: 'PATCH'
     url: "#{_getGitHubApiHost()}/repos/#{repos}/hooks/#{hookId}"
     headers:
-      'User-Agent': util.userAgent
-      'User-Agent': util.userAgent
+      'User-Agent': util.getUserAgent()
       'Authorization': "token #{token}"
     json: true
     body:

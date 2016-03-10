@@ -19,7 +19,7 @@ _checkRSS = (req, res) ->
     request
       url: url
       method: 'GET'
-      headers: 'User-Agent': util.userAgent
+      headers: 'User-Agent': util.getUserAgent()
       encoding: null
     , (err, res, body) ->
       unless res?.statusCode >= 200 and res?.statusCode < 300

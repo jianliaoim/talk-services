@@ -39,7 +39,7 @@ _getBoards = (req, res) ->
       headers: "User-Agent": util.getUserAgent()
       url: _apiHost + '/members/me/boards'
       json: true
-      timeout: 10000
+      timeout: 30000
       qs:
         key: _apiKey
         token: token
@@ -60,7 +60,7 @@ _createWebhook = (integration, token) ->
     headers: "User-Agent": util.getUserAgent()
     url: _apiHost + '/webhooks'
     json: true
-    timeout: 10000
+    timeout: 30000
     qs:
       key: _apiKey
       token: token
@@ -83,7 +83,7 @@ _removeWebhook = (integration, token) ->
     headers: 'User-Agent': util.getUserAgent()
     url: _apiHost + "/webhooks/#{integration.data.webhookId}"
     json: true
-    timeout: 10000
+    timeout: 30000
     qs:
       key: _apiKey
       token: token
@@ -104,6 +104,10 @@ _beforeCreate = (req) ->
 
 _beforeUpdate = (req) ->
   {integration} = req
+  unless req.get('config')?.modelId and req.get('config')?.modelId isnt integration.config?.modelId
+    # Do not update webhook unless update integration's modelId
+    return
+
   $token = _getTrelloToken req.get('accountToken')
 
   $token.then (token) ->

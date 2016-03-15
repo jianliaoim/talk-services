@@ -2,6 +2,7 @@ Promise = require 'bluebird'
 request = require 'request'
 Err = require 'err1st'
 _ = require 'lodash'
+logger = require 'graceful-logger'
 
 requestAsync = Promise.promisify request
 
@@ -126,6 +127,10 @@ _beforeRemove = (req) ->
   $token.then (token) -> _removeWebhook integration, token
 
   .then -> integration
+
+  .catch (err) ->
+    # Ignore exceptions when removing webhook failed
+    logger.warn err.stack
 
 _onWebhook = (req) ->
   return if req.method is 'HEAD'
